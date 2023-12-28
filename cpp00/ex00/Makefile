@@ -11,6 +11,9 @@ OBJS			=	$(SRCS:%.cpp=%.o)
 $(NAME)	: $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $@
 
+test : $(NAME)
+	./test.sh
+
 %.o: %.c
 	$(CC) $(CFLAGS) -c $^ -o $@
 
