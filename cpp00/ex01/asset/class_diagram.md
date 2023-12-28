@@ -10,7 +10,6 @@ class PHONEBOOK["PhoneBook"] {
 
     +Add()
     +Search()
-    +Exit()
 }
 
 class CONTACT["Contact"] {
