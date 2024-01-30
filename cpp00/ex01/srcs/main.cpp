@@ -6,11 +6,9 @@ int	main(void) {
 	std::string	order;
 
 	while (std::cin >> order) {
-		if (order == "ADD")
-			phone_book.Add();
-		else if (order == "SEARCH")
-			phone_book.Search();
-		else if (order == "EXIT")
+		if ((order == "ADD" && !phone_book.Add())
+			|| (order == "SEARCH" && !phone_book.Search())
+			|| (order == "EXIT" && !phone_book.Exit()))
 			break ;
 	}
 	return 0;

@@ -1,37 +1,23 @@
 #ifndef CPP00_EX01_PHONEBOOK_H_
 # define CPP00_EX01_PHONEBOOK_H_
 
-# define PHONE_BOOK_CAPACITY 8
-
-#include <iostream>
-
-class Contact {
-private:
-	std::string	first_name_;
-	std::string	last_name_;
-	std::string	nick_name_;
-	std::string	phone_number_;
-	std::string	secret_;
-
-public:
-	Contact();
-	std::string	GetFirstName(void) const;
-	std::string	GetLastName(void) const;
-	std::string	GetNickName(void) const;
-	std::string	GetPhoneNumber(void) const;
-	std::string	GetSecret(void) const;
-	void		SetContact(std::string, std::string, std::string, std::string, std::string);
-};
+#include "Contact.hpp"
+#include <cstddef>
+#include <string>
 
 class PhoneBook {
 private:
-	size_t	idx_;
-	Contact	contacts_[PHONE_BOOK_CAPACITY];
+	static const int	PHONE_BOOK_CAPACITY = 8;
+	Contact				contacts_[PHONE_BOOK_CAPACITY];
+	size_t				idx_;
+	std::string			input_;
 
 public:
 	PhoneBook();
-	void	Add();
-	void	Search() const;
+	bool	Add();
+	bool	Search() const;
+	bool	Exit() const;
+	bool	input_str();
 };
 
 #endif
