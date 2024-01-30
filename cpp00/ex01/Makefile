@@ -11,8 +11,8 @@ SRCS_DIR		=	./srcs
 OBJS_DIR		=	./objs
 INCLUDES_DIR	=	./inc
 
-SRCS			=	PhoneBook/PhoneBook.cpp \
-					Contact/Contact.cpp \
+SRCS			=	PhoneBook.cpp \
+					Contact.cpp \
 					main.cpp
 
 OBJS			=	$(patsubst %.o, $(OBJS_DIR)/%.o, $(SRCS:.cpp=.o))

@@ -11,13 +11,13 @@ private:
 	Contact				contacts_[PHONE_BOOK_CAPACITY];
 	size_t				idx_;
 	std::string			input_;
+	void		_print_contact_list(void) const;
 
 public:
 	PhoneBook();
-	bool	Add();
-	bool	Search() const;
-	bool	Exit() const;
-	bool	input_str();
+	bool		Add();
+	bool		Search() const;
+	bool		Exit() const;
 };
 
 #endif
