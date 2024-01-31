@@ -1,31 +1,16 @@
-NAME			=	phonebook
+NAME			=	ThisIsBrain
 
 CC				=	c++
 CFLAGS			=	-Wall -Wextra -Werror
 CFLAGS			+=	-std=c++98
-
-PRE_OPT			=	-MMD -MP
-INCLUDE			=	-I$(INCLUDES_DIR)
-
-SRCS_DIR		=	./srcs
-OBJS_DIR		=	./objs
-INCLUDES_DIR	=	./inc
-
 SRCS			=	main.cpp
 
-OBJS			=	$(patsubst %.o, $(OBJS_DIR)/%.o, $(SRCS:.cpp=.o))
-DEPS			=	$(OBJS:.o=.d)
+OBJS			=	$(SRCS:%.cpp=%.o)
 
 RM				=	rm -rf
 
-$(OBJS_DIR)	: % :
-	@mkdir -p $@
-
-$(NAME)	: $(OBJS_DIR) $(OBJS)
-	$(CC) $(CFLAGS) $(INCLUDE) $(OBJS) -o $@
-
-$(OBJS_DIR)/%.o	:	$(SRCS_DIR)/%.cpp
-	$(CC) $(CFLAGS) $(INCLUDE) $(PRE_OPT) -o $@ -c $<
+$(NAME)	: $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o $@
 
 .DEFAULT_GOAL	=	all
 .PHONY:	all
@@ -33,7 +18,7 @@ all:	$(NAME)
 
 .PHONY:	clean
 clean:
-	$(RM) $(OBJS_DIR)
+	$(RM) $(OBJS)
 
 .PHONY:	fclean
 fclean:	clean
