@@ -1,0 +1,4 @@
+-I./ex00/inc/
+-I./ex01/inc/
+-I./ex02/inc/
+-I/Library/Developer/CommandLineTools/usr/include/c++/v1/
