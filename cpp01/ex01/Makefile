@@ -1,4 +1,4 @@
-NAME			=	phonebook
+NAME			=	MoarBrainz
 
 CC				=	c++
 CFLAGS			=	-Wall -Wextra -Werror
