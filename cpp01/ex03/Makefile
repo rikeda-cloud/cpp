@@ -1,4 +1,4 @@
-NAME			=	phonebook
+NAME			=	UnnecessaryViolence
 
 CC				=	c++
 CFLAGS			=	-Wall -Wextra -Werror
