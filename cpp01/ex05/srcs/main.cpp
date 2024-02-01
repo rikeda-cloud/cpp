@@ -8,3 +8,7 @@ int	main(void) {
 	harl.complain("INFO");
 	return 0;
 }
+// 	__attribute__((destructor)) static void destructor()
+// {
+//    system("leaks -q Harl");
+// }
