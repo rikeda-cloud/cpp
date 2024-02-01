@@ -6,7 +6,6 @@ HARLDICT "1" *-- "0..*" HARLPAIR
 class HARL["Harl"] {
     +harl_func_ptr
 
-    -harl_func_ptr  _select_level(string level)
     +Harl(void)
     +debug(void)
     +info(void)

@@ -7,8 +7,6 @@
 class Harl {
 public:
 	typedef void	(*harl_func_ptr)();
-private:
-	Harl::harl_func_ptr	_select_level(std::string level);
 public:
 	Harl(void);
 	static void	debug(void);
