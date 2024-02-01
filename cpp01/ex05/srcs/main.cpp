@@ -6,6 +6,7 @@ int	main(void) {
 	harl.complain("WARNING");
 	harl.complain("ERROR");
 	harl.complain("INFO");
+	harl.complain("NONO");
 	return 0;
 }
 // 	__attribute__((destructor)) static void destructor()

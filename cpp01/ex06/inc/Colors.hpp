@@ -6,5 +6,6 @@ public:
 	static const std::string RED;
 	static const std::string YELLOW;
 	static const std::string BLUE;
+	static const std::string MAGENTA;
 	static const std::string WHITE;
 };

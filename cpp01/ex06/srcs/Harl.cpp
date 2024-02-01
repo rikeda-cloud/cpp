@@ -7,6 +7,7 @@ const std::string Colors::RESET = "\033[0m";
 const std::string Colors::RED = "\033[31m";
 const std::string Colors::YELLOW = "\033[33m";
 const std::string Colors::BLUE = "\033[34m";
+const std::string Colors::MAGENTA = "\033[35m";
 const std::string Colors::WHITE = "\033[37m";
 
 Harl::Harl(void) {
@@ -63,5 +64,15 @@ void	Harl::complain(std::string level) {
 			dict.getHarlPair(2)->getValue()();
 		case 3:
 			dict.getHarlPair(3)->getValue()();
+		default: 
+			std::cerr
+				<< Colors::MAGENTA
+				<< "\""
+				<< level
+				<< "\""
+				<< " is not in harl levels"
+				<< Colors::RESET
+				<< std::endl
+				<< std::endl;
 	}
 }

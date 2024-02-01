@@ -1,13 +1,16 @@
 #include "Harl.hpp"
+#include <iostream>
 
-int	main(void) {
+int	main(int argc, char **argv) {
 	Harl	harl;
-	// harl.complain("DEBUG");
-	harl.complain("WARNING");
-	// harl.complain("ERROR");
-	// harl.complain("INFO");
+
+	if (argc == 2)
+		harl.complain(argv[1]);
+	else
+		harl.complain("ERROR");
 	return 0;
 }
+
 	__attribute__((destructor)) static void destructor()
 {
    system("leaks -q HarlFilter");
