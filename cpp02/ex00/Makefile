@@ -1,4 +1,4 @@
-NAME			=	phonebook
+NAME			=	Fixed
 
 CC				=	c++
 CFLAGS			=	-Wall -Wextra -Werror
@@ -11,7 +11,7 @@ SRCS_DIR		=	./srcs
 OBJS_DIR		=	./objs
 INCLUDES_DIR	=	./inc
 
-SRCS			=	PhoneBook.cpp \
+SRCS			=	Fixed.cpp \
 					main.cpp
 
 OBJS			=	$(patsubst %.o, $(OBJS_DIR)/%.o, $(SRCS:.cpp=.o))
