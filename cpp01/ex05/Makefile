@@ -1,7 +1,7 @@
-NAME			=	phonebook
+NAME			=	Harl
 
 CC				=	c++
-CFLAGS			=	-Wall -Wextra -Werror
+CFLAGS			=	-Wall -Wextra -Werror -g
 CFLAGS			+=	-std=c++98
 
 PRE_OPT			=	-MMD -MP
@@ -12,6 +12,8 @@ OBJS_DIR		=	./objs
 INCLUDES_DIR	=	./inc
 
 SRCS			=	Harl.cpp \
+					HarlDict.cpp \
+					HarlPair.cpp \
 					main.cpp
 
 OBJS			=	$(patsubst %.o, $(OBJS_DIR)/%.o, $(SRCS:.cpp=.o))
