@@ -7,6 +7,8 @@
 class Harl {
 public:
 	typedef void	(*harl_func_ptr)();
+private:
+	ssize_t	_level_to_index(std::string);
 public:
 	Harl(void);
 	static void	debug(void);

@@ -32,7 +32,7 @@ void	Harl::error(void) {
 	std::cout << "This is unacceptable! I want to speak to the manager now." << std::endl << std::endl;
 }
 
-void	Harl::complain(std::string level) {
+ssize_t	Harl::_level_to_index(std::string level) {
 	HarlDict	dict;
 	dict.append("DEBUG", Harl::debug);
 	dict.append("INFO", Harl::info);
@@ -40,9 +40,20 @@ void	Harl::complain(std::string level) {
 	dict.append("ERROR", Harl::error);
 
 	for (int i = 0; i < dict.size(); i++) {
-		if (dict.getHarlPair(i)->getKey() == level) {
-			dict.getHarlPair(i)->getValue()();
-			break ;
-		}
+		if (dict.getHarlPair(i)->getKey() == level)
+			return i;
 	}
+	return -1;
+}
+
+void	Harl::complain(std::string level) {
+	ssize_t		index = _level_to_index(level);
+	HarlDict	dict;
+	dict.append("DEBUG", Harl::debug);
+	dict.append("INFO", Harl::info);
+	dict.append("WARNING", Harl::warning);
+	dict.append("ERROR", Harl::error);
+
+	if (index != -1)
+		dict.getHarlPair(index)->getValue()();
 }
