@@ -10,7 +10,7 @@ ScavTrap::ScavTrap(std::string name) : ClapTrap(name) {
 	std::cout << Colors::CYAN << "The ScavTrap constructor will be called" << Colors::RESET << std::endl;
 }
 
-ScavTrap::ScavTrap(const ScavTrap& scavtrap) : ClapTrap(scavtrap){
+ScavTrap::ScavTrap(const ScavTrap& scavtrap) : ClapTrap(scavtrap) {
 	std::cout << Colors::CYAN << "The ScavTrap copy constructor will be called" << Colors::RESET << std::endl;
 }
 
