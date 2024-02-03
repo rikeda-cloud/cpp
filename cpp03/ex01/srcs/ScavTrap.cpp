@@ -26,3 +26,14 @@ ScavTrap&	ScavTrap::operator=(const ScavTrap& scavtrap) {
 void	ScavTrap::guardGate(void) {
 	std::cout << Colors::YELLOW <<  getName() << " is now in Gate keeper mode" << Colors::RESET << std::endl;
 }
+
+void	ScavTrap::attack(const std::string& target) {
+	if (hit_point_ == 0)
+		std::cout << Colors::MAGENTA << getName() << " is already dead" << Colors::RESET << std::endl;
+	else if (energy_point_ == 0)
+		std::cout << Colors::MAGENTA << "No energy point" << Colors::RESET << std::endl;
+	else {
+		energy_point_--;
+		std::cout << Colors::BLUE << "ScavTrap " << getName() << " attacks " << target << ", causing " << attack_damage_ << " points of damage!" << Colors::RESET << std::endl;
+	}
+}

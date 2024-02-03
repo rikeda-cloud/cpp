@@ -47,7 +47,7 @@ void	ClapTrap::takeDamege(unsigned int amount) {
 	if (hit_point_ == 0)
 		std::cout << Colors::MAGENTA << getName() << " is already dead" << Colors::RESET << std::endl;
 	else {
-		std::cout << Colors::RED << "ClapTrap " << getName() << " take damege " << amount << " points of damage!" << Colors::RESET << std::endl;
+		std::cout << Colors::RED << getName() << " take damege " << amount << " points of damage!" << Colors::RESET << std::endl;
 		hit_point_ = hit_point_ < amount ? 0 : hit_point_ - amount;
 		if (hit_point_ == 0)
 			std::cout << Colors::MAGENTA << getName() << " is dead" << Colors::RESET << std::endl;
@@ -61,7 +61,7 @@ void	ClapTrap::beRepaired(unsigned int amount) {
 		std::cout << Colors::MAGENTA << "No energy point" << Colors::RESET << std::endl;
 	else {
 		energy_point_--;
-		std::cout << Colors::GREEN << "ClapTrap " << getName() << " repaired " << amount << " points of damage!" << Colors::RESET << std::endl;
+		std::cout << Colors::GREEN << getName() << " repaired " << amount << " points of damage!" << Colors::RESET << std::endl;
 		hit_point_ += amount;
 	}
 }
