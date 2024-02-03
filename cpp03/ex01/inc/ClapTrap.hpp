@@ -1,10 +1,10 @@
-#ifndef CPP03_EX00_ClapTrap_H_
-# define CPP03_EX00_ClapTrap_H_
+#ifndef CPP03_EX01_ClapTrap_H_
+# define CPP03_EX01_ClapTrap_H_
 
 #include <string>
 
 class ClapTrap {
-private:
+protected:
 	std::string		name_;
 	unsigned int	hit_point_;
 	unsigned int	energy_point_;

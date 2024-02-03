@@ -1,4 +1,4 @@
-NAME			=	phonebook
+NAME			=	scavtrap
 
 CC				=	c++
 CFLAGS			=	-Wall -Wextra -Werror
@@ -11,7 +11,8 @@ SRCS_DIR		=	./srcs
 OBJS_DIR		=	./objs
 INCLUDES_DIR	=	./inc
 
-SRCS			=	PhoneBook.cpp \
+SRCS			=	ClapTrap.cpp \
+					ScavTrap.cpp \
 					main.cpp
 
 OBJS			=	$(patsubst %.o, $(OBJS_DIR)/%.o, $(SRCS:.cpp=.o))
