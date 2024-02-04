@@ -1,4 +1,4 @@
-NAME			=	phonebook
+NAME			=	abc
 
 CC				=	c++
 CFLAGS			=	-Wall -Wextra -Werror
@@ -11,7 +11,10 @@ SRCS_DIR		=	./srcs
 OBJS_DIR		=	./objs
 INCLUDES_DIR	=	./inc
 
-SRCS			=	PhoneBook.cpp \
+SRCS			=	Animal.cpp \
+					Cat.cpp \
+					Dog.cpp \
+					Brain.cpp \
 					main.cpp
 
 OBJS			=	$(patsubst %.o, $(OBJS_DIR)/%.o, $(SRCS:.cpp=.o))
