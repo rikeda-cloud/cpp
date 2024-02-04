@@ -3,6 +3,7 @@ NAME			=	diamondtrap
 CC				=	c++
 CFLAGS			=	-Wall -Wextra -Werror
 CFLAGS			+=	-std=c++98
+CFLAGS			+=	-Wshadow
 
 PRE_OPT			=	-MMD -MP
 INCLUDE			=	-I$(INCLUDES_DIR)

@@ -5,6 +5,9 @@
 #include <iostream>
 
 DiamondTrap::DiamondTrap(std::string name) : ScavTrap(name + "_clap_name"), FragTrap(name + "_clap_name"), name_(name) {
+	DiamondTrap::hit_point_ = FragTrap::hit_point_;
+	DiamondTrap::energy_point_ = ScavTrap::energy_point_;
+	DiamondTrap::attack_damage_ = FragTrap::attack_damage_;
 	std::cout << Colors::CYAN << "The DiamondTrap constructor will be called" << Colors::RESET << std::endl;
 }
 
