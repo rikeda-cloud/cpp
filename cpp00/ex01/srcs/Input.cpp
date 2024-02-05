@@ -25,7 +25,7 @@ size_t	Input::InputIndex(const std::string& prompt, size_t max_idx) {
 	size_t	idx;
 
 	std::cout << prompt << std::flush;
-	while (!(std::cin >> idx) || !(1 <= idx && idx <= max_idx)) {
+	while (!(std::cin >> idx && 1 <= idx && idx <= max_idx)) {
 		if (std::cin.eof())
 			return 0;
 		std::cin.clear();

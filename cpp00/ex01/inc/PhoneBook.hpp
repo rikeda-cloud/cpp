@@ -6,15 +6,15 @@
 
 class PhoneBook {
 private:
-	static const size_t	PHONE_BOOK_CAPACITY = 8;
-	Contact				contacts_[PHONE_BOOK_CAPACITY];
+	static const size_t	PHONEBOOK_CAPACITY = 8;
+	Contact				contacts_[PHONEBOOK_CAPACITY];
 	size_t				idx_;
 
 	void				PrintContactList(void) const;
 	void				PrintAdjustedString(const std::string&) const;
 
 public:
-	enum e_continue {PHONE_BOOK_CONTINUE = 0, PHONE_BOOK_END = 1};
+	enum e_continue {PHONEBOOK_CONTINUE = 0, PHONEBOOK_END = 1};
 
 	PhoneBook(void);
 	PhoneBook(const PhoneBook&);
