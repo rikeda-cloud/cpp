@@ -13,12 +13,23 @@ private:
 
 public:
 	Contact();
-	std::string	GetFirstName(void) const;
-	std::string	GetLastName(void) const;
-	std::string	GetNickName(void) const;
-	std::string	GetPhoneNumber(void) const;
-	std::string	GetSecret(void) const;
-	void		SetContact(std::string, std::string, std::string, std::string, std::string);
+	Contact(const Contact&);
+	~Contact();
+	Contact&	operator=(const Contact&);
+
+	const std::string&	GetFirstName(void) const;
+	const std::string&	GetLastName(void) const;
+	const std::string&	GetNickName(void) const;
+	const std::string&	GetPhoneNumber(void) const;
+	const std::string&	GetSecret(void) const;
+	void				SetContact(
+		std::string,
+		std::string,
+		std::string,
+		std::string,
+		std::string
+	);
+	void				PrintContact(void) const;
 };
 
 #endif

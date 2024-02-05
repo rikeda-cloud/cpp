@@ -2,22 +2,28 @@
 # define CPP00_EX01_PHONEBOOK_H_
 
 #include "Contact.hpp"
-#include <cstddef>
 #include <string>
 
 class PhoneBook {
 private:
-	static const int	PHONE_BOOK_CAPACITY = 8;
+	static const size_t	PHONE_BOOK_CAPACITY = 8;
 	Contact				contacts_[PHONE_BOOK_CAPACITY];
 	size_t				idx_;
-	std::string			input_;
-	void		_print_contact_list(void) const;
+
+	void				PrintContactList(void) const;
+	void				PrintAdjustedString(const std::string&) const;
 
 public:
-	PhoneBook();
-	bool		Add();
-	bool		Search() const;
-	bool		Exit() const;
+	enum e_continue {PHONE_BOOK_CONTINUE = 0, PHONE_BOOK_END = 1};
+
+	PhoneBook(void);
+	PhoneBook(const PhoneBook&);
+	~PhoneBook(void);
+	PhoneBook&	operator=(const PhoneBook&);
+
+	e_continue	Add(void);
+	e_continue	Search(void) const;
+	e_continue	Exit(void) const;
 };
 
 #endif

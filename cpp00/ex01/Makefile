@@ -1,7 +1,7 @@
 NAME			=	phonebook
 
 CC				=	c++
-CFLAGS			=	-Wall -Wextra -Werror -g
+CFLAGS			=	-Wall -Wextra -Werror
 CFLAGS			+=	-std=c++98
 
 PRE_OPT			=	-MMD -MP
@@ -13,6 +13,7 @@ INCLUDES_DIR	=	./inc
 
 SRCS			=	PhoneBook.cpp \
 					Contact.cpp \
+					Input.cpp \
 					main.cpp
 
 OBJS			=	$(patsubst %.o, $(OBJS_DIR)/%.o, $(SRCS:.cpp=.o))
@@ -24,10 +25,7 @@ RM				=	rm -rf
 $(OBJS_DIR)	: % :
 	@mkdir -p $@
 
-$(OBJS_SUBDIRS) : % :
-	@mkdir -p $@
-
-$(NAME)	: $(OBJS_DIR) $(OBJS_SUBDIRS) $(OBJS)
+$(NAME)	: $(OBJS_DIR) $(OBJS)
 	$(CC) $(CFLAGS) $(INCLUDE) $(OBJS) -o $@
 
 $(OBJS_DIR)/%.o	:	$(SRCS_DIR)/%.cpp
