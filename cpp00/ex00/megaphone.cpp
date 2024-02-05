@@ -1,16 +1,19 @@
 #include <iostream>
 
+static std::string	_toupper_string(std::string str) {
+	for (int i = 0; i < str.size(); i++)
+		str[i] = std::toupper(str[i]);
+	return str;
+}
+
 static void	_megaphone(int argc, const char **argv) {
 	const static std::string default_str("* LOUD AND UNBEARABLE FEEDBACK NOISE *");
 
 	if (argc == 1)
 		std::cout << default_str;
 	else {
-		for (int i = 1; i < argc; i++) {
-			std::string str(argv[i]);
-			std::transform(str.begin(), str.end(), str.begin(), toupper);
-			std::cout << str;
-		}
+		for (int i = 1; i < argc; i++)
+			std::cout << _toupper_string(argv[i]);
 	}
 	std::cout << std::endl;
 }
