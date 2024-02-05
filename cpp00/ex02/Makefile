@@ -14,6 +14,9 @@ $(NAME)	: $(OBJS)
 %.o: %.c
 	$(CC) $(CFLAGS) -c $^ -o $@
 
+test_diff: 
+	./test/test.sh
+
 .DEFAULT_GOAL	=	all
 .PHONY:	all
 all:	$(NAME)
