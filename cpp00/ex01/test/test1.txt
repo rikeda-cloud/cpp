@@ -1,0 +1,9 @@
+# ADDを１回行い、SEARCHで確認
+ADD
+1
+2
+3
+4
+5
+SEARCH
+1

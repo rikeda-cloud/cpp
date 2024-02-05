@@ -22,17 +22,18 @@ std::string	Input::InputString(const std::string& prompt) {
 }
 
 size_t	Input::InputIndex(const std::string& prompt, size_t max_idx) {
-	size_t	idx;
+	size_t		idx;
+	std::string	buffer;
 
-	std::cout << prompt << std::flush;
-	while (!(std::cin >> idx && 1 <= idx && idx <= max_idx)) {
+	while (true) {
+		buffer = InputString(prompt);
 		if (std::cin.eof())
 			return 0;
-		std::cin.clear();
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		std::cout << prompt << std::flush;
+		else if (std::isdigit(buffer[0]) && buffer.size() == 1) {
+			idx = static_cast<size_t>(std::atoi(buffer.c_str()));
+			if (1 <= idx && idx <= max_idx)
+				break ;
+		}
 	}
-	std::cin.clear();
-	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	return idx;
 }

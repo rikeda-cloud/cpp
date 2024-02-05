@@ -31,6 +31,9 @@ $(NAME)	: $(OBJS_DIR) $(OBJS)
 $(OBJS_DIR)/%.o	:	$(SRCS_DIR)/%.cpp
 	$(CC) $(CFLAGS) $(INCLUDE) $(PRE_OPT) -o $@ -c $<
 
+test_phonebook: $(NAME)
+	./test/test.sh
+
 .DEFAULT_GOAL	=	all
 .PHONY:	all
 all:	$(NAME)

@@ -1,7 +1,12 @@
 #include "PhoneBook.hpp"
+#include "Colors.hpp"
 #include "Input.hpp"
 #include <iostream>
 #include <sstream>
+
+const std::string Colors::RESET = "\033[0m";
+const std::string Colors::GREEN = "\033[32m";
+const std::string Colors::MAGENTA = "\033[35m";
 
 PhoneBook::PhoneBook(void) : idx_(0) {}
 
@@ -33,6 +38,8 @@ void	PhoneBook::PrintAdjustedString(const std::string& s) const {
 }
 
 void	PhoneBook::PrintContactList(void) const {
+	std::cout << std::endl; // intentional!!
+	std::cout << Colors::MAGENTA;
 	for (size_t i = 0; i < (idx_ % PhoneBook::PHONEBOOK_CAPACITY); i++) {
 		const Contact&	contact = contacts_[i];
 		for (int i = 0; i < 45; i++)
@@ -53,7 +60,7 @@ void	PhoneBook::PrintContactList(void) const {
 	}
 	for (int i = 0; i < 45; i++)
 		std::cout << "-";
-	std::cout << std::endl;
+	std::cout << std::endl << Colors::RESET;
 }
 
 PhoneBook::e_continue	PhoneBook::Add(void) {
@@ -90,7 +97,10 @@ PhoneBook::e_continue	PhoneBook::Search(void) const {
 	size_t	selected_index = Input::InputIndex("INDEX >> ", capacity);
 	if (std::cin.eof())
 		return PHONEBOOK_END;
+	std::cout << std::endl; // intentional!!
+	std::cout << Colors::GREEN;
 	this->contacts_[selected_index - 1].PrintContact();
+	std::cout << Colors::RESET;
 	return PHONEBOOK_CONTINUE;
 }
 
