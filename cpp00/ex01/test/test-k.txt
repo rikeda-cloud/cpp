@@ -1,0 +1,3 @@
+EXITで終了
+EXIT
+SEARCH

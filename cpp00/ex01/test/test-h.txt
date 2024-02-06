@@ -1,0 +1,30 @@
+多くの無効文字を含んだ入力(空白文字が1つでも含まれていた場合、パラメータとして受け付けない,電話番号は数字のみ)
+
+
+
+ADD
+FIRST NAME
+FIRST	NAME
+FIRSTNAME
+	LASTNAME
+ LASTNAME
+LASTNAME
+N I C K N A M E
+
+
+
+
+NICKNAME
+000-111-222
+111 222 333
+111.111.111
+110
+
+SECRET
+
+SEARCH
+ 1 
+	1
+
+
+1

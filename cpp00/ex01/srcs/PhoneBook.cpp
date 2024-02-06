@@ -12,7 +12,7 @@ const std::string Colors::MAGENTA = "\033[35m";
 PhoneBook::PhoneBook(void) : idx_(0) {}
 
 PhoneBook::PhoneBook(const PhoneBook& phonebook) : idx_(phonebook.idx_) {
-	for (size_t i = 0; i < (this->idx_ % PhoneBook::PHONEBOOK_CAPACITY); i++)
+	for (size_t i = 0; i < (this->idx_ % PHONEBOOK_CAPACITY); i++)
 		this->contacts_[i] = phonebook.contacts_[i];
 }
 
@@ -21,7 +21,7 @@ PhoneBook::~PhoneBook(void) {}
 PhoneBook&	PhoneBook::operator=(const PhoneBook& phonebook) {
 	if (this != &phonebook) {
 		this->idx_ = phonebook.idx_;
-		for (size_t i = 0; i < (this->idx_ % PhoneBook::PHONEBOOK_CAPACITY); i++)
+		for (size_t i = 0; i < (this->idx_ % PHONEBOOK_CAPACITY); i++)
 			this->contacts_[i] = phonebook.contacts_[i];
 	}
 	return *this;
@@ -47,7 +47,8 @@ void	PhoneBook::PrintListLine(void) const {
 void	PhoneBook::PrintContactList(void) const {
 	std::cout << std::endl; // intentional!!
 	std::cout << Colors::MAGENTA;
-	for (size_t i = 0; i < (idx_ % PhoneBook::PHONEBOOK_CAPACITY); i++) {
+	size_t	contact_size = idx_ < PHONEBOOK_CAPACITY ? idx_ : PHONEBOOK_CAPACITY;
+	for (size_t i = 0; i < contact_size; i++) {
 		const Contact&		contact = contacts_[i];
 		std::stringstream	ss;
 		PrintListLine();
@@ -69,7 +70,7 @@ void	PhoneBook::PrintContactList(void) const {
 Input::e_continue	PhoneBook::Add(void) {
 	static size_t	INFO_SIZE = 5;
 	std::string		str[INFO_SIZE];
-	Contact&		contact = contacts_[idx_ % PhoneBook::PHONEBOOK_CAPACITY];
+	Contact&		contact = contacts_[idx_ % PHONEBOOK_CAPACITY];
 
 	if (contact.SetFirstName() == Input::INPUT_END
 		|| contact.SetLastName() == Input::INPUT_END
@@ -78,8 +79,8 @@ Input::e_continue	PhoneBook::Add(void) {
 		|| contact.SetSecret() == Input::INPUT_END
 	)
 		return Input::INPUT_END;
-	if (idx_ == (PhoneBook::PHONEBOOK_CAPACITY * 2))
-		idx_ -= PhoneBook::PHONEBOOK_CAPACITY;
+	if (idx_ == (PHONEBOOK_CAPACITY * 2))
+		idx_ -= PHONEBOOK_CAPACITY;
 	else
 		idx_++;
 	return Input::INPUT_CONTINUE;
@@ -91,7 +92,7 @@ Input::e_continue	PhoneBook::Search(void) const {
 		return Input::INPUT_CONTINUE;
 	}
 	PhoneBook::PrintContactList();
-	size_t	capacity = idx_ < PhoneBook::PHONEBOOK_CAPACITY ? idx_ : PhoneBook::PHONEBOOK_CAPACITY;
+	size_t	capacity = idx_ < PHONEBOOK_CAPACITY ? idx_ : PHONEBOOK_CAPACITY;
 	size_t	selected_index = Input::InputIndex("INDEX >> ", capacity);
 	if (std::cin.eof())
 		return Input::INPUT_END;
