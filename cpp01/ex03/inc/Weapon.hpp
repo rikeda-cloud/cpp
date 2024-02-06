@@ -9,7 +9,11 @@ private:
 
 public:
 	Weapon(std::string weapon_type);
-	const std::string&	getType(void);
+	Weapon(const Weapon&);
+	~Weapon(void);
+	Weapon&	operator=(const Weapon&);
+
+	const std::string&	getType(void) const;
 	void				setType(std::string weapon_type);
 };
 

@@ -1,8 +1,8 @@
 #ifndef CPP01_EX03_HumanB_H_
 # define CPP01_EX03_HumanB_H_
 
-#include <string>
 #include "Weapon.hpp"
+#include <string>
 
 class	HumanB {
 private:
@@ -11,6 +11,10 @@ private:
 
 public:
 	HumanB(std::string name);
+	HumanB(const HumanB&);
+	~HumanB(void);
+	HumanB&	operator=(const HumanB&);
+
 	void	attack(void);
 	void	setWeapon(Weapon &new_weapon);
 };
