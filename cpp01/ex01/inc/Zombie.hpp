@@ -9,8 +9,11 @@ private:
 
 public:
 	Zombie(void);
-	Zombie(std::string zombie_name);
+	Zombie(std::string);
+	Zombie(const Zombie&);
 	~Zombie(void);
+	Zombie&	operator=(const Zombie&);
+
 	void	announce(void);
 	void	SetName(std::string);
 };

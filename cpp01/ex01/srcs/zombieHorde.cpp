@@ -12,8 +12,6 @@ Zombie*	zombieHorde(int N, std::string name) {
 		tmp_zombies = new Zombie[N];
 		for (int i = 0; i < N; i++)
 			tmp_zombies[i].SetName(name);
-		for (int i = 0; i < N; i++)
-			tmp_zombies[i].announce();
 	}
 	return tmp_zombies;
 }
