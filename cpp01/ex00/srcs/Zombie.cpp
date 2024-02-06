@@ -1,7 +1,7 @@
 #include "Zombie.hpp"
 #include <iostream>
 
-Zombie::Zombie(void) : name("NONAME-ZOMBIE") {}
+Zombie::Zombie(void) : name() {}
 
 Zombie::Zombie(std::string zombie_name) : name(zombie_name) {}
 
