@@ -1,17 +1,11 @@
 #include "Zombie.hpp"
 #include <iostream>
 
-Zombie::Zombie(void) : name("NONAME-ZOMBIE") {
-	std::cout << "CREATE " << name << std::endl;
-}
+Zombie::Zombie(void) : name("NONAME-ZOMBIE") {}
 
-Zombie::Zombie(std::string zombie_name) : name(zombie_name) {
-	std::cout << "CREATE " << name << std::endl;
-}
+Zombie::Zombie(std::string zombie_name) : name(zombie_name) {}
 
-Zombie::Zombie(const Zombie& zombie) : name(zombie.name) {
-	std::cout << "COPY " << name << std::endl;
-}
+Zombie::Zombie(const Zombie& zombie) : name(zombie.name) {}
 
 Zombie::~Zombie(void) {
 	std::cout << "DELETE " << name << std::endl;
