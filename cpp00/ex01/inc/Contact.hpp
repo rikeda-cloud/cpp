@@ -1,6 +1,7 @@
 #ifndef CPP00_EX01_Contact_H_
 # define CPP00_EX01_Contact_H_
 
+#include "Input.hpp"
 #include <string>
 
 class Contact {
@@ -22,13 +23,11 @@ public:
 	const std::string&	GetNickName(void) const;
 	const std::string&	GetPhoneNumber(void) const;
 	const std::string&	GetSecret(void) const;
-	void				SetContact(
-		std::string,
-		std::string,
-		std::string,
-		std::string,
-		std::string
-	);
+	Input::e_continue	SetFirstName(void);
+	Input::e_continue	SetLastName(void);
+	Input::e_continue	SetNickName(void);
+	Input::e_continue	SetPhoneNumber(void);
+	Input::e_continue	SetSecret(void);
 	void				PrintContact(void) const;
 };
 

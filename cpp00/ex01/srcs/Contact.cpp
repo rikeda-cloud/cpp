@@ -1,4 +1,5 @@
 #include "Contact.hpp"
+#include "Input.hpp"
 #include <iostream>
 
 Contact::Contact(void) {}
@@ -23,19 +24,6 @@ Contact&	Contact::operator=(const Contact& contact) {
 	return *this;
 }
 
-void	Contact::SetContact(
-		std::string first_name,
-		std::string last_name,
-		std::string nick_name,
-		std::string phone_number,
-		std::string secret) {
-	this->first_name_ = first_name;
-	this->last_name_ = last_name;
-	this->nick_name_ = nick_name;
-	this->phone_number_ = phone_number;
-	this->secret_ = secret;
-}
-
 const std::string&	Contact::GetFirstName(void) const {
 	return first_name_;
 }
@@ -54,6 +42,41 @@ const std::string&	Contact::GetPhoneNumber(void) const {
 
 const std::string&	Contact::GetSecret(void) const {
 	return secret_;
+}
+
+Input::e_continue	Contact::SetFirstName(void) {
+	first_name_ = Input::InputString("FIRST NAME   >> ", std::isalpha);
+	if (std::cin.eof())
+		return Input::INPUT_END;
+	return Input::INPUT_CONTINUE;
+}
+
+Input::e_continue	Contact::SetLastName(void) {
+	last_name_ = Input::InputString("LAST NAME    >> ", std::isalpha);
+	if (std::cin.eof())
+		return Input::INPUT_END;
+	return Input::INPUT_CONTINUE;
+}
+
+Input::e_continue	Contact::SetNickName(void) {
+	nick_name_ = Input::InputString("NICK NAME    >> ", std::isalnum);
+	if (std::cin.eof())
+		return Input::INPUT_END;
+	return Input::INPUT_CONTINUE;
+}
+
+Input::e_continue	Contact::SetPhoneNumber(void) {
+	phone_number_ = Input::InputString("PHONE NUMBER >> ", std::isdigit);
+	if (std::cin.eof())
+		return Input::INPUT_END;
+	return Input::INPUT_CONTINUE;
+}
+
+Input::e_continue	Contact::SetSecret(void) {
+	secret_ = Input::InputString("SECRET       >> ", std::isprint);
+	if (std::cin.eof())
+		return Input::INPUT_END;
+	return Input::INPUT_CONTINUE;
 }
 
 void	Contact::PrintContact(void) const {
