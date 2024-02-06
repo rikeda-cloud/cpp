@@ -7,7 +7,11 @@ int	Account::_totalAmount = 0;
 int	Account::_totalNbDeposits = 0;
 int	Account::_totalNbWithdrawals = 0;
 
-Account::Account(void) : _accountIndex(getNbAccounts()), _amount(0), _nbDeposits(0), _nbWithdrawals(0) {
+Account::Account(void)
+	:	_accountIndex(getNbAccounts()),
+		_amount(0),
+		_nbDeposits(0),
+		_nbWithdrawals(0) {
 	_nbAccounts++;
 	_displayTimestamp();
 	std::cout << " index:" << _accountIndex << ";amount:" << _amount << ";created" << std::endl;
@@ -61,7 +65,7 @@ void	Account::makeDeposit(int deposit) {
 }
 
 bool	Account::makeWithdrawal(int withdrawal) {
-	bool	is_can_withdrawal = (withdrawal < _amount);
+	bool	is_can_withdrawal = (withdrawal <= _amount);
 
 	_displayTimestamp();
 	std::cout << " index:" << _accountIndex << ";p_amount:" << _amount << ";withdrawal:";
@@ -88,8 +92,8 @@ void	Account::displayStatus(void) const{
 }
 
 void	Account::_displayTimestamp(void) {
-	time_t		current = time(NULL);
-	struct tm	*local_time = localtime(&current);
+	time_t		current = std::time(NULL);
+	struct tm	*local_time = std::localtime(&current);
 
 	std::cout << "[";
 	std::cout << local_time->tm_year + 1900;
