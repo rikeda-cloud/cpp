@@ -9,6 +9,7 @@ private:
 	static const size_t	PHONEBOOK_CAPACITY = 8;
 	Contact				contacts_[PHONEBOOK_CAPACITY];
 	size_t				idx_;
+	bool				is_fill_;
 
 	void				PrintListLine(void) const;
 	void				PrintContactList(void) const;
@@ -19,6 +20,7 @@ public:
 	PhoneBook(const PhoneBook&);
 	~PhoneBook(void);
 	PhoneBook&	operator=(const PhoneBook&);
+	size_t		GetCapacityIdx(void) const;
 
 	enum e_continue {INPUT_CONTINUE = 0, INPUT_END = 1};
 

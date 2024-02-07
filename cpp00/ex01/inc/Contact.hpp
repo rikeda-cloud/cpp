@@ -1,7 +1,6 @@
 #ifndef CPP00_EX01_Contact_H_
 # define CPP00_EX01_Contact_H_
 
-#include "Input.hpp"
 #include <string>
 
 class Contact {
