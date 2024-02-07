@@ -1,3 +1,6 @@
+#ifndef CPP02_EX01_Fixed_H_
+# define CPP02_EX01_Fixed_H_
+
 #include <iostream>
 
 class Fixed {
@@ -9,9 +12,10 @@ public:
 	Fixed(void);
 	Fixed(int);
 	Fixed(float);
-	~Fixed(void);
 	Fixed(const Fixed& fixed);
+	~Fixed(void);
 	Fixed&	operator=(const Fixed& fixed);
+
 	int		getRawBits(void) const;
 	void	setRawBits(int const raw);
 	float	toFloat(void) const;
@@ -19,3 +23,5 @@ public:
 };
 
 std::ostream&	operator<<(std::ostream& s, const Fixed& fixed);
+
+#endif
