@@ -11,9 +11,10 @@ private:
 	size_t				idx_;
 	bool				is_fill_;
 
-	void				PrintListLine(void) const;
-	void				PrintContactList(void) const;
-	void				PrintAdjustedString(const std::string&) const;
+	void	PrintAdjustedString(const std::string&) const;
+	void	PrintListLine(void) const;
+	void	PrintContactList(void) const;
+	void	PrintContact(const Contact&) const;
 
 public:
 	PhoneBook(void);

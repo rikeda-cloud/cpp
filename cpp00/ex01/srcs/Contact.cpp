@@ -62,11 +62,3 @@ void	Contact::SetPhoneNumber(std::string phone_number) {
 void	Contact::SetDarkestSecret(std::string darkest_secret) {
 	darkest_secret_ = darkest_secret;
 }
-
-void	Contact::PrintContact(void) const {
-	std::cout << "FIRST NAME     -> [" << GetFirstName() << "]" << std::endl;
-	std::cout << "LAST NAME      -> [" << GetLastName() << "]" << std::endl;
-	std::cout << "NICK NAME      -> [" << GetNickName() << "]" << std::endl;
-	std::cout << "PHONE NUMBER   -> [" << GetPhoneNumber() << "]" << std::endl;
-	std::cout << "DARKEST SECRET -> [" << GetDarkestSecret() << "]" << std::endl;
-}

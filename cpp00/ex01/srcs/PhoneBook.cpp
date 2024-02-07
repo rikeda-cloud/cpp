@@ -29,7 +29,7 @@ PhoneBook&	PhoneBook::operator=(const PhoneBook& phonebook) {
 }
 
 void	PhoneBook::PrintAdjustedString(const std::string& s) const {
-	static const size_t	adjust_size = 10;
+	const size_t	adjust_size = 10;
 
 	if (s.size() <= adjust_size) {
 		std::cout.width(adjust_size);
@@ -68,8 +68,7 @@ void	PhoneBook::PrintContactList(void) const {
 }
 
 PhoneBook::e_continue	PhoneBook::Add(void) {
-	static size_t	INFO_SIZE = 5;
-	std::string		str[INFO_SIZE];
+	std::string		str[5];
 	Contact&		contact = contacts_[idx_];
 
 	str[0] = Input::InputString("FIRST NAME     >> ", std::isalpha);
@@ -111,7 +110,7 @@ PhoneBook::e_continue	PhoneBook::Search(void) const {
 		return INPUT_END;
 	std::cout << std::endl; // intentional!!
 	std::cout << Colors::GREEN;
-	this->contacts_[selected_index - 1].PrintContact();
+	PhoneBook::PrintContact(this->contacts_[selected_index - 1]);
 	std::cout << Colors::RESET;
 	return INPUT_CONTINUE;
 }
@@ -122,4 +121,12 @@ PhoneBook::e_continue	PhoneBook::Exit(void) const {
 
 size_t	PhoneBook::GetCapacityIdx(void) const {
 	return is_fill_ ? PHONEBOOK_CAPACITY : idx_;
+}
+
+void	PhoneBook::PrintContact(const Contact& contact) const {
+	std::cout << "FIRST NAME     -> [" << contact.GetFirstName() << "]" << std::endl;
+	std::cout << "LAST NAME      -> [" << contact.GetLastName() << "]" << std::endl;
+	std::cout << "NICK NAME      -> [" << contact.GetNickName() << "]" << std::endl;
+	std::cout << "PHONE NUMBER   -> [" << contact.GetPhoneNumber() << "]" << std::endl;
+	std::cout << "DARKEST SECRET -> [" << contact.GetDarkestSecret() << "]" << std::endl;
 }

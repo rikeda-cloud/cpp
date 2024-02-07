@@ -5,6 +5,10 @@
 
 class Input {
 private:
+	Input(void);
+	Input(const Input&);
+	~Input(void);
+	void	operator=(const Input& input);
 	static bool	IsIntendedString(const std::string&, int (*f)(int));
 
 public:

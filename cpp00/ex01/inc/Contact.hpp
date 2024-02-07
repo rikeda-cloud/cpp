@@ -27,7 +27,6 @@ public:
 	void				SetNickName(std::string);
 	void				SetPhoneNumber(std::string);
 	void				SetDarkestSecret(std::string);
-	void				PrintContact(void) const;
 };
 
 #endif

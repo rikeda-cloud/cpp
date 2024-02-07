@@ -1,6 +1,13 @@
 #include "Input.hpp"
-#include <cctype>
 #include <iostream>
+
+Input::Input(void) {}
+
+Input::Input(const Input& input) {(void)input;}
+
+Input::~Input(void) {}
+
+void	Input::operator=(const Input& input) {(void)input;}
 
 bool	Input::IsIntendedString(const std::string& str, int (*f)(int)) {
 	if (str.size() == 0)
