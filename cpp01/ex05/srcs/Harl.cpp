@@ -1,6 +1,7 @@
 #include "Harl.hpp"
 #include "Colors.hpp"
 #include <iostream>
+#include <cstddef>
 
 const std::string Colors::RESET = "\033[0m";
 const std::string Colors::RED = "\033[31m";
@@ -67,7 +68,7 @@ void	Harl::error(void) {
 	std::cout << "This is unacceptable! I want to speak to the manager now." << std::endl << std::endl;
 }
 
-ssize_t	Harl::LevelToIndex(std::string& level) {
+int	Harl::LevelToIndex(std::string& level) {
 	for (int i = 0; i < 4; i++) {
 		if ((this->level_list_[i]) == level)
 			return i;
@@ -76,7 +77,7 @@ ssize_t	Harl::LevelToIndex(std::string& level) {
 }
 
 void	Harl::complain(std::string level) {
-	ssize_t		index = LevelToIndex(level);
+	int	index = LevelToIndex(level);
 
 	if (index != -1)
 		(this->*(f_list_[index]))();

@@ -12,6 +12,7 @@ OBJS_DIR		=	./objs
 INCLUDES_DIR	=	./inc
 
 SRCS			=	Harl.cpp \
+					Colors.cpp \
 					main.cpp
 
 OBJS			=	$(patsubst %.o, $(OBJS_DIR)/%.o, $(SRCS:.cpp=.o))

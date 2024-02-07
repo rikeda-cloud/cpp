@@ -26,10 +26,12 @@ FileReplacer&	FileReplacer::operator=(const FileReplacer& filereplacer) {
 }
 
 int	FileReplacer::Open(void) {
-	fs_.open(file_);
+	fs_.open(file_.c_str());
 	if (!fs_.is_open())
 		return -1;
-	fs_replace_.open(file_ + ".replace");
+	std::string	replace_file(file_);
+	replace_file += ".replace";
+	fs_replace_.open(replace_file.c_str());
 	if (!fs_replace_.is_open())
 		return -1;
 	return 0;

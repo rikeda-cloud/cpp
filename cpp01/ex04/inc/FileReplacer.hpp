@@ -12,10 +12,13 @@ private:
 	std::ifstream	fs_;
 	std::ofstream	fs_replace_;
 
+	FileReplacer(void);
+
 	int				Open(void);
 	int				Close(void);
 	void			Save(std::string&);
 	std::string		ReplaceLine(std::string line);
+
 
 public:
 	FileReplacer(std::string, std::string, std::string);

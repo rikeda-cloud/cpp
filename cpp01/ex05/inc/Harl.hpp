@@ -5,14 +5,14 @@
 
 class Harl {
 private:
-	void	(Harl::*f_list_[4])(void);
+	void		(Harl::*f_list_[4])(void);
 	std::string	level_list_[4];
 
 	void	debug(void);
 	void	info(void);
 	void	warning(void);
 	void	error(void);
-	ssize_t	LevelToIndex(std::string&);
+	int		LevelToIndex(std::string&);
 
 public:
 	Harl(void);
