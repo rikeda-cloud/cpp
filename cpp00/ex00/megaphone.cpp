@@ -7,7 +7,7 @@ static std::string	_toupper_string(std::string str) {
 }
 
 static void	_megaphone(int argc, const char **argv) {
-	const static std::string default_str("* LOUD AND UNBEARABLE FEEDBACK NOISE *");
+	const char	default_str[] = "* LOUD AND UNBEARABLE FEEDBACK NOISE *";
 
 	if (argc == 1)
 		std::cout << default_str;
