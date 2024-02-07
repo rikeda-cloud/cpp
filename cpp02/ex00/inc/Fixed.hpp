@@ -1,4 +1,5 @@
-
+#ifndef CPP02_EX00_Fixed_H_
+# define CPP02_EX00_Fixed_H_
 
 class Fixed {
 private:
@@ -7,9 +8,12 @@ private:
 
 public:
 	Fixed(void);
-	~Fixed(void);
 	Fixed(const Fixed& fixed);
+	~Fixed(void);
 	Fixed&	operator=(const Fixed& fixed);
+
 	int		getRawBits(void) const;
 	void	setRawBits(int const raw);
 };
+
+#endif
