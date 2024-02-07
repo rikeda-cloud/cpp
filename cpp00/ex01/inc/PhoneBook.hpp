@@ -2,7 +2,6 @@
 # define CPP00_EX01_PHONEBOOK_H_
 
 #include "Contact.hpp"
-#include "Input.hpp"
 #include <string>
 
 class PhoneBook {
@@ -21,9 +20,11 @@ public:
 	~PhoneBook(void);
 	PhoneBook&	operator=(const PhoneBook&);
 
-	Input::e_continue	Add(void);
-	Input::e_continue	Search(void) const;
-	Input::e_continue	Exit(void) const;
+	enum e_continue {INPUT_CONTINUE = 0, INPUT_END = 1};
+
+	e_continue	Add(void);
+	e_continue	Search(void) const;
+	e_continue	Exit(void) const;
 };
 
 #endif

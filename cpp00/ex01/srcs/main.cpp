@@ -3,17 +3,16 @@
 #include <iostream>
 
 int	main(void) {
-	const char	prompt[] = ">> ";
 	PhoneBook	phone_book;
 	std::string	order;
 
 	while (true) {
-		order = Input::InputString(prompt, std::isupper);
+		order = Input::InputString(">> ", std::isupper);
 		if (std::cin.eof())
 			break ;
-		else if ((order == "ADD" && phone_book.Add() == Input::INPUT_END)
-			|| (order == "SEARCH" && phone_book.Search() == Input::INPUT_END)
-			|| (order == "EXIT" && phone_book.Exit()) == Input::INPUT_END)
+		else if ((order == "ADD" && phone_book.Add() == PhoneBook::INPUT_END)
+			|| (order == "SEARCH" && phone_book.Search() == PhoneBook::INPUT_END)
+			|| (order == "EXIT" && phone_book.Exit()) == PhoneBook::INPUT_END)
 			break ;
 	}
 	return 0;

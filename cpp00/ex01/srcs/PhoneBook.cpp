@@ -67,42 +67,55 @@ void	PhoneBook::PrintContactList(void) const {
 	std::cout << Colors::RESET;
 }
 
-Input::e_continue	PhoneBook::Add(void) {
+PhoneBook::e_continue	PhoneBook::Add(void) {
 	static size_t	INFO_SIZE = 5;
 	std::string		str[INFO_SIZE];
 	Contact&		contact = contacts_[idx_ % PHONEBOOK_CAPACITY];
 
-	if (contact.SetFirstName() == Input::INPUT_END
-		|| contact.SetLastName() == Input::INPUT_END
-		|| contact.SetNickName() == Input::INPUT_END
-		|| contact.SetPhoneNumber() == Input::INPUT_END
-		|| contact.SetSecret() == Input::INPUT_END
-	)
-		return Input::INPUT_END;
+	str[0] = Input::InputString("FIRST NAME     >> ", std::isalpha);
+	if (std::cin.eof())
+		return INPUT_END;
+	str[1] = Input::InputString("LAST NAME      >> ", std::isalpha);
+	if (std::cin.eof())
+		return INPUT_END;
+	str[2] = Input::InputString("NICK NAME      >> ", std::isalnum);
+	if (std::cin.eof())
+		return INPUT_END;
+	str[3] = Input::InputString("PHONE NUMBER   >> ", std::isdigit);
+	if (std::cin.eof())
+		return INPUT_END;
+	str[4] = Input::InputString("DARKEST SECRET >> ", std::isprint);
+	if (std::cin.eof())
+		return INPUT_END;
+	contact.SetFirstName(str[0]);
+	contact.SetLastName(str[1]);
+	contact.SetNickName(str[2]);
+	contact.SetPhoneNumber(str[3]);
+	contact.SetDarkestSecret(str[4]);
 	if (idx_ == (PHONEBOOK_CAPACITY * 2))
 		idx_ -= PHONEBOOK_CAPACITY;
 	else
 		idx_++;
-	return Input::INPUT_CONTINUE;
+	return INPUT_CONTINUE;
 }
 
-Input::e_continue	PhoneBook::Search(void) const {
+PhoneBook::e_continue	PhoneBook::Search(void) const {
 	if (this->idx_ == 0) {
 		std::cout << "There are no contacts registered yet" << std::endl;
-		return Input::INPUT_CONTINUE;
+		return INPUT_CONTINUE;
 	}
 	PhoneBook::PrintContactList();
 	size_t	capacity = idx_ < PHONEBOOK_CAPACITY ? idx_ : PHONEBOOK_CAPACITY;
 	size_t	selected_index = Input::InputIndex("INDEX >> ", capacity);
 	if (std::cin.eof())
-		return Input::INPUT_END;
+		return INPUT_END;
 	std::cout << std::endl; // intentional!!
 	std::cout << Colors::GREEN;
 	this->contacts_[selected_index - 1].PrintContact();
 	std::cout << Colors::RESET;
-	return Input::INPUT_CONTINUE;
+	return INPUT_CONTINUE;
 }
 
-Input::e_continue	PhoneBook::Exit(void) const {
-	return Input::INPUT_END;
+PhoneBook::e_continue	PhoneBook::Exit(void) const {
+	return INPUT_END;
 }
