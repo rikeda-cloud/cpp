@@ -20,11 +20,6 @@ int	main(void) {
 	randomChump("randomZombie3");
 	std::cout << std::endl;
 
-	std::cout << "--- NoNameZombie ---" << std::endl;
-	Zombie	noname_zombie;
-	noname_zombie.announce();
-	std::cout << std::endl;
-
 	std::cout << "--- NormalZombie ---" << std::endl;
 	Zombie	normal_zombie1("normalZombie1");
 	Zombie	normal_zombie2("normalZombie2");
