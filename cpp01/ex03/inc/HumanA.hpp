@@ -9,6 +9,8 @@ private:
 	std::string	name_;
 	Weapon&		weapon_;
 
+	HumanA(void);
+
 public:
 	HumanA(std::string name, Weapon& weapon);
 	HumanA(const HumanA&);

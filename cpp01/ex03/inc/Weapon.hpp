@@ -7,6 +7,8 @@ class Weapon {
 private:
 	std::string	type;
 
+	Weapon(void);
+
 public:
 	Weapon(std::string weapon_type);
 	Weapon(const Weapon&);

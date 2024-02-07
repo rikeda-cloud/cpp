@@ -9,6 +9,8 @@ private:
 	std::string	name_;
 	Weapon		*weapon_;
 
+	HumanB(void);
+
 public:
 	HumanB(std::string name);
 	HumanB(const HumanB&);
