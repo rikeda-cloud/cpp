@@ -1,4 +1,4 @@
-NAME			=	HarlFilter
+NAME			=	harlFilter
 
 CC				=	c++
 CFLAGS			=	-Wall -Wextra -Werror
@@ -12,8 +12,6 @@ OBJS_DIR		=	./objs
 INCLUDES_DIR	=	./inc
 
 SRCS			=	Harl.cpp \
-					HarlPair.cpp \
-					HarlDict.cpp \
 					main.cpp
 
 OBJS			=	$(patsubst %.o, $(OBJS_DIR)/%.o, $(SRCS:.cpp=.o))
