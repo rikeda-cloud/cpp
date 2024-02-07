@@ -1,17 +1,23 @@
 #include "Harl.hpp"
 #include <iostream>
 
-int	main(int argc, char **argv) {
+int	main(void) {
 	Harl	harl;
 
-	if (argc == 2)
-		harl.complain(argv[1]);
-	else
-		harl.complain("ERROR");
+	std::cout << "--- DEBUG ---" << std::endl;
+	harl.complain("DEBUG");
+	std::cout << "--- INFO ---" << std::endl;
+	harl.complain("INFO");
+	std::cout << "--- WARNING ---" << std::endl;
+	harl.complain("WARNING");
+	std::cout << "--- ERROR ---" << std::endl;
+	harl.complain("ERROR");
+	std::cout << "--- NO LEVEL ---" << std::endl;
+	harl.complain("NONO");
 	return 0;
 }
 
-	__attribute__((destructor)) static void destructor()
-{
-   system("leaks -q HarlFilter");
-}
+// 	__attribute__((destructor)) static void destructor()
+// {
+//    system("leaks -q Harl");
+// }
