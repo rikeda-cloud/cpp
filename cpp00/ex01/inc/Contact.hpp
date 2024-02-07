@@ -12,9 +12,9 @@ private:
 	std::string	darkest_secret_;
 
 public:
-	Contact();
+	Contact(void);
 	Contact(const Contact&);
-	~Contact();
+	~Contact(void);
 	Contact&	operator=(const Contact&);
 
 	const std::string&	GetFirstName(void) const;

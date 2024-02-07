@@ -1,5 +1,5 @@
-#ifndef CPP00_EX01_PHONEBOOK_H_
-# define CPP00_EX01_PHONEBOOK_H_
+#ifndef CPP00_EX01_PhoneBook_H_
+# define CPP00_EX01_PhoneBook_H_
 
 #include "Contact.hpp"
 #include <string>
