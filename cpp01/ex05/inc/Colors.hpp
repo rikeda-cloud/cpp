@@ -1,3 +1,6 @@
+#ifndef CPP01_EX05_Colors_H_
+# define CPP01_EX05_Colors_H_
+
 #include <string>
 
 class Colors {
@@ -8,4 +11,8 @@ public:
 	static const std::string BLUE;
 	static const std::string MAGENTA;
 	static const std::string WHITE;
+	static const std::string GREEN;
+	static const std::string CYAN;
 };
+
+#endif

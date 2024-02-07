@@ -2,7 +2,6 @@
 #include "Colors.hpp"
 #include <iostream>
 
-
 const std::string Colors::RESET = "\033[0m";
 const std::string Colors::RED = "\033[31m";
 const std::string Colors::YELLOW = "\033[33m";
@@ -11,6 +10,41 @@ const std::string Colors::MAGENTA = "\033[35m";
 const std::string Colors::WHITE = "\033[37m";
 
 Harl::Harl(void) {
+	f_list_[0] = &Harl::debug;
+	f_list_[1] = &Harl::info;
+	f_list_[2] = &Harl::warning;
+	f_list_[3] = &Harl::error;
+	level_list_[0] = "DEBUG";
+	level_list_[1] = "INFO";
+	level_list_[2] = "WARNING";
+	level_list_[3] = "ERROR";
+}
+
+Harl::Harl(const Harl& harl) {
+	f_list_[0] = harl.f_list_[0];
+	f_list_[1] = harl.f_list_[1];
+	f_list_[2] = harl.f_list_[2];
+	f_list_[3] = harl.f_list_[3];
+	level_list_[0] = harl.level_list_[0];
+	level_list_[1] = harl.level_list_[1];
+	level_list_[2] = harl.level_list_[2];
+	level_list_[3] = harl.level_list_[3];
+}
+
+Harl::~Harl(void) {}
+
+Harl&	Harl::operator=(const Harl& harl) {
+	if (this != &harl) {
+		f_list_[0] = harl.f_list_[0];
+		f_list_[1] = harl.f_list_[1];
+		f_list_[2] = harl.f_list_[2];
+		f_list_[3] = harl.f_list_[3];
+		level_list_[0] = harl.level_list_[0];
+		level_list_[1] = harl.level_list_[1];
+		level_list_[2] = harl.level_list_[2];
+		level_list_[3] = harl.level_list_[3];
+	}
+	return *this;
 }
 
 void	Harl::debug(void) {
@@ -33,30 +67,19 @@ void	Harl::error(void) {
 	std::cout << "This is unacceptable! I want to speak to the manager now." << std::endl << std::endl;
 }
 
-ssize_t	Harl::_level_to_index(std::string level) {
-	HarlDict	dict;
-	dict.append("DEBUG", Harl::debug);
-	dict.append("INFO", Harl::info);
-	dict.append("WARNING", Harl::warning);
-	dict.append("ERROR", Harl::error);
-
-	for (int i = 0; i < dict.size(); i++) {
-		if (dict.getHarlPair(i)->getKey() == level)
+ssize_t	Harl::LevelToIndex(std::string& level) {
+	for (int i = 0; i < 4; i++) {
+		if ((this->level_list_[i]) == level)
 			return i;
 	}
 	return -1;
 }
 
 void	Harl::complain(std::string level) {
-	ssize_t		index = _level_to_index(level);
-	HarlDict	dict;
-	dict.append("DEBUG", Harl::debug);
-	dict.append("INFO", Harl::info);
-	dict.append("WARNING", Harl::warning);
-	dict.append("ERROR", Harl::error);
+	ssize_t		index = LevelToIndex(level);
 
 	if (index != -1)
-		dict.getHarlPair(index)->getValue()();
+		(this->*(f_list_[index]))();
 	else
 		std::cerr
 			<< Colors::MAGENTA
