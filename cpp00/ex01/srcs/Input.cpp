@@ -40,7 +40,7 @@ size_t	Input::InputIndex(const char *prompt, size_t max_idx) {
 		if (std::cin.eof())
 			return 0;
 		else if (buffer.size() == 1) {
-			idx = static_cast<size_t>(std::atoi(buffer.c_str()));
+			idx = buffer[0] - '0';
 			if (1 <= idx && idx <= max_idx)
 				break ;
 		}
