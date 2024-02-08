@@ -1,25 +1,26 @@
-NAME			=	dreams
-CC				=	c++
-CFLAGS			=	-Wall -Wextra -Werror
-CFLAGS			+=	-std=c++98
+TARGET			=	dreams
+
+CXX				=	c++
+CXXFLAGS		=	-Wall -Wextra -Werror
+CXXFLAGS		+=	-std=c++98
 SRCS			=	tests.cpp \
 					Account.cpp
 
 RM				=	rm -rf
 OBJS			=	$(SRCS:%.cpp=%.o)
 
-$(NAME)	: $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $@
+$(TARGET)	: $(OBJS)
+	$(CXX) $(CXXFLAGS) $(OBJS) -o $@
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $^ -o $@
+	$(CXX) $(CXXFLAGS) -c $^ -o $@
 
-test_diff: $(NAME)
+test_diff: $(TARGET)
 	./test/test.sh
 
 .DEFAULT_GOAL	=	all
 .PHONY:	all
-all:	$(NAME)
+all:	$(TARGET)
 
 .PHONY:	clean
 clean:
@@ -27,7 +28,7 @@ clean:
 
 .PHONY:	fclean
 fclean:	clean
-	$(RM) $(NAME)
+	$(RM) $(TARGET)
 
 .PHONY:	re
 re:	fclean all

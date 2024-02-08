@@ -1,8 +1,8 @@
-NAME			=	phonebook
+TARGET			=	phonebook
 
-CC				=	c++
-CFLAGS			=	-Wall -Wextra -Werror
-CFLAGS			+=	-std=c++98
+CXX				=	c++
+CXXFLAGS		=	-Wall -Wextra -Werror
+CXXFLAGS		+=	-std=c++98
 
 PRE_OPT			=	-MMD -MP
 INCLUDE			=	-I$(INCLUDES_DIR)
@@ -26,18 +26,18 @@ RM				=	rm -rf
 $(OBJS_DIR)	: % :
 	@mkdir -p $@
 
-$(NAME)	: $(OBJS_DIR) $(OBJS)
-	$(CC) $(CFLAGS) $(INCLUDE) $(OBJS) -o $@
+$(TARGET)	: $(OBJS_DIR) $(OBJS)
+	$(CXX) $(CXXFLAGS) $(INCLUDE) $(OBJS) -o $@
 
 $(OBJS_DIR)/%.o	:	$(SRCS_DIR)/%.cpp
-	$(CC) $(CFLAGS) $(INCLUDE) $(PRE_OPT) -o $@ -c $<
+	$(CXX) $(CXXFLAGS) $(INCLUDE) $(PRE_OPT) -o $@ -c $<
 
-test_phonebook: $(NAME)
+test_phonebook: $(TARGET)
 	./test/test.sh
 
 .DEFAULT_GOAL	=	all
 .PHONY:	all
-all:	$(NAME)
+all:	$(TARGET)
 
 .PHONY:	clean
 clean:
@@ -45,7 +45,7 @@ clean:
 
 .PHONY:	fclean
 fclean:	clean
-	$(RM) $(NAME)
+	$(RM) $(TARGET)
 
 .PHONY:	re
 re:	fclean all

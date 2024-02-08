@@ -1,26 +1,26 @@
-NAME			=	megaphone
-CC				=	c++
-CFLAGS			=	-Wall -Wextra -Werror
-CFLAGS			+=	-std=c++98
+TARGET			=	megaphone
+
+CXX				=	c++
+CXXFLAGS		=	-Wall -Wextra -Werror
+CXXFLAGS		+=	-std=c++98
 RM				=	rm -rf
 
 SRCS			=	megaphone.cpp
-
 OBJS			=	$(SRCS:%.cpp=%.o)
 
-$(NAME)	: $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $@
+$(TARGET)	: $(OBJS)
+	$(CXX) $(CXXFLAGS) $(OBJS) -o $@
 
-test : $(NAME)
+test : $(TARGET)
 	./test.sh
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $^ -o $@
+	$(CXX) $(CXXFLAGS) -c $^ -o $@
 
 .DEFAULT_GOAL	=	all
 
 .PHONY:	all
-all:	$(NAME)
+all:	$(TARGET)
 
 .PHONY:	clean
 clean:
@@ -28,7 +28,7 @@ clean:
 
 .PHONY:	fclean
 fclean:	clean
-	$(RM) $(NAME)
+	$(RM) $(TARGET)
 
 .PHONY:	re
 re:	fclean all

@@ -1,5 +1,4 @@
 #include "Contact.hpp"
-#include <iostream>
 
 Contact::Contact(void) {}
 
@@ -44,21 +43,21 @@ const std::string&	Contact::GetDarkestSecret(void) const {
 }
 
 void	Contact::SetFirstName(std::string first_name) {
-	first_name_ = first_name;
+	this->first_name_ = first_name;
 }
 
 void	Contact::SetLastName(std::string last_name) {
-	last_name_ = last_name;
+	this->last_name_ = last_name;
 }
 
 void	Contact::SetNickName(std::string nick_name) {
-	nick_name_ = nick_name;
+	this->nick_name_ = nick_name;
 }
 
 void	Contact::SetPhoneNumber(std::string phone_number) {
-	phone_number_ = phone_number;
+	this->phone_number_ = phone_number;
 }
 
 void	Contact::SetDarkestSecret(std::string darkest_secret) {
-	darkest_secret_ = darkest_secret;
+	this->darkest_secret_ = darkest_secret;
 }

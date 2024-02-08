@@ -10,10 +10,10 @@ private:
 	~Input(void);
 	void	operator=(const Input& input);
 
-	static bool	IsIntendedString(const std::string&, int (*f)(int));
+	static bool	IsIntendedString(const std::string&, int (*)(int));
 
 public:
-	static std::string	InputString(const char *prompt, int (*f)(int));
+	static std::string	InputString(const char *prompt, int (*)(int));
 	static size_t		InputIndex(const char *prompt, size_t max_idx);
 };
 

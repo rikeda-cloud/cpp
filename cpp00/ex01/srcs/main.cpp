@@ -10,9 +10,9 @@ int	main(void) {
 		order = Input::InputString(">> ", std::isupper);
 		if (std::cin.eof())
 			break ;
-		else if ((order == "ADD" && phone_book.Add() == PhoneBook::INPUT_END)
-			|| (order == "SEARCH" && phone_book.Search() == PhoneBook::INPUT_END)
-			|| (order == "EXIT" && phone_book.Exit()) == PhoneBook::INPUT_END)
+		else if ((order == std::string("ADD") && phone_book.Add() == PhoneBook::INPUT_END)
+			|| (order == std::string("SEARCH") && phone_book.Search() == PhoneBook::INPUT_END)
+			|| (order == std::string("EXIT") && phone_book.Exit()) == PhoneBook::INPUT_END)
 			break ;
 	}
 	return 0;

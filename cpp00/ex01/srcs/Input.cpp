@@ -1,30 +1,22 @@
 #include "Input.hpp"
 #include <iostream>
 
-Input::Input(void) {}
-
-Input::Input(const Input& input) {(void)input;}
-
-Input::~Input(void) {}
-
-void	Input::operator=(const Input& input) {(void)input;}
-
-bool	Input::IsIntendedString(const std::string& str, int (*f)(int)) {
+bool	Input::IsIntendedString(const std::string& str, int (*is_func)(int)) {
 	if (str.size() == 0)
 		return false;
 	for (size_t i = 0; i < str.size(); i++) {
-		if (f(str[i]) == 0)
+		if (is_func(str[i]) == 0)
 			return false;
 	}
 	return true;
 }
 
-std::string	Input::InputString(const char *prompt, int (*f)(int)) {
+std::string	Input::InputString(const char *prompt, int (*is_func)(int)) {
 	std::string	buffer;
 
 	std::cout << prompt << std::flush;
 	while (std::getline(std::cin, buffer)) {
-		if (IsIntendedString(buffer, f))
+		if (IsIntendedString(buffer, is_func))
 			break ;
 		std::cout << prompt << std::flush;
 	}
