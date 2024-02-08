@@ -16,9 +16,11 @@ FileReplacer::~FileReplacer(void) {
 
 FileReplacer&	FileReplacer::operator=(const FileReplacer& filereplacer) {
 	if (this != &filereplacer) {
+		this->is_failed_ = false;
 		this->Close();
 		this->file_ = filereplacer.file_;
-		this->Open();
+		if (this->is_failed_ == false)
+			this->Open();
 	}
 	return *this;
 }
@@ -29,14 +31,14 @@ void	FileReplacer::Open(void) {
 		return ;
 	}
 	fs_.open(file_.c_str());
-	if (!fs_.is_open()) {
+	if (fs_.fail()) {
 		is_failed_ = true;
 		return ;
 	}
 	std::string	replace_file(file_);
 	replace_file += ".replace";
 	fs_replace_.open(replace_file.c_str());
-	if (!fs_replace_.is_open()) {
+	if (fs_replace_.fail()) {
 		fs_.close();
 		is_failed_ = true;
 		return ;
@@ -45,14 +47,26 @@ void	FileReplacer::Open(void) {
 }
 
 void	FileReplacer::Close(void) {
-	if (fs_.is_open())
+	if (fs_.is_open()) {
 		fs_.close();
-	if (fs_replace_.is_open())
+		if (fs_.fail())
+			is_failed_ = true;
+	}
+	if (fs_replace_.is_open()) {
 		fs_replace_.close();
+		if (fs_replace_.fail())
+			is_failed_ = true;
+	}
 }
 
-void	FileReplacer::SaveLine(std::string& line) {
+int	FileReplacer::SaveLine(std::string& line) {
 	fs_replace_ << line << std::endl;
+	if (fs_replace_.fail()) {
+		is_failed_ = true;
+		std::cerr << "output error" << std::endl;
+		return -1;
+	}
+	return 0;
 }
 
 std::string	FileReplacer::ReplaceLine(std::string line, std::string& from, std::string& to) {
@@ -70,7 +84,7 @@ std::string	FileReplacer::ReplaceLine(std::string line, std::string& from, std::
 
 int	FileReplacer::Replace(std::string from, std::string to) {
 	if (is_failed_) {
-		std::cerr << "file open failed" << std::endl;
+		std::cerr << "file error" << std::endl;
 		return -1;
 	}
 	while (true) {
@@ -79,7 +93,8 @@ int	FileReplacer::Replace(std::string from, std::string to) {
 		if (!fs_)
 			break ;
 		line = ReplaceLine(line, from, to);
-		SaveLine(line);
+		if (SaveLine(line) == -1)
+			return -1;
 	}
 	return 0;
 }

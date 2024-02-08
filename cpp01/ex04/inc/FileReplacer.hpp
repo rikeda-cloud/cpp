@@ -13,7 +13,7 @@ private:
 
 	void			Open(void);
 	void			Close(void);
-	void			SaveLine(std::string&);
+	int				SaveLine(std::string&);
 	std::string		ReplaceLine(std::string line, std::string& from, std::string& to);
 
 	FileReplacer(void);
