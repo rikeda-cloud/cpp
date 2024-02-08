@@ -1,20 +1,20 @@
-NAME			=	ThisIsBrain
+TARGET			=	ThisIsBrain
 
-CC				=	c++
-CFLAGS			=	-Wall -Wextra -Werror
-CFLAGS			+=	-std=c++98
+CXX				=	c++
+CXXFLAGS		=	-Wall -Wextra -Werror
+CXXFLAGS		+=	-std=c++98
 SRCS			=	main.cpp
 
 OBJS			=	$(SRCS:%.cpp=%.o)
 
 RM				=	rm -rf
 
-$(NAME)	: $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $@
+$(TARGET)	: $(OBJS)
+	$(CXX) $(CXXFLAGS) $(OBJS) -o $@
 
 .DEFAULT_GOAL	=	all
 .PHONY:	all
-all:	$(NAME)
+all:	$(TARGET)
 
 .PHONY:	clean
 clean:
@@ -22,7 +22,7 @@ clean:
 
 .PHONY:	fclean
 fclean:	clean
-	$(RM) $(NAME)
+	$(RM) $(TARGET)
 
 .PHONY:	re
 re:	fclean all
