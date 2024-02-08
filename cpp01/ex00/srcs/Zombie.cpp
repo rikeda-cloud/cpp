@@ -6,9 +6,8 @@ Zombie::Zombie(std::string zombie_name) : name(zombie_name) {}
 Zombie::Zombie(const Zombie& zombie) : name(zombie.name){}
 
 Zombie&	Zombie::operator=(const Zombie& zombie) {
-	if (this != &zombie) {
+	if (this != &zombie)
 		this->name = zombie.name;
-	}
 	return *this;
 }
 

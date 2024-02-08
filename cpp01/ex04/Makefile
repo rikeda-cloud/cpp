@@ -37,7 +37,7 @@ all:	$(TARGET)
 
 .PHONY:	clean
 clean:
-	$(RM) $(OBJS_DIR)
+	$(RM) $(OBJS_DIR) ./test/*.replace
 
 .PHONY:	fclean
 fclean:	clean

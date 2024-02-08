@@ -7,26 +7,24 @@
 class FileReplacer {
 private:
 	std::string		file_;
-	std::string		from_;
-	std::string		to_;
 	std::ifstream	fs_;
 	std::ofstream	fs_replace_;
+	bool			is_failed_;
+
+	void			Open(void);
+	void			Close(void);
+	void			SaveLine(std::string&);
+	std::string		ReplaceLine(std::string line, std::string& from, std::string& to);
 
 	FileReplacer(void);
 
-	int				Open(void);
-	int				Close(void);
-	void			Save(std::string&);
-	std::string		ReplaceLine(std::string line);
-
-
 public:
-	FileReplacer(std::string, std::string, std::string);
+	FileReplacer(std::string file);
 	FileReplacer(const FileReplacer&);
 	~FileReplacer(void);
 	FileReplacer&	operator=(const FileReplacer&);
 
-	int	Replace(void);
+	int		Replace(std::string, std::string);
 };
 
 #endif

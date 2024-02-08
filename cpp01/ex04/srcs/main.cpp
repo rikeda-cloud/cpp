@@ -6,8 +6,8 @@ int	main(int argc, char **argv) {
 		std::cout << "argc != 3" << std::endl;
 		return 1;
 	}
-	FileReplacer	replacer(argv[1], argv[2], argv[3]);
-	if (replacer.Replace() == -1)
+	FileReplacer	replacer(argv[1]);
+	if (replacer.Replace(argv[2], argv[3]) == -1)
 		return 1;
 	return 0;
 }
