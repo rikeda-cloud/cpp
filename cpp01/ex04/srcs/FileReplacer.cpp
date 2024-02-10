@@ -35,9 +35,7 @@ void	FileReplacer::Open(void) {
 		is_failed_ = true;
 		return ;
 	}
-	std::string	replace_file(file_);
-	replace_file += ".replace";
-	fs_replace_.open(replace_file.c_str());
+	fs_replace_.open((file_ + std::string(".replace")).c_str());
 	if (fs_replace_.fail()) {
 		fs_.close();
 		is_failed_ = true;

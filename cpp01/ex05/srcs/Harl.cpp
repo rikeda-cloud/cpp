@@ -1,14 +1,6 @@
 #include "Harl.hpp"
 #include "Colors.hpp"
 #include <iostream>
-#include <cstddef>
-
-const std::string Colors::RESET = "\033[0m";
-const std::string Colors::RED = "\033[31m";
-const std::string Colors::YELLOW = "\033[33m";
-const std::string Colors::BLUE = "\033[34m";
-const std::string Colors::MAGENTA = "\033[35m";
-const std::string Colors::WHITE = "\033[37m";
 
 Harl::Harl(void) {
 	f_list_[0] = &Harl::debug;
