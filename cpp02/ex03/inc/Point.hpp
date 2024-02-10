@@ -14,14 +14,15 @@ public:
 	Point(const Point&);
 	~Point(void);
 	Point&			operator=(const Point&);
+
 	const Fixed&	getX(void) const;
 	const Fixed&	getY(void) const;
 	void			setX(const Fixed&);
 	void			setY(const Fixed&);
+	static Point	PointToDistanceVector(const Point&, const Point&);
 
 };
 
-Point	point_to_vector(const Point& p1, const Point& p2);
 bool	bsp(Point const a, Point const b, Point const c, Point const point);
 
 #endif
