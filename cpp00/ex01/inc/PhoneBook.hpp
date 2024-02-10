@@ -5,6 +5,9 @@
 #include <string>
 
 class PhoneBook {
+public:
+	enum e_continue {CONTINUE = 0, END = 1};
+
 private:
 	static const size_t	PHONEBOOK_CAPACITY = 8;
 	Contact				contacts_[PHONEBOOK_CAPACITY];
@@ -13,21 +16,21 @@ private:
 
 	void	PrintAdjustedString(const std::string&) const;
 	void	PrintListLine(void) const;
-	void	PrintContactList(void) const;
+	void	ListContacts(void) const;
 	void	PrintContact(const Contact&) const;
+
+	size_t		GetCapacityIdx(void) const;
+	e_continue	Add(void);
+	e_continue	Search(void) const;
+	e_continue	Exit(void) const;
 
 public:
 	PhoneBook(void);
 	PhoneBook(const PhoneBook&);
 	~PhoneBook(void);
 	PhoneBook&	operator=(const PhoneBook&);
-	size_t		GetCapacityIdx(void) const;
 
-	enum e_continue {INPUT_CONTINUE = 0, INPUT_END = 1};
-
-	e_continue	Add(void);
-	e_continue	Search(void) const;
-	e_continue	Exit(void) const;
+	e_continue	Execute(std::string&);
 };
 
 #endif

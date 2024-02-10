@@ -5,10 +5,6 @@
 #include <iostream>
 #include <sstream>
 
-const std::string Colors::RESET = "\033[0m";
-const std::string Colors::GREEN = "\033[32m";
-const std::string Colors::MAGENTA = "\033[35m";
-
 PhoneBook::PhoneBook(void) : idx_(0), is_fill_(false) {}
 
 PhoneBook::PhoneBook(const PhoneBook& phonebook) : idx_(phonebook.idx_), is_fill_(phonebook.is_fill_) {
@@ -45,7 +41,7 @@ void	PhoneBook::PrintListLine(void) const {
 	std::cout << std::endl;
 }
 
-void	PhoneBook::PrintContactList(void) const {
+void	PhoneBook::ListContacts(void) const {
 	std::cout << std::endl; // intentional!!
 	std::cout << Colors::MAGENTA;
 	for (size_t i = 0; i < GetCapacityIdx(); i++) {
@@ -67,25 +63,33 @@ void	PhoneBook::PrintContactList(void) const {
 	std::cout << Colors::RESET;
 }
 
+void	PhoneBook::PrintContact(const Contact& contact) const {
+	std::cout << "FIRST NAME     -> [" << contact.GetFirstName() << "]" << std::endl;
+	std::cout << "LAST NAME      -> [" << contact.GetLastName() << "]" << std::endl;
+	std::cout << "NICK NAME      -> [" << contact.GetNickName() << "]" << std::endl;
+	std::cout << "PHONE NUMBER   -> [" << contact.GetPhoneNumber() << "]" << std::endl;
+	std::cout << "DARKEST SECRET -> [" << contact.GetDarkestSecret() << "]" << std::endl;
+}
+
 PhoneBook::e_continue	PhoneBook::Add(void) {
 	std::string		str[5];
 	Contact&		contact = contacts_[idx_];
 
 	str[0] = Input::InputString("FIRST NAME     >> ", std::isalpha);
 	if (std::cin.eof())
-		return INPUT_END;
+		return END;
 	str[1] = Input::InputString("LAST NAME      >> ", std::isalpha);
 	if (std::cin.eof())
-		return INPUT_END;
+		return END;
 	str[2] = Input::InputString("NICK NAME      >> ", std::isalnum);
 	if (std::cin.eof())
-		return INPUT_END;
+		return END;
 	str[3] = Input::InputString("PHONE NUMBER   >> ", std::isdigit);
 	if (std::cin.eof())
-		return INPUT_END;
+		return END;
 	str[4] = Input::InputString("DARKEST SECRET >> ", std::isprint);
 	if (std::cin.eof())
-		return INPUT_END;
+		return END;
 	contact.SetFirstName(str[0]);
 	contact.SetLastName(str[1]);
 	contact.SetNickName(str[2]);
@@ -96,37 +100,39 @@ PhoneBook::e_continue	PhoneBook::Add(void) {
 		idx_ = 0;
 		is_fill_ = true;
 	}
-	return INPUT_CONTINUE;
+	return CONTINUE;
 }
 
 PhoneBook::e_continue	PhoneBook::Search(void) const {
 	if (GetCapacityIdx() == 0) {
 		std::cout << "There are no contacts registered yet" << std::endl;
-		return INPUT_CONTINUE;
+		return CONTINUE;
 	}
-	PhoneBook::PrintContactList();
+	PhoneBook::ListContacts();
 	size_t	selected_index = Input::InputIndex("INDEX >> ", GetCapacityIdx());
 	if (std::cin.eof())
-		return INPUT_END;
+		return END;
 	std::cout << std::endl; // intentional!!
 	std::cout << Colors::GREEN;
 	PhoneBook::PrintContact(this->contacts_[selected_index - 1]);
 	std::cout << Colors::RESET;
-	return INPUT_CONTINUE;
+	return CONTINUE;
 }
 
 PhoneBook::e_continue	PhoneBook::Exit(void) const {
-	return INPUT_END;
+	return END;
+}
+
+PhoneBook::e_continue	PhoneBook::Execute(std::string& command) {
+	if (command == std::string("ADD"))
+		return Add();
+	else if (command == std::string("SEARCH"))
+		return Search();
+	else if (command == std::string("EXIT"))
+		return Exit();
+	return CONTINUE;
 }
 
 size_t	PhoneBook::GetCapacityIdx(void) const {
 	return is_fill_ ? PHONEBOOK_CAPACITY : idx_;
-}
-
-void	PhoneBook::PrintContact(const Contact& contact) const {
-	std::cout << "FIRST NAME     -> [" << contact.GetFirstName() << "]" << std::endl;
-	std::cout << "LAST NAME      -> [" << contact.GetLastName() << "]" << std::endl;
-	std::cout << "NICK NAME      -> [" << contact.GetNickName() << "]" << std::endl;
-	std::cout << "PHONE NUMBER   -> [" << contact.GetPhoneNumber() << "]" << std::endl;
-	std::cout << "DARKEST SECRET -> [" << contact.GetDarkestSecret() << "]" << std::endl;
 }
