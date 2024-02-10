@@ -6,11 +6,11 @@ Fixed::Fixed(void) : number_(0) {
 	std::cout << "Default constructor called" << std::endl;
 }
 
-Fixed::Fixed(int int_number) : number_(int_number << bits_) {
+Fixed::Fixed(int number) : number_(number << bits_) {
 	std::cout << "Int constructor called" << std::endl;
 }
 
-Fixed::Fixed(float float_number) : number_(std::roundf(float_number * (1 << bits_))) {
+Fixed::Fixed(float number) : number_(std::roundf(number * (1 << bits_))) {
 	std::cout << "Float constructor called" << std::endl;
 }
 
@@ -87,16 +87,20 @@ Fixed	Fixed::operator-(const Fixed& fixed) const {
 }
 
 Fixed	Fixed::operator*(const Fixed& fixed) const {
-	Fixed	tmp;
+	Fixed		tmp;
+	long long	llnumber = this->number_;
+	long long	tmp2 = llnumber * fixed.number_;
 
-	tmp.setRawBits(this->number_ * fixed.number_ / (1 << bits_));
+	tmp.setRawBits(tmp2 / (1 << bits_));
 	return tmp;
 }
 
 Fixed	Fixed::operator/(const Fixed& fixed) const {
-	Fixed	tmp;
+	Fixed		tmp;
+	long long	llnumber = this->number_;
+	long long	tmp2 = llnumber * (1 << bits_);
 
-	tmp.setRawBits((this->number_ * (1 << bits_)) / fixed.number_);
+	tmp.setRawBits(tmp2 / fixed.number_);
 	return tmp;
 }
 
