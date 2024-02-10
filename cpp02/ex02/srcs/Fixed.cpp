@@ -3,36 +3,36 @@
 #include <cmath>
 
 Fixed::Fixed(void) : number_(0) {
-	// std::cout << "Default constructor called" << std::endl;
+	std::cout << "Default constructor called" << std::endl;
 }
 
 Fixed::Fixed(int int_number) : number_(int_number << bits_) {
-	// std::cout << "Int constructor called" << std::endl;
+	std::cout << "Int constructor called" << std::endl;
 }
 
 Fixed::Fixed(float float_number) : number_(std::roundf(float_number * (1 << bits_))) {
-	// std::cout << "Float constructor called" << std::endl;
+	std::cout << "Float constructor called" << std::endl;
 }
 
 Fixed::~Fixed(void) {
-	// std::cout << "Destructor called" << std::endl;
+	std::cout << "Destructor called" << std::endl;
 }
 
 Fixed::Fixed(const Fixed& fixed) {
-	// std::cout << "Copy constructor called" << std::endl;
+	std::cout << "Copy constructor called" << std::endl;
 	*this = fixed;
 }
 
 Fixed&	Fixed::operator=(const Fixed& fixed) {
 	if (this != &fixed) {
-		// std::cout << "Copy assignment operator called" << std::endl;
+		std::cout << "Copy assignment operator called" << std::endl;
 		setRawBits(fixed.getRawBits());
 	}
 	return *this;
 }
 
 int	Fixed::getRawBits(void) const {
-	//std::cout << "getRawBits member function called" << std::endl;
+	std::cout << "getRawBits member function called" << std::endl;
 	return number_;
 }
 
@@ -101,7 +101,7 @@ Fixed	Fixed::operator/(const Fixed& fixed) const {
 }
 
 Fixed&	Fixed::operator++(void) {
-	number_ += 1;
+	number_++;
 	return *this;
 }
 
@@ -112,7 +112,7 @@ Fixed	Fixed::operator++(int) {
 }
 
 Fixed&	Fixed::operator--(void) {
-	number_ -= 1;
+	number_--;
 	return *this;
 }
 
