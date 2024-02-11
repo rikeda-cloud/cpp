@@ -10,11 +10,14 @@ protected:
 	unsigned int	energy_point_;
 	unsigned int	attack_damage_;
 
+	ClapTrap(void);
+
 public:
 	ClapTrap(std::string name);
 	~ClapTrap(void);
 	ClapTrap(const ClapTrap&);
 	ClapTrap&		operator=(const ClapTrap&);
+
 	void			attack(const std::string& target);
 	void			takeDamege(unsigned int amount);
 	void			beRepaired(unsigned int amount);

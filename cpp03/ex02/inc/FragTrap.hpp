@@ -5,11 +5,15 @@
 #include <string>
 
 class FragTrap : public ClapTrap {
+private:
+	FragTrap(void);
+
 public:
 	FragTrap(std::string name);
 	FragTrap(const FragTrap&);
 	~FragTrap(void);
 	FragTrap&	operator=(const FragTrap&);
+
 	void		highFivesGuys(void);
 };
 

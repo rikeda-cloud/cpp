@@ -12,11 +12,14 @@ private:
 	unsigned int	energy_point_;
 	unsigned int	attack_damage_;
 
+	DiamondTrap(void);
+
 public:
 	DiamondTrap(std::string name);
 	DiamondTrap(const DiamondTrap&);
 	~DiamondTrap(void);
 	DiamondTrap&	operator=(const DiamondTrap&);
+
 	void			whoAmI(void);
 	void			attack(const std::string& target);
 };
