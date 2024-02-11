@@ -1,8 +1,8 @@
 #ifndef CPP03_EX03_ScavTrap_H_
 # define CPP03_EX03_ScavTrap_H_
 
-#include <string>
 #include "ClapTrap.hpp"
+#include <string>
 
 class ScavTrap : public ClapTrap {
 public:

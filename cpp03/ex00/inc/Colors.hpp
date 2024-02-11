@@ -1,6 +1,15 @@
+#ifndef CPP03_EX00_Colors_H_
+# define CPP03_EX00_Colors_H_
+
 #include <string>
 
 class Colors {
+private:
+	Colors(void);
+	Colors(const Colors&);
+	~Colors(void);
+	void	operator=(const Colors&);
+
 public:
 	static const std::string RESET;
 	static const std::string RED;
@@ -11,3 +20,5 @@ public:
 	static const std::string GREEN;
 	static const std::string CYAN;
 };
+
+#endif
