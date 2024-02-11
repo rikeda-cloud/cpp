@@ -1,9 +1,9 @@
-NAME			=	diamondtrap
+TARGET			=	diamondtrap
 
-CC				=	c++
-CFLAGS			=	-Wall -Wextra -Werror
-CFLAGS			+=	-std=c++98
-CFLAGS			+=	-Wshadow
+CXX				=	c++
+CXXFLAGS		=	-Wall -Wextra -Werror
+CXXFLAGS		+=	-std=c++98
+CXXFLAGS		+=	-Wshadow
 
 PRE_OPT			=	-MMD -MP
 INCLUDE			=	-I$(INCLUDES_DIR)
@@ -26,15 +26,15 @@ RM				=	rm -rf
 $(OBJS_DIR)	: % :
 	@mkdir -p $@
 
-$(NAME)	: $(OBJS_DIR) $(OBJS)
-	$(CC) $(CFLAGS) $(INCLUDE) $(OBJS) -o $@
+$(TARGET)	: $(OBJS_DIR) $(OBJS)
+	$(CXX) $(CXXFLAGS) $(INCLUDE) $(OBJS) -o $@
 
 $(OBJS_DIR)/%.o	:	$(SRCS_DIR)/%.cpp
-	$(CC) $(CFLAGS) $(INCLUDE) $(PRE_OPT) -o $@ -c $<
+	$(CXX) $(CXXFLAGS) $(INCLUDE) $(PRE_OPT) -o $@ -c $<
 
 .DEFAULT_GOAL	=	all
 .PHONY:	all
-all:	$(NAME)
+all:	$(TARGET)
 
 .PHONY:	clean
 clean:
@@ -42,7 +42,7 @@ clean:
 
 .PHONY:	fclean
 fclean:	clean
-	$(RM) $(NAME)
+	$(RM) $(TARGET)
 
 .PHONY:	re
 re:	fclean all
