@@ -1,5 +1,5 @@
-#ifndef CPP04_EX01_Animal_H_
-# define CPP04_EX01_Animal_H_
+#ifndef CPP04_EX02_Animal_H_
+# define CPP04_EX02_Animal_H_
 
 #include <string>
 

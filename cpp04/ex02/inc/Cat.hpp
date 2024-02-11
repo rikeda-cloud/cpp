@@ -1,5 +1,5 @@
-#ifndef CPP04_EX01_Cat_H_
-# define CPP04_EX01_Cat_H_
+#ifndef CPP04_EX02_Cat_H_
+# define CPP04_EX02_Cat_H_
 
 #include "Animal.hpp"
 #include "Brain.hpp"
