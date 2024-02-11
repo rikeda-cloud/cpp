@@ -1,5 +1,5 @@
-#ifndef CPP04_EX00_WrongCat_H_
-# define CPP04_EX00_WrongCat_H_
+#ifndef CPP04_EX01_WrongCat_H_
+# define CPP04_EX01_WrongCat_H_
 
 #include "WrongAnimal.hpp"
 #include <string>

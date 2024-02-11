@@ -1,8 +1,8 @@
 #ifndef CPP04_EX00_Dog_H_
 # define CPP04_EX00_Dog_H_
 
-#include <string>
 #include "Animal.hpp"
+#include <string>
 
 class Dog : public Animal {
 public:
