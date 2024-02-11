@@ -16,6 +16,10 @@ public:
 
 	void		attack(const std::string& target);
 	void		guardGate(void);
+
+	static const unsigned int	HIT_POINT = 100;
+	static const unsigned int	ENERGY_POINT = 50;
+	static const unsigned int	ATTACK_DAMAGE = 20;
 };
 
 #endif

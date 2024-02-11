@@ -13,6 +13,7 @@ INCLUDES_DIR	=	./inc
 
 SRCS			=	ClapTrap.cpp \
 					FragTrap.cpp \
+					Colors.cpp \
 					main.cpp
 
 OBJS			=	$(patsubst %.o, $(OBJS_DIR)/%.o, $(SRCS:.cpp=.o))

@@ -1,25 +1,25 @@
 #include "FragTrap.hpp"
-#include "ClapTrap.hpp"
 #include "Colors.hpp"
 #include <iostream>
 
 FragTrap::FragTrap(std::string name) : ClapTrap(name) {
-	hit_point_ = 100;
-	energy_point_ = 100;
-	attack_damage_ = 30;
-	std::cout << Colors::CYAN << "The FragTrap constructor will be called" << Colors::RESET << std::endl;
+	hit_point_ = FragTrap::HIT_POINT;
+	energy_point_ = FragTrap::ENERGY_POINT;
+	attack_damage_ = FragTrap::ATTACK_DAMAGE;
+	std::cout << Colors::CYAN << "FragTrap constructor called" << Colors::RESET << std::endl;
 }
 
 FragTrap::FragTrap(const FragTrap& fragtrap) : ClapTrap(fragtrap) {
-	std::cout << Colors::CYAN << "The FragTrap copy constructor will be called" << Colors::RESET << std::endl;
+	std::cout << Colors::CYAN << "FragTrap copy constructor called" << Colors::RESET << std::endl;
 }
 
 FragTrap::~FragTrap(void) {
-	std::cout << Colors::WHITE << "The FragTrap destructor will be called" << Colors::RESET << std::endl;
+	std::cout << Colors::WHITE << "FragTrap destructor called" << Colors::RESET << std::endl;
 }
 
 FragTrap&	FragTrap::operator=(const FragTrap& fragtrap) {
-	ClapTrap::operator=(fragtrap);
+	if (this != &fragtrap)
+		ClapTrap::operator=(fragtrap);
 	return *this;
 }
 

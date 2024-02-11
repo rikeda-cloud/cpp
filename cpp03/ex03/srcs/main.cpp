@@ -5,10 +5,10 @@ int	main(void) {
 	DiamondTrap	enemy("enemy");
 
 	my.attack(enemy.getName());
-	my.takeDamege(1);
+	my.takeDamage(1);
 	my.beRepaired(1);
-	my.takeDamege(9);
-	my.takeDamege(1);
+	my.takeDamage(9);
+	my.takeDamage(1);
 	my.beRepaired(1);
 	my.beRepaired(1);
 	my.beRepaired(1);
@@ -22,5 +22,6 @@ int	main(void) {
 	my.beRepaired(1);
 	my.beRepaired(1);
 	my.beRepaired(1);
+	my.whoAmI();
 	return 0;
 }

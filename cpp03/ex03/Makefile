@@ -16,6 +16,7 @@ SRCS			=	ClapTrap.cpp \
 					ScavTrap.cpp \
 					FragTrap.cpp \
 					DiamondTrap.cpp \
+					Colors.cpp \
 					main.cpp
 
 OBJS			=	$(patsubst %.o, $(OBJS_DIR)/%.o, $(SRCS:.cpp=.o))

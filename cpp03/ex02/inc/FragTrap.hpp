@@ -15,6 +15,10 @@ public:
 	FragTrap&	operator=(const FragTrap&);
 
 	void		highFivesGuys(void);
+
+	static const unsigned int	HIT_POINT = 100;
+	static const unsigned int	ENERGY_POINT = 100;
+	static const unsigned int	ATTACK_DAMAGE = 30;
 };
 
 #endif

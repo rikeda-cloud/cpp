@@ -4,25 +4,29 @@
 #include "Colors.hpp"
 #include <iostream>
 
-DiamondTrap::DiamondTrap(std::string name) : ScavTrap(name + "_clap_name"), FragTrap(name + "_clap_name"), name_(name) {
-	DiamondTrap::hit_point_ = FragTrap::hit_point_;
-	DiamondTrap::energy_point_ = ScavTrap::energy_point_;
-	DiamondTrap::attack_damage_ = FragTrap::attack_damage_;
-	std::cout << Colors::CYAN << "The DiamondTrap constructor will be called" << Colors::RESET << std::endl;
+DiamondTrap::DiamondTrap(std::string name) : ClapTrap(name), ScavTrap(name), FragTrap(name), name_(name) {
+	ClapTrap::name_ = name + std::string("_clap_name");
+	hit_point_ = FragTrap::HIT_POINT;
+	energy_point_ = ScavTrap::ENERGY_POINT;
+	attack_damage_ = FragTrap::ATTACK_DAMAGE;
+	std::cout << Colors::CYAN << "DiamondTrap constructor called" << Colors::RESET << std::endl;
 }
 
-DiamondTrap::DiamondTrap(const DiamondTrap& diamondtrap) : ScavTrap(diamondtrap), FragTrap(diamondtrap) {
-	std::cout << Colors::CYAN << "The DiamondTrap copy constructor will be called" << Colors::RESET << std::endl;
+DiamondTrap::DiamondTrap(const DiamondTrap& diamondtrap) : ClapTrap(diamondtrap), ScavTrap(diamondtrap), FragTrap(diamondtrap) {
+	std::cout << Colors::CYAN << "DiamondTrap copy constructor called" << Colors::RESET << std::endl;
 }
 
 DiamondTrap::~DiamondTrap(void) {
-	std::cout << Colors::CYAN << "The DiamondTrap destructor will be called" << Colors::RESET << std::endl;
+	std::cout << Colors::CYAN << "DiamondTrap destructor called" << Colors::RESET << std::endl;
 }
 
 DiamondTrap&	DiamondTrap::operator=(const DiamondTrap& diamondtrap) {
-	ScavTrap::operator=(diamondtrap);
-	FragTrap::operator=(diamondtrap);
-	this->name_ = diamondtrap.name_;
+	if (this != &diamondtrap) {
+		ClapTrap::operator=(diamondtrap);
+		ScavTrap::operator=(diamondtrap);
+		FragTrap::operator=(diamondtrap);
+		this->name_ = diamondtrap.name_;
+	}
 	return *this;
 }
 
@@ -31,6 +35,6 @@ void	DiamondTrap::attack(const std::string& target) {
 }
 
 void	DiamondTrap::whoAmI(void) {
-	std::cout << Colors::WHITE << "ClapTrap: I am " << ScavTrap::name_ << Colors::RESET << std::endl;
-	std::cout << Colors::WHITE << "DiamondTrap: I am " << name_ << Colors::RESET << std::endl;
+	std::cout << Colors::WHITE << "ClapTrap: I am " << ClapTrap::name_ << Colors::RESET << std::endl;
+	std::cout << Colors::WHITE << "DiamondTrap: I am " << this->name_ << Colors::RESET << std::endl;
 }
