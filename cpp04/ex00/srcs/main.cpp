@@ -1,6 +1,8 @@
 #include "Animal.hpp"
 #include "Cat.hpp"
 #include "Dog.hpp"
+#include "WrongAnimal.hpp"
+#include "WrongCat.hpp"
 #include <iostream>
 
 int main()
@@ -14,5 +16,27 @@ int main()
 	j->makeSound();
 	meta->makeSound();
 
+	delete meta;
+	delete j;
+	delete i;
+
 	return 0;
+}
+
+// int main()
+// {
+// 	const WrongAnimal* meta = new WrongAnimal();
+// 	const WrongAnimal* i = new WrongCat();
+// 	std::cout << i->getType() << " " << std::endl;
+// 	i->makeSound(); //will output the cat sound!
+// 	meta->makeSound();
+
+// 	delete meta;
+// 	delete i;
+// 	return 0;
+// }
+
+	__attribute__((destructor)) static void destructor()
+{
+   system("leaks -q Animal");
 }

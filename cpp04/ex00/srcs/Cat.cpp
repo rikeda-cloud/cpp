@@ -16,7 +16,8 @@ Cat::~Cat(void) {
 }
 
 Cat&	Cat::operator=(const Cat& cat) {
-	this->type = cat.type;
+	if (this != &cat)
+		this->type = cat.type;
 	return *this;
 }
 

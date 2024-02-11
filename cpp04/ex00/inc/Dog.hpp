@@ -10,6 +10,7 @@ public:
 	Dog(const Dog&);
 	~Dog(void);
 	Dog&		operator=(const Dog&);
+
 	void		makeSound(void) const;
 	std::string	getType(void) const;
 };
