@@ -2,6 +2,7 @@
 # define CPP05_EX00_Bureaucrat_H_
 
 #include <string>
+#include <iostream>
 
 class Bureaucrat {
 public:
@@ -28,5 +29,7 @@ public:
 	void				GradeUp(size_t);
 	void				GradeDown(size_t);
 };
+
+std::ostream&	operator<<(std::ostream& s, const Bureaucrat& bureaucrat);
 
 #endif

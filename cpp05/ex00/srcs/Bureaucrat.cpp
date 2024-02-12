@@ -50,3 +50,7 @@ void	Bureaucrat::GradeDown(size_t grade_decrease) {
 		throw Bureaucrat::GradeTooLowException();
 	grade_ += grade_decrease;
 }
+
+std::ostream&	operator<<(std::ostream& s, const Bureaucrat& bureaucrat) {
+	return s << bureaucrat.getName() << ", bureaucrat grade " << bureaucrat.getGrade() << "." << std::endl;
+}
