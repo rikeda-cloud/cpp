@@ -1,7 +1,7 @@
 TARGET			=	Bureaucrat
 
 CXX				=	c++
-CXXFLAGS		=	-Wall -Wextra -Werror -g
+CXXFLAGS		=	-Wall -Wextra -Werror
 CXXFLAGS		+=	-std=c++98
 
 PRE_OPT			=	-MMD -MP
