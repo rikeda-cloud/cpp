@@ -15,20 +15,22 @@ public:
 	class AlreadySignedException : public std::exception {};
 
 private:
-	std::string	name_;
-	size_t		grade_;
-	bool		is_signed_;
+	const std::string	name_;
+	const size_t		grade_to_sign_;
+	const size_t		grade_to_excecute_;
+	bool				is_signed_;
 
 	Form(void);
 
 public:
-	Form(std::string, size_t);
+	Form(std::string name, size_t grade_to_sign, size_t grade_to_excecute);
 	Form(const Form&);
 	~Form(void);
 	Form&	operator=(const Form&);
 
 	const std::string&	getName(void) const;
-	size_t				getGrade(void) const;
+	size_t				getGradeToSign(void) const;
+	size_t				getGradeToExcecute(void) const;
 	bool				getIsSigned(void) const;
 	void				beSigned(const Bureaucrat&);
 };

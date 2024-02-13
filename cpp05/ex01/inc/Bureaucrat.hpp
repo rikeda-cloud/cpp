@@ -14,8 +14,8 @@ public:
 	class GradeTooLowException : public std::exception {};
 
 private:
-	std::string	name_;
-	size_t		grade_;
+	const std::string	name_;
+	size_t				grade_;
 
 	Bureaucrat(void);
 

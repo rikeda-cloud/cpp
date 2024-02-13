@@ -40,3 +40,14 @@ int	main(void) {
 
 	return 0;
 }
+
+//// [TEST] operator=
+// int	main(void) {
+// 	Bureaucrat	b1("b1", 1);
+// 	Bureaucrat	b2("b2", 2);
+
+// 	b2 = b1;
+// 	std::cout << b2 << std::endl;
+
+// 	return 0;
+// }

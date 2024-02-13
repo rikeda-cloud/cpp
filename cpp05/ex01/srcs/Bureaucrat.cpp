@@ -2,12 +2,11 @@
 #include "Form.hpp"
 #include <iostream>
 
-Bureaucrat::Bureaucrat(std::string name, size_t grade) : name_(name) {
+Bureaucrat::Bureaucrat(std::string name, size_t grade) : name_(name), grade_(grade) {
 	if (grade < GRADE_HIGH_LIMIT)
 		throw Bureaucrat::GradeTooHighException();
 	if (GRADE_LOW_LIMIT < grade)
 		throw Bureaucrat::GradeTooLowException();
-	grade_ = grade;
 	std::cout << "Bureaucrat constructor called" << std::endl;
 }
 
@@ -22,7 +21,7 @@ Bureaucrat::~Bureaucrat(void) {
 
 Bureaucrat&	Bureaucrat::operator=(const Bureaucrat& bureaucrat) {
 	if (this != &bureaucrat) {
-		this->name_ = bureaucrat.name_;
+		const_cast<std::string&>(this->name_) = bureaucrat.name_;
 		this->grade_ = bureaucrat.grade_;
 	}
 	return *this;
