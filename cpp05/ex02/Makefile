@@ -1,4 +1,4 @@
-TARGET			=	PLEASE_SET
+TARGET			=	Forms
 
 CXX				=	c++
 CXXFLAGS		=	-Wall -Wextra -Werror
@@ -11,7 +11,11 @@ SRCS_DIR		=	./srcs
 OBJS_DIR		=	./objs
 INCLUDES_DIR	=	./inc
 
-SRCS			=	PhoneBook.cpp \
+SRCS			=	AForm.cpp \
+					Bureaucrat.cpp \
+					PresidentialPardonForm.cpp \
+					RobotomyRequestForm.cpp \
+					ShrubberyCreationForm.cpp \
 					main.cpp
 
 OBJS			=	$(patsubst %.o, $(OBJS_DIR)/%.o, $(SRCS:.cpp=.o))
