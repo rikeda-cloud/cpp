@@ -8,5 +8,11 @@ int	main(void) {
 	rrf = someRandomIntern.makeForm("robotomy request", "Bender");
 	std::cout << *rrf;
 
+	delete rrf;
 	return 0;
+}
+
+	__attribute__((destructor)) static void destructor()
+{
+   system("leaks -q Intern");
 }
