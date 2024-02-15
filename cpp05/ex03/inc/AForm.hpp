@@ -37,7 +37,6 @@ public:
 
 	virtual void		Action(void) const = 0;
 	void				execute(Bureaucrat const& exeutor) const;
-	virtual AForm*		Clone(std::string& name, std::string& target) const = 0;
 };
 
 std::ostream&	operator<<(std::ostream& s, const AForm&);

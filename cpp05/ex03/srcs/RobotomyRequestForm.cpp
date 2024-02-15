@@ -36,7 +36,3 @@ void	RobotomyRequestForm::Action(void) const {
 	else
 		std::cout << "[ERROR]  " << target_ << "couldn't become a robot";
 }
-
-AForm*	RobotomyRequestForm::Clone(std::string& name, std::string& target) const {
-	return new RobotomyRequestForm(name, target);
-}

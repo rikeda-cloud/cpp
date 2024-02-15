@@ -51,7 +51,3 @@ void	ShrubberyCreationForm::Action(void) const {
 			throw FileException();
 	}
 }
-
-AForm*	ShrubberyCreationForm::Clone(std::string& name, std::string& target) const {
-	return new ShrubberyCreationForm(name, target);
-}

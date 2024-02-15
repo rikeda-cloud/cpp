@@ -19,7 +19,6 @@ public:
 	RobotomyRequestForm&	operator=(const RobotomyRequestForm&);
 
 	void	Action(void) const;
-	AForm*	Clone(std::string& name, std::string& target) const;
 };
 
 #endif

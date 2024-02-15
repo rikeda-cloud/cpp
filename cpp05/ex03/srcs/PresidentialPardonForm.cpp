@@ -31,7 +31,3 @@ PresidentialPardonForm&	PresidentialPardonForm::operator=(const PresidentialPard
 void	PresidentialPardonForm::Action(void) const {
 	std::cout << "Informs that " << target_ << " has been pardoned by Zaphod Beeblebrox." << std::endl;
 }
-
-AForm*	PresidentialPardonForm::Clone(std::string& name, std::string& target) const {
-	return new PresidentialPardonForm(name, target);
-}
