@@ -1,4 +1,4 @@
-TARGET			=	PLEASE_SET
+TARGET			=	easyfind
 
 CXX				=	c++
 CXXFLAGS		=	-Wall -Wextra -Werror
@@ -11,8 +11,7 @@ SRCS_DIR		=	./srcs
 OBJS_DIR		=	./objs
 INCLUDES_DIR	=	./inc
 
-SRCS			=	PhoneBook.cpp \
-					main.cpp
+SRCS			=	main.cpp
 
 OBJS			=	$(patsubst %.o, $(OBJS_DIR)/%.o, $(SRCS:.cpp=.o))
 DEPS			=	$(OBJS:.o=.d)
