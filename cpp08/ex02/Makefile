@@ -1,7 +1,7 @@
-TARGET			=	PLEASE_SET
+TARGET			=	mutantstack
 
 CXX				=	c++
-CXXFLAGS		=	-Wall -Wextra -Werror
+CXXFLAGS		=	-Wall -Wextra -Werror -g
 CXXFLAGS		+=	-std=c++98
 
 PRE_OPT			=	-MMD -MP
@@ -11,8 +11,7 @@ SRCS_DIR		=	./srcs
 OBJS_DIR		=	./objs
 INCLUDES_DIR	=	./inc
 
-SRCS			=	PhoneBook.cpp \
-					main.cpp
+SRCS			=	main.cpp
 
 OBJS			=	$(patsubst %.o, $(OBJS_DIR)/%.o, $(SRCS:.cpp=.o))
 DEPS			=	$(OBJS:.o=.d)
