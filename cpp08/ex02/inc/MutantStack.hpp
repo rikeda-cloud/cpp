@@ -2,32 +2,32 @@
 # define CPP08_EX02_MutantStack_H_
 
 #include <stack>
+#include <deque>
+#include <iterator>
 
-template<class T>
-class MutantStack : public std::stack<T> {
+template<class T, class Container = std::deque<T> >
+class MutantStack : public std::stack<T, Container> {
 public:
 	MutantStack(void);
 	MutantStack(const MutantStack& stack);
 	~MutantStack(void);
 	MutantStack&	operator=(const MutantStack& stack);
 
-	// template<T>
-	class iterator {
+	class iterator : public std::iterator<std::bidirectional_iterator_tag, T*> {
 	public:
-		T*	ptr_;
-
+		iterator(T* ptr);
 		iterator(const iterator&);
 		~iterator(void);
 		iterator&	operator=(const iterator&);
 
 		T&			operator*(void);
 		iterator&	operator++(void);
-		iterator	operator++(int);
 		iterator&	operator--(void);
-		iterator	operator--(int);
-		bool		operator!=(const iterator&);
+		bool		operator!=(const iterator&) const;
 
 	private:
+		T*	ptr_;
+
 		iterator(void);
 	};
 
@@ -35,28 +35,6 @@ public:
 	iterator	end(void);
 };
 
-#include <iostream>
-
-template<class T>
-MutantStack<T>::MutantStack(void) {}
-
-template<class T>
-MutantStack<T>::MutantStack(const MutantStack<T>& stack) : std::stack<T>(stack){
-}
-
-template<class T>
-MutantStack<T>::~MutantStack(void) {
-	std::cout << "delete MutantStack" << std::endl;
-}
-
-template<class T>
-MutantStack<T>&	MutantStack<T>::operator=(const MutantStack<T>& stack) {
-	if (this != &stack) {
-		*this = stack;
-	}
-	return *this;
-}
-
-// #include "MutantStack.tpp"
+#include "MutantStack.tpp"
 
 #endif
