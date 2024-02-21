@@ -11,7 +11,9 @@ SRCS_DIR		=	./srcs
 OBJS_DIR		=	./objs
 INCLUDES_DIR	=	./inc
 
-SRCS			=	FileReplacer.cpp \
+SRCS			=	InFileReader.cpp \
+					OutFileReader.cpp \
+					Replacer.cpp \
 					main.cpp
 
 OBJS			=	$(patsubst %.o, $(OBJS_DIR)/%.o, $(SRCS:.cpp=.o))

@@ -1,19 +1,31 @@
 ```mermaid
 classDiagram
 
-class FILEREPLACER["FileReplacer"] {
-    -stirng         file_
-    -stirng         s1_ 
-    -stirng         s2_
-    -ifstream       fs_
-    -ofstream       fs_replace_
+FILEREADER <|-- INFILEREADER
+FILEREADER <|-- OUTFILEREADER
 
-    +FileReplacer(string, string, string)
-    ~FileReplacer(void)
-    -bool           _open(void)
-    -void           _replace_s1_to_s2(void)
-    -string         _replace_line(string line)
-    +void           replace(void)
+class REPLACER["Replacer"] {
+    +void           replace(string& string, string& from, string& to)
+}
+
+class FILEREADER["FileReader"] {
+    -string fname;
+    -bool   is_fail;
+
+    -int    Open(void);
+    -void   Close(void);
+
+    +IsFail(void);
+}
+
+class INFILEREADER["InFileReader"] {
+    -ifstream   fs;
+    +GetAllChars(void);
+}
+
+class OUTFILEREADER["OutFileReader"] {
+    -ofstream   fs;
+    +Save(void);
 }
 
 ```
