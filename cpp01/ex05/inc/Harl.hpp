@@ -4,23 +4,25 @@
 #include <string>
 
 class Harl {
-private:
-	void		(Harl::*f_list_[4])(void);
-	std::string	level_list_[4];
-
-	void	debug(void);
-	void	info(void);
-	void	warning(void);
-	void	error(void);
-	int		LevelToIndex(std::string&);
-
 public:
+	static const int	LEVEL_SIZE = 4;
+
 	Harl(void);
 	Harl(const Harl&);
 	~Harl(void);
 	Harl&	operator=(const Harl&);
 	
 	void	complain(std::string level);
+
+private:
+	void		(Harl::*method_array_[LEVEL_SIZE])(void);
+	std::string	level_string_array_[LEVEL_SIZE];
+
+	void	debug(void);
+	void	info(void);
+	void	warning(void);
+	void	error(void);
+	int		LevelToIndex(std::string&);
 };
 
 #endif

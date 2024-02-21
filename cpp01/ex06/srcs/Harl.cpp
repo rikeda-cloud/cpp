@@ -3,39 +3,31 @@
 #include <iostream>
 
 Harl::Harl(void) {
-	f_list_[0] = &Harl::debug;
-	f_list_[1] = &Harl::info;
-	f_list_[2] = &Harl::warning;
-	f_list_[3] = &Harl::error;
-	level_list_[0] = "DEBUG";
-	level_list_[1] = "INFO";
-	level_list_[2] = "WARNING";
-	level_list_[3] = "ERROR";
+	method_array_[0] = &Harl::debug;
+	method_array_[1] = &Harl::info;
+	method_array_[2] = &Harl::warning;
+	method_array_[3] = &Harl::error;
+	level_string_array_[0] = "DEBUG";
+	level_string_array_[1] = "INFO";
+	level_string_array_[2] = "WARNING";
+	level_string_array_[3] = "ERROR";
 }
 
 Harl::Harl(const Harl& harl) {
-	f_list_[0] = harl.f_list_[0];
-	f_list_[1] = harl.f_list_[1];
-	f_list_[2] = harl.f_list_[2];
-	f_list_[3] = harl.f_list_[3];
-	level_list_[0] = harl.level_list_[0];
-	level_list_[1] = harl.level_list_[1];
-	level_list_[2] = harl.level_list_[2];
-	level_list_[3] = harl.level_list_[3];
+	for (int i = 0; i < LEVEL_SIZE; ++i)
+		this->method_array_[i] = harl.method_array_[i];
+	for (int i = 0; i < LEVEL_SIZE; ++i)
+		this->level_string_array_[i] = harl.level_string_array_[i];
 }
 
 Harl::~Harl(void) {}
 
 Harl&	Harl::operator=(const Harl& harl) {
 	if (this != &harl) {
-		f_list_[0] = harl.f_list_[0];
-		f_list_[1] = harl.f_list_[1];
-		f_list_[2] = harl.f_list_[2];
-		f_list_[3] = harl.f_list_[3];
-		level_list_[0] = harl.level_list_[0];
-		level_list_[1] = harl.level_list_[1];
-		level_list_[2] = harl.level_list_[2];
-		level_list_[3] = harl.level_list_[3];
+		for (int i = 0; i < LEVEL_SIZE; ++i)
+			this->method_array_[i] = harl.method_array_[i];
+		for (int i = 0; i < LEVEL_SIZE; ++i)
+			this->level_string_array_[i] = harl.level_string_array_[i];
 	}
 	return *this;
 }
@@ -61,35 +53,31 @@ void	Harl::error(void) {
 }
 
 int	Harl::LevelToIndex(std::string& level) {
-	for (int i = 0; i < 4; i++) {
-		if ((this->level_list_[i]) == level)
+	for (int i = 0; i < LEVEL_SIZE; i++) {
+		if ((this->level_string_array_[i]) == level)
 			return i;
 	}
 	return -1;
 }
 
 void	Harl::complain(std::string level) {
-	int	index = LevelToIndex(level);
+	const int	index = LevelToIndex(level);
 
 	switch (index) {
 		case 0:
-			(this->*(f_list_[0]))();
+			(this->*(method_array_[0]))();
 		case 1:
-			(this->*(f_list_[1]))();
+			(this->*(method_array_[1]))();
 		case 2:
-			(this->*(f_list_[2]))();
+			(this->*(method_array_[2]))();
 		case 3:
-			(this->*(f_list_[3]))();
+			(this->*(method_array_[3]))();
 			break ;
 		default: 
 			std::cerr
 				<< Colors::MAGENTA
-				<< "\""
-				<< level
-				<< "\""
-				<< " is not in harl levels"
+				<< "\"" << level << "\"" << " is not in harl levels"
 				<< Colors::RESET
-				<< std::endl
-				<< std::endl;
+				<< std::endl << std::endl;
 	}
 }

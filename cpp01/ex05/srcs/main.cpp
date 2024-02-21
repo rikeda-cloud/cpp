@@ -3,15 +3,17 @@
 
 int	main(void) {
 	std::cout << "--- Normal ---" << std::endl;
-	Harl	harl;
-	harl.complain("DEBUG");
-	harl.complain("WARNING");
-	harl.complain("ERROR");
-	harl.complain("INFO");
-	harl.complain("NONO");
+	Harl	*harl = new Harl();
+	harl->complain("DEBUG");
+	harl->complain("WARNING");
+	harl->complain("ERROR");
+	harl->complain("INFO");
+	harl->complain("NONO");
 
 	std::cout << "--- Copy ---" << std::endl;
-	Harl	harl2(harl);
+	Harl	harl2(*harl);
+	Harl	harl3 = *harl;
+	delete harl;
 	harl2.complain("DEBUG");
 	harl2.complain("WARNING");
 	harl2.complain("ERROR");
@@ -19,7 +21,6 @@ int	main(void) {
 	harl2.complain("NONO");
 
 	std::cout << "--- Operator= ---" << std::endl;
-	Harl	harl3 = harl;
 	harl3.complain("DEBUG");
 	harl3.complain("WARNING");
 	harl3.complain("ERROR");
