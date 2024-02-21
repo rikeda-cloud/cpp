@@ -42,22 +42,22 @@ const std::string&	Contact::GetDarkestSecret(void) const {
 	return darkest_secret_;
 }
 
-void	Contact::SetFirstName(std::string first_name) {
+void	Contact::SetFirstName(std::string& first_name) {
 	this->first_name_ = first_name;
 }
 
-void	Contact::SetLastName(std::string last_name) {
+void	Contact::SetLastName(std::string& last_name) {
 	this->last_name_ = last_name;
 }
 
-void	Contact::SetNickName(std::string nick_name) {
+void	Contact::SetNickName(std::string& nick_name) {
 	this->nick_name_ = nick_name;
 }
 
-void	Contact::SetPhoneNumber(std::string phone_number) {
+void	Contact::SetPhoneNumber(std::string& phone_number) {
 	this->phone_number_ = phone_number;
 }
 
-void	Contact::SetDarkestSecret(std::string darkest_secret) {
+void	Contact::SetDarkestSecret(std::string& darkest_secret) {
 	this->darkest_secret_ = darkest_secret;
 }

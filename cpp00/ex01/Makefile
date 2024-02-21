@@ -13,7 +13,7 @@ INCLUDES_DIR	=	./inc
 
 SRCS			=	PhoneBook.cpp \
 					Contact.cpp \
-					Input.cpp \
+					InputUtils.cpp \
 					Colors.cpp \
 					main.cpp
 

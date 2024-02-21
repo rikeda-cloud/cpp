@@ -1,5 +1,5 @@
 #include "PhoneBook.hpp"
-#include "Input.hpp"
+#include "InputUtils.hpp"
 #include <iostream>
 
 int	main(void) {
@@ -7,14 +7,9 @@ int	main(void) {
 	std::string	command;
 
 	while (true) {
-		command = Input::InputString(">> ", std::isupper);
+		command = InputUtils::InputString(">> ", std::isupper);
 		if (std::cin.eof() || phone_book.Execute(command) == PhoneBook::END)
 			break ;
 	}
 	return 0;
 }
-
-// 	__attribute__((destructor)) static void destructor()
-// {
-//    system("leaks -q phonebook");
-// }

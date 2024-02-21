@@ -1,6 +1,6 @@
 #include "PhoneBook.hpp"
 #include "Colors.hpp"
-#include "Input.hpp"
+#include "InputUtils.hpp"
 #include "Contact.hpp"
 #include <iostream>
 #include <sstream>
@@ -8,7 +8,9 @@
 PhoneBook::PhoneBook(void) : idx_(0), is_fill_(false) {}
 
 PhoneBook::PhoneBook(const PhoneBook& phonebook) : idx_(phonebook.idx_), is_fill_(phonebook.is_fill_) {
-	for (size_t i = 0; i < GetCapacityIdx(); i++)
+	size_t	capacity_idx = phonebook.GetCapacityIdx();
+
+	for (size_t i = 0; i < capacity_idx; ++i)
 		this->contacts_[i] = phonebook.contacts_[i];
 }
 
@@ -18,25 +20,27 @@ PhoneBook&	PhoneBook::operator=(const PhoneBook& phonebook) {
 	if (this != &phonebook) {
 		this->idx_ = phonebook.idx_;
 		this->is_fill_ = phonebook.is_fill_;
-		for (size_t i = 0; i < GetCapacityIdx(); i++)
+		size_t	capacity_idx = phonebook.GetCapacityIdx();
+		for (size_t i = 0; i < capacity_idx; ++i)
 			this->contacts_[i] = phonebook.contacts_[i];
 	}
 	return *this;
 }
 
-void	PhoneBook::PrintAdjustedString(const std::string& s) const {
-	const size_t	adjust_size = 10;
+std::string	PhoneBook::AdjustedString(std::string s) const {
+	static const size_t	adjust_size = 10;
 
 	if (s.size() <= adjust_size) {
-		std::cout.width(adjust_size);
-		std::cout << s;
+		for (size_t i = s.size(); i < adjust_size; ++i)
+			s.insert(0, " ");
 	}
 	else
-		std::cout << s.substr(0, adjust_size - 1) << ".";
+		s = s.substr(0, adjust_size - 1) + std::string(".");
+	return s;
 }
 
 void	PhoneBook::PrintListLine(void) const {
-	for (int i = 0; i < 45; i++)
+	for (int i = 0; i < 45; ++i)
 		std::cout << "-";
 	std::cout << std::endl;
 }
@@ -44,20 +48,18 @@ void	PhoneBook::PrintListLine(void) const {
 void	PhoneBook::ListContacts(void) const {
 	std::cout << std::endl; // intentional!!
 	std::cout << Colors::MAGENTA;
-	for (size_t i = 0; i < GetCapacityIdx(); i++) {
+	size_t	capacity_idx = GetCapacityIdx();
+	for (size_t i = 0; i < capacity_idx; ++i) {
 		const Contact&		contact = contacts_[i];
-		std::stringstream	ss;
 		PrintListLine();
-		std::cout << "|";
+		std::stringstream	ss;
 		ss << i + 1;
-		PrintAdjustedString(ss.str());
 		std::cout << "|";
-		PrintAdjustedString(contact.GetFirstName());
-		std::cout << "|";
-		PrintAdjustedString(contact.GetLastName());
-		std::cout << "|";
-		PrintAdjustedString(contact.GetNickName());
-		std::cout << "|" << std::endl;
+		std::cout << AdjustedString(ss.str()) << "|";
+		std::cout << AdjustedString(contact.GetFirstName()) << "|";
+		std::cout << AdjustedString(contact.GetLastName()) << "|";
+		std::cout << AdjustedString(contact.GetNickName()) << "|";
+		std::cout << std::endl;
 	}
 	PrintListLine();
 	std::cout << Colors::RESET;
@@ -71,31 +73,39 @@ void	PhoneBook::PrintContact(const Contact& contact) const {
 	std::cout << "DARKEST SECRET -> [" << contact.GetDarkestSecret() << "]" << std::endl;
 }
 
-PhoneBook::e_continue	PhoneBook::Add(void) {
-	std::string		str[5];
-	Contact&		contact = contacts_[idx_];
+PhoneBook::e_continue	PhoneBook::InputStringWithEOFCheck(
+		std::string& input_buffer,
+		const char* prompt,
+		int (*is_func)(int)) const {
+	input_buffer = InputUtils::InputString(prompt, is_func);
+	if (std::cin.eof())
+		return END;
+	return CONTINUE;
+}
 
-	str[0] = Input::InputString("FIRST NAME     >> ", std::isalpha);
-	if (std::cin.eof())
+PhoneBook::e_continue	PhoneBook::Add(void) {
+	std::string			input_buffer[5];
+	const char			*prompts[5] = {
+		"FIRST NAME     >> ",
+		"LAST NAME      >> ",
+		"NICK NAME      >> ",
+		"PHONE NUMBER   >> ",
+		"DARKEST SECRET >> "
+	};
+
+	if (InputStringWithEOFCheck(input_buffer[0], prompts[0], std::isalpha) == END
+		|| InputStringWithEOFCheck(input_buffer[1], prompts[1], std::isalpha) == END
+		|| InputStringWithEOFCheck(input_buffer[2], prompts[2], std::isalnum) == END
+		|| InputStringWithEOFCheck(input_buffer[3], prompts[3], std::isdigit) == END
+		|| InputStringWithEOFCheck(input_buffer[4], prompts[4], std::isprint) == END)
 		return END;
-	str[1] = Input::InputString("LAST NAME      >> ", std::isalpha);
-	if (std::cin.eof())
-		return END;
-	str[2] = Input::InputString("NICK NAME      >> ", std::isalnum);
-	if (std::cin.eof())
-		return END;
-	str[3] = Input::InputString("PHONE NUMBER   >> ", std::isdigit);
-	if (std::cin.eof())
-		return END;
-	str[4] = Input::InputString("DARKEST SECRET >> ", std::isprint);
-	if (std::cin.eof())
-		return END;
-	contact.SetFirstName(str[0]);
-	contact.SetLastName(str[1]);
-	contact.SetNickName(str[2]);
-	contact.SetPhoneNumber(str[3]);
-	contact.SetDarkestSecret(str[4]);
-	idx_++;
+	Contact&	contact = contacts_[idx_];
+	contact.SetFirstName(input_buffer[0]);
+	contact.SetLastName(input_buffer[1]);
+	contact.SetNickName(input_buffer[2]);
+	contact.SetPhoneNumber(input_buffer[3]);
+	contact.SetDarkestSecret(input_buffer[4]);
+	++idx_;
 	if (idx_ == PHONEBOOK_CAPACITY) {
 		idx_ = 0;
 		is_fill_ = true;
@@ -104,12 +114,14 @@ PhoneBook::e_continue	PhoneBook::Add(void) {
 }
 
 PhoneBook::e_continue	PhoneBook::Search(void) const {
-	if (GetCapacityIdx() == 0) {
+	size_t	capacity_idx = GetCapacityIdx();
+
+	if (capacity_idx == 0) {
 		std::cout << "There are no contacts registered yet" << std::endl;
 		return CONTINUE;
 	}
 	PhoneBook::ListContacts();
-	size_t	selected_index = Input::InputIndex("INDEX >> ", GetCapacityIdx());
+	size_t	selected_index = InputUtils::InputIndex("INDEX >> ", capacity_idx);
 	if (std::cin.eof())
 		return END;
 	std::cout << std::endl; // intentional!!
@@ -126,9 +138,9 @@ PhoneBook::e_continue	PhoneBook::Exit(void) const {
 PhoneBook::e_continue	PhoneBook::Execute(std::string& command) {
 	if (command == std::string("ADD"))
 		return Add();
-	else if (command == std::string("SEARCH"))
+	if (command == std::string("SEARCH"))
 		return Search();
-	else if (command == std::string("EXIT"))
+	if (command == std::string("EXIT"))
 		return Exit();
 	return CONTINUE;
 }
