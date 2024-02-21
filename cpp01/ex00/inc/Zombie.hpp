@@ -4,11 +4,6 @@
 #include <string>
 
 class	Zombie {
-private:
-	std::string	name;
-
-	Zombie(void);
-
 public:
 	Zombie(std::string);
 	Zombie(const Zombie&);
@@ -16,6 +11,10 @@ public:
 	Zombie&	operator=(const Zombie&);
 
 	void	announce(void);
+
+private:
+	std::string	name;
+	Zombie(void);
 };
 
 Zombie*	newZombie(std::string name);

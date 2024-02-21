@@ -4,9 +4,6 @@
 #include <string>
 
 class	Zombie {
-private:
-	std::string	name;
-
 public:
 	Zombie(void);
 	Zombie(std::string);
@@ -16,6 +13,9 @@ public:
 
 	void	announce(void);
 	void	SetName(std::string);
+
+private:
+	std::string	name;
 };
 
 Zombie*	zombieHorde(int N, std::string name);

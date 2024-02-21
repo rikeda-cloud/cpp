@@ -5,12 +5,6 @@
 #include <string>
 
 class	HumanA {
-private:
-	std::string	name_;
-	Weapon&		weapon_;
-
-	HumanA(void);
-
 public:
 	HumanA(std::string name, Weapon& weapon);
 	HumanA(const HumanA&);
@@ -18,6 +12,11 @@ public:
 	HumanA&	operator=(const HumanA&);
 
 	void	attack(void);
+
+private:
+	std::string	name_;
+	Weapon&		weapon_;
+	HumanA(void);
 };
 
 #endif

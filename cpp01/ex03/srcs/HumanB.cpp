@@ -17,7 +17,7 @@ HumanB&	HumanB::operator=(const HumanB& humanb) {
 
 void	HumanB::attack(void) {
 	std::cout << name_ << " attacks with their ";
-	if (weapon_)
+	if (weapon_ != NULL)
 		std::cout << weapon_->getType();
 	else
 		std::cout << "bare hands";
