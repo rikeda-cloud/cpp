@@ -1,4 +1,6 @@
 #include "Replacer.hpp"
+#include "InFileReader.hpp"
+#include "OutFileReader.hpp"
 
 void	Replacer::Replace(
 		std::string& string,
@@ -13,4 +15,14 @@ void	Replacer::Replace(
 		string.insert(idx, to);
 		idx += to.length();
 	}
+}
+
+void	Replacer::Replace(
+			InFileReader* in_reader,
+			OutFileReader* out_reader,
+			const std::string& from,
+			const std::string& to) {
+	std::string	all_chars = in_reader->GetAllChars();
+	Replacer::Replace(all_chars, from, to);
+	out_reader->Save(all_chars);
 }

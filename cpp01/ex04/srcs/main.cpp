@@ -19,8 +19,6 @@ int	main(int argc, const char **argv) {
 		std::cout << "OutputFile error" << std::endl;
 		return 1;
 	}
-	std::string all_chars = in_reader.GetAllChars();
-	Replacer::Replace(all_chars, argv[2], argv[3]);
-	out_reader.Save(all_chars);
+	Replacer::Replace(&in_reader, &out_reader, std::string(argv[2]), std::string(argv[3]));
 	return 0;
 }

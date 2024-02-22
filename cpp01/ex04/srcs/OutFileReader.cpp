@@ -43,8 +43,8 @@ void	OutFileReader::Close(void) {
 		fs_.close();
 }
 
-void	OutFileReader::Save(std::string& charsets) {
-	fs_ << charsets;
+void	OutFileReader::Save(std::string& chars) {
+	fs_ << chars;
 	if (fs_.fail())
 		is_fail_ = true;
 }

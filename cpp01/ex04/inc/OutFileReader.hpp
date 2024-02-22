@@ -11,7 +11,7 @@ public:
 	~OutFileReader(void);
 	OutFileReader&	operator=(const OutFileReader&);
 
-	void	Save(std::string& charsets);
+	void	Save(std::string&);
 	bool	IsFail(void);
 
 private:

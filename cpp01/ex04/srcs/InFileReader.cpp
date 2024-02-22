@@ -1,15 +1,11 @@
 #include "InFileReader.hpp"
 
-InFileReader::InFileReader(std::string file)
-	:	fname_(file),
-		is_fail_(false) {
+InFileReader::InFileReader(std::string file) : fname_(file), is_fail_(false) {
 	if (Open() == -1)
 		is_fail_ = true;
 }
 
-InFileReader::InFileReader(const InFileReader& reader)
-	:	fname_(reader.fname_),
-		is_fail_(false) {
+InFileReader::InFileReader(const InFileReader& reader) : fname_(reader.fname_), is_fail_(false) {
 	if (Open() == -1)
 		is_fail_ = true;
 }
@@ -21,8 +17,8 @@ InFileReader::~InFileReader(void) {
 InFileReader&	InFileReader::operator=(const InFileReader& reader) {
 	if (this != &reader) {
 		this->fname_ = reader.fname_;
-		this->is_fail_ = false;
 		Close();
+		this->is_fail_ = false;
 		if (Open() == -1)
 			is_fail_ = true;
 	}
@@ -44,18 +40,14 @@ void	InFileReader::Close(void) {
 }
 
 std::string	InFileReader::GetAllChars(void) {
-	std::string	all_charsets;
+	std::string	all_chars;
 	std::string	line;
 
-	getline(fs_, line);
-	while (true) {
-		if (!fs_)
-			break ;
-		all_charsets += line;
-		all_charsets += std::string("\n");
-		getline(fs_, line);
+	while (std::getline(fs_, line)) {
+		all_chars += line;
+		all_chars += std::string("\n");
 	}
-	return all_charsets;
+	return all_chars;
 }
 
 bool	InFileReader::IsFail(void) {
