@@ -53,7 +53,7 @@ void	Harl::error(void) {
 }
 
 int	Harl::LevelToIndex(std::string& level) {
-	for (int i = 0; i < 4; i++) {
+	for (int i = 0; i < LEVEL_SIZE; i++) {
 		if ((this->level_string_array_[i]) == level)
 			return i;
 	}
