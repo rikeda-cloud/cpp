@@ -21,17 +21,7 @@ int	main(void) {
 		zombies[i].announce();
 	std::cout << std::endl;
 
-	std::cout << "--- rename 10 Zombies ---" << std::endl;
-	for (int i = 0; i < 10; i++)
-		zombies[i].SetName(std::string("Rename-Zombies"));
-	std::cout << std::endl;
-
-	std::cout << "--- announce rename 10 Zombies ---" << std::endl;
-	for (int i = 0; i < 10; i++)
-		zombies[i].announce();
-	std::cout << std::endl;
-
-	std::cout << "--- delete rename 10 Zombies ---" << std::endl;
+	std::cout << "--- delete 10 Zombies ---" << std::endl;
 	delete[] zombies;
 
 	return 0;

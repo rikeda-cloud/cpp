@@ -3,8 +3,6 @@
 
 Zombie::Zombie(void) {}
 
-Zombie::Zombie(std::string zombie_name) : name(zombie_name) {}
-
 Zombie::Zombie(const Zombie& zombie) : name(zombie.name) {}
 
 Zombie::~Zombie(void) {
@@ -21,6 +19,6 @@ void	Zombie::announce(void) {
 	std::cout << name << ": BraiiiiiiinnnzzzZ..." << std::endl;
 }
 
-void	Zombie::SetName(std::string zombie_name) {
-	name = zombie_name;
+void	Zombie::SetName(std::string name) {
+	this->name = name;
 }

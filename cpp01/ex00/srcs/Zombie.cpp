@@ -5,14 +5,14 @@ Zombie::Zombie(void) {}
 
 Zombie::Zombie(const Zombie& zombie) : name(zombie.name){}
 
+Zombie::~Zombie(void) {
+	std::cout << "DELETE " << name << std::endl;
+}
+
 Zombie&	Zombie::operator=(const Zombie& zombie) {
 	if (this != &zombie)
 		this->name = zombie.name;
 	return *this;
-}
-
-Zombie::~Zombie(void) {
-	std::cout << "DELETE " << name << std::endl;
 }
 
 void	Zombie::announce(void) {
