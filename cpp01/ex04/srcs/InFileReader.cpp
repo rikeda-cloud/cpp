@@ -47,6 +47,8 @@ std::string	InFileReader::GetAllChars(void) {
 		all_chars += line;
 		all_chars += std::string("\n");
 	}
+	if (fs_.fail())
+		is_fail_ = true;
 	return all_chars;
 }
 

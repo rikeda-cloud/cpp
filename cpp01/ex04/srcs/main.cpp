@@ -19,6 +19,9 @@ int	main(int argc, const char **argv) {
 		std::cout << "OutputFile error" << std::endl;
 		return 1;
 	}
-	Replacer::Replace(&in_reader, &out_reader, std::string(argv[2]), std::string(argv[3]));
+	if (Replacer::Replace(&in_reader, &out_reader, std::string(argv[2]), std::string(argv[3]))) {
+		std::cout << "Replace error" << std::endl;
+		return 1;
+	}
 	return 0;
 }

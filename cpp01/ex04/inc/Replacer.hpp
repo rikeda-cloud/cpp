@@ -13,7 +13,7 @@ public:
 		const std::string& to
 	);
 
-	static void	Replace(
+	static bool	Replace(
 		InFileReader*,
 		OutFileReader*,
 		const std::string& from,

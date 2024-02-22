@@ -17,12 +17,15 @@ void	Replacer::Replace(
 	}
 }
 
-void	Replacer::Replace(
+bool	Replacer::Replace(
 			InFileReader* in_reader,
 			OutFileReader* out_reader,
 			const std::string& from,
 			const std::string& to) {
 	std::string	all_chars = in_reader->GetAllChars();
+	if (in_reader->IsFail())
+		return true;
 	Replacer::Replace(all_chars, from, to);
 	out_reader->Save(all_chars);
+	return out_reader->IsFail();
 }
