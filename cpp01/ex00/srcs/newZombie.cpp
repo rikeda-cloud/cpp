@@ -2,5 +2,7 @@
 #include <string>
 
 Zombie*	newZombie(std::string name) {
-	return new Zombie(name);
+	Zombie*	tmp = new Zombie;
+	tmp->SetName(name);
+	return tmp;
 }

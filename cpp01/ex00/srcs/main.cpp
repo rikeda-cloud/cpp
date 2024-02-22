@@ -9,9 +9,6 @@ int	main(void) {
 	new_zombie1->announce();
 	new_zombie2->announce();
 	new_zombie3->announce();
-	delete new_zombie1;
-	delete new_zombie2;
-	delete new_zombie3;
 	std::cout << std::endl;
 
 	std::cout << "--- randomZombie ---" << std::endl;
@@ -20,16 +17,11 @@ int	main(void) {
 	randomChump("randomZombie3");
 	std::cout << std::endl;
 
-	std::cout << "--- NormalZombie ---" << std::endl;
-	Zombie	normal_zombie1("normalZombie1");
-	Zombie	normal_zombie2("normalZombie2");
-	Zombie	normal_zombie3("normalZombie3");
-	normal_zombie1.announce();
-	normal_zombie2.announce();
-	normal_zombie3.announce();
-	std::cout << std::endl;
+	std::cout << "--- delete newZombie ---" << std::endl;
+	delete new_zombie1;
+	delete new_zombie2;
+	delete new_zombie3;
 
-	std::cout << "--- destructor of a local variable created inside the main function is called ---" << std::endl;
 	return 0;
 }
 
