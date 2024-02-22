@@ -5,7 +5,7 @@ Zombie*	zombieHorde(int N, std::string name) {
 	Zombie*	zombies;
 
 	if (N <= 0) {
-		std::cout << "Invalid input for the argument" << std::endl;
+		std::cerr << "Invalid input for the argument" << std::endl;
 		zombies = NULL;
 	}
 	else {
