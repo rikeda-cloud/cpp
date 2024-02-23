@@ -22,7 +22,7 @@ private:
 	void	info(void);
 	void	warning(void);
 	void	error(void);
-	int		LevelToIndex(std::string&);
+	int		levelToIndex(const std::string&) const;
 };
 
 #endif

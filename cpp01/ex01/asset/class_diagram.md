@@ -8,7 +8,7 @@ class ZOMBIE["Zombie"] {
     +Zombie(string)
     ~Zombie(void)
     +void   announce(void)
-    +void   SetName(string)
+    +void   setName(string)
 }
 
 class ZOMBIE_FUNCTION["ZombieFunction"] {

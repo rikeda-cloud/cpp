@@ -8,19 +8,21 @@ int	main(int argc, const char **argv) {
 		std::cout << "argc != 4" << std::endl;
 		return 1;
 	}
-	InFileReader	in_reader(argv[1]);
 
-	if (in_reader.IsFail()) {
-		std::cout << "InputFile error" << std::endl;
+	InFileReader	in_reader(argv[1]);
+	if (in_reader.isFail()) {
+		std::cerr << "InputFile error" << std::endl;
 		return 1;
 	}
+
 	OutFileReader	out_reader(argv[1] + std::string(".replace"));
-	if (out_reader.IsFail()) {
-		std::cout << "OutputFile error" << std::endl;
+	if (out_reader.isFail()) {
+		std::cerr << "OutputFile error" << std::endl;
 		return 1;
 	}
-	if (Replacer::Replace(&in_reader, &out_reader, std::string(argv[2]), std::string(argv[3]))) {
-		std::cout << "Replace error" << std::endl;
+
+	if (Replacer::replace(&in_reader, &out_reader, argv[2], argv[3])) {
+		std::cerr << "Replace error" << std::endl;
 		return 1;
 	}
 	return 0;

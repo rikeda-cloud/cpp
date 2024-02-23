@@ -11,16 +11,16 @@ public:
 	~OutFileReader(void);
 	OutFileReader&	operator=(const OutFileReader&);
 
-	void	Save(std::string&);
-	bool	IsFail(void);
+	void	save(std::string&);
+	bool	isFail(void) const;
 
 private:
 	std::string		fname_;
 	std::ofstream	fs_;
 	bool			is_fail_;
 
-	int		Open(void);
-	void	Close(void);
+	void	open(void);
+	void	close(void);
 	OutFileReader(void);
 };
 

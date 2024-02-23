@@ -1,54 +1,47 @@
 #include "OutFileReader.hpp"
 
-OutFileReader::OutFileReader(std::string file)
-	:	fname_(file),
-		is_fail_(false) {
-	if (Open() == -1)
-		is_fail_ = true;
+OutFileReader::OutFileReader(std::string file) : fname_(file), is_fail_(false) {
+	open();
 }
 
-OutFileReader::OutFileReader(const OutFileReader& reader)
-	:	fname_(reader.fname_),
-		is_fail_(false) {
-	if (Open() == -1)
-		is_fail_ = true;
+OutFileReader::OutFileReader(const OutFileReader& reader) : fname_(reader.fname_), is_fail_(false) {
+	open();
 }
 
 OutFileReader::~OutFileReader(void) {
-	Close();
+	close();
 }
 
 OutFileReader&	OutFileReader::operator=(const OutFileReader& reader) {
 	if (this != &reader) {
 		this->fname_ = reader.fname_;
-		this->is_fail_ = false;
-		Close();
-		if (Open() == -1)
-			is_fail_ = true;
+		close();
+		open();
 	}
 	return *this;
 }
 
-int	OutFileReader::Open(void) {
-	if (fname_.size() == 0)
-		return -1;
+void	OutFileReader::open(void) {
+	if (fname_.size() == 0) {
+		is_fail_ = true;
+		return ;
+	}
 	fs_.open(fname_.c_str());
 	if (fs_.fail())
-		return -1;
-	return 0;
+		is_fail_ = true;
 }
 
-void	OutFileReader::Close(void) {
+void	OutFileReader::close(void) {
 	if (fs_.is_open())
 		fs_.close();
 }
 
-void	OutFileReader::Save(std::string& chars) {
+void	OutFileReader::save(std::string& chars) {
 	fs_ << chars;
 	if (fs_.fail())
 		is_fail_ = true;
 }
 
-bool	OutFileReader::IsFail(void) {
+bool	OutFileReader::isFail(void) const {
 	return is_fail_;
 }

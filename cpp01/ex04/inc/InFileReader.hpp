@@ -11,16 +11,16 @@ public:
 	~InFileReader(void);
 	InFileReader&	operator=(const InFileReader&);
 
-	std::string	GetAllChars(void);
-	bool		IsFail(void);
+	std::string	getAllChars(void);
+	bool		isFail(void) const;
 
 private:
 	std::string		fname_;
 	std::ifstream	fs_;
 	bool			is_fail_;
 
-	int		Open(void);
-	void	Close(void);
+	void	open(void);
+	void	close(void);
 	InFileReader(void);
 };
 

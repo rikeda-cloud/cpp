@@ -11,7 +11,7 @@ public:
 	Zombie&	operator=(const Zombie&);
 
 	void	announce(void);
-	void	SetName(std::string);
+	void	setName(std::string);
 
 private:
 	std::string	name;

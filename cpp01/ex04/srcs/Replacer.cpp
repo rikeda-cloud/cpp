@@ -2,7 +2,7 @@
 #include "InFileReader.hpp"
 #include "OutFileReader.hpp"
 
-void	Replacer::Replace(
+void	Replacer::replace(
 		std::string& string,
 		const std::string& from,
 		const std::string& to) {
@@ -17,15 +17,15 @@ void	Replacer::Replace(
 	}
 }
 
-bool	Replacer::Replace(
+bool	Replacer::replace(
 			InFileReader* in_reader,
 			OutFileReader* out_reader,
 			const std::string& from,
 			const std::string& to) {
-	std::string	all_chars = in_reader->GetAllChars();
-	if (in_reader->IsFail())
+	std::string	all_chars = in_reader->getAllChars();
+	if (in_reader->isFail())
 		return true;
-	Replacer::Replace(all_chars, from, to);
-	out_reader->Save(all_chars);
-	return out_reader->IsFail();
+	Replacer::replace(all_chars, from, to);
+	out_reader->save(all_chars);
+	return out_reader->isFail();
 }

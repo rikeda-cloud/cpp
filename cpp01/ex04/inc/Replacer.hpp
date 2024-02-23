@@ -7,13 +7,13 @@
 
 class Replacer {
 public:
-	static void	Replace(
+	static void	replace(
 		std::string& string,
 		const std::string& from,
 		const std::string& to
 	);
 
-	static bool	Replace(
+	static bool	replace(
 		InFileReader*,
 		OutFileReader*,
 		const std::string& from,

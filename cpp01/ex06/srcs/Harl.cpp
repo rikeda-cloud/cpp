@@ -52,7 +52,7 @@ void	Harl::error(void) {
 	std::cout << "This is unacceptable! I want to speak to the manager now." << std::endl << std::endl;
 }
 
-int	Harl::LevelToIndex(std::string& level) {
+int	Harl::levelToIndex(const std::string& level) const {
 	for (int i = 0; i < LEVEL_SIZE; i++) {
 		if ((this->level_string_array_[i]) == level)
 			return i;
@@ -61,7 +61,7 @@ int	Harl::LevelToIndex(std::string& level) {
 }
 
 void	Harl::complain(std::string level) {
-	const int	index = LevelToIndex(level);
+	const int	index = levelToIndex(level);
 
 	switch (index) {
 		case 0:

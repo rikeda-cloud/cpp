@@ -12,20 +12,20 @@ class FILEREADER["FileReader"] {
     -string fname;
     -bool   is_fail;
 
-    -int    Open(void);
-    -void   Close(void);
+    -int    open(void);
+    -void   close(void);
 
-    +IsFail(void);
+    +isFail(void);
 }
 
 class INFILEREADER["InFileReader"] {
     -ifstream   fs;
-    +GetAllChars(void);
+    +getAllChars(void);
 }
 
 class OUTFILEREADER["OutFileReader"] {
     -ofstream   fs;
-    +Save(void);
+    +save(void);
 }
 
 ```
