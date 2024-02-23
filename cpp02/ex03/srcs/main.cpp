@@ -5,6 +5,7 @@ int main( void ) {
 	Point	a(-10, 10);
 	Point	b(10, 10);
 	Point	c(0, -10);
+
 	std::cout << bsp(a, b, c, Point(0, 0)) << std::endl; // 三角形の中心
 	std::cout << bsp(a, b, c, Point(-10, 10)) << std::endl; // 座標aと同じ座標
 	std::cout << bsp(a, b, c, Point(10, 10)) << std::endl; // 座標bと同じ座標

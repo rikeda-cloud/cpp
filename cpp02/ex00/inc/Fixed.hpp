@@ -2,18 +2,18 @@
 # define CPP02_EX00_Fixed_H_
 
 class Fixed {
-private:
-	int					number_;
-	const static int	bits_ = 8;
-
 public:
 	Fixed(void);
-	Fixed(const Fixed& fixed);
+	Fixed(const Fixed&);
 	~Fixed(void);
-	Fixed&	operator=(const Fixed& fixed);
+	Fixed&	operator=(const Fixed&);
 
 	int		getRawBits(void) const;
 	void	setRawBits(int const raw);
+
+private:
+	int					number_;
+	const static int	bits_ = 8;
 };
 
 #endif

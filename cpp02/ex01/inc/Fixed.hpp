@@ -4,14 +4,10 @@
 #include <iostream>
 
 class Fixed {
-private:
-	int					number_;
-	const static int	bits_ = 8;
-
 public:
 	Fixed(void);
-	Fixed(int);
-	Fixed(float);
+	Fixed(int int_number);
+	Fixed(float float_number);
 	Fixed(const Fixed& fixed);
 	~Fixed(void);
 	Fixed&	operator=(const Fixed& fixed);
@@ -20,6 +16,10 @@ public:
 	void	setRawBits(int const raw);
 	float	toFloat(void) const;
 	int		toInt(void) const;
+
+private:
+	int					number_;
+	const static int	bits_ = 8;
 };
 
 std::ostream&	operator<<(std::ostream& s, const Fixed& fixed);

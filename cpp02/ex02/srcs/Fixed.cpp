@@ -87,65 +87,65 @@ Fixed	Fixed::operator-(const Fixed& fixed) const {
 }
 
 Fixed	Fixed::operator*(const Fixed& fixed) const {
-	Fixed		tmp;
 	long long	llnumber = this->number_;
-	long long	tmp2 = llnumber * fixed.number_;
+	long long	simple_multiplied_llnumber = llnumber * fixed.number_;
+	Fixed		tmp;
 
-	tmp.setRawBits(tmp2 / (1 << bits_));
+	tmp.setRawBits(std::roundf(simple_multiplied_llnumber / static_cast<float>(1 << bits_)));
 	return tmp;
 }
 
 Fixed	Fixed::operator/(const Fixed& fixed) const {
-	Fixed		tmp;
 	long long	llnumber = this->number_;
-	long long	tmp2 = llnumber * (1 << bits_);
+	long long	moved_point_llnumber = llnumber * (1 << bits_);
+	Fixed		tmp;
 
-	tmp.setRawBits(tmp2 / fixed.number_);
+	tmp.setRawBits(std::roundf(moved_point_llnumber / static_cast<float>(fixed.number_)));
 	return tmp;
 }
 
 Fixed&	Fixed::operator++(void) {
-	number_++;
+	++number_;
 	return *this;
 }
 
 Fixed	Fixed::operator++(int) {
-	Fixed	fixed = *this;
+	Fixed	tmp = *this;
 	++(*this);
-	return fixed;
+	return tmp;
 }
 
 Fixed&	Fixed::operator--(void) {
-	number_--;
+	--number_;
 	return *this;
 }
 
 Fixed	Fixed::operator--(int) {
-	Fixed	fixed = *this;
+	Fixed	tmp = *this;
 	--(*this);
-	return fixed;
+	return tmp;
 }
 
 Fixed&	Fixed::min(Fixed& fixed1, Fixed& fixed2) {
-	if (fixed1 < fixed2)
+	if (fixed1 <= fixed2)
 		return fixed1;
 	return fixed2;
 }
 
 const Fixed&	Fixed::min(const Fixed& fixed1, const Fixed& fixed2) {
-	if (fixed1 < fixed2)
+	if (fixed1 <= fixed2)
 		return fixed1;
 	return fixed2;
 }
 
 Fixed&	Fixed::max(Fixed& fixed1, Fixed& fixed2) {
-	if (fixed1 < fixed2)
+	if (fixed1 <= fixed2)
 		return fixed2;
 	return fixed1;
 }
 
 const Fixed&	Fixed::max(const Fixed& fixed1, const Fixed& fixed2) {
-	if (fixed1 < fixed2)
+	if (fixed1 <= fixed2)
 		return fixed2;
 	return fixed1;
 }

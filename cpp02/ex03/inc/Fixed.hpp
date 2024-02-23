@@ -4,14 +4,10 @@
 #include <iostream>
 
 class Fixed {
-private:
-	int					number_;
-	const static int	bits_ = 8;
-
 public:
 	Fixed(void);
-	Fixed(int);
-	Fixed(float);
+	Fixed(int int_number);
+	Fixed(float float_number);
 	~Fixed(void);
 	Fixed(const Fixed& fixed);
 	Fixed&	operator=(const Fixed& fixed);
@@ -41,6 +37,10 @@ public:
 	static const Fixed&	min(const Fixed& fixed1, const Fixed& fixed2);
 	static Fixed&		max(Fixed& fixed1, Fixed& fixed2);
 	static const Fixed&	max(const Fixed& fixed1, const Fixed& fixed2);
+
+private:
+	int					number_;
+	const static int	bits_ = 8;
 };
 
 std::ostream&	operator<<(std::ostream& s, const Fixed& fixed);

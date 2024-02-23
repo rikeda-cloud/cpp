@@ -4,13 +4,9 @@
 #include "Fixed.hpp"
 
 class Point {
-private:
-	Fixed	x;
-	Fixed	y;
-
 public:
 	Point(void);
-	Point(float, float);
+	Point(float value_x, float value_y);
 	Point(const Point&);
 	~Point(void);
 	Point&			operator=(const Point&);
@@ -19,8 +15,11 @@ public:
 	const Fixed&	getY(void) const;
 	void			setX(const Fixed&);
 	void			setY(const Fixed&);
-	static Point	PointToDistanceVector(const Point&, const Point&);
+	static Point	pointToDistanceVector(const Point&, const Point&);
 
+private:
+	Fixed	x;
+	Fixed	y;
 };
 
 bool	bsp(Point const a, Point const b, Point const c, Point const point);
