@@ -13,13 +13,13 @@ public:
 
 	const Fixed&	getX(void) const;
 	const Fixed&	getY(void) const;
-	void			setX(const Fixed&);
-	void			setY(const Fixed&);
 	static Point	pointToDistanceVector(const Point&, const Point&);
 
 private:
 	const Fixed	x;
 	const Fixed	y;
+	void	setX(const Fixed&);
+	void	setY(const Fixed&);
 };
 
 bool	bsp(Point const a, Point const b, Point const c, Point const point);

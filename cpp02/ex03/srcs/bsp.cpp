@@ -10,9 +10,9 @@ bool	bsp(Point const a, Point const b, Point const c, Point const point) {
 	Point	ca(Point::pointToDistanceVector(c, a));
 	Point	pa(Point::pointToDistanceVector(point, a));
 	
-	Fixed	c1(ab.getX() * pb.getY() - ab.getY() *pb.getX());
-	Fixed	c2(bc.getX() * pc.getY() - bc.getY() *pc.getX());
-	Fixed	c3(ca.getX() * pa.getY() - ca.getY() *pa.getX());
+	Fixed	c1(ab.getX() * pb.getY() - ab.getY() * pb.getX());
+	Fixed	c2(bc.getX() * pc.getY() - bc.getY() * pc.getX());
+	Fixed	c3(ca.getX() * pa.getY() - ca.getY() * pa.getX());
 
 	Fixed	fixed0(0);
 	return (
