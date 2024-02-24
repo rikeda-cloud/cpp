@@ -15,6 +15,7 @@ OutFileReader::~OutFileReader(void) {
 OutFileReader&	OutFileReader::operator=(const OutFileReader& reader) {
 	if (this != &reader) {
 		this->fname_ = reader.fname_;
+		this->is_fail_ = false;
 		close();
 		open();
 	}

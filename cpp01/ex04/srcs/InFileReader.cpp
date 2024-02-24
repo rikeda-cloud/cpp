@@ -15,6 +15,7 @@ InFileReader::~InFileReader(void) {
 InFileReader&	InFileReader::operator=(const InFileReader& reader) {
 	if (this != &reader) {
 		this->fname_ = reader.fname_;
+		this->is_fail_ = false;
 		close();
 		open();
 	}
@@ -42,11 +43,10 @@ std::string	InFileReader::getAllChars(void) {
 
 	while (std::getline(fs_, line)) {
 		all_chars += line;
-		all_chars += std::string("\n");
+		if (fs_.eof() == false)
+			all_chars += std::string("\n");
 	}
-	if (fs_.eof())
-		is_fail_ = false;
-	else if (fs_.fail())
+	if (fs_.eof() == false && fs_.fail())
 		is_fail_ = true;
 	return all_chars;
 }

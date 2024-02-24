@@ -5,8 +5,6 @@
 
 class Harl {
 public:
-	static const int	LEVEL_SIZE = 4;
-
 	Harl(void);
 	Harl(const Harl&);
 	~Harl(void);
@@ -15,6 +13,7 @@ public:
 	void	complain(std::string level);
 
 private:
+	static const int	LEVEL_SIZE = 4;
 	void		(Harl::*method_array_[LEVEL_SIZE])(void);
 	std::string	level_string_array_[LEVEL_SIZE];
 

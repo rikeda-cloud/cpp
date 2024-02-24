@@ -28,22 +28,22 @@ int main()
 // 	Weapon	weapon("*******");
 // 	HumanA	a("A", weapon);
 // 	HumanB	b("B");
-// 
+
 // 	std::cout << "--- HumanA attack ---" << std::endl;
 // 	a.attack();
 // 	std::cout << std::endl;
-// 
+
 // 	std::cout << "--- HumanB(not set weapon) attack ---" << std::endl;
 // 	b.attack();
 // 	std::cout << std::endl;
-// 
+
 // 	std::cout << "--- HumanB set ******* ---" << std::endl;
 // 	b.setWeapon(weapon);
 // 	std::cout << std::endl;
-// 
+
 // 	std::cout << "--- HumanB(have *******) attack ---" << std::endl;
 // 	b.attack();
-// 
+
 // 	return 0;
 // }
 
