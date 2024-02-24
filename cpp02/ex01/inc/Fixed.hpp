@@ -6,8 +6,8 @@
 class Fixed {
 public:
 	Fixed(void);
-	Fixed(int int_number);
-	Fixed(float float_number);
+	Fixed(const int int_number);
+	Fixed(const float float_number);
 	Fixed(const Fixed& fixed);
 	~Fixed(void);
 	Fixed&	operator=(const Fixed& fixed);

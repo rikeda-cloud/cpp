@@ -1,14 +1,14 @@
 #include "Point.hpp"
 
 bool	bsp(Point const a, Point const b, Point const c, Point const point) {
-	Point	ab(Point::PointToDistanceVector(a, b));
-	Point	pb(Point::PointToDistanceVector(point, b));
+	Point	ab(Point::pointToDistanceVector(a, b));
+	Point	pb(Point::pointToDistanceVector(point, b));
 
-	Point	bc(Point::PointToDistanceVector(b, c));
-	Point	pc(Point::PointToDistanceVector(point, c));
+	Point	bc(Point::pointToDistanceVector(b, c));
+	Point	pc(Point::pointToDistanceVector(point, c));
 
-	Point	ca(Point::PointToDistanceVector(c, a));
-	Point	pa(Point::PointToDistanceVector(point, a));
+	Point	ca(Point::pointToDistanceVector(c, a));
+	Point	pa(Point::pointToDistanceVector(point, a));
 	
 	Fixed	c1(ab.getX() * pb.getY() - ab.getY() *pb.getX());
 	Fixed	c2(bc.getX() * pc.getY() - bc.getY() *pc.getX());

@@ -6,11 +6,11 @@ Fixed::Fixed(void) : number_(0) {
 	std::cout << "Default constructor called" << std::endl;
 }
 
-Fixed::Fixed(int number) : number_(number << bits_) {
+Fixed::Fixed(const int int_number) : number_(int_number << bits_) {
 	std::cout << "Int constructor called" << std::endl;
 }
 
-Fixed::Fixed(float number) : number_(std::roundf(number * (1 << bits_))) {
+Fixed::Fixed(const float float_number) : number_(std::roundf(float_number * (1 << bits_))) {
 	std::cout << "Float constructor called" << std::endl;
 }
 
@@ -32,7 +32,7 @@ Fixed&	Fixed::operator=(const Fixed& fixed) {
 }
 
 int	Fixed::getRawBits(void) const {
-	std::cout << "getRawBits member function called" << std::endl;
+	// std::cout << "getRawBits member function called" << std::endl;
 	return number_;
 }
 

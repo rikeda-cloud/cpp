@@ -6,7 +6,7 @@
 class Point {
 public:
 	Point(void);
-	Point(float value_x, float value_y);
+	Point(const float value_x, const float value_y);
 	Point(const Point&);
 	~Point(void);
 	Point&			operator=(const Point&);
@@ -18,8 +18,8 @@ public:
 	static Point	pointToDistanceVector(const Point&, const Point&);
 
 private:
-	Fixed	x;
-	Fixed	y;
+	const Fixed	x;
+	const Fixed	y;
 };
 
 bool	bsp(Point const a, Point const b, Point const c, Point const point);
