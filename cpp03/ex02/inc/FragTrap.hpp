@@ -5,9 +5,6 @@
 #include <string>
 
 class FragTrap : public ClapTrap {
-private:
-	FragTrap(void);
-
 public:
 	FragTrap(std::string name);
 	FragTrap(const FragTrap&);
@@ -19,6 +16,9 @@ public:
 	static const unsigned int	HIT_POINT = 100;
 	static const unsigned int	ENERGY_POINT = 100;
 	static const unsigned int	ATTACK_DAMAGE = 30;
+
+private:
+	FragTrap(void);
 };
 
 #endif

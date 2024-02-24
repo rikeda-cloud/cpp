@@ -10,13 +10,16 @@ ClapTrap::ClapTrap(std::string name)
 	std::cout << Colors::CYAN << "ClapTrap constructor called" << Colors::RESET << std::endl;
 }
 
-ClapTrap::~ClapTrap(void) {
-	std::cout << Colors::WHITE << "ClapTrap destructor called" << Colors::RESET << std::endl;
+ClapTrap::ClapTrap(const ClapTrap& claptrap)
+	:	name_(claptrap.name_),
+		hit_point_(claptrap.hit_point_),
+		energy_point_(claptrap.energy_point_),
+		attack_damage_(claptrap.attack_damage_) {
+	std::cout << Colors::CYAN << "ClapTrap copy constructor called" << Colors::RESET << std::endl;
 }
 
-ClapTrap::ClapTrap(const ClapTrap& claptrap) {
-	*this = claptrap;
-	std::cout << Colors::CYAN << "ClapTrap copy constructor called" << Colors::RESET << std::endl;
+ClapTrap::~ClapTrap(void) {
+	std::cout << Colors::WHITE << "ClapTrap destructor called" << Colors::RESET << std::endl;
 }
 
 ClapTrap&	ClapTrap::operator=(const ClapTrap& claptrap) {

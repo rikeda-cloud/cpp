@@ -4,12 +4,6 @@
 #include <string>
 
 class Colors {
-private:
-	Colors(void);
-	Colors(const Colors&);
-	~Colors(void);
-	void	operator=(const Colors&);
-
 public:
 	static const std::string RESET;
 	static const std::string RED;
@@ -19,6 +13,12 @@ public:
 	static const std::string WHITE;
 	static const std::string GREEN;
 	static const std::string CYAN;
+
+private:
+	Colors(void);
+	Colors(const Colors&);
+	~Colors(void);
+	void	operator=(const Colors&);
 };
 
 #endif

@@ -4,15 +4,6 @@
 #include <string>
 
 class ClapTrap {
-private:
-	ClapTrap(void);
-
-protected:
-	std::string		name_;
-	unsigned int	hit_point_;
-	unsigned int	energy_point_;
-	unsigned int	attack_damage_;
-
 public:
 	ClapTrap(std::string name);
 	~ClapTrap(void);
@@ -28,6 +19,14 @@ public:
 	static const unsigned int	ENERGY_POINT = 10;
 	static const unsigned int	ATTACK_DAMAGE = 0;
 
+protected:
+	std::string		name_;
+	unsigned int	hit_point_;
+	unsigned int	energy_point_;
+	unsigned int	attack_damage_;
+
+private:
+	ClapTrap(void);
 };
 
 #endif

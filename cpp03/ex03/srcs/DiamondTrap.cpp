@@ -4,7 +4,11 @@
 #include "Colors.hpp"
 #include <iostream>
 
-DiamondTrap::DiamondTrap(std::string name) : ClapTrap(name), ScavTrap(name), FragTrap(name), name_(name) {
+DiamondTrap::DiamondTrap(std::string name)
+	:	ClapTrap(name),
+		ScavTrap(name),
+		FragTrap(name),
+		name_(name) {
 	ClapTrap::name_ = name + std::string("_clap_name");
 	hit_point_ = FragTrap::HIT_POINT;
 	energy_point_ = ScavTrap::ENERGY_POINT;
@@ -12,7 +16,10 @@ DiamondTrap::DiamondTrap(std::string name) : ClapTrap(name), ScavTrap(name), Fra
 	std::cout << Colors::CYAN << "DiamondTrap constructor called" << Colors::RESET << std::endl;
 }
 
-DiamondTrap::DiamondTrap(const DiamondTrap& diamondtrap) : ClapTrap(diamondtrap), ScavTrap(diamondtrap), FragTrap(diamondtrap) {
+DiamondTrap::DiamondTrap(const DiamondTrap& diamondtrap)
+	:	ClapTrap(diamondtrap),
+		ScavTrap(diamondtrap),
+		FragTrap(diamondtrap) {
 	std::cout << Colors::CYAN << "DiamondTrap copy constructor called" << Colors::RESET << std::endl;
 }
 

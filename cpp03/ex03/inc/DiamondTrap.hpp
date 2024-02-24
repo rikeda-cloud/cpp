@@ -6,11 +6,6 @@
 #include <string>
 
 class DiamondTrap : public ScavTrap, public FragTrap {
-private:
-	std::string	name_;
-
-	DiamondTrap(void);
-
 public:
 	DiamondTrap(std::string name);
 	DiamondTrap(const DiamondTrap&);
@@ -19,6 +14,10 @@ public:
 
 	void			whoAmI(void);
 	void			attack(const std::string& target);
+
+private:
+	std::string	name_;
+	DiamondTrap(void);
 };
 
 #endif
