@@ -3,7 +3,7 @@
 #include <iostream>
 
 void	case_equal_operator(void) {
-	std::cout << "--- test operator= ---" << std::endl << std::endl;
+	std::cout << "--- test operator= ---" << std::endl;
 	ClapTrap*	trap = new ScavTrap("EqualOperator");
 	for (int i = 0; i < 49; ++i)
 		trap->beRepaired(1);
@@ -16,7 +16,7 @@ void	case_equal_operator(void) {
 }
 
 void	case_copy_constructor(void) {
-	std::cout << "--- test copy constructor ---" << std::endl << std::endl;
+	std::cout << "--- test copy constructor ---" << std::endl;
 	ClapTrap*	trap = new ScavTrap("CopyTrap");
 	for (int i = 0; i < 49; ++i)
 		trap->beRepaired(1);
@@ -28,7 +28,7 @@ void	case_copy_constructor(void) {
 }
 
 void	case_check_hit_point(void) {
-	std::cout << "--- test hit point ---" << std::endl << std::endl;
+	std::cout << "--- test hit point ---" << std::endl;
 	ClapTrap*	trap = new ScavTrap("HitPoint");
 
 	trap->takeDamage(20);
@@ -40,7 +40,7 @@ void	case_check_hit_point(void) {
 }
 
 void	case_other(void) {
-	std::cout << "--- test other ---" << std::endl << std::endl;
+	std::cout << "--- test other ---" << std::endl;
 	ClapTrap*	trap = new ScavTrap("OTHER");
 
 	trap->attack("enemy1");
