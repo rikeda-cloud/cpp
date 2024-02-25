@@ -24,5 +24,5 @@ FragTrap&	FragTrap::operator=(const FragTrap& fragtrap) {
 }
 
 void	FragTrap::highFivesGuys(void) {
-	std::cout << Colors::YELLOW << "high fives request ???" << Colors::RESET << std::endl;
+	std::cout << Colors::YELLOW << "High Fives Guys" << Colors::RESET << std::endl;
 }

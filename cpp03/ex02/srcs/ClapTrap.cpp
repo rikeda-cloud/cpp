@@ -65,7 +65,3 @@ void	ClapTrap::beRepaired(unsigned int amount) {
 		hit_point_ += amount;
 	}
 }
-
-const std::string&	ClapTrap::getName(void) const {
-	return name_;
-}

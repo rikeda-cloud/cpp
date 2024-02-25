@@ -12,8 +12,8 @@ public:
 	~DiamondTrap(void);
 	DiamondTrap&	operator=(const DiamondTrap&);
 
-	void			whoAmI(void);
-	void			attack(const std::string& target);
+	void	whoAmI(void);
+	void	attack(const std::string& target);
 
 private:
 	std::string	name_;

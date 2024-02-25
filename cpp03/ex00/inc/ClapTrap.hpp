@@ -13,7 +13,6 @@ public:
 	void				attack(const std::string& target);
 	void				takeDamage(unsigned int amount);
 	void				beRepaired(unsigned int amount);
-	const std::string&	getName(void) const;
 
 	static const unsigned int	HIT_POINT = 10;
 	static const unsigned int	ENERGY_POINT = 10;
