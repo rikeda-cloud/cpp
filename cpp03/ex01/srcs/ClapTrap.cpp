@@ -1,6 +1,7 @@
 #include "ClapTrap.hpp"
 #include "Colors.hpp"
 #include <iostream>
+#include <limits>
 
 ClapTrap::ClapTrap(std::string name)
 	:	name_(name),
@@ -62,6 +63,11 @@ void	ClapTrap::beRepaired(unsigned int amount) {
 	else {
 		--energy_point_;
 		std::cout << Colors::GREEN << name_ << " repaired " << amount << " points" << Colors::RESET << std::endl;
-		hit_point_ += amount;
+		if ((std::numeric_limits<unsigned int>::max() - amount) < hit_point_) {
+			hit_point_ = std::numeric_limits<unsigned int>::max();
+			std::cout << Colors::GREEN << "The hit points have been restored to their maximum value" << Colors::RESET << std::endl;
+		}
+		else
+			hit_point_ += amount;
 	}
 }

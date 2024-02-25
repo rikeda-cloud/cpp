@@ -19,7 +19,8 @@ DiamondTrap::DiamondTrap(std::string name)
 DiamondTrap::DiamondTrap(const DiamondTrap& diamondtrap)
 	:	ClapTrap(diamondtrap),
 		ScavTrap(diamondtrap),
-		FragTrap(diamondtrap) {
+		FragTrap(diamondtrap),
+		name_(diamondtrap.name_) {
 	std::cout << Colors::CYAN << "DiamondTrap copy constructor called" << Colors::RESET << std::endl;
 }
 

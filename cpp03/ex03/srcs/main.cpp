@@ -48,12 +48,16 @@ void	case_other(void) {
 	dynamic_cast<DiamondTrap*>(trap)->guardGate();
 	dynamic_cast<DiamondTrap*>(trap)->highFivesGuys();
 	dynamic_cast<DiamondTrap*>(trap)->whoAmI();
+	DiamondTrap	trap2(*dynamic_cast<DiamondTrap*>(trap));
+	trap2.whoAmI();
+	trap2 = DiamondTrap("NEW NAME DIAMOND TRAP");
+	trap2.whoAmI();
 }
 
 int	main(void) {
-	case_equal_operator();
-	case_copy_constructor();
-	case_check_hit_point();
+	// case_equal_operator();
+	// case_copy_constructor();
+	// case_check_hit_point();
 	case_other();
 	return 0;
 }

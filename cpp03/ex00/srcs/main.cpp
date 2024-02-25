@@ -1,44 +1,56 @@
 #include "ClapTrap.hpp"
 #include <iostream>
+#include <limits>
 
-void	case_die(ClapTrap player1) {
+void	case_die(ClapTrap player) {
 	std::cout << "--- die ---" << std::endl;
-	player1.takeDamage(9);
-	player1.beRepaired(9);
-	player1.takeDamage(9);
-	player1.takeDamage(1); // このタイミングでdie
-	player1.takeDamage(1);
-	player1.beRepaired(1);
+	player.takeDamage(9);
+	player.beRepaired(9);
+	player.takeDamage(9);
+	player.takeDamage(1); // このタイミングでdie
+	player.takeDamage(1);
+	player.beRepaired(1);
+	std::cout << std::endl;
 }
 
-void	case_energy_point_run_out_by_beRepaired(ClapTrap player1) {
-	std::cout << "--- energy point run out by beRepaired ---" << std::endl;
-	player1.beRepaired(1);
-	player1.beRepaired(1);
-	player1.beRepaired(1);
-	player1.beRepaired(1);
-	player1.beRepaired(1);
-	player1.beRepaired(1);
-	player1.beRepaired(1);
-	player1.beRepaired(1);
-	player1.beRepaired(1);
-	player1.beRepaired(1); // このタイミングでenergy pointが尽きる
-	player1.beRepaired(1);
+void	case_energy_point_run_out_by_beRepaired(ClapTrap player) {
+	std::cout << "--- energy point run out by beRepaired ---" << std::endl << std::endl;
+	player.beRepaired(1);
+	player.beRepaired(1);
+	player.beRepaired(1);
+	player.beRepaired(1);
+	player.beRepaired(1);
+	player.beRepaired(1);
+	player.beRepaired(1);
+	player.beRepaired(1);
+	player.beRepaired(1);
+	player.beRepaired(1); // このタイミングでenergy pointが尽きる
+	player.beRepaired(1);
+	std::cout << std::endl;
 }
 
-void	case_energy_point_run_out_by_attack(ClapTrap player1) {
-	std::cout << "--- energy point run out by attack ---" << std::endl;
-	player1.attack("enemy");
-	player1.attack("enemy");
-	player1.attack("enemy");
-	player1.attack("enemy");
-	player1.attack("enemy");
-	player1.attack("enemy");
-	player1.attack("enemy");
-	player1.attack("enemy");
-	player1.attack("enemy");
-	player1.attack("enemy"); // このタイミングでenergy pointが尽きる
-	player1.attack("enemy");
+void	case_energy_point_run_out_by_attack(ClapTrap player) {
+	std::cout << "--- energy point run out by attack ---" << std::endl << std::endl;
+	player.attack("enemy");
+	player.attack("enemy");
+	player.attack("enemy");
+	player.attack("enemy");
+	player.attack("enemy");
+	player.attack("enemy");
+	player.attack("enemy");
+	player.attack("enemy");
+	player.attack("enemy");
+	player.attack("enemy"); // このタイミングでenergy pointが尽きる
+	player.attack("enemy");
+	std::cout << std::endl;
+}
+
+void	case_hit_point_over_flow(ClapTrap player) {
+	std::cout << "--- hit point over flow ---" << std::endl << std::endl;
+	player.beRepaired(std::numeric_limits<unsigned int>::max() - 8);
+	player.takeDamage(1); // オーバーフローガードしないとここでdie
+	player.takeDamage(1);
+	player.attack("enemy");
 }
 
 int	main(void) {
@@ -47,6 +59,7 @@ int	main(void) {
 	case_die(trap);
 	case_energy_point_run_out_by_beRepaired(trap);
 	case_energy_point_run_out_by_attack(trap);
+	case_hit_point_over_flow(trap);
 
 	return 0;
 }
