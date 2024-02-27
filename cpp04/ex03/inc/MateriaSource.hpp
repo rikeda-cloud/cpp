@@ -5,10 +5,6 @@
 #include "AMateria.hpp"
 
 class MateriaSource : public IMateriaSource {
-private:
-	static const int	SLOT_CAPACITY = 4;
-	AMateria			*slot_[SLOT_CAPACITY];
-
 public:
 	MateriaSource(void);
 	MateriaSource(const MateriaSource&);
@@ -17,6 +13,10 @@ public:
 
 	void		learnMateria(AMateria*);
 	AMateria*	createMateria(std::string const& type);
+
+private:
+	static const int	SLOT_CAPACITY = 4;
+	AMateria			*slot_[SLOT_CAPACITY];
 };
 
 #endif

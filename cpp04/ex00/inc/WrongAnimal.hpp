@@ -4,17 +4,17 @@
 #include <string>
 
 class WrongAnimal {
-protected:
-	std::string	type;
-
 public:
 	WrongAnimal(void);
 	WrongAnimal(const WrongAnimal&);
-	~WrongAnimal(void);
+	virtual ~WrongAnimal(void);
 	WrongAnimal&	operator=(const WrongAnimal&);
 
 	void		makeSound(void) const;
 	std::string	getType(void) const;
+
+protected:
+	std::string	type;
 };
 
 #endif

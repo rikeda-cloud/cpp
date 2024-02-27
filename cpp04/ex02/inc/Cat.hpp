@@ -6,9 +6,6 @@
 #include <string>
 
 class Cat : public Animal {
-private:
-	Brain*	brain;
-
 public:
 	Cat(void);
 	Cat(const Cat&);
@@ -16,6 +13,9 @@ public:
 	Cat&		operator=(const Cat&);
 	void		makeSound(void) const;
 	std::string	getType(void) const;
+
+private:
+	Brain*	brain;
 };
 
 #endif

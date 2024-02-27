@@ -6,8 +6,7 @@ Dog::Dog(void) : Animal() {
 	std::cout << "Dog constructor called" << std::endl;
 }
 
-Dog::Dog(const Dog& dog) {
-	*this = dog;
+Dog::Dog(const Dog& dog) : Animal(dog) {
 	std::cout << "Dog copy constructor called" << std::endl;
 }
 
@@ -17,7 +16,7 @@ Dog::~Dog(void) {
 
 Dog&	Dog::operator=(const Dog& dog) {
 	if (this != &dog)
-		this->type = dog.type;
+		Animal::operator=(dog);
 	return *this;
 }
 

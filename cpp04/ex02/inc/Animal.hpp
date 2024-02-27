@@ -4,9 +4,6 @@
 #include <string>
 
 class Animal {
-protected:
-	std::string	type;
-
 public:
 	Animal(void);
 	Animal(const Animal&);
@@ -15,6 +12,9 @@ public:
 
 	virtual void		makeSound(void) const = 0;
 	virtual std::string	getType(void) const;
+
+protected:
+	std::string	type;
 };
 
 #endif

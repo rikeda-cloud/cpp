@@ -4,9 +4,6 @@
 #include <string>
 
 class WrongAnimal {
-protected:
-	std::string	type;
-
 public:
 	WrongAnimal(void);
 	WrongAnimal(const WrongAnimal&);
@@ -15,6 +12,9 @@ public:
 
 	void		makeSound(void) const;
 	std::string	getType(void) const;
+
+protected:
+	std::string	type;
 };
 
 #endif

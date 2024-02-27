@@ -6,13 +6,6 @@
 #include <string>
 
 class Character : public ICharacter {
-private:
-	static const int	SLOT_CAPACITY = 4;
-	std::string	name_;
-	AMateria*	slot_[SLOT_CAPACITY];
-
-	Character(void);
-
 public:
 	Character(std::string);
 	Character(const Character&);
@@ -23,6 +16,13 @@ public:
 	void				equip(AMateria* m);
 	void				unequip(int idx);
 	void				use(int idx, ICharacter& target);
+
+private:
+	static const int	SLOT_CAPACITY = 4;
+	std::string	name_;
+	AMateria*	slot_[SLOT_CAPACITY];
+
+	Character(void);
 };
 
 #endif

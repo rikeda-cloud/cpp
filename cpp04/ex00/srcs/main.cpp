@@ -36,7 +36,7 @@ int main()
 // 	return 0;
 // }
 
-	__attribute__((destructor)) static void destructor()
-{
-   system("leaks -q Animal");
-}
+// 	__attribute__((destructor)) static void destructor()
+// {
+//    system("leaks -q Animal");
+// }
