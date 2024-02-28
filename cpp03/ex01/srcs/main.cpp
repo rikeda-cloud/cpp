@@ -2,50 +2,52 @@
 #include "ScavTrap.hpp"
 #include <iostream>
 
-void	case_equal_operator(void) {
+static void	case_equal_operator(void) {
 	std::cout << "--- test operator= ---" << std::endl;
 	ClapTrap*	trap = new ScavTrap("EqualOperator");
-	for (int i = 0; i < 49; ++i)
+	for (unsigned i = 0; i < (ScavTrap::ENERGY_POINT - 1); ++i)
 		trap->beRepaired(1);
-	ScavTrap	new_trap("TMP");
-	new_trap = *dynamic_cast<ScavTrap*>(trap); // ここで代入演算
-	trap->beRepaired(1);
+	ScavTrap	equal_operator_trap("TMP");
+	equal_operator_trap = *dynamic_cast<ScavTrap*>(trap); // ここで代入演算
+	trap->beRepaired(1); // ここでenergy pointが無くなる
 	trap->beRepaired(1); // energy pointが足りない
-	new_trap.beRepaired(1);
-	new_trap.beRepaired(1); // 代入が適切にできていればenergy pointが足りない
+	equal_operator_trap.beRepaired(1); // ここでenergy pointが無くなる
+	equal_operator_trap.beRepaired(1); // energy pointが足りない
+	delete trap;
 }
 
-void	case_copy_constructor(void) {
+static void	case_copy_constructor(void) {
 	std::cout << "--- test copy constructor ---" << std::endl;
 	ClapTrap*	trap = new ScavTrap("CopyTrap");
-	for (int i = 0; i < 49; ++i)
+	for (unsigned i = 0; i < (ScavTrap::ENERGY_POINT - 1); ++i)
 		trap->beRepaired(1);
-	ScavTrap new_trap(*dynamic_cast<ScavTrap*>(trap));
-	trap->beRepaired(1);
+	ScavTrap	copy_trap(*dynamic_cast<ScavTrap*>(trap)); // ここでコピー
+	trap->beRepaired(1); // ここでenergy pointが無くなる
 	trap->beRepaired(1); // energy pointが足りない
-	new_trap.beRepaired(1);
-	new_trap.beRepaired(1); // コピーが適切にできていればenergy pointが足りない
+	copy_trap.beRepaired(1); // ここでenergy pointが無くなる
+	copy_trap.beRepaired(1); // energy pointが足りない
+	delete trap;
 }
 
-void	case_check_hit_point(void) {
+static void	case_check_hit_point(void) {
 	std::cout << "--- test hit point ---" << std::endl;
 	ClapTrap*	trap = new ScavTrap("HitPoint");
 
-	trap->takeDamage(20);
-	trap->takeDamage(20);
-	trap->takeDamage(20);
-	trap->takeDamage(20);
-	trap->takeDamage(20); // このタイミングでdie
-	trap->takeDamage(20);
+	const unsigned int damage = 19;
+	for (unsigned i = 0; i < (ScavTrap::HIT_POINT / damage); ++i)
+		trap->takeDamage(damage);
+	trap->takeDamage(damage); // このタイミングでdie
+	trap->takeDamage(damage);
+	delete trap;
 }
 
-void	case_other(void) {
+static void	case_other(void) {
 	std::cout << "--- test other ---" << std::endl;
 	ClapTrap*	trap = new ScavTrap("OTHER");
 
 	trap->attack("enemy1");
-	trap->attack("enemy2");
 	dynamic_cast<ScavTrap*>(trap)->guardGate();
+	delete trap;
 }
 
 int	main(void) {
@@ -53,5 +55,11 @@ int	main(void) {
 	case_copy_constructor();
 	case_check_hit_point();
 	case_other();
+
 	return 0;
 }
+
+// 	__attribute__((destructor)) static void destructor()
+// {
+//    system("leaks -q scavtrap");
+// }

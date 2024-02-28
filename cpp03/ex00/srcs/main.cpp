@@ -2,7 +2,8 @@
 #include <iostream>
 #include <limits>
 
-void	case_die(ClapTrap player) {
+static void	case_die(ClapTrap player) {
+	std::cout << "--- die ---" << std::endl;
 	player.takeDamage(9);
 	player.beRepaired(9);
 	player.takeDamage(9);
@@ -11,35 +12,26 @@ void	case_die(ClapTrap player) {
 	player.beRepaired(1);
 }
 
-void	case_energy_point_run_out_by_beRepaired(ClapTrap player) {
-	player.beRepaired(1);
-	player.beRepaired(1);
-	player.beRepaired(1);
-	player.beRepaired(1);
-	player.beRepaired(1);
-	player.beRepaired(1);
-	player.beRepaired(1);
-	player.beRepaired(1);
-	player.beRepaired(1);
+static void	case_energy_point_run_out_by_beRepaired(ClapTrap player) {
+	std::cout << "--- energy point run out by beRepaired ---" << std::endl;
+	for (unsigned i = 0; i < (ClapTrap::ENERGY_POINT - 1); ++i)
+		player.beRepaired(1);
 	player.beRepaired(1); // このタイミングでenergy pointが尽きる
 	player.beRepaired(1);
+	player.beRepaired(1);
 }
 
-void	case_energy_point_run_out_by_attack(ClapTrap player) {
-	player.attack("enemy");
-	player.attack("enemy");
-	player.attack("enemy");
-	player.attack("enemy");
-	player.attack("enemy");
-	player.attack("enemy");
-	player.attack("enemy");
-	player.attack("enemy");
-	player.attack("enemy");
+static void	case_energy_point_run_out_by_attack(ClapTrap player) {
+	std::cout << "--- energy point run out by attack ---" << std::endl;
+	for (unsigned i = 0; i < (ClapTrap::ENERGY_POINT - 1); ++i)
+		player.attack("enemy");
 	player.attack("enemy"); // このタイミングでenergy pointが尽きる
 	player.attack("enemy");
+	player.attack("enemy");
 }
 
-void	case_hit_point_over_flow(ClapTrap player) {
+static void	case_hit_point_over_flow(ClapTrap player) {
+	std::cout << "--- hit point over flow ---" << std::endl;
 	player.beRepaired(std::numeric_limits<unsigned int>::max() - 8);
 	player.takeDamage(1); // オーバーフローガードしないとここでdie
 	player.takeDamage(1);
@@ -49,14 +41,15 @@ void	case_hit_point_over_flow(ClapTrap player) {
 int	main(void) {
 	ClapTrap	trap("TRAP");
 
-	std::cout << "--- die ---" << std::endl;
 	case_die(trap);
-	std::cout << "--- energy point run out by beRepaired ---" << std::endl;
 	case_energy_point_run_out_by_beRepaired(trap);
-	std::cout << "--- energy point run out by attack ---" << std::endl;
 	case_energy_point_run_out_by_attack(trap);
-	std::cout << "--- hit point over flow ---" << std::endl;
 	case_hit_point_over_flow(trap);
 
 	return 0;
 }
+
+// 	__attribute__((destructor)) static void destructor()
+// {
+//    system("leaks -q claptrap");
+// }

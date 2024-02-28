@@ -3,7 +3,7 @@ TARGET			=	diamondtrap
 CXX				=	c++
 CXXFLAGS		=	-Wall -Wextra -Werror
 CXXFLAGS		+=	-std=c++98
-CXXFLAGS		+=	-Wshadow
+CXXFLAGS		+=	-Wshadow -Wno-shadow
 
 PRE_OPT			=	-MMD -MP
 INCLUDE			=	-I$(INCLUDES_DIR)
