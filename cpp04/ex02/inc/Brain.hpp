@@ -10,8 +10,12 @@ public:
 	~Brain(void);
 	Brain&	operator=(const Brain&);
 
+	const std::string*	getIdea(size_t idx) const;
+	void				setIdea(size_t idx, const std::string& new_idea);
+
 private:
-	std::string	ideas[100];
+	static const size_t	IDEAS_MAX = 100;
+	std::string	ideas[IDEAS_MAX];
 };
 
 #endif

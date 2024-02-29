@@ -1,17 +1,17 @@
 #include "WrongAnimal.hpp"
+#include "Colors.hpp"
 #include <iostream>
 
 WrongAnimal::WrongAnimal(void) : type("WrongAnimal") {
-	std::cout << "WrongAnimal constructor called" << std::endl;
+	std::cout << Colors::MAGENTA << "WrongAnimal constructor called" << Colors::RESET << std::endl;
 }
 
-WrongAnimal::WrongAnimal(const WrongAnimal& wronganimal) {
-	*this = wronganimal;
-	std::cout << "WrongAnimal copy constructor called" << std::endl;
+WrongAnimal::WrongAnimal(const WrongAnimal& wronganimal) : type(wronganimal.type) {
+	std::cout << Colors::MAGENTA << "WrongAnimal copy constructor called" << Colors::RESET << std::endl;
 }
 
 WrongAnimal::~WrongAnimal(void) {
-	std::cout << "WrongAnimal destructor called" << std::endl;
+	std::cout << Colors::MAGENTA << "WrongAnimal destructor called" << Colors::RESET << std::endl;
 }
 
 WrongAnimal&	WrongAnimal::operator=(const WrongAnimal& wronganimal) {
@@ -21,7 +21,7 @@ WrongAnimal&	WrongAnimal::operator=(const WrongAnimal& wronganimal) {
 }
 
 void	WrongAnimal::makeSound(void) const {
-	std::cout << "WrongAnimal WrongAnimal WrongAnimal" << std::endl;
+	std::cout << Colors::MAGENTA << "WrongAnimal WrongAnimal WrongAnimal" << Colors::RESET << std::endl;
 }
 
 std::string	WrongAnimal::getType(void) const {

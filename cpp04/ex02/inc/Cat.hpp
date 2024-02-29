@@ -10,9 +10,11 @@ public:
 	Cat(void);
 	Cat(const Cat&);
 	~Cat(void);
-	Cat&		operator=(const Cat&);
-	void		makeSound(void) const;
-	std::string	getType(void) const;
+	Cat&	operator=(const Cat&);
+
+	void	makeSound(void) const;
+	void	comeUpWithIdea(size_t idx, const std::string& idea);
+	void	rememberIdea(size_t idx) const;
 
 private:
 	Brain*	brain;

@@ -7,11 +7,11 @@ class Animal {
 public:
 	Animal(void);
 	Animal(const Animal&);
-	virtual		~Animal(void);
+	virtual	~Animal(void);
 	Animal&		operator=(const Animal&);
 
-	virtual void		makeSound(void) const = 0;
-	virtual std::string	getType(void) const;
+	virtual void	makeSound(void) const = 0;
+	std::string		getType(void) const;
 
 protected:
 	std::string	type;

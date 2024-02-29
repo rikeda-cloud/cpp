@@ -10,9 +10,11 @@ public:
 	Dog(void);
 	Dog(const Dog&);
 	~Dog(void);
-	Dog&		operator=(const Dog&);
-	void		makeSound(void) const;
-	std::string	getType(void) const;
+	Dog&	operator=(const Dog&);
+
+	void	makeSound(void) const;
+	void	comeUpWithIdea(size_t idx, const std::string& idea);
+	void	rememberIdea(size_t idx) const;
 
 private:
 	Brain*	brain;
