@@ -1,17 +1,18 @@
 #include "Dog.hpp"
+#include "Colors.hpp"
 #include <iostream>
 
 Dog::Dog(void) : Animal() {
 	this->type = "Dog";
-	std::cout << "Dog constructor called" << std::endl;
+	std::cout << Colors::RED << "Dog constructor called" << Colors::RESET << std::endl;
 }
 
 Dog::Dog(const Dog& dog) : Animal(dog) {
-	std::cout << "Dog copy constructor called" << std::endl;
+	std::cout << Colors::RED << "Dog copy constructor called" << Colors::RESET << std::endl;
 }
 
 Dog::~Dog(void) {
-	std::cout << "Dog destructor called" << std::endl;
+	std::cout << Colors::RED << "Dog destructor called" << Colors::RESET << std::endl;
 }
 
 Dog&	Dog::operator=(const Dog& dog) {
@@ -21,5 +22,5 @@ Dog&	Dog::operator=(const Dog& dog) {
 }
 
 void	Dog::makeSound(void) const {
-	std::cout << "Dog Dog Dog" << std::endl;
+	std::cout << Colors::RED << "Dog Dog Dog" << Colors::RESET << std::endl;
 }

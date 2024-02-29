@@ -50,7 +50,25 @@ void	test_child_ptr(void) {
 	delete wrong_cat;
 }
 
-void	test_copy_and_assignment(void) {
+void	test_copy(void) {
+	std::cout << "--- コピーコンストラクタのテスト ---" << std::endl;
+	const Cat*		cat = new Cat();
+	const WrongCat*	wrong_cat = new WrongCat();
+	std::cout << cat->getType() << " " << std::endl;
+	std::cout << wrong_cat->getType() << " " << std::endl;
+	cat->makeSound();
+	wrong_cat->makeSound();
+	Cat			copy_cat(*cat); // copy constructor
+	WrongCat	copy_wrong_cat(*wrong_cat); // copy constructor
+	delete cat;
+	delete wrong_cat;
+	std::cout << copy_cat.getType() << " " << std::endl;
+	std::cout << copy_wrong_cat.getType() << " " << std::endl;
+	copy_cat.makeSound();
+	copy_wrong_cat.makeSound();
+}
+
+void	test_assignment(void) {
 	std::cout << "--- コピーコンストラクタと代入演算子のテスト ---" << std::endl;
 	const Cat*		cat = new Cat();
 	const WrongCat*	wrong_cat = new WrongCat();
@@ -58,20 +76,16 @@ void	test_copy_and_assignment(void) {
 	std::cout << wrong_cat->getType() << " " << std::endl;
 	cat->makeSound();
 	wrong_cat->makeSound();
-	Cat			another_cat(*cat); // copy constructor
-	WrongCat	another_wrong_cat(*wrong_cat); // copy constructor
+	Cat			assignment_cat;
+	WrongCat	assignment_wrong_cat;
+	assignment_cat = *cat; // assignment operator
+	assignment_wrong_cat = *wrong_cat; // assignment operator
 	delete cat;
 	delete wrong_cat;
-	std::cout << another_cat.getType() << " " << std::endl;
-	std::cout << another_wrong_cat.getType() << " " << std::endl;
-	another_cat.makeSound();
-	another_wrong_cat.makeSound();
-	another_cat = Cat(); // assignment operator
-	another_wrong_cat = WrongCat(); // assignment operator
-	std::cout << another_cat.getType() << " " << std::endl;
-	std::cout << another_wrong_cat.getType() << " " << std::endl;
-	another_cat.makeSound();
-	another_wrong_cat.makeSound();
+	std::cout << assignment_cat.getType() << " " << std::endl;
+	std::cout << assignment_wrong_cat.getType() << " " << std::endl;
+	assignment_cat.makeSound();
+	assignment_wrong_cat.makeSound();
 }
 
 int main()
@@ -79,12 +93,13 @@ int main()
 	test_default();
 	test_wrong();
 	test_child_ptr();
-	test_copy_and_assignment();
+	test_copy();
+	test_assignment();
 
 	return 0;
 }
 
-// 	__attribute__((destructor)) static void destructor()
-// {
-//    system("leaks -q Animal");
-// }
+	__attribute__((destructor)) static void destructor()
+{
+   system("leaks -q Animal");
+}

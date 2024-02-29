@@ -1,17 +1,18 @@
 #include "Cat.hpp"
+#include "Colors.hpp"
 #include <iostream>
 
 Cat::Cat(void) : Animal() {
 	this->type = "Cat";
-	std::cout << "Cat constructor called" << std::endl;
+	std::cout << Colors::YELLOW << "Cat constructor called" << Colors::RESET << std::endl;
 }
 
 Cat::Cat(const Cat& cat) : Animal(cat) {
-	std::cout << "Cat copy constructor called" << std::endl;
+	std::cout << Colors::YELLOW << "Cat copy constructor called" << Colors::RESET << std::endl;
 }
 
 Cat::~Cat(void) {
-	std::cout << "Cat destructor called" << std::endl;
+	std::cout << Colors::YELLOW << "Cat destructor called" << Colors::RESET << std::endl;
 }
 
 Cat&	Cat::operator=(const Cat& cat) {
@@ -21,5 +22,5 @@ Cat&	Cat::operator=(const Cat& cat) {
 }
 
 void	Cat::makeSound(void) const {
-	std::cout << "Cat Cat Cat" << std::endl;
+	std::cout << Colors::YELLOW << "Cat Cat Cat" << Colors::RESET << std::endl;
 }
