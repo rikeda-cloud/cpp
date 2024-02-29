@@ -1,4 +1,5 @@
 #include "Dog.hpp"
+#include "Brain.hpp"
 #include <iostream>
 
 Dog::Dog(void) : Animal() {
@@ -7,8 +8,7 @@ Dog::Dog(void) : Animal() {
 	std::cout << "Dog constructor called" << std::endl;
 }
 
-Dog::Dog(const Dog& dog) {
-	this->type = dog.type;
+Dog::Dog(const Dog& dog) : Animal(dog) {
 	this->brain = new Brain();
 	*this->brain = *dog.brain;
 	std::cout << "Dog copy constructor called" << std::endl;
@@ -22,7 +22,7 @@ Dog::~Dog(void) {
 
 Dog&	Dog::operator=(const Dog& dog) {
 	if (this != &dog) {
-		this->type = dog.type;
+		Animal::operator=(dog);
 		*this->brain = *dog.brain;
 	}
 	return *this;
@@ -32,6 +32,12 @@ void	Dog::makeSound(void) const {
 	std::cout << "Dog Dog Dog" << std::endl;
 }
 
-std::string	Dog::getType(void) const {
-	return type;
+void	Dog::comeUpWithIdea(size_t idx, const std::string& idea) {
+	this->brain->setIdea(idx, idea);
+}
+
+void	Dog::rememberIdea(size_t idx) const {
+	const std::string*	idea = this->brain->getIdea(idx);
+	if (idea)
+		std::cout << this->type << "[" << idx << "] = " << *idea << std::endl;
 }

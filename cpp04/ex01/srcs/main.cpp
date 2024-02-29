@@ -1,66 +1,74 @@
 #include "Animal.hpp"
 #include "Cat.hpp"
 #include "Dog.hpp"
+#include <iostream>
 
-// int main()
-// {
-// 	const Animal* j = new Dog();
-// 	const Animal* i = new Cat();
-// 	delete j;//should not create a leak
-// 	delete i;
+void	test_default(void)
+{
+	std::cout << "--- 課題PDFにあるサンプルmainと同じテスト ---" << std::endl;
+	const Animal* j = new Dog();
+	const Animal* i = new Cat();
+	delete j;//should not create a leak
+	delete i;
+}
 
-// 	return 0;
-// }
+void	test_default2(void)
+{
+	std::cout << "--- 課題PDFの文章で想定されているテスト ---" << std::endl;
+	const int	num_animals = 10;
+	Animal*		animals[10];
 
-// int	main(void)
-// {
-// 	int		num_animals = 100;
-// 	Animal*	animals[100];
+	int	i = 0;
+	for (; i < num_animals / 2; ++i)
+		animals[i] = new Dog();
+	for (; i < num_animals; i++)
+		animals[i] = new Cat();
+	for (int i = 0; i < num_animals; ++i)
+		animals[i]->makeSound();
+	for (int i = 0; i < num_animals; ++i)
+		delete animals[i];
+}
 
-// 	int	i = 0;
-// 	for (; i < num_animals / 2; i++)
-// 		animals[i] = new Dog();
-// 	for (; i < num_animals; i++)
-// 		animals[i] = new Cat();
-// 	for (int i = 0; i < num_animals; i++)
-// 		delete animals[i];
-// 	return 0;
-// }
+void	test_copy(void) {
+	std::cout << "--- コピーコンストラクタでアイデアがディープコピーになるかのテスト ---" << std::endl;
+	Dog*	dog = new Dog();
+	Cat*	cat = new Cat();
+	dog->comeUpWithIdea(3, std::string("NEWDOGIDEA"));
+	cat->comeUpWithIdea(3, std::string("NEWCATIDEA"));
 
-// int	main(void) {
-// 	Dog*	dogs[2];
-// 	Cat*	cats[2];
-// 	dogs[0] = new Dog();
-// 	dogs[1] = new Dog();
-// 	cats[0] = new Cat();
-// 	cats[1] = new Cat();
+	Dog	copy_dog(*dog);
+	Cat	copy_cat(*cat);
+	delete dog;
+	delete cat;
 
-// 	dogs[0]->makeSound();
-// 	dogs[1]->makeSound();
-// 	cats[0]->makeSound();
-// 	cats[1]->makeSound();
+	dog->rememberIdea(3);
+	cat->rememberIdea(3);
+}
 
-// 	*dogs[0] = *dogs[1];
-// 	*cats[0] = *cats[1];
-// 	*dogs[1] = *dogs[0];
-// 	*cats[1] = *cats[0];
+void	test_assignment(void) {
+	std::cout << "--- 代入演算子でアイデアがディープコピーになるかのテスト ---" << std::endl;
+	Dog*	dog = new Dog();
+	Cat*	cat = new Cat();
+	dog->comeUpWithIdea(3, std::string("NEWDOGIDEA"));
+	cat->comeUpWithIdea(3, std::string("NEWCATIDEA"));
 
-// 	delete dogs[0];
-// 	delete dogs[1];
-// 	delete cats[0];
-// 	delete cats[1];
-// 	return 0;
-// }
+	Dog	another_dog;
+	Cat	another_cat;
+	another_dog = *dog;
+	another_cat = *cat;
+	delete dog;
+	delete cat;
+
+	another_dog.rememberIdea(3);
+	another_cat.rememberIdea(3);
+}
 
 int	main(void) {
-	Animal	*animal[2];
-	animal[0] = new Dog();
-	animal[1] = new Cat();
-	Dog	dog(*dynamic_cast<Dog*>(animal[0]));
-	Cat	cat(*dynamic_cast<Cat*>(animal[1]));
+	test_default();
+	test_default2();
+	test_copy();
+	test_assignment();
 
-	delete animal[0];
-	delete animal[1];
 	return 0;
 }
 

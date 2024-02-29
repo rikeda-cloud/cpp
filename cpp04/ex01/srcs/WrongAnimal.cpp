@@ -5,8 +5,7 @@ WrongAnimal::WrongAnimal(void) : type("WrongAnimal") {
 	std::cout << "WrongAnimal constructor called" << std::endl;
 }
 
-WrongAnimal::WrongAnimal(const WrongAnimal& wronganimal) {
-	*this = wronganimal;
+WrongAnimal::WrongAnimal(const WrongAnimal& wronganimal) : type(wronganimal.type) {
 	std::cout << "WrongAnimal copy constructor called" << std::endl;
 }
 

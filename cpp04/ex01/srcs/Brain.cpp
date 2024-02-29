@@ -15,7 +15,21 @@ Brain::~Brain(void) {
 }
 
 Brain&	Brain::operator=(const Brain& brain) {
-	for (int i = 0; i < 100; i++)
+	std::cout << "Brain assignment operator called" << std::endl;
+	for (size_t i = 0; i < IDEAS_MAX; i++)
 		this->ideas[i] = brain.ideas[i];
 	return *this;
+}
+
+const std::string*	Brain::getIdea(size_t idx) const {
+	if (idx < IDEAS_MAX)
+		return &this->ideas[idx];
+	return NULL;
+}
+
+void	Brain::setIdea(size_t idx, const std::string& new_idea) {
+	if (idx < IDEAS_MAX)
+		this->ideas[idx] = new_idea;
+	else
+		std::cerr << "index accepts 0 to 99" << std::endl;
 }
