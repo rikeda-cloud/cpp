@@ -6,8 +6,7 @@ WrongCat::WrongCat(void) : WrongAnimal() {
 	std::cout << "WrongCat constructor called" << std::endl;
 }
 
-WrongCat::WrongCat(const WrongCat& wrongcat) {
-	*this = wrongcat;
+WrongCat::WrongCat(const WrongCat& wrongcat) : WrongAnimal(wrongcat) {
 	std::cout << "WrongCat copy constructor called" << std::endl;
 }
 
@@ -23,8 +22,4 @@ WrongCat&	WrongCat::operator=(const WrongCat& wrongcat) {
 
 void	WrongCat::makeSound(void) const {
 	std::cout << "WrongCat WrongCat WrongCat" << std::endl;
-}
-
-std::string	WrongCat::getType(void) const {
-	return type;
 }

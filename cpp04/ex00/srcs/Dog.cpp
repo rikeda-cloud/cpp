@@ -23,7 +23,3 @@ Dog&	Dog::operator=(const Dog& dog) {
 void	Dog::makeSound(void) const {
 	std::cout << "Dog Dog Dog" << std::endl;
 }
-
-std::string	Dog::getType(void) const {
-	return type;
-}
