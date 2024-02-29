@@ -17,6 +17,7 @@ SRCS			=	Brain.cpp \
 					Dog.cpp \
 					WrongAnimal.cpp \
 					WrongCat.cpp \
+					Colors.cpp \
 					main.cpp
 
 OBJS			=	$(patsubst %.o, $(OBJS_DIR)/%.o, $(SRCS:.cpp=.o))

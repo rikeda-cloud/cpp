@@ -41,8 +41,8 @@ void	test_copy(void) {
 	delete dog;
 	delete cat;
 
-	dog->rememberIdea(3);
-	cat->rememberIdea(3);
+	copy_dog.rememberIdea(3);
+	copy_cat.rememberIdea(3);
 }
 
 void	test_assignment(void) {
@@ -52,15 +52,34 @@ void	test_assignment(void) {
 	dog->comeUpWithIdea(3, std::string("NEWDOGIDEA"));
 	cat->comeUpWithIdea(3, std::string("NEWCATIDEA"));
 
-	Dog	another_dog;
-	Cat	another_cat;
-	another_dog = *dog;
-	another_cat = *cat;
+	Dog	assignment_dog;
+	Cat	assignment_cat;
+	assignment_dog = *dog;
+	assignment_cat = *cat;
 	delete dog;
 	delete cat;
 
-	another_dog.rememberIdea(3);
-	another_cat.rememberIdea(3);
+	assignment_dog.rememberIdea(3);
+	assignment_cat.rememberIdea(3);
+}
+
+void	test_brain(void) {
+	std::cout << "--- Brainクラスのテスト ---" << std::endl;
+	Brain	*brain = new Brain();
+
+	brain->setIdea(-1, "idea1"); // idea[0~99]の範囲におさまらないインデックス
+	brain->setIdea(100, "idea1"); // idea[0~99]の範囲におさまらないインデックス
+	
+	// std::stringのデフォルト値で初期化されている
+	std::cout << "brain[0] = \"" << *brain->getIdea(0) << "\"" << std::endl;
+	brain->setIdea(1, "idea1");
+	std::cout << "brain[1] = \"" << *brain->getIdea(1) << "\"" << std::endl;
+	Brain	copy_brain(*brain);
+	Brain	assignment_brain;
+	assignment_brain = *brain;
+	delete brain; // ここでコピー＆代入元のbrainを削除
+	std::cout << "copy[1] = \"" << *copy_brain.getIdea(1) << "\"" << std::endl;
+	std::cout << "assignment[1] = \"" << *assignment_brain.getIdea(1) << "\"" << std::endl;
 }
 
 int	main(void) {
@@ -68,11 +87,12 @@ int	main(void) {
 	test_default2();
 	test_copy();
 	test_assignment();
+	test_brain();
 
 	return 0;
 }
 
-// 	__attribute__((destructor)) static void destructor()
-// {
-//    system("leaks -q brain");
-// }
+	__attribute__((destructor)) static void destructor()
+{
+   system("leaks -q brain");
+}

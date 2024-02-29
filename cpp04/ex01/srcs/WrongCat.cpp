@@ -1,22 +1,23 @@
 #include "WrongCat.hpp"
+#include "Brain.hpp"
+#include "Colors.hpp"
 #include <iostream>
 
 WrongCat::WrongCat(void) : WrongAnimal() {
 	this->type = "WrongCat";
 	this->brain = new Brain();
-	std::cout << "WrongCat constructor called" << std::endl;
+	std::cout << Colors::GREEN << "WrongCat constructor called" << Colors::RESET << std::endl;
 }
 
 WrongCat::WrongCat(const WrongCat& wrongcat) : WrongAnimal(wrongcat) {
-	this->brain = new Brain();
-	*this->brain = *wrongcat.brain;
-	std::cout << "WrongCat copy constructor called" << std::endl;
+	this->brain = new Brain(*wrongcat.brain);
+	std::cout << Colors::GREEN << "WrongCat copy constructor called" << Colors::RESET << std::endl;
 }
 
 WrongCat::~WrongCat(void) {
 	if (this->brain)
 		delete this->brain;
-	std::cout << "WrongCat destructor called" << std::endl;
+	std::cout << Colors::GREEN << "WrongCat destructor called" << Colors::RESET << std::endl;
 }
 
 WrongCat&	WrongCat::operator=(const WrongCat& wrongcat) {
@@ -28,7 +29,7 @@ WrongCat&	WrongCat::operator=(const WrongCat& wrongcat) {
 }
 
 void	WrongCat::makeSound(void) const {
-	std::cout << "WrongCat WrongCat WrongCat" << std::endl;
+	std::cout << Colors::GREEN << "WrongCat WrongCat WrongCat" << Colors::RESET << std::endl;
 }
 
 void	WrongCat::comeUpWithIdea(size_t idx, const std::string& idea) {
