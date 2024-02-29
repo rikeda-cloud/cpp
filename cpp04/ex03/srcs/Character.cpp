@@ -1,15 +1,22 @@
 #include "Character.hpp"
-#include <iostream>
 
 Character::Character(std::string name) : name_(name) {
 	for (int i = 0; i < Character::SLOT_CAPACITY; i++)
 		slot_[i] = NULL;
-	std::cout << "Character constructor called" << std::endl;
+	// std::cout << "Character constructor called" << std::endl;
 }
 
 Character::Character(const Character& character) : name_(character.name_) {
-	*slot_ = *character.slot_;
-	std::cout << "Character copy constructor called" << std::endl;
+	for (int i = 0; i < Character::SLOT_CAPACITY; i++) {
+		if (this->slot_[i] != NULL)
+			delete this->slot_[i];
+		this->slot_[i] = NULL;
+	}
+	for (int i = 0; i < Character::SLOT_CAPACITY; i++) {
+		if (character.slot_[i] != NULL)
+			this->slot_[i] = character.slot_[i]->clone();
+	}
+	// std::cout << "Character copy constructor called" << std::endl;
 }
 
 Character::~Character(void) {
@@ -17,13 +24,21 @@ Character::~Character(void) {
 		if (slot_[i] != NULL)
 			delete slot_[i];
 	}
-	std::cout << "Character destructor called" << std::endl;
+	// std::cout << "Character destructor called" << std::endl;
 }
 
 Character&	Character::operator=(const Character& character) {
 	if (this != &character) {
 		this->name_ = character.name_;
-		*this->slot_ = *character.slot_;
+		for (int i = 0; i < Character::SLOT_CAPACITY; i++) {
+			if (this->slot_[i] != NULL)
+				delete this->slot_[i];
+			this->slot_[i] = NULL;
+		}
+		for (int i = 0; i < Character::SLOT_CAPACITY; i++) {
+			if (character.slot_[i] != NULL)
+				this->slot_[i] = character.slot_[i]->clone();
+		}
 	}
 	return *this;
 }
@@ -36,7 +51,7 @@ void	Character::equip(AMateria* m) {
 	for (int i = 0; i < Character::SLOT_CAPACITY; i++) {
 		if (slot_[i] == NULL) {
 			slot_[i] = m;
-			break ;
+			return ;
 		}
 	}
 }
@@ -45,9 +60,6 @@ void	Character::unequip(int idx) {
 	if (idx < 0 && Character::SLOT_CAPACITY <= idx)
 		return ;
 	slot_[idx] = NULL;
-	for (int i = idx; i < Character::SLOT_CAPACITY - 1; i++) {
-		slot_[i] = slot_[i + 1];
-	}
 }
 
 void	Character::use(int idx, ICharacter& target) {

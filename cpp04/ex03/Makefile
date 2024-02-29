@@ -16,6 +16,8 @@ SRCS			=	Character.cpp \
 					MateriaSource.cpp \
 					Cure.cpp \
 					Ice.cpp \
+					ICharacter.cpp \
+					IMateriaSource.cpp \
 					main.cpp
 
 OBJS			=	$(patsubst %.o, $(OBJS_DIR)/%.o, $(SRCS:.cpp=.o))

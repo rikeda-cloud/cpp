@@ -2,17 +2,21 @@
 #include "ICharacter.hpp"
 #include <iostream>
 
-AMateria::AMateria(std::string const& type) : type_(type){
-	std::cout << "AMateria constructor called" << std::endl;
+AMateria::AMateria(std::string const& type) : type_(type) {
+	// std::cout << "AMateria constructor called" << std::endl;
+}
+
+AMateria::AMateria(const AMateria& materia) {
+	static_cast<void>(materia);
+	// std::cout << "AMateria copy constructor called" << std::endl;
 }
 
 AMateria::~AMateria(void) {
-	std::cout << "AMateria destructor called" << std::endl;
+	// std::cout << "AMateria destructor called" << std::endl;
 }
 
-AMateria&	AMateria::operator=(const AMateria& amateria) {
-	if (this != &amateria)
-		this->type_ = amateria.type_;
+AMateria&	AMateria::operator=(const AMateria& materia) {
+	static_cast<void>(materia);
 	return *this;
 }
 

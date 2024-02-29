@@ -4,8 +4,9 @@
 #include "Cure.hpp"
 #include "ICharacter.hpp"
 #include "Character.hpp"
+#include <iostream>
 
-int main()
+void	test_default(void)
 {
 	IMateriaSource* src = new MateriaSource();
 	src->learnMateria(new Ice());
@@ -27,6 +28,24 @@ int main()
 	delete bob;
 	delete me;
 	delete src;
+}
+
+void	test_MateriaSource_not_learn_create(void) {
+	IMateriaSource*	src = new MateriaSource();
+
+	AMateria*	materia1 = src->createMateria("ice");
+	if (materia1 == NULL)
+		std::cout << "no materia" << std::endl;
+	else {
+		std::cout << materia1->getType();
+		delete materia1;
+	}
+	delete src;
+}
+
+int	main(void) {
+	test_default();
+	test_MateriaSource_not_learn_create();
 
 	return 0;
 }

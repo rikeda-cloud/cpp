@@ -19,8 +19,8 @@ public:
 
 private:
 	static const int	SLOT_CAPACITY = 4;
-	std::string	name_;
-	AMateria*	slot_[SLOT_CAPACITY];
+	std::string			name_;
+	AMateria*			slot_[SLOT_CAPACITY];
 
 	Character(void);
 };
