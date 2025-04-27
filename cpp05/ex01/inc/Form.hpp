@@ -1,9 +1,10 @@
 #ifndef CPP05_EX01_Form_H_
 #define CPP05_EX01_Form_H_
 
-#include "Bureaucrat.hpp"
 #include <ostream>
 #include <string>
+
+class Bureaucrat;
 
 class Form {
 public:
