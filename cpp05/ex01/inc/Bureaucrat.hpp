@@ -29,7 +29,7 @@ public:
   size_t getGrade(void) const;
   void incrementGrade(void);
   void decrementGrade(void);
-  void signForm(Form &);
+  std::string signForm(Form &);
 
 private:
   const std::string name_;
