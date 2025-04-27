@@ -205,6 +205,34 @@ void testBeSigned(void) {
   }
 }
 
+void testSignForm(void) {
+  // INFO signForm関数が機能するか
+  std::cout << BLUE << "=== testSignForm ===" << RESET << std::endl;
+
+  Form f("ABC", 1, 1);
+  Bureaucrat grade2_bureaucrat("Grade2", 2);
+  Bureaucrat grade1_bureaucrat("Grade1", 1);
+
+  // INFO グレードが低すぎるため署名は失敗する
+  std::string expect_signForm_by_grade2 =
+      "Grade2 couldn't sign ABC because Grade too low!.\n";
+  if (expect_signForm_by_grade2 == grade2_bureaucrat.signForm(f)) {
+    std::cout << GREEN << "[SUCCESS:testSignForm(1)]" << RESET << std::endl;
+  } else {
+    std::cout << RED << "[ERROR:testSignForm(1)]"
+              << " Output is unexpected." << RESET << std::endl;
+  }
+
+  // INFO グレードが高いので署名に成功
+  std::string expect_signForm_by_grade1 = "Grade1 signed ABC\n";
+  if (expect_signForm_by_grade1 == grade1_bureaucrat.signForm(f)) {
+    std::cout << GREEN << "[SUCCESS:testSignForm(2)]" << RESET << std::endl;
+  } else {
+    std::cout << RED << "[ERROR:testSignForm(2)]"
+              << " Output is unexpected." << RESET << std::endl;
+  }
+}
+
 int main(void) {
   testTooHighGrade();
   testTooLowGrade();
@@ -214,6 +242,7 @@ int main(void) {
   testCopyOperator();
   testAssignmentOperator();
   testBeSigned();
+  testSignForm();
 
   return 0;
 }
