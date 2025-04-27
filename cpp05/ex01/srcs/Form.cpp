@@ -35,11 +35,9 @@ const std::string &Form::getName(void) const { return this->name_; }
 
 bool Form::getIsSigned(void) const { return this->is_signed_; }
 
-const size_t Form::getGradeToSign(void) const { return this->grade_to_sign_; }
+size_t Form::getGradeToSign(void) const { return this->grade_to_sign_; }
 
-const size_t Form::getGradeToExecute(void) const {
-  return this->grade_to_execute_;
-}
+size_t Form::getGradeToExecute(void) const { return this->grade_to_execute_; }
 
 void Form::beSigned(const Bureaucrat &bureaucrat) {
   // INFO すでにsign済みの場合も同様に処理

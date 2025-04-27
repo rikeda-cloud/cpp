@@ -27,8 +27,8 @@ public:
 
   const std::string &getName(void) const;
   bool getIsSigned(void) const;
-  const size_t getGradeToSign(void) const;
-  const size_t getGradeToExecute(void) const;
+  size_t getGradeToSign(void) const;
+  size_t getGradeToExecute(void) const;
   void beSigned(const Bureaucrat &);
 
 private:
