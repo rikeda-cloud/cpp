@@ -9,17 +9,12 @@ Bureaucrat::Bureaucrat(std::string name, size_t grade)
   if (grade > Bureaucrat::GRADE_LOW_LIMIT) {
     throw Bureaucrat::GradeTooLowException();
   }
-  std::cout << "Bureaucrat constructor called" << std::endl;
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat &bureaucrat)
-    : name_(bureaucrat.name_), grade_(bureaucrat.grade_) {
-  std::cout << "Bureaucrat copy constructor called" << std::endl;
-}
+    : name_(bureaucrat.name_), grade_(bureaucrat.grade_) {}
 
-Bureaucrat::~Bureaucrat(void) {
-  std::cout << "Bureaucrat destructor called" << std::endl;
-}
+Bureaucrat::~Bureaucrat(void) {}
 
 Bureaucrat &Bureaucrat::operator=(const Bureaucrat &bureaucrat) {
   if (this != &bureaucrat) {
