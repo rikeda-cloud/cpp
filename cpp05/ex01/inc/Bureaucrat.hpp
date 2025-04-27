@@ -34,6 +34,8 @@ public:
 private:
   const std::string name_;
   size_t grade_;
+
+  Bureaucrat(void);
 };
 
 std::ostream &operator<<(std::ostream &s, const Bureaucrat &bureaucrat);

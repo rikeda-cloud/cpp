@@ -36,6 +36,8 @@ private:
   bool is_signed_;
   const size_t grade_to_sign_;
   const size_t grade_to_execute_;
+
+  Form(void);
 };
 
 std::ostream &operator<<(std::ostream &s, const Form &form);
