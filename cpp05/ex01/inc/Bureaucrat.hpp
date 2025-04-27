@@ -4,6 +4,8 @@
 #include <iostream>
 #include <string>
 
+class Form;
+
 class Bureaucrat {
 public:
   static const size_t GRADE_HIGH_LIMIT = 1;
@@ -27,6 +29,7 @@ public:
   size_t getGrade(void) const;
   void incrementGrade(void);
   void decrementGrade(void);
+  void signForm(Form &);
 
 private:
   const std::string name_;
