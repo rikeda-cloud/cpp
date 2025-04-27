@@ -26,7 +26,7 @@ public:
   Form &operator=(const Form &);
 
   const std::string &getName(void) const;
-  bool is_signed(void) const;
+  bool getIsSigned(void) const;
   const size_t getGradeToSign(void) const;
   const size_t getGradeToExecute(void) const;
   void beSigned(const Bureaucrat &);
