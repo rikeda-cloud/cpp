@@ -1,3 +1,4 @@
+#include "Bureaucrat.hpp"
 #include "Form.hpp"
 #include <iostream>
 #include <sstream>
@@ -156,6 +157,54 @@ void testAssignmentOperator(void) {
   }
 }
 
+void testBeSigned(void) {
+  // INFO besigned関数が機能するか
+  std::cout << BLUE << "=== testBeSigned ===" << RESET << std::endl;
+
+  Form f("ABC", 1, 1); // INFO 署名にGrade1のBureaucratが必要
+  Bureaucrat grade2_bureaucrat("Grade2", 2);
+  Bureaucrat grade1_bureaucrat("Grade1", 1);
+
+  // INFO Bureaucratのグレードが低いと例外が発生
+  try {
+    f.beSigned(grade2_bureaucrat);
+    std::cerr << RED << "[ERROR:testBeSigned(1)]"
+              << " No exceptions occurred." << RESET << std::endl;
+  } catch (const std::exception &e) {
+    std::cout << GREEN << "[SUCCESS:testBeSigned(1)]" << RESET << std::endl;
+  }
+
+  // INFO Bureaucratのグレードが高いと署名可能
+  try {
+    f.beSigned(grade1_bureaucrat);
+    if (f.getIsSigned() == false) {
+      throw std::exception();
+    }
+    std::cout << GREEN << "[SUCCESS:testBeSigned(2)]" << RESET << std::endl;
+  } catch (const std::exception &e) {
+    std::cerr << RED << "[ERROR:testBeSigned(2)]"
+              << " An exception has occurred." << RESET << std::endl;
+  }
+
+  // INFO 署名の有無に関わらずBureaucratのグレードが低いと例外が発生
+  try {
+    f.beSigned(grade2_bureaucrat);
+    std::cerr << RED << "[ERROR:testBeSigned(3)]"
+              << " No exceptions occurred." << RESET << std::endl;
+  } catch (const std::exception &e) {
+    std::cout << GREEN << "[SUCCESS:testBeSigned(3)]" << RESET << std::endl;
+  }
+
+  // INFO 署名の有無に関わらずBureaucratのグレードが高いと署名可能
+  try {
+    f.beSigned(grade1_bureaucrat);
+    std::cout << GREEN << "[SUCCESS:testBeSigned(4)]" << RESET << std::endl;
+  } catch (const std::exception &e) {
+    std::cerr << RED << "[ERROR:testBeSigned(4)]"
+              << " An exception has occurred." << RESET << std::endl;
+  }
+}
+
 int main(void) {
   testTooHighGrade();
   testTooLowGrade();
@@ -164,6 +213,7 @@ int main(void) {
   testOutputOperator("");
   testCopyOperator();
   testAssignmentOperator();
+  testBeSigned();
 
   return 0;
 }
