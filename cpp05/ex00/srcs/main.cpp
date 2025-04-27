@@ -4,6 +4,8 @@
 
 void testTooHighGrade(void) {
   // INFO グレードが高すぎるケース
+  std::cout << "=== testTooHighGrade ===" << std::endl;
+
   const size_t too_high_grade = Bureaucrat::GRADE_HIGH_LIMIT - 1;
 
   try {
@@ -20,6 +22,8 @@ void testTooHighGrade(void) {
 
 void testTooLowGrade(void) {
   // INFO グレードが低すぎるケース
+  std::cout << "=== testTooLowGrade ===" << std::endl;
+
   const size_t too_low_grade = Bureaucrat::GRADE_LOW_LIMIT + 1;
 
   try {
@@ -35,6 +39,9 @@ void testTooLowGrade(void) {
 }
 
 void testNormalGrade(void) {
+  // INFO 正常値でBureaucratクラスをインスタンス化するケース
+  std::cout << "=== testNormalGrade ===" << std::endl;
+
   try {
     Bureaucrat b1("ABC", Bureaucrat::GRADE_HIGH_LIMIT);
     Bureaucrat b2("ABC", Bureaucrat::GRADE_LOW_LIMIT);
@@ -46,6 +53,9 @@ void testNormalGrade(void) {
 }
 
 void testIncrementGradeThrowException(void) {
+  // INFO インクリメント時に最高グレードを超えるケース
+  std::cout << "=== testIncrementGradeThrowException ===" << std::endl;
+
   Bureaucrat b("ABC", Bureaucrat::GRADE_HIGH_LIMIT);
 
   try {
@@ -61,6 +71,9 @@ void testIncrementGradeThrowException(void) {
 }
 
 void testDecrementGradeThrowException(void) {
+  // INFO デクリメント時に最低グレードを下回るケース
+  std::cout << "=== testDecrementGradeThrowException ===" << std::endl;
+
   Bureaucrat b("ABC", Bureaucrat::GRADE_LOW_LIMIT);
 
   try {
@@ -76,6 +89,9 @@ void testDecrementGradeThrowException(void) {
 }
 
 void testIncrementGradeAndDecrementGrade(void) {
+  // INFO インクリメント・デクリメントが正常に行えるケース
+  std::cout << "=== testIncrementGradeAndDecrementGrade ===" << std::endl;
+
   Bureaucrat b("ABC", Bureaucrat::GRADE_HIGH_LIMIT);
 
   try {
@@ -93,11 +109,14 @@ void testIncrementGradeAndDecrementGrade(void) {
 }
 
 void testOutputOperator(std::string name) {
+  // INFO 出力演算子が予期する文字列になっているか
   Bureaucrat b(name, 42);
   std::string expect = name + ", bureaucrat grade 42.\n";
 
   std::ostringstream oss;
   oss << b;
+
+  std::cout << "=== testOutputOperator (" << name << ") ===" << std::endl;
 
   if (oss.str() == expect) {
     std::cout << "[SUCCESS:testOutputOperator]" << std::endl;
