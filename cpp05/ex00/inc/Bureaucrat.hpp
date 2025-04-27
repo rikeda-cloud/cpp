@@ -1,0 +1,32 @@
+#ifndef CPP05_EX00_Bureaucrat_H_
+#define CPP05_EX00_Bureaucrat_H_
+
+#include <iostream>
+#include <string>
+
+class Bureaucrat {
+public:
+  static const size_t GRADE_HIGH_LIMIT = 1;
+  static const size_t GRADE_LOW_LIMIT = 150;
+
+  class GradeTooHighException : public std::exception {};
+  class GradeTooLowException : public std::exception {};
+
+  Bureaucrat(std::string, size_t);
+  Bureaucrat(const Bureaucrat &);
+  ~Bureaucrat(void);
+  Bureaucrat &operator=(const Bureaucrat &);
+
+  const std::string &getName(void) const;
+  size_t getGrade(void) const;
+  void incrementGrade(void);
+  void decrementGrade(void);
+
+private:
+  const std::string name_;
+  size_t grade_;
+};
+
+std::ostream &operator<<(std::ostream &s, const Bureaucrat &bureaucrat);
+
+#endif
