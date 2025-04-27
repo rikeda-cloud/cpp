@@ -2,6 +2,10 @@
 #include <iostream>
 #include <sstream>
 
+static const char *RED = "\033[31m";
+static const char *GREEN = "\033[32m";
+static const char *RESET = "\033[0m";
+
 void testTooHighGrade(void) {
   // INFO グレードが高すぎるケース
   std::cout << "=== testTooHighGrade ===" << std::endl;
@@ -10,13 +14,13 @@ void testTooHighGrade(void) {
 
   try {
     Bureaucrat b("ABC", too_high_grade);
-    std::cerr << "[ERROR:testTooHighGrade]"
-              << " No exceptions occurred." << std::endl;
+    std::cerr << RED << "[ERROR:testTooHighGrade]" << " No exceptions occurred."
+              << RESET << std::endl;
   } catch (const Bureaucrat::GradeTooHighException &e) {
-    std::cout << "[SUCCESS:testTooHighGrade]" << std::endl;
+    std::cout << GREEN << "[SUCCESS:testTooHighGrade]" << RESET << std::endl;
   } catch (const std::exception &e) {
-    std::cerr << "[ERROR:testTooHighGrade]"
-              << " An unexpected error has occurred." << std::endl;
+    std::cerr << RED << "[ERROR:testTooHighGrade]"
+              << " An unexpected error has occurred." << RESET << std::endl;
   }
 }
 
@@ -28,13 +32,13 @@ void testTooLowGrade(void) {
 
   try {
     Bureaucrat b("ABC", too_low_grade);
-    std::cerr << "[ERROR:testTooLowGrade]"
-              << " No exceptions occurred." << std::endl;
+    std::cerr << RED << "[ERROR:testTooLowGrade]" << " No exceptions occurred."
+              << RESET << std::endl;
   } catch (const Bureaucrat::GradeTooLowException &e) {
-    std::cout << "[SUCCESS:testTooLowGrade]" << std::endl;
+    std::cout << GREEN << "[SUCCESS:testTooLowGrade]" << RESET << std::endl;
   } catch (const std::exception &e) {
-    std::cerr << "[ERROR:testTooLowGrade]"
-              << " An unexpected error has occurred." << std::endl;
+    std::cerr << RED << "[ERROR:testTooLowGrade]"
+              << " An unexpected error has occurred." << RESET << std::endl;
   }
 }
 
@@ -45,10 +49,10 @@ void testNormalGrade(void) {
   try {
     Bureaucrat b1("ABC", Bureaucrat::GRADE_HIGH_LIMIT);
     Bureaucrat b2("ABC", Bureaucrat::GRADE_LOW_LIMIT);
-    std::cout << "[SUCCESS:testNormalGrade]" << std::endl;
+    std::cout << GREEN << "[SUCCESS:testNormalGrade]" << RESET << std::endl;
   } catch (const std::exception &e) {
-    std::cerr << "[ERROR:testNormalGrade]"
-              << " An exception has occurred." << std::endl;
+    std::cerr << RED << "[ERROR:testNormalGrade]"
+              << " An exception has occurred." << RESET << std::endl;
   }
 }
 
@@ -60,13 +64,14 @@ void testIncrementGradeThrowException(void) {
 
   try {
     b.incrementGrade();
-    std::cerr << "[ERROR:testIncrementGradeThrowException]"
-              << " No exceptions occurred." << std::endl;
+    std::cerr << RED << "[ERROR:testIncrementGradeThrowException]"
+              << " No exceptions occurred." << RESET << std::endl;
   } catch (const Bureaucrat::GradeTooHighException &e) {
-    std::cout << "[SUCCESS:testIncrementGradeThrowException]" << std::endl;
+    std::cout << GREEN << "[SUCCESS:testIncrementGradeThrowException]" << RESET
+              << std::endl;
   } catch (const std::exception &e) {
-    std::cerr << "[ERROR:testIncrementGradeThrowException]"
-              << " An unexpected error has occurred." << std::endl;
+    std::cerr << RED << "[ERROR:testIncrementGradeThrowException]"
+              << " An unexpected error has occurred." << RESET << std::endl;
   }
 }
 
@@ -78,13 +83,14 @@ void testDecrementGradeThrowException(void) {
 
   try {
     b.decrementGrade();
-    std::cerr << "[ERROR:testDecrementGradeThrowException]"
-              << " No exceptions occurred." << std::endl;
+    std::cerr << RED << "[ERROR:testDecrementGradeThrowException]"
+              << " No exceptions occurred." << RESET << std::endl;
   } catch (const Bureaucrat::GradeTooLowException &e) {
-    std::cout << "[SUCCESS:testDecrementGradeThrowException]" << std::endl;
+    std::cout << GREEN << "[SUCCESS:testDecrementGradeThrowException]" << RESET
+              << std::endl;
   } catch (const std::exception &e) {
-    std::cerr << "[ERROR:testDecrementGradeThrowException]"
-              << " An unexpected error has occurred." << std::endl;
+    std::cerr << RED << "[ERROR:testDecrementGradeThrowException]"
+              << " An unexpected error has occurred." << RESET << std::endl;
   }
 }
 
@@ -101,28 +107,74 @@ void testIncrementGradeAndDecrementGrade(void) {
     while (b.getGrade() < Bureaucrat::GRADE_HIGH_LIMIT) {
       b.incrementGrade();
     }
-    std::cout << "[SUCCESS:testIncrementGradeAndDecrementGrade]" << std::endl;
+    std::cout << GREEN << "[SUCCESS:testIncrementGradeAndDecrementGrade]"
+              << RESET << std::endl;
   } catch (const std::exception &e) {
-    std::cerr << "[ERROR:testIncrementGradeAndDecrementGrade]"
-              << " An exception has occurred." << std::endl;
+    std::cerr << RED << "[ERROR:testIncrementGradeAndDecrementGrade]"
+              << " An exception has occurred." << RESET << std::endl;
   }
 }
 
 void testOutputOperator(std::string name) {
   // INFO 出力演算子が予期する文字列になっているか
+  std::cout << "=== testOutputOperator (" << name << ") ===" << std::endl;
+
   Bureaucrat b(name, 42);
   std::string expect = name + ", bureaucrat grade 42.\n";
 
   std::ostringstream oss;
   oss << b;
 
-  std::cout << "=== testOutputOperator (" << name << ") ===" << std::endl;
-
   if (oss.str() == expect) {
-    std::cout << "[SUCCESS:testOutputOperator]" << std::endl;
+    std::cout << GREEN << "[SUCCESS:testOutputOperator]" << RESET << std::endl;
   } else {
-    std::cerr << "[ERROR:testOutputOperator]"
-              << " Output is unexpected." << std::endl;
+    std::cerr << RED << "[ERROR:testOutputOperator]" << " Output is unexpected."
+              << RESET << std::endl;
+  }
+}
+
+void testCopyOperator(void) {
+  // INFO コピー演算子が機能しているか
+  std::cout << "=== testCopyOperator ===" << std::endl;
+
+  Bureaucrat b("ABC", 42);
+  Bureaucrat copy_b(b);
+
+  std::ostringstream output_b;
+  output_b << b;
+  std::ostringstream output_copy_b;
+  output_copy_b << copy_b;
+
+  if (b.getName() == copy_b.getName() && b.getGrade() == copy_b.getGrade() &&
+      output_b.str() == output_copy_b.str()) {
+    std::cout << GREEN << "[SUCCESS:testCopyOperator]" << RESET << std::endl;
+  } else {
+    std::cerr << RED << "[ERROR:testCopyOperator]"
+              << " Copy bureaucrat is unexpected." << RESET << std::endl;
+  }
+}
+
+void testAssignmentOperator(void) {
+  // INFO 代入演算子が機能しているか
+  std::cout << "=== testAssignmentOperator ===" << std::endl;
+
+  Bureaucrat b("ABC", 42);
+  Bureaucrat assignment_b("DEF", 1);
+  assignment_b = b;
+
+  std::ostringstream output_b;
+  output_b << b;
+  std::ostringstream output_assignment_b;
+  output_assignment_b << assignment_b;
+
+  if (b.getName() == assignment_b.getName() &&
+      b.getGrade() == assignment_b.getGrade() &&
+      output_b.str() == output_assignment_b.str()) {
+    std::cout << GREEN << "[SUCCESS:testAssignmentOperator]" << RESET
+              << std::endl;
+  } else {
+    std::cerr << RED << "[ERROR:testAssignmentOperator]"
+              << " Copy bureaucrat is unexpected." << RESET << std::endl;
   }
 }
 
@@ -135,6 +187,8 @@ int main(void) {
   testIncrementGradeAndDecrementGrade();
   testOutputOperator("ABC");
   testOutputOperator("");
+  testCopyOperator();
+  testAssignmentOperator();
 
   return 0;
 }
