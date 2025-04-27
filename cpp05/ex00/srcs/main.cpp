@@ -1,5 +1,6 @@
 #include "Bureaucrat.hpp"
 #include <iostream>
+#include <sstream>
 
 void testTooHighGrade(void) {
   // INFO グレードが高すぎるケース
@@ -91,6 +92,21 @@ void testIncrementGradeAndDecrementGrade(void) {
   }
 }
 
+void testOutputOperator(std::string name) {
+  Bureaucrat b(name, 42);
+  std::string expect = name + ", bureaucrat grade 42.\n";
+
+  std::ostringstream oss;
+  oss << b;
+
+  if (oss.str() == expect) {
+    std::cout << "[SUCCESS:testOutputOperator]" << std::endl;
+  } else {
+    std::cerr << "[ERROR:testOutputOperator]"
+              << " Output is unexpected." << std::endl;
+  }
+}
+
 int main(void) {
   testTooHighGrade();
   testTooLowGrade();
@@ -98,6 +114,8 @@ int main(void) {
   testIncrementGradeThrowException();
   testDecrementGradeThrowException();
   testIncrementGradeAndDecrementGrade();
+  testOutputOperator("ABC");
+  testOutputOperator("");
 
   return 0;
 }
