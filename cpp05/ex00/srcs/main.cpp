@@ -2,13 +2,14 @@
 #include <iostream>
 #include <sstream>
 
-static const char *RED = "\033[31m";
-static const char *GREEN = "\033[32m";
+static const char *RED = "\033[41m";
+static const char *GREEN = "\033[42m";
+static const char *BLUE = "\e[46m";
 static const char *RESET = "\033[0m";
 
 void testTooHighGrade(void) {
   // INFO グレードが高すぎるケース
-  std::cout << "=== testTooHighGrade ===" << std::endl;
+  std::cout << BLUE << "=== testTooHighGrade ===" << RESET << std::endl;
 
   const size_t too_high_grade = Bureaucrat::GRADE_HIGH_LIMIT - 1;
 
@@ -26,7 +27,7 @@ void testTooHighGrade(void) {
 
 void testTooLowGrade(void) {
   // INFO グレードが低すぎるケース
-  std::cout << "=== testTooLowGrade ===" << std::endl;
+  std::cout << BLUE << "=== testTooLowGrade ===" << RESET << std::endl;
 
   const size_t too_low_grade = Bureaucrat::GRADE_LOW_LIMIT + 1;
 
@@ -44,7 +45,7 @@ void testTooLowGrade(void) {
 
 void testNormalGrade(void) {
   // INFO 正常値でBureaucratクラスをインスタンス化するケース
-  std::cout << "=== testNormalGrade ===" << std::endl;
+  std::cout << BLUE << "=== testNormalGrade ===" << RESET << std::endl;
 
   try {
     Bureaucrat b1("ABC", Bureaucrat::GRADE_HIGH_LIMIT);
@@ -58,7 +59,8 @@ void testNormalGrade(void) {
 
 void testIncrementGradeThrowException(void) {
   // INFO インクリメント時に最高グレードを超えるケース
-  std::cout << "=== testIncrementGradeThrowException ===" << std::endl;
+  std::cout << BLUE << "=== testIncrementGradeThrowException ===" << RESET
+            << std::endl;
 
   Bureaucrat b("ABC", Bureaucrat::GRADE_HIGH_LIMIT);
 
@@ -77,7 +79,8 @@ void testIncrementGradeThrowException(void) {
 
 void testDecrementGradeThrowException(void) {
   // INFO デクリメント時に最低グレードを下回るケース
-  std::cout << "=== testDecrementGradeThrowException ===" << std::endl;
+  std::cout << BLUE << "=== testDecrementGradeThrowException ===" << RESET
+            << std::endl;
 
   Bureaucrat b("ABC", Bureaucrat::GRADE_LOW_LIMIT);
 
@@ -96,7 +99,8 @@ void testDecrementGradeThrowException(void) {
 
 void testIncrementGradeAndDecrementGrade(void) {
   // INFO インクリメント・デクリメントが正常に行えるケース
-  std::cout << "=== testIncrementGradeAndDecrementGrade ===" << std::endl;
+  std::cout << BLUE << "=== testIncrementGradeAndDecrementGrade ===" << RESET
+            << std::endl;
 
   Bureaucrat b("ABC", Bureaucrat::GRADE_HIGH_LIMIT);
 
@@ -117,7 +121,8 @@ void testIncrementGradeAndDecrementGrade(void) {
 
 void testOutputOperator(std::string name) {
   // INFO 出力演算子が予期する文字列になっているか
-  std::cout << "=== testOutputOperator (" << name << ") ===" << std::endl;
+  std::cout << BLUE << "=== testOutputOperator (" << name << ") ===" << RESET
+            << std::endl;
 
   Bureaucrat b(name, 42);
   std::string expect = name + ", bureaucrat grade 42.\n";
@@ -135,7 +140,7 @@ void testOutputOperator(std::string name) {
 
 void testCopyOperator(void) {
   // INFO コピー演算子が機能しているか
-  std::cout << "=== testCopyOperator ===" << std::endl;
+  std::cout << BLUE << "=== testCopyOperator ===" << RESET << std::endl;
 
   Bureaucrat b("ABC", 42);
   Bureaucrat copy_b(b);
@@ -156,7 +161,7 @@ void testCopyOperator(void) {
 
 void testAssignmentOperator(void) {
   // INFO 代入演算子が機能しているか
-  std::cout << "=== testAssignmentOperator ===" << std::endl;
+  std::cout << BLUE << "=== testAssignmentOperator ===" << RESET << std::endl;
 
   Bureaucrat b("ABC", 42);
   Bureaucrat assignment_b("DEF", 1);
