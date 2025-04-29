@@ -22,7 +22,7 @@ public:
 
   AForm(std::string, size_t, size_t);
   AForm(const AForm &);
-  ~AForm(void);
+  virtual ~AForm(void);
   AForm &operator=(const AForm &);
 
   const std::string &getName(void) const;
@@ -30,6 +30,9 @@ public:
   size_t getGradeToSign(void) const;
   size_t getGradeToExecute(void) const;
   void beSigned(const Bureaucrat &);
+
+  virtual void action(void) const = 0;
+  void execute(Bureaucrat const &) const;
 
 private:
   const std::string name_;
