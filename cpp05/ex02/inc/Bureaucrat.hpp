@@ -1,5 +1,5 @@
-#ifndef CPP05_EX01_Bureaucrat_H_
-#define CPP05_EX01_Bureaucrat_H_
+#ifndef CPP05_EX02_Bureaucrat_H_
+#define CPP05_EX02_Bureaucrat_H_
 
 #include <iostream>
 #include <string>
