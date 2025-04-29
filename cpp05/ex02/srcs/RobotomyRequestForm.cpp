@@ -31,9 +31,9 @@ void RobotomyRequestForm::action(void) const {
   }
 
   if (std::rand() % 2 == 0) {
-    std::cout << "[SUCCESS] " << target_ << "has become a robot" << std::endl;
+    std::cout << "[SUCCESS] " << target_ << " has become a robot" << std::endl;
   } else {
-    std::cout << "[ERROR] " << target_ << "couldn't become a robot"
+    std::cout << "[ERROR] " << target_ << " couldn't become a robot"
               << std::endl;
   }
 }

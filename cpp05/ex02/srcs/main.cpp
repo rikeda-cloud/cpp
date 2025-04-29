@@ -36,7 +36,7 @@ void executeShrubberyCreationForm(void) {
   // INFO ShrubberyCreationFormで複数のファイルを作成
   for (size_t i = 0; i < 10; i++) {
     std::ostringstream oss;
-    oss << "target" << i;
+    oss << "target" << i + 1;
     ShrubberyCreationForm form(oss.str());
     b.signForm(form);
     b.executeForm(form);
