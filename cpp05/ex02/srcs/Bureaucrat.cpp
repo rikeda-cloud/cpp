@@ -1,5 +1,5 @@
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
 #include <iostream>
 
 Bureaucrat::Bureaucrat(std::string name, size_t grade)
@@ -43,7 +43,7 @@ void Bureaucrat::decrementGrade(void) {
   this->grade_++;
 }
 
-std::string Bureaucrat::signForm(Form &form) {
+std::string Bureaucrat::signForm(AForm &form) {
   std::string message;
 
   try {
@@ -54,6 +54,19 @@ std::string Bureaucrat::signForm(Form &form) {
               e.what() + ".\n";
   }
 
+  std::cout << message;
+  return message;
+}
+
+std::string Bureaucrat::executeForm(AForm const &form) const {
+  std::string message;
+  try {
+    form.execute(*this);
+    message = this->name_ + " executed " + form.getName() + "\n";
+  } catch (std::exception &e) {
+    message = this->name_ + " couldn't execute " + form.getName() +
+              " because " + e.what() + "\n";
+  }
   std::cout << message;
   return message;
 }

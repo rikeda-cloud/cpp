@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string>
 
-class Form;
+class AForm;
 
 class Bureaucrat {
 public:
@@ -29,7 +29,8 @@ public:
   size_t getGrade(void) const;
   void incrementGrade(void);
   void decrementGrade(void);
-  std::string signForm(Form &);
+  std::string signForm(AForm &);
+  std::string executeForm(AForm const &form) const;
 
 private:
   const std::string name_;
