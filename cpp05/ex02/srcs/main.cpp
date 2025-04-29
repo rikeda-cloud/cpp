@@ -72,11 +72,36 @@ void testExecuteNoSignForm(void) {
   }
 }
 
+void testBureaucratGradeTooLowToExecute(void) {
+  // INFO 官僚がExecuteするのに必要なグレードではないケース
+  std::cout << BLUE << "=== testBureaucratGradeTooLowToExecute ===" << RESET
+            << std::endl;
+
+  Bureaucrat high_grade_b("HighGrade", Bureaucrat::GRADE_HIGH_LIMIT);
+  Bureaucrat low_grade_b("LowGrade", Bureaucrat::GRADE_LOW_LIMIT);
+  PresidentialPardonForm form("target");
+  high_grade_b.signForm(form);
+
+  std::string expect = "LowGrade couldn't execute PresidentialPardonForm "
+                       "because Grade too low!\n";
+
+  std::string actual = low_grade_b.executeForm(form);
+
+  if (expect == actual) {
+    std::cout << GREEN << "[SUCCESS:testBureaucratGradeTooLowToExecute]"
+              << RESET << std::endl;
+  } else {
+    std::cout << RED << "[ERROR:testBureaucratGradeTooLowToExecute]"
+              << " Output is unexpected." << RESET << std::endl;
+  }
+}
+
 int main(void) {
   executePresidentialPardonForm();
   executeRobotomyRequestForm();
   executeShrubberyCreationForm();
   testExecuteNoSignForm();
+  testBureaucratGradeTooLowToExecute();
 
   return 0;
 }
