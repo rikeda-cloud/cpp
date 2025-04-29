@@ -34,8 +34,6 @@ public:
   size_t getGradeToSign(void) const;
   size_t getGradeToExecute(void) const;
   void beSigned(const Bureaucrat &);
-
-  virtual void action(void) const = 0;
   void execute(Bureaucrat const &) const;
 
 private:
@@ -45,6 +43,7 @@ private:
   const size_t grade_to_execute_;
 
   AForm(void);
+  virtual void action(void) const = 0;
 };
 
 std::ostream &operator<<(std::ostream &s, const AForm &form);

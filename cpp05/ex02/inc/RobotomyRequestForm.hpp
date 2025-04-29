@@ -10,14 +10,13 @@ public:
   ~RobotomyRequestForm(void);
   RobotomyRequestForm &operator=(const RobotomyRequestForm &);
 
-  void action(void) const;
-
 private:
   static const size_t REQUIRED_GRADE_SIGN = 72;
   static const size_t REQUIRED_GRADE_EXEC = 45;
 
   const std::string target_;
   RobotomyRequestForm(void);
+  void action(void) const;
 };
 
 #endif

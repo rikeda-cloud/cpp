@@ -10,14 +10,13 @@ public:
   ~PresidentialPardonForm(void);
   PresidentialPardonForm &operator=(const PresidentialPardonForm &);
 
-  void action(void) const;
-
 private:
   static const size_t REQUIRED_GRADE_SIGN = 25;
   static const size_t REQUIRED_GRADE_EXEC = 5;
 
   const std::string target_;
   PresidentialPardonForm(void);
+  void action(void) const;
 };
 
 #endif
