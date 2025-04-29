@@ -1,5 +1,6 @@
 #include "RobotomyRequestForm.hpp"
 #include "AForm.hpp"
+#include <cstdlib>
 #include <ctime>
 #include <iostream>
 
