@@ -5,6 +5,11 @@
 
 class ShrubberyCreationForm : public AForm {
 public:
+  class FileException : public std::exception {
+  public:
+    const char *what() const throw();
+  };
+
   ShrubberyCreationForm(std::string);
   ~ShrubberyCreationForm(void);
   ShrubberyCreationForm(const ShrubberyCreationForm &);
