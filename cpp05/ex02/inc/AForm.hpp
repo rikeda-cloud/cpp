@@ -19,6 +19,10 @@ public:
   public:
     const char *what() const throw();
   };
+  class NoSignException : public std::exception {
+  public:
+    const char *what() const throw();
+  };
 
   AForm(std::string, size_t, size_t);
   AForm(const AForm &);
