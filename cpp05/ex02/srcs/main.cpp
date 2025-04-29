@@ -7,12 +7,15 @@
 #include <sstream>
 #include <string>
 
-// static const char *RED = "\033[41m";
-// static const char *GREEN = "\033[42m";
-// static const char *BLUE = "\e[46m";
-// static const char *RESET = "\033[0m";
+static const char *RED = "\033[41m";
+static const char *GREEN = "\033[42m";
+static const char *BLUE = "\e[46m";
+static const char *RESET = "\033[0m";
 
 void executePresidentialPardonForm(void) {
+  std::cout << BLUE << "=== executePresidentialPardonForm ===" << RESET
+            << std::endl;
+
   Bureaucrat b("ABC", Bureaucrat::GRADE_HIGH_LIMIT);
   PresidentialPardonForm form("target");
   b.signForm(form);
@@ -20,6 +23,9 @@ void executePresidentialPardonForm(void) {
 }
 
 void executeRobotomyRequestForm(void) {
+  std::cout << BLUE << "=== executeRobotomyRequestForm ===" << RESET
+            << std::endl;
+
   Bureaucrat b("ABC", Bureaucrat::GRADE_HIGH_LIMIT);
   RobotomyRequestForm form("target");
   b.signForm(form);
@@ -31,6 +37,9 @@ void executeRobotomyRequestForm(void) {
 }
 
 void executeShrubberyCreationForm(void) {
+  std::cout << BLUE << "=== executeShrubberyCreationForm ===" << RESET
+            << std::endl;
+
   Bureaucrat b("ABC", Bureaucrat::GRADE_HIGH_LIMIT);
 
   // INFO ShrubberyCreationFormで複数のファイルを作成
@@ -43,10 +52,31 @@ void executeShrubberyCreationForm(void) {
   }
 }
 
+void testExecuteNoSignForm(void) {
+  // INFO 署名のないFormを実行
+  std::cout << BLUE << "=== testExecuteNoSignForm ===" << RESET << std::endl;
+
+  Bureaucrat b("ABC", Bureaucrat::GRADE_HIGH_LIMIT);
+  PresidentialPardonForm form("target");
+  std::string expect = "ABC couldn't execute PresidentialPardonForm because "
+                       "form is not signed!\n";
+
+  std::string actual = b.executeForm(form);
+
+  if (expect == actual) {
+    std::cout << GREEN << "[SUCCESS:testExecuteNoSignForm]" << RESET
+              << std::endl;
+  } else {
+    std::cout << RED << "[ERROR:testExecuteNoSignForm]"
+              << " Output is unexpected." << RESET << std::endl;
+  }
+}
+
 int main(void) {
   executePresidentialPardonForm();
   executeRobotomyRequestForm();
   executeShrubberyCreationForm();
+  testExecuteNoSignForm();
 
   return 0;
 }
