@@ -36,9 +36,11 @@ $(OBJS_DIR)/%.o	:	$(SRCS_DIR)/%.cpp
 .PHONY:	all
 all:	$(TARGET)
 
+# INFO ShrubberyCreationFormで作成されるファイルも削除
 .PHONY:	clean
 clean:
 	$(RM) $(OBJS_DIR)
+	$(RM) *_shrubbery
 
 .PHONY:	fclean
 fclean:	clean
