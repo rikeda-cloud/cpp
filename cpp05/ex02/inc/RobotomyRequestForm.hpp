@@ -5,9 +5,6 @@
 
 class RobotomyRequestForm : public AForm {
 public:
-  static const size_t REQUIRED_GRADE_SIGN = 72;
-  static const size_t REQUIRED_GRADE_EXEC = 45;
-
   RobotomyRequestForm(std::string);
   RobotomyRequestForm(const RobotomyRequestForm &);
   ~RobotomyRequestForm(void);
@@ -16,6 +13,9 @@ public:
   void action(void) const;
 
 private:
+  static const size_t REQUIRED_GRADE_SIGN = 72;
+  static const size_t REQUIRED_GRADE_EXEC = 45;
+
   const std::string target_;
   RobotomyRequestForm(void);
 };
