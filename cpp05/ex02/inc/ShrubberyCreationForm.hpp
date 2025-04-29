@@ -5,6 +5,9 @@
 
 class ShrubberyCreationForm : public AForm {
 public:
+  static const size_t REQUIRED_GRADE_SIGN = 145;
+  static const size_t REQUIRED_GRADE_EXEC = 137;
+
   class FileException : public std::exception {
   public:
     const char *what() const throw();
@@ -16,9 +19,6 @@ public:
   ShrubberyCreationForm &operator=(const ShrubberyCreationForm &);
 
 private:
-  static const size_t REQUIRED_GRADE_SIGN = 145;
-  static const size_t REQUIRED_GRADE_EXEC = 137;
-
   const std::string target_;
   ShrubberyCreationForm(void);
   void action(void) const;
