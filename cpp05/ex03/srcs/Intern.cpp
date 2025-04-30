@@ -39,7 +39,7 @@ AForm *Intern::makeForm(std::string form_name, std::string target) {
       return (this->*(form_pairs_[i].makeFunc))(target);
     }
   }
-  std::cerr << form_name << " not found" << std::endl;
+  std::cout << form_name << " not found" << std::endl;
   return NULL;
 }
 

@@ -17,26 +17,26 @@ void testTooHighGrade(void) {
   // INFO gradeToSignのグレードが高すぎるケース
   try {
     Form f("ABC", too_high_grade, 42);
-    std::cerr << RED << "[ERROR:testTooHighGrade(gradeToSign)]"
+    std::cout << RED << "[ERROR:testTooHighGrade(gradeToSign)]"
               << " No exceptions occurred." << RESET << std::endl;
   } catch (const Form::GradeTooHighException &e) {
     std::cout << GREEN << "[SUCCESS:testTooHighGrade(gradeToSign)]" << RESET
               << std::endl;
   } catch (const std::exception &e) {
-    std::cerr << RED << "[ERROR:testTooHighGrade(gradeToSign)]"
+    std::cout << RED << "[ERROR:testTooHighGrade(gradeToSign)]"
               << " An unexpected error has occurred." << RESET << std::endl;
   }
 
   // INFO gradeToExecuteのグレードが高すぎるケース
   try {
     Form f("ABC", 42, too_high_grade);
-    std::cerr << RED << "[ERROR:testTooHighGrade(gradeToExecute)]"
+    std::cout << RED << "[ERROR:testTooHighGrade(gradeToExecute)]"
               << " No exceptions occurred." << RESET << std::endl;
   } catch (const Form::GradeTooHighException &e) {
     std::cout << GREEN << "[SUCCESS:testTooHighGrade(gradeToExecute)]" << RESET
               << std::endl;
   } catch (const std::exception &e) {
-    std::cerr << RED << "[ERROR:testTooHighGrade(gradeToExecute)]"
+    std::cout << RED << "[ERROR:testTooHighGrade(gradeToExecute)]"
               << " An unexpected error has occurred." << RESET << std::endl;
   }
 }
@@ -50,26 +50,26 @@ void testTooLowGrade(void) {
   // INFO gradeToSignが低すぎるケース
   try {
     Form f("ABC", too_low_grade, 42);
-    std::cerr << RED << "[ERROR:testTooLowGrade(gradeToSign)]"
+    std::cout << RED << "[ERROR:testTooLowGrade(gradeToSign)]"
               << " No exceptions occurred." << RESET << std::endl;
   } catch (const Form::GradeTooLowException &e) {
     std::cout << GREEN << "[SUCCESS:testTooLowGrade(gradeToSign)]" << RESET
               << std::endl;
   } catch (const std::exception &e) {
-    std::cerr << RED << "[ERROR:testTooLowGrade(gradeToSign)]"
+    std::cout << RED << "[ERROR:testTooLowGrade(gradeToSign)]"
               << " An unexpected error has occurred." << RESET << std::endl;
   }
 
   // INFO gradeToExecuteが低すぎるケース
   try {
     Form f("ABC", 42, too_low_grade);
-    std::cerr << RED << "[ERROR:testTooLowGrade(gradeToExecute)]"
+    std::cout << RED << "[ERROR:testTooLowGrade(gradeToExecute)]"
               << " No exceptions occurred." << RESET << std::endl;
   } catch (const Form::GradeTooLowException &e) {
     std::cout << GREEN << "[SUCCESS:testTooLowGrade(gradeToExecute)]" << RESET
               << std::endl;
   } catch (const std::exception &e) {
-    std::cerr << RED << "[ERROR:testTooLowGrade(gradeToExecute)]"
+    std::cout << RED << "[ERROR:testTooLowGrade(gradeToExecute)]"
               << " An unexpected error has occurred." << RESET << std::endl;
   }
 }
@@ -83,7 +83,7 @@ void testNormalGrade(void) {
     Form f2("ABC", Form::GRADE_LOW_LIMIT, Form::GRADE_HIGH_LIMIT);
     std::cout << GREEN << "[SUCCESS:testNormalGrade]" << RESET << std::endl;
   } catch (const std::exception &e) {
-    std::cerr << RED << "[ERROR:testNormalGrade]"
+    std::cout << RED << "[ERROR:testNormalGrade]"
               << " An exception has occurred." << RESET << std::endl;
   }
 }
@@ -104,8 +104,8 @@ void testOutputOperator(std::string name) {
   if (oss.str() == expect) {
     std::cout << GREEN << "[SUCCESS:testOutputOperator]" << RESET << std::endl;
   } else {
-    std::cerr << RED << "[ERROR:testOutputOperator]" << " Output is unexpected."
-              << RESET << std::endl;
+    std::cout << RED << "[ERROR:testOutputOperator]"
+              << " Output is unexpected." << RESET << std::endl;
   }
 }
 
@@ -127,7 +127,7 @@ void testCopyOperator(void) {
       output_f.str() == output_copy_f.str()) {
     std::cout << GREEN << "[SUCCESS:testCopyOperator]" << RESET << std::endl;
   } else {
-    std::cerr << RED << "[ERROR:testCopyOperator]"
+    std::cout << RED << "[ERROR:testCopyOperator]"
               << " Copy bureaucrat is unexpected." << RESET << std::endl;
   }
 }
@@ -152,7 +152,7 @@ void testAssignmentOperator(void) {
     std::cout << GREEN << "[SUCCESS:testAssignmentOperator]" << RESET
               << std::endl;
   } else {
-    std::cerr << RED << "[ERROR:testAssignmentOperator]"
+    std::cout << RED << "[ERROR:testAssignmentOperator]"
               << " Copy bureaucrat is unexpected." << RESET << std::endl;
   }
 }
@@ -168,7 +168,7 @@ void testBeSigned(void) {
   // INFO Bureaucratのグレードが低いと例外が発生
   try {
     f.beSigned(grade2_bureaucrat);
-    std::cerr << RED << "[ERROR:testBeSigned(1)]"
+    std::cout << RED << "[ERROR:testBeSigned(1)]"
               << " No exceptions occurred." << RESET << std::endl;
   } catch (const std::exception &e) {
     std::cout << GREEN << "[SUCCESS:testBeSigned(1)]" << RESET << std::endl;
@@ -182,14 +182,14 @@ void testBeSigned(void) {
     }
     std::cout << GREEN << "[SUCCESS:testBeSigned(2)]" << RESET << std::endl;
   } catch (const std::exception &e) {
-    std::cerr << RED << "[ERROR:testBeSigned(2)]"
+    std::cout << RED << "[ERROR:testBeSigned(2)]"
               << " An exception has occurred." << RESET << std::endl;
   }
 
   // INFO 署名の有無に関わらずBureaucratのグレードが低いと例外が発生
   try {
     f.beSigned(grade2_bureaucrat);
-    std::cerr << RED << "[ERROR:testBeSigned(3)]"
+    std::cout << RED << "[ERROR:testBeSigned(3)]"
               << " No exceptions occurred." << RESET << std::endl;
   } catch (const std::exception &e) {
     std::cout << GREEN << "[SUCCESS:testBeSigned(3)]" << RESET << std::endl;
@@ -200,7 +200,7 @@ void testBeSigned(void) {
     f.beSigned(grade1_bureaucrat);
     std::cout << GREEN << "[SUCCESS:testBeSigned(4)]" << RESET << std::endl;
   } catch (const std::exception &e) {
-    std::cerr << RED << "[ERROR:testBeSigned(4)]"
+    std::cout << RED << "[ERROR:testBeSigned(4)]"
               << " An exception has occurred." << RESET << std::endl;
   }
 }
