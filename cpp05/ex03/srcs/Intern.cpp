@@ -14,7 +14,7 @@ Intern::Intern(void) {
 }
 
 Intern::Intern(const Intern &intern) {
-  for (int i = 0; i < NUM_OF_FORM_TYPES; i++) {
+  for (size_t i = 0; i < NUM_OF_FORM_TYPES; i++) {
     form_pairs_[i].name = intern.form_pairs_[i].name;
     form_pairs_[i].makeFunc = intern.form_pairs_[i].makeFunc;
   }
@@ -24,7 +24,7 @@ Intern::~Intern(void) {}
 
 Intern &Intern::operator=(const Intern &intern) {
   if (this != &intern) {
-    for (int i = 0; i < NUM_OF_FORM_TYPES; i++) {
+    for (size_t i = 0; i < NUM_OF_FORM_TYPES; i++) {
       form_pairs_[i].name = intern.form_pairs_[i].name;
       form_pairs_[i].makeFunc = intern.form_pairs_[i].makeFunc;
     }
@@ -33,7 +33,7 @@ Intern &Intern::operator=(const Intern &intern) {
 }
 
 AForm *Intern::makeForm(std::string form_name, std::string target) {
-  for (int i = 0; i < NUM_OF_FORM_TYPES; i++) {
+  for (size_t i = 0; i < NUM_OF_FORM_TYPES; i++) {
     if (form_pairs_[i].name == form_name) {
       std::cout << "Intern creates " << form_name << std::endl;
       return (this->*(form_pairs_[i].makeFunc))(target);
