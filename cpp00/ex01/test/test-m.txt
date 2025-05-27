@@ -1,0 +1,9 @@
+パラメータの文字数が10付近の入力を表示
+ADD
+abcdefghi
+abcdefghij
+abcdefghijk
+0123456789
+abcdefghijkl
+SEARCH
+1
