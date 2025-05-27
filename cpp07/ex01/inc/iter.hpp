@@ -8,4 +8,6 @@ template <typename T> void iter(T *arr, std::size_t length, void (*f)(T &)) {
   }
 };
 
+template <typename T> void x10(T val) { val *= 10; };
+
 #endif
