@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 
-void testConstructor(void) {
+void testDefaultConstructor(void) {
   Array<int> arr;
 
   // パタメータ無しでインスタンス化し、配列が空であるか?
@@ -124,7 +124,7 @@ void testAccessOperatorEmptyArray(void) {
 }
 
 int main(void) {
-  testConstructor();
+  testDefaultConstructor();
   testCustomConstructor();
   testCopyConstructor();
   testAssignmentOperator();
