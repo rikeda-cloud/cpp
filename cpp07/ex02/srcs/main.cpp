@@ -123,6 +123,24 @@ void testAccessOperatorEmptyArray(void) {
   }
 }
 
+void testSelfAssignment(void) {
+  unsigned int n = 4;
+  Array<unsigned int> arr1(n);
+  for (unsigned int i = 0; i < n; ++i) {
+    arr1[i] = (i + 1) * 10;
+  }
+
+  // 自分自身に代入しても問題ないか？
+  arr1 = arr1;
+  for (unsigned int i = 0; i < n; ++i) {
+    if (arr1[i] != (i + 1) * 10) {
+      std::cerr << "Self-assignment test failed: element at index " << i
+                << " should be " << (i + 1) * 10 << ", got " << arr1[i]
+                << std::endl;
+    }
+  }
+}
+
 int main(void) {
   testDefaultConstructor();
   testCustomConstructor();
@@ -130,6 +148,7 @@ int main(void) {
   testAssignmentOperator();
   testAccessOperator();
   testAccessOperatorEmptyArray();
+  testSelfAssignment();
 
   return 0;
 }
