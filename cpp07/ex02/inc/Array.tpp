@@ -28,9 +28,7 @@ Array<T>::Array(const Array<T> &arr) : size_(arr.size_) {
 template <typename T>
 Array<T>& Array<T>::operator=(const Array<T> &arr) {
 	if (this != &arr) {
-		if (this->size_) {
-			delete[] this->array_;
-		}
+		delete[] this->array_;
 		this->size_ = arr.size_;
 		this->array_ = new T[arr.size_]();
 		for (unsigned int i = 0; i < arr.size_; ++i) {
