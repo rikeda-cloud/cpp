@@ -1,7 +1,7 @@
 #include "iter.hpp"
 #include <iostream>
 
-bool testIntArray() {
+void testIntArray() {
   size_t length = 5;
   int arr[] = {1, 2, 3, 4, 5};
   int expect[] = {10, 20, 30, 40, 50};
@@ -12,13 +12,12 @@ bool testIntArray() {
     if (arr[i] != expect[i]) {
       std::cerr << "Test failed at index " << i << ": expected " << expect[i]
                 << ", got " << arr[i] << std::endl;
-      return false;
+      return;
     }
   }
-  return true;
 }
 
-bool testDouble() {
+void testDouble() {
   size_t length = 5;
   double arr[] = {1.1, 2.2, 3.3, 4.4, 5.5};
   double expect[] = {11.0, 22.0, 33.0, 44.0, 55.0};
@@ -29,17 +28,24 @@ bool testDouble() {
     if (arr[i] != expect[i]) {
       std::cerr << "Test failed at index " << i << ": expected " << expect[i]
                 << ", got " << arr[i] << std::endl;
-      return false;
+      return;
     }
   }
-  return true;
+}
+
+void testNull() {
+  double *ptr = NULL;
+  iter(ptr, 0, x10<double &>);
+
+  double arr[] = {1.1, 2.2, 3.3, 4.4, 5.5};
+  void (*f)(double &) = NULL;
+  iter(arr, 5, f);
 }
 
 int main(void) {
-  if (testIntArray())
-    std::cout << "Integer array test passed." << std::endl;
-  if (testDouble())
-    std::cout << "Double array test passed." << std::endl;
+  testIntArray();
+  testDouble();
+  testNull();
 
   return 0;
 }
