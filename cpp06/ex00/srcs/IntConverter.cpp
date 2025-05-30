@@ -9,11 +9,11 @@ IntConverter::IntConverter(AConverter *converter) : AConverter(converter) {}
 IntConverter::~IntConverter(void) {}
 
 IScalar *IntConverter::convertTo(const std::string &s) const {
-  std::cout << "call convertTo " << s << std::endl;
+  std::cout << "call convertToInt " << s << std::endl;
   return NULL;
 }
 
 bool IntConverter::canConvert(const std::string &s) const {
-  std::cout << "call canConvert " << s << std::endl;
+  std::cout << "call canConvertInt " << s << std::endl;
   return false;
 }
