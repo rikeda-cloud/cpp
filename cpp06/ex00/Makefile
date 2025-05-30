@@ -15,6 +15,7 @@ SRCS			=	AConverter.cpp \
 					IntConverter.cpp \
 					CharConverter.cpp \
 					FloatConverter.cpp \
+					DoubleConverter.cpp \
 					main.cpp
 
 OBJS			=	$(patsubst %.o, $(OBJS_DIR)/%.o, $(SRCS:.cpp=.o))
