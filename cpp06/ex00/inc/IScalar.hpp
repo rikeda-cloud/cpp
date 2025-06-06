@@ -9,8 +9,10 @@ public:
   virtual float castToFloat(void) = 0;
   virtual double castToDouble(void) = 0;
 
-private:
+protected:
   IScalar(void);
+
+private:
   IScalar(const IScalar &other);
   IScalar &operator=(const IScalar &other);
 };
