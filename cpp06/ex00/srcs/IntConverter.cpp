@@ -1,7 +1,6 @@
 #include "IntConverter.hpp"
 #include "IntScalar.hpp"
 #include <cstdlib>
-#include <iostream>
 #include <limits>
 
 IntConverter::IntConverter(void) : AConverter() {}
