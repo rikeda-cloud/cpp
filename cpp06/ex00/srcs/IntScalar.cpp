@@ -8,6 +8,9 @@ IntScalar::~IntScalar(void) {}
 int IntScalar::castToInt(void) { return this->value_; }
 
 char IntScalar::castToChar(void) {
+  if (this->value_ < 0 || this->value_ > 255) {
+    return '\0';
+  }
   if (std::isprint(this->value_)) {
     return static_cast<char>(this->value_);
   }
