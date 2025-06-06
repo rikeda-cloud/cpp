@@ -13,8 +13,3 @@ IScalar *DoubleConverter::convertTo(const std::string &s) const {
   std::cout << "call convertToDouble " << s << std::endl;
   return NULL;
 }
-
-bool DoubleConverter::canConvert(const std::string &s) const {
-  std::cout << "call canConvertDouble " << s << std::endl;
-  return false;
-}

@@ -20,7 +20,6 @@ private:
   AConverter &operator=(const AConverter &);
 
   virtual IScalar *convertTo(const std::string &) const = 0;
-  virtual bool canConvert(const std::string &) const = 0;
 };
 
 #endif

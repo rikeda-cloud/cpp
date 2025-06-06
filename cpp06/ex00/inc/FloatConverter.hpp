@@ -15,7 +15,6 @@ private:
   FloatConverter &operator=(const FloatConverter &other);
 
   IScalar *convertTo(const std::string &) const;
-  bool canConvert(const std::string &) const;
 };
 
 #endif

@@ -8,10 +8,11 @@ AConverter::AConverter(AConverter *next) : next_(next) {}
 AConverter::~AConverter(void) {}
 
 IScalar *AConverter::convert(const std::string &s) const {
-  if (canConvert(s)) {
-    return convertTo(s);
+  IScalar *result = convertTo(s);
+  if (result) {
+    return result;
   }
-  if (next_) {
+  if (this->next_) {
     return next_->convert(s);
   }
   return NULL;

@@ -12,8 +12,3 @@ IScalar *CharConverter::convertTo(const std::string &s) const {
   std::cout << "call convertToChar " << s << std::endl;
   return NULL;
 }
-
-bool CharConverter::canConvert(const std::string &s) const {
-  std::cout << "call canConvertChar " << s << std::endl;
-  return false;
-}

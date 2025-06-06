@@ -15,7 +15,6 @@ private:
   CharConverter &operator=(const CharConverter &other);
 
   IScalar *convertTo(const std::string &) const;
-  bool canConvert(const std::string &) const;
 };
 
 #endif

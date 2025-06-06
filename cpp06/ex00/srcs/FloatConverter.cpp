@@ -12,8 +12,3 @@ IScalar *FloatConverter::convertTo(const std::string &s) const {
   std::cout << "call convertToFloat " << s << std::endl;
   return NULL;
 }
-
-bool FloatConverter::canConvert(const std::string &s) const {
-  std::cout << "call canConvertFloat " << s << std::endl;
-  return false;
-}

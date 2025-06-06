@@ -12,8 +12,3 @@ IScalar *IntConverter::convertTo(const std::string &s) const {
   std::cout << "call convertToInt " << s << std::endl;
   return NULL;
 }
-
-bool IntConverter::canConvert(const std::string &s) const {
-  std::cout << "call canConvertInt " << s << std::endl;
-  return false;
-}
