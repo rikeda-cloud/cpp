@@ -1,8 +1,8 @@
 #include "IntConverter.hpp"
 #include "IntScalar.hpp"
-#include <climits>
 #include <cstdlib>
 #include <iostream>
+#include <limits>
 
 IntConverter::IntConverter(void) : AConverter() {}
 
@@ -15,7 +15,8 @@ IScalar *IntConverter::convertTo(const std::string &s) const {
   long int lvalue = std::strtol(s.c_str(), &end, 10);
 
   // 文字列全てを変換かつIntの範囲内
-  if (*end == '\0' && INT_MIN <= lvalue && lvalue <= INT_MAX) {
+  if (*end == '\0' && std::numeric_limits<int>::min() <= lvalue &&
+      lvalue <= std::numeric_limits<int>::max()) {
     return new IntScalar(static_cast<int>(lvalue));
   }
 
