@@ -21,6 +21,7 @@ SRCS			=	AConverter.cpp \
 					CharScalar.cpp \
 					FloatScalar.cpp \
 					DoubleScalar.cpp \
+					UnknownScalar.cpp \
 					ScalarConverter.cpp \
 					main.cpp
 

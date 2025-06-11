@@ -1,5 +1,6 @@
 #include "AConverter.hpp"
 #include "IScalar.hpp"
+#include "UnknownScalar.hpp"
 
 AConverter::AConverter(void) : next_(NULL) {}
 
@@ -15,5 +16,5 @@ IScalar *AConverter::convert(const std::string &s) const {
   if (this->next_) {
     return next_->convert(s);
   }
-  return NULL;
+  return new UnknownScalar();
 }
