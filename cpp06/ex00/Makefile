@@ -21,6 +21,7 @@ SRCS			=	AConverter.cpp \
 					CharScalar.cpp \
 					FloatScalar.cpp \
 					DoubleScalar.cpp \
+					ScalarConverter.cpp \
 					main.cpp
 
 OBJS			=	$(patsubst %.o, $(OBJS_DIR)/%.o, $(SRCS:.cpp=.o))
