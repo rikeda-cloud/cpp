@@ -19,7 +19,7 @@ std::string FloatScalar::castToChar(void) {
     char char_value = static_cast<char>(this->value_);
     if (std::isprint(char_value)) {
       std::ostringstream oss;
-      oss << "'" << this->value_ << "'";
+      oss << "'" << char_value << "'";
       return oss.str();
     }
     return "Non displayable";
