@@ -1,6 +1,7 @@
 #include "DoubleConverter.hpp"
 #include "DoubleScalar.hpp"
 #include <cstdlib>
+#include <iostream>
 
 DoubleConverter::DoubleConverter(void) : AConverter() {}
 

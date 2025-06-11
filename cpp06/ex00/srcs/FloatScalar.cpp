@@ -30,7 +30,7 @@ std::string FloatScalar::castToChar(void) {
 std::string FloatScalar::castToFloat(void) {
   std::ostringstream oss;
   oss << std::fixed << std::setprecision(FLOAT_PRECISION);
-  oss << this->value_;
+  oss << this->value_ << "f";
   return oss.str();
 }
 

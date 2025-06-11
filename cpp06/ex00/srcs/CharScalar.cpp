@@ -27,7 +27,7 @@ std::string CharScalar::castToFloat(void) {
   float float_value = static_cast<float>(this->value_);
   std::ostringstream oss;
   oss << std::fixed << std::setprecision(FLOAT_PRECISION);
-  oss << float_value;
+  oss << float_value << "f";
   return oss.str();
 }
 
