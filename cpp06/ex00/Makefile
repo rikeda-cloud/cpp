@@ -17,12 +17,14 @@ SRCS			=	AConverter.cpp \
 					FloatConverter.cpp \
 					DoubleConverter.cpp \
 					InfConverter.cpp \
+					NaNConverter.cpp \
 					IScalar.cpp \
 					IntScalar.cpp \
 					CharScalar.cpp \
 					FloatScalar.cpp \
 					DoubleScalar.cpp \
 					InfScalar.cpp \
+					NaNScalar.cpp \
 					ScalarConverter.cpp \
 					main.cpp
 
