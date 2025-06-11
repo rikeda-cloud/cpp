@@ -4,6 +4,7 @@
 #include "DoubleConverter.hpp"
 #include "FloatConverter.hpp"
 #include "IScalar.hpp"
+#include "InfConverter.hpp"
 #include "IntConverter.hpp"
 #include <iostream>
 
@@ -12,8 +13,9 @@ void ScalarConverter::convert(const std::string &s) {
   DoubleConverter cvt2(&cvt1);
   FloatConverter cvt3(&cvt2);
   IntConverter cvt4(&cvt3);
+  InfConverter cvt5(&cvt4);
 
-  IScalar *scalar = cvt4.convert(s);
+  IScalar *scalar = cvt5.convert(s);
   std::cout << "char: " << scalar->castToChar() << std::endl;
   std::cout << "int: " << scalar->castToInt() << std::endl;
   std::cout << "float: " << scalar->castToFloat() << std::endl;
