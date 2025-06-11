@@ -1,4 +1,5 @@
 #include "DoubleScalar.hpp"
+#include <cmath>
 #include <iomanip>
 #include <sstream>
 #include <string>
@@ -8,6 +9,9 @@ DoubleScalar::DoubleScalar(double value) : value_(value) {}
 DoubleScalar::~DoubleScalar(void) {}
 
 std::string DoubleScalar::castToInt(void) {
+  if (!std::isfinite(this->value_)) {
+    return "impossible";
+  }
   int int_value = static_cast<int>(this->value_);
   std::ostringstream oss;
   oss << int_value;

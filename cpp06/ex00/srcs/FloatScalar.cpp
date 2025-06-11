@@ -1,4 +1,5 @@
 #include "FloatScalar.hpp"
+#include <cmath>
 #include <iomanip>
 #include <sstream>
 #include <string>
@@ -8,6 +9,9 @@ FloatScalar::FloatScalar(float value) : value_(value) {}
 FloatScalar::~FloatScalar(void) {}
 
 std::string FloatScalar::castToInt(void) {
+  if (!std::isfinite(this->value_)) {
+    return "impossible";
+  }
   int int_value = static_cast<int>(this->value_);
   std::ostringstream oss;
   oss << int_value;
