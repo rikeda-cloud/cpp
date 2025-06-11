@@ -1,15 +1,43 @@
 #include "DoubleScalar.hpp"
+#include <iomanip>
+#include <sstream>
+#include <string>
 
 DoubleScalar::DoubleScalar(double value) : value_(value) {}
 
 DoubleScalar::~DoubleScalar(void) {}
 
-int DoubleScalar::castToInt(void) { return static_cast<int>(this->value_); }
-
-char DoubleScalar::castToChar(void) { return static_cast<char>(this->value_); }
-
-float DoubleScalar::castToFloat(void) {
-  return static_cast<float>(this->value_);
+std::string DoubleScalar::castToInt(void) {
+  int int_value = static_cast<int>(this->value_);
+  std::ostringstream oss;
+  oss << int_value;
+  return oss.str();
 }
 
-double DoubleScalar::castToDouble(void) { return this->value_; }
+std::string DoubleScalar::castToChar(void) {
+  if (0.0 <= this->value_ && this->value_ <= 255.0) {
+    char char_value = static_cast<char>(this->value_);
+    if (std::isprint(char_value)) {
+      std::ostringstream oss;
+      oss << "'" << this->value_ << "'";
+      return oss.str();
+    }
+    return "Non displayable";
+  }
+  return "impossible";
+}
+
+std::string DoubleScalar::castToFloat(void) {
+  float float_value = static_cast<float>(this->value_);
+  std::ostringstream oss;
+  oss << std::fixed << std::setprecision(FLOAT_PRECISION);
+  oss << float_value;
+  return oss.str();
+}
+
+std::string DoubleScalar::castToDouble(void) {
+  std::ostringstream oss;
+  oss << std::fixed << std::setprecision(DOUBLE_PRECISION);
+  oss << this->value_;
+  return oss.str();
+}
