@@ -8,10 +8,10 @@
 #include <iostream>
 
 void ScalarConverter::convert(const std::string &s) {
-  DoubleConverter cvt1;
-  FloatConverter cvt2(&cvt1);
-  IntConverter cvt3(&cvt2);
-  CharConverter cvt4(&cvt3);
+  CharConverter cvt1;
+  DoubleConverter cvt2(&cvt1);
+  FloatConverter cvt3(&cvt2);
+  IntConverter cvt4(&cvt3);
 
   IScalar *scalar = cvt4.convert(s);
   std::cout << "char: " << scalar->castToChar() << std::endl;
