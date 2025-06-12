@@ -4,6 +4,7 @@
 #include "IScalar.hpp"
 #include "IntConverter.hpp"
 #include <iostream>
+#include <sstream>
 #include <string>
 
 #define RED "\033[31m"
@@ -44,4 +45,10 @@ bool exec_test_convert(const std::string &param, const std::string &expect_char,
   }
 
   return fail_count >= 1;
+}
+
+std::string convert_long_to_string(long value) {
+  std::stringstream ss;
+  ss << value;
+  return ss.str();
 }
