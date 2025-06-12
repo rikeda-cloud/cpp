@@ -1,6 +1,7 @@
 #include "DoubleScalar.hpp"
 #include <cmath>
 #include <iomanip>
+#include <limits>
 #include <sstream>
 #include <string>
 
@@ -9,7 +10,9 @@ DoubleScalar::DoubleScalar(double value) : value_(value) {}
 DoubleScalar::~DoubleScalar(void) {}
 
 std::string DoubleScalar::castToInt(void) {
-  if (!std::isfinite(this->value_)) {
+  if (!std::isfinite(this->value_) ||
+      this->value_ > std::numeric_limits<int>::max() ||
+      this->value_ < std::numeric_limits<int>::min()) {
     return "impossible";
   }
   int int_value = static_cast<int>(this->value_);

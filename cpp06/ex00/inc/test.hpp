@@ -7,4 +7,6 @@ bool exec_test_convert(const std::string &, const std::string &,
                        const std::string &, const std::string &,
                        const std::string &);
 
+std::string convert_long_to_string(long);
+
 #endif
