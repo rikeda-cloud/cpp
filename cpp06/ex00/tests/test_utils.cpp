@@ -3,6 +3,7 @@
 #include "FloatConverter.hpp"
 #include "IScalar.hpp"
 #include "IntConverter.hpp"
+#include <iomanip>
 #include <iostream>
 #include <sstream>
 #include <string>
@@ -50,5 +51,11 @@ bool exec_test_convert(const std::string &param, const std::string &expect_char,
 std::string convert_long_to_string(long value) {
   std::stringstream ss;
   ss << value;
+  return ss.str();
+}
+
+std::string convert_double_to_string(double value) {
+  std::stringstream ss;
+  ss << std::fixed << std::setprecision(0) << value;
   return ss.str();
 }

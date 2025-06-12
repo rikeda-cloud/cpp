@@ -5,6 +5,7 @@
 int test_char(void) {
   int fail_count = exec_test_convert("a", "'a'", "97", "97.0f", "97.0") +
                    exec_test_convert("c", "'c'", "99", "99.0f", "99.0") +
+                   exec_test_convert("T", "'T'", "84", "84.0f", "84.0") +
                    exec_test_convert(" ", "' '", "32", "32.0f", "32.0") +
                    exec_test_convert("!", "'!'", "33", "33.0f", "33.0");
 
@@ -63,10 +64,57 @@ int test_int_min(void) {
 }
 
 int test_float(void) {
+  /*
+   * INFO 仕様上、小数点以下第１位までとする
+   */
+
   int fail_count =
       exec_test_convert("0.0f", "Non displayable", "0", "0.0f", "0.0") +
       exec_test_convert("-42.0f", "impossible", "-42", "-42.0f", "-42.0") +
-      exec_test_convert("42.0f", "'*'", "42", "42.0f", "42.0");
+      exec_test_convert("42.0f", "'*'", "42", "42.0f", "42.0") +
+      exec_test_convert(".9f", "Non displayable", "0", "0.9f", "0.9") +
+      exec_test_convert("-.9f", "impossible", "0", "-0.9f", "-0.9") +
+      exec_test_convert("1.f", "Non displayable", "1", "1.0f", "1.0") +
+      exec_test_convert("0.100000", "Non displayable", "0", "0.1f", "0.1") +
+      exec_test_convert("-999.01f", "impossible", "-999", "-999.0f", "-999.0");
+
+  return fail_count;
+}
+
+int test_float_max(void) {
+  /*
+   * INFO float型のオーバーフローはimpossibleとして扱う
+   */
+
+  std::string float_max =
+      convert_double_to_string(std::numeric_limits<float>::max());
+  std::string float_max_mul_2 =
+      convert_double_to_string(std::numeric_limits<float>::max() * 2.0);
+
+  int fail_count =
+      exec_test_convert(float_max, "impossible", "impossible",
+                        float_max + ".0f", float_max + ".0") +
+      exec_test_convert(float_max_mul_2, "impossible", "impossible",
+                        "impossible", float_max_mul_2 + ".0");
+
+  return fail_count;
+}
+
+int test_float_min(void) {
+  /*
+   * INFO float型のアンダーフローはimpossibleとして扱う
+   */
+
+  std::string float_min =
+      convert_double_to_string(std::numeric_limits<float>::min());
+  std::string float_min_mul_2 =
+      convert_double_to_string(std::numeric_limits<float>::max() * 2.0);
+
+  int fail_count =
+      exec_test_convert(float_min, "impossible", "impossible",
+                        float_min + ".0f", float_min + ".0") +
+      exec_test_convert(float_min_mul_2, "impossible", "impossible",
+                        "impossible", float_min_mul_2 + ".0");
 
   return fail_count;
 }
@@ -92,14 +140,19 @@ int test_nan_inf(void) {
       exec_test_convert("inff", "impossible", "impossible", "inff", "inf") +
       exec_test_convert("+inff", "impossible", "impossible", "inff", "inf") +
       exec_test_convert("-inff", "impossible", "impossible", "-inff", "-inf");
+  exec_test_convert("  inf  ", "impossible", "impossible", "impossible",
+                    "impossible");
+  exec_test_convert("nan    ", "impossible", "impossible", "impossible",
+                    "impossible");
+  exec_test_convert("    -inff", "impossible", "impossible", "-inff", "-inf");
 
   return fail_count;
 }
 
 int main(void) {
   int total_fail_count = test_char() + test_int() + test_int_max() +
-                         test_int_min() + test_float() + test_double() +
-                         test_nan_inf();
+                         test_int_min() + test_float() + test_float_max() +
+                         test_double() + test_nan_inf();
 
   return total_fail_count != 0;
 }
