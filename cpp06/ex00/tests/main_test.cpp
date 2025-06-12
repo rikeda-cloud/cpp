@@ -6,7 +6,9 @@ int test_char(void) {
   int fail_count = exec_test_convert("a", "'a'", "97", "97.0f", "97.0") +
                    exec_test_convert("c", "'c'", "99", "99.0f", "99.0") +
                    exec_test_convert("T", "'T'", "84", "84.0f", "84.0") +
+                   exec_test_convert("f", "'f'", "102", "102.0f", "102.0") +
                    exec_test_convert(" ", "' '", "32", "32.0f", "32.0") +
+                   exec_test_convert(".", "'.'", "46", "46.0f", "46.0") +
                    exec_test_convert("!", "'!'", "33", "33.0f", "33.0");
 
   return fail_count;
@@ -76,6 +78,8 @@ int test_float(void) {
       exec_test_convert("-.9f", "impossible", "0", "-0.9f", "-0.9") +
       exec_test_convert("1.f", "Non displayable", "1", "1.0f", "1.0") +
       exec_test_convert("0.100000f", "Non displayable", "0", "0.1f", "0.1") +
+      exec_test_convert("1e5f", "impossible", "100000", "100000.0f",
+                        "100000.0") +
       exec_test_convert("-999.01f", "impossible", "-999", "-999.0f", "-999.0");
 
   return fail_count;
@@ -127,6 +131,8 @@ int test_double(void) {
       exec_test_convert("-.9", "impossible", "0", "-0.9f", "-0.9") +
       exec_test_convert("1.", "Non displayable", "1", "1.0f", "1.0") +
       exec_test_convert("0.100000", "Non displayable", "0", "0.1f", "0.1") +
+      exec_test_convert("1e5", "impossible", "100000", "100000.0f",
+                        "100000.0") +
       exec_test_convert("-999.01", "impossible", "-999", "-999.0f", "-999.0");
 
   return fail_count;
@@ -179,11 +185,37 @@ int test_nan_inf(void) {
   return fail_count;
 }
 
+int test_edge(void) {
+  /*
+   * INFO 空文字列はヌル文字とみなす
+   */
+  int fail_count =
+      exec_test_convert("", "Non displayable", "0", "0.0f", "0.0") +
+      exec_test_convert("1ff", "impossible", "impossible", "impossible",
+                        "impossible") +
+      exec_test_convert("1.0F", "impossible", "impossible", "impossible",
+                        "impossible") +
+      exec_test_convert("++1", "impossible", "impossible", "impossible",
+                        "impossible") +
+      exec_test_convert("--1", "impossible", "impossible", "impossible",
+                        "impossible") +
+      exec_test_convert("+-1", "impossible", "impossible", "impossible",
+                        "impossible") +
+      exec_test_convert("1.0a", "impossible", "impossible", "impossible",
+                        "impossible") +
+      exec_test_convert("nan123", "impossible", "impossible", "impossible",
+                        "impossible") +
+      exec_test_convert("Hello", "impossible", "impossible", "impossible",
+                        "impossible");
+
+  return fail_count;
+}
+
 int main(void) {
   int total_fail_count = test_char() + test_int() + test_int_max() +
                          test_int_min() + test_float() + test_float_max() +
                          test_float_min() + test_double() + test_double_max() +
-                         test_double_min() + test_nan_inf();
+                         test_double_min() + test_nan_inf() + test_edge();
 
   return total_fail_count != 0;
 }
