@@ -15,7 +15,7 @@ std::string IntScalar::castToInt(void) {
 }
 
 std::string IntScalar::castToChar(void) {
-  if (0 <= this->value_ && this->value_ <= 255) {
+  if (-128 <= this->value_ && this->value_ <= 127) {
     char char_value = static_cast<char>(this->value_);
     if (std::isprint(char_value)) {
       std::ostringstream oss;

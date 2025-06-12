@@ -19,7 +19,7 @@ std::string FloatScalar::castToInt(void) {
 }
 
 std::string FloatScalar::castToChar(void) {
-  if (0.0 <= this->value_ && this->value_ <= 255.0) {
+  if (-128.0 <= this->value_ && this->value_ <= 127.0) {
     char char_value = static_cast<char>(this->value_);
     if (std::isprint(char_value)) {
       std::ostringstream oss;

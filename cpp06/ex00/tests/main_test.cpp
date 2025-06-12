@@ -17,10 +17,15 @@ int test_char(void) {
 int test_int(void) {
   int fail_count =
       exec_test_convert("0", "Non displayable", "0", "0.0f", "0.0") +
-      exec_test_convert("-42", "impossible", "-42", "-42.0f", "-42.0") +
+      exec_test_convert("-42", "Non displayable", "-42", "-42.0f", "-42.0") +
       exec_test_convert("42", "'*'", "42", "42.0f", "42.0") +
-      exec_test_convert("255", "Non displayable", "255", "255.0f", "255.0") +
-      exec_test_convert("256", "impossible", "256", "256.0f", "256.0");
+      exec_test_convert("126", "'~'", "126", "126.0f", "126.0") +
+      exec_test_convert("127", "Non displayable", "127", "127.0f", "127.0") +
+      exec_test_convert("128", "impossible", "128", "128.0f", "128.0") +
+      exec_test_convert("-128", "Non displayable", "-128", "-128.0f",
+                        "-128.0") +
+      exec_test_convert("-129", "impossible", "-129", "-129.0f", "-129.0") +
+      exec_test_convert("-1", "Non displayable", "-1", "-1.0f", "-1.0");
 
   return fail_count;
 }
@@ -72,10 +77,12 @@ int test_float(void) {
 
   int fail_count =
       exec_test_convert("0.0f", "Non displayable", "0", "0.0f", "0.0") +
-      exec_test_convert("-42.0f", "impossible", "-42", "-42.0f", "-42.0") +
+      exec_test_convert("-42.0f", "Non displayable", "-42", "-42.0f", "-42.0") +
       exec_test_convert("42.0f", "'*'", "42", "42.0f", "42.0") +
+      exec_test_convert("-4.2f", "Non displayable", "-4", "-4.2f", "-4.2") +
+      exec_test_convert("4.2f", "Non displayable", "4", "4.2f", "4.2") +
       exec_test_convert(".9f", "Non displayable", "0", "0.9f", "0.9") +
-      exec_test_convert("-.9f", "impossible", "0", "-0.9f", "-0.9") +
+      exec_test_convert("-.9f", "Non displayable", "0", "-0.9f", "-0.9") +
       exec_test_convert("1.f", "Non displayable", "1", "1.0f", "1.0") +
       exec_test_convert("0.100000f", "Non displayable", "0", "0.1f", "0.1") +
       exec_test_convert("1e5f", "impossible", "100000", "100000.0f",
@@ -125,10 +132,12 @@ int test_float_min(void) {
 int test_double(void) {
   int fail_count =
       exec_test_convert("0.0", "Non displayable", "0", "0.0f", "0.0") +
-      exec_test_convert("-42.0", "impossible", "-42", "-42.0f", "-42.0") +
+      exec_test_convert("-42.0", "Non displayable", "-42", "-42.0f", "-42.0") +
       exec_test_convert("42.0", "'*'", "42", "42.0f", "42.0") +
+      exec_test_convert("-4.2", "Non displayable", "-4", "-4.2f", "-4.2") +
+      exec_test_convert("4.2", "Non displayable", "4", "4.2f", "4.2") +
       exec_test_convert(".9", "Non displayable", "0", "0.9f", "0.9") +
-      exec_test_convert("-.9", "impossible", "0", "-0.9f", "-0.9") +
+      exec_test_convert("-.9", "Non displayable", "0", "-0.9f", "-0.9") +
       exec_test_convert("1.", "Non displayable", "1", "1.0f", "1.0") +
       exec_test_convert("0.100000", "Non displayable", "0", "0.1f", "0.1") +
       exec_test_convert("1e5", "impossible", "100000", "100000.0f",
@@ -204,6 +213,8 @@ int test_edge(void) {
       exec_test_convert("1.0a", "impossible", "impossible", "impossible",
                         "impossible") +
       exec_test_convert("nan123", "impossible", "impossible", "impossible",
+                        "impossible") +
+      exec_test_convert("12.3.4", "impossible", "impossible", "impossible",
                         "impossible") +
       exec_test_convert("Hello", "impossible", "impossible", "impossible",
                         "impossible");
