@@ -25,7 +25,8 @@ SRCS			=	AConverter.cpp \
 
 MAIN_SRCS		=	main.cpp
 
-TEST_SRCS		=	main_test.cpp
+TEST_SRCS		=	main_test.cpp \
+					test_utils.cpp
 
 OBJS			=	$(patsubst %.o, $(OBJS_DIR)/%.o, $(SRCS:.cpp=.o))
 DEPS			=	$(OBJS:.o=.d)
