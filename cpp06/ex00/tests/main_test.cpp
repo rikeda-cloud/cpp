@@ -75,7 +75,7 @@ int test_float(void) {
       exec_test_convert(".9f", "Non displayable", "0", "0.9f", "0.9") +
       exec_test_convert("-.9f", "impossible", "0", "-0.9f", "-0.9") +
       exec_test_convert("1.f", "Non displayable", "1", "1.0f", "1.0") +
-      exec_test_convert("0.100000", "Non displayable", "0", "0.1f", "0.1") +
+      exec_test_convert("0.100000f", "Non displayable", "0", "0.1f", "0.1") +
       exec_test_convert("-999.01f", "impossible", "-999", "-999.0f", "-999.0");
 
   return fail_count;
@@ -83,38 +83,37 @@ int test_float(void) {
 
 int test_float_max(void) {
   /*
-   * INFO float型のオーバーフローはimpossibleとして扱う
+   * INFO float型のオーバーフローはinffとして扱う
    */
 
   std::string float_max =
       convert_double_to_string(std::numeric_limits<float>::max());
-  std::string float_max_mul_2 =
-      convert_double_to_string(std::numeric_limits<float>::max() * 2.0);
+  std::string float_max_mul_10 = float_max + "0";
 
   int fail_count =
       exec_test_convert(float_max, "impossible", "impossible",
                         float_max + ".0f", float_max + ".0") +
-      exec_test_convert(float_max_mul_2, "impossible", "impossible",
-                        "impossible", float_max_mul_2 + ".0");
+      exec_test_convert(float_max_mul_10, "impossible", "impossible", "inff",
+                        float_max_mul_10 + ".0");
 
   return fail_count;
 }
 
 int test_float_min(void) {
   /*
-   * INFO float型のアンダーフローはimpossibleとして扱う
+   * INFO float型のアンダーフローは-inffとして扱う
    */
 
   std::string float_min =
-      convert_double_to_string(std::numeric_limits<float>::min());
+      convert_double_to_string(-std::numeric_limits<float>::max());
   std::string float_min_mul_2 =
-      convert_double_to_string(std::numeric_limits<float>::max() * 2.0);
+      convert_double_to_string(-std::numeric_limits<float>::max() * 2.0);
 
   int fail_count =
       exec_test_convert(float_min, "impossible", "impossible",
                         float_min + ".0f", float_min + ".0") +
-      exec_test_convert(float_min_mul_2, "impossible", "impossible",
-                        "impossible", float_min_mul_2 + ".0");
+      exec_test_convert(float_min_mul_2, "impossible", "impossible", "-inff",
+                        float_min_mul_2 + ".0");
 
   return fail_count;
 }
@@ -123,7 +122,38 @@ int test_double(void) {
   int fail_count =
       exec_test_convert("0.0", "Non displayable", "0", "0.0f", "0.0") +
       exec_test_convert("-42.0", "impossible", "-42", "-42.0f", "-42.0") +
-      exec_test_convert("42.0", "'*'", "42", "42.0f", "42.0");
+      exec_test_convert("42.0", "'*'", "42", "42.0f", "42.0") +
+      exec_test_convert(".9", "Non displayable", "0", "0.9f", "0.9") +
+      exec_test_convert("-.9", "impossible", "0", "-0.9f", "-0.9") +
+      exec_test_convert("1.", "Non displayable", "1", "1.0f", "1.0") +
+      exec_test_convert("0.100000", "Non displayable", "0", "0.1f", "0.1") +
+      exec_test_convert("-999.01", "impossible", "-999", "-999.0f", "-999.0");
+
+  return fail_count;
+}
+
+int test_double_max(void) {
+  std::string double_max =
+      convert_double_to_string(std::numeric_limits<double>::max());
+  std::string double_max_mul_10 = double_max + "0";
+
+  int fail_count = exec_test_convert(double_max, "impossible", "impossible",
+                                     "inff", double_max + ".0") +
+                   exec_test_convert(double_max_mul_10, "impossible",
+                                     "impossible", "inff", "inf");
+
+  return fail_count;
+}
+
+int test_double_min(void) {
+  std::string double_min =
+      convert_double_to_string(-std::numeric_limits<double>::max());
+  std::string double_min_mul_10 = double_min + "0";
+
+  int fail_count = exec_test_convert(double_min, "impossible", "impossible",
+                                     "-inff", double_min + ".0") +
+                   exec_test_convert(double_min_mul_10, "impossible",
+                                     "impossible", "-inff", "-inf");
 
   return fail_count;
 }
@@ -152,7 +182,8 @@ int test_nan_inf(void) {
 int main(void) {
   int total_fail_count = test_char() + test_int() + test_int_max() +
                          test_int_min() + test_float() + test_float_max() +
-                         test_double() + test_nan_inf();
+                         test_float_min() + test_double() + test_double_max() +
+                         test_double_min() + test_nan_inf();
 
   return total_fail_count != 0;
 }

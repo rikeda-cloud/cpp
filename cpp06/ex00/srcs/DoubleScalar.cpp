@@ -37,10 +37,6 @@ std::string DoubleScalar::castToChar(void) {
 std::string DoubleScalar::castToFloat(void) {
   float float_value = static_cast<float>(this->value_);
 
-  // doubleは有限なのにfloatでinf → オーバーフロー
-  if (std::isinf(float_value) && !std::isinf(this->value_)) {
-    return "impossible";
-  }
   std::ostringstream oss;
   oss << std::fixed << std::setprecision(FLOAT_PRECISION);
   oss << float_value << "f";
