@@ -70,6 +70,49 @@ int test_int_min(void) {
   return fail_count;
 }
 
+int test_int_maxf(void) {
+  /*
+   * INFO float型の精度には限界がある
+   * 実行環境の丸めずに正確に表現できる桁数は下記プログラムで取得可能
+   * std::cout << std::numeric_limits<float>::digits10 << std::endl;
+   */
+
+  std::string int_max = convert_long_to_string(std::numeric_limits<int>::max());
+  std::string int_max_plus_1 = convert_long_to_string(
+      static_cast<long>(std::numeric_limits<int>::max()) + 1);
+  std::string int_maxf = int_max + "f";
+  std::string int_max_plus_1f = int_max_plus_1 + "f";
+
+  int fail_count =
+      exec_test_convert(int_maxf, "impossible", "impossible",
+                        int_max_plus_1 + ".0f", int_max_plus_1 + ".0") +
+      exec_test_convert(int_max_plus_1f, "impossible", "impossible",
+                        int_max_plus_1 + ".0f", int_max_plus_1 + ".0");
+
+  return fail_count;
+}
+
+int test_int_minf(void) {
+  /*
+   * INFO float型の精度には限界がある
+   * 実行環境の丸めずに正確に表現できる桁数は下記プログラムで取得可能
+   * std::cout << std::numeric_limits<float>::digits10 << std::endl;
+   */
+
+  std::string int_min = convert_long_to_string(std::numeric_limits<int>::min());
+  std::string int_min_minus_1 = convert_long_to_string(
+      static_cast<long>(std::numeric_limits<int>::min()) - 1);
+  std::string int_minf = int_min + "f";
+  std::string int_min_minus_1f = int_min_minus_1 + "f";
+
+  int fail_count = exec_test_convert(int_minf, "impossible", int_min,
+                                     int_min + ".0f", int_min + ".0") +
+                   exec_test_convert(int_min_minus_1f, "impossible", int_min,
+                                     int_min + ".0f", int_min + ".0");
+
+  return fail_count;
+}
+
 int test_float(void) {
   /*
    * INFO 仕様上、小数点以下第１位までとする
@@ -224,9 +267,10 @@ int test_edge(void) {
 
 int main(void) {
   int total_fail_count = test_char() + test_int() + test_int_max() +
-                         test_int_min() + test_float() + test_float_max() +
-                         test_float_min() + test_double() + test_double_max() +
-                         test_double_min() + test_nan_inf() + test_edge();
+                         test_int_min() + test_int_maxf() + test_int_minf() +
+                         test_float() + test_float_max() + test_float_min() +
+                         test_double() + test_double_max() + test_double_min() +
+                         test_nan_inf() + test_edge();
 
   return total_fail_count != 0;
 }
