@@ -1,5 +1,4 @@
 #include "CharScalar.hpp"
-#include <cctype>
 #include <iomanip>
 #include <sstream>
 

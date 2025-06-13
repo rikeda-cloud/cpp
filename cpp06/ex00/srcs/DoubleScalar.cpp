@@ -3,7 +3,6 @@
 #include <iomanip>
 #include <limits>
 #include <sstream>
-#include <string>
 
 DoubleScalar::DoubleScalar(double value) : value_(value) {}
 
@@ -22,8 +21,10 @@ std::string DoubleScalar::castToInt(void) {
 }
 
 std::string DoubleScalar::castToChar(void) {
-  if (-128.0 <= this->value_ && this->value_ <= 127.0) {
-    char char_value = static_cast<char>(this->value_);
+  if (std::isfinite(this->value_) &&
+      std::numeric_limits<signed char>::min() <= this->value_ &&
+      this->value_ <= std::numeric_limits<signed char>::max()) {
+    signed char char_value = static_cast<signed char>(this->value_);
     if (std::isprint(char_value)) {
       std::ostringstream oss;
       oss << "'" << char_value << "'";

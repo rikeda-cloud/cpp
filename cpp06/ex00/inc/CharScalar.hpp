@@ -14,7 +14,8 @@ public:
   std::string castToDouble(void);
 
 private:
-  char value_;
+  // INFO charはsigned charとして扱う(環境依存のため)
+  signed char value_;
 
   CharScalar(void);
   CharScalar(const CharScalar &other);
