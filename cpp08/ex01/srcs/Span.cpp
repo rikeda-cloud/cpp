@@ -36,7 +36,7 @@ Span &Span::operator=(const Span &span) {
 
 void Span::addNumber(int number) {
   if (this->crr_idx_ >= this->n_) {
-    throw std::length_error("FixedArray: exceeded maximum size");
+    throw std::length_error("Exceeded maximum size");
   }
 
   this->array_[this->crr_idx_] = number;
@@ -56,16 +56,14 @@ void Span::addNumber(int number) {
 
 unsigned int Span::shortestSpan(void) const {
   if (this->crr_idx_ <= 1) {
-    throw std::domain_error(
-        "At least two elements are required to compute a difference.");
+    throw std::domain_error("Too few elements to compute difference.");
   }
   return this->shortest_span_;
 }
 
 unsigned int Span::longestSpan(void) const {
   if (this->crr_idx_ <= 1) {
-    throw std::domain_error(
-        "At least two elements are required to compute a difference.");
+    throw std::domain_error("Too few elements to compute difference.");
   }
   return this->longest_span_;
 }
