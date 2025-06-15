@@ -19,6 +19,8 @@ private:
   unsigned int longest_span_;
   int *array_;
 
+  unsigned int calcDiff(int, int) const;
+
   Span(void);
 };
 

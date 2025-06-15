@@ -35,35 +35,41 @@ Span &Span::operator=(const Span &span) {
 }
 
 void Span::addNumber(int number) {
-  if (this->crr_idx_ >= this->n_) {
+  if (crr_idx_ >= n_) {
     throw std::length_error("Exceeded maximum size");
   }
 
-  this->array_[this->crr_idx_] = number;
-  this->crr_idx_++;
+  array_[crr_idx_] = number;
+  crr_idx_++;
 
-  if (this->crr_idx_ >= 2) {
-    unsigned int diff = std::abs(this->array_[this->crr_idx_ - 2] -
-                                 this->array_[this->crr_idx_ - 1]);
-    if (diff < this->shortest_span_) {
-      this->shortest_span_ = diff;
+  if (crr_idx_ >= 2) {
+    unsigned int diff = calcDiff(array_[crr_idx_ - 1], array_[crr_idx_ - 2]);
+
+    if (diff < shortest_span_) {
+      shortest_span_ = diff;
     }
-    if (diff > this->longest_span_) {
-      this->longest_span_ = diff;
+    if (diff > longest_span_) {
+      longest_span_ = diff;
     }
   }
+}
+
+unsigned int Span::calcDiff(int v1, int v2) const {
+  long long lv1 = static_cast<long long>(v1);
+  long long lv2 = static_cast<long long>(v2);
+  return (lv1 > lv2) ? lv1 - lv2 : lv2 - lv1;
 }
 
 unsigned int Span::shortestSpan(void) const {
-  if (this->crr_idx_ <= 1) {
+  if (crr_idx_ <= 1) {
     throw std::domain_error("Too few elements to compute difference.");
   }
-  return this->shortest_span_;
+  return shortest_span_;
 }
 
 unsigned int Span::longestSpan(void) const {
-  if (this->crr_idx_ <= 1) {
+  if (crr_idx_ <= 1) {
     throw std::domain_error("Too few elements to compute difference.");
   }
-  return this->longest_span_;
+  return longest_span_;
 }
