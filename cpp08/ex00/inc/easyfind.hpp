@@ -4,14 +4,8 @@
 #include <algorithm>
 
 template <typename T>
-typename T::const_iterator easyfind(const T &container, int val) {
-  for (typename T::const_iterator it = container.begin(); it != container.end();
-       ++it) {
-    if (*it == val) {
-      return it;
-    }
-  }
-  return container.end();
-};
+typename T::const_iterator easyfind(const T &container, int val);
+
+#include "easyfind.tpp"
 
 #endif
