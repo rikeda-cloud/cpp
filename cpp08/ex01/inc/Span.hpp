@@ -9,6 +9,11 @@ public:
   Span &operator=(const Span &);
 
   void addNumber(int);
+  template <typename Iter> void addNumbers(const Iter &first, const Iter &end) {
+    for (Iter it = first; it != end; ++it) {
+      addNumber(*it);
+    }
+  };
   unsigned int shortestSpan(void) const;
   unsigned int longestSpan(void) const;
 
