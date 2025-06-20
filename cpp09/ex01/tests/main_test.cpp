@@ -52,6 +52,8 @@ int main(void) {
                    exec_test_evaluate("1 2 + -", EXPECTED_EXCEPTION) +
                    exec_test_evaluate("1 2 + a", EXPECTED_EXCEPTION) +
                    exec_test_evaluate("1.1 2 +", EXPECTED_EXCEPTION) +
+                   exec_test_evaluate("1 2 3 ++", EXPECTED_EXCEPTION) +
+                   exec_test_evaluate("1 2 3 +", EXPECTED_EXCEPTION) +
                    exec_test_evaluate("1 -1 +", EXPECTED_EXCEPTION);
 
   return fail_count != 0;
