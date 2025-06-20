@@ -1,6 +1,8 @@
 #ifndef CPP08_EX01_Span_H_
 #define CPP08_EX01_Span_H_
 
+#include <vector>
+
 class Span {
 public:
   Span(unsigned int);
@@ -14,16 +16,15 @@ public:
       addNumber(*it);
     }
   };
-  unsigned int shortestSpan(void) const;
-  unsigned int longestSpan(void) const;
+  unsigned int shortestSpan(void);
+  unsigned int longestSpan(void);
 
 private:
   unsigned int n_;
-  unsigned int crr_idx_;
-  unsigned int shortest_span_;
-  unsigned int longest_span_;
-  int *array_;
+  std::vector<int> vec_;
+  bool sorted_;
 
+  void prepareCalcSpan(void);
   unsigned int calcDiff(int, int) const;
 
   Span(void);
