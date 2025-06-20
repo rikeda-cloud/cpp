@@ -228,12 +228,33 @@ bool test_n_is_zero(void) {
   return true;
 }
 
+bool test_n_is_10000(void) {
+  const unsigned int n = 10000;
+  const unsigned int expect_shortest = 1;
+  const unsigned int expect_longest = n - 1;
+  Span sp(n);
+
+  for (unsigned i = 0; i < n; ++i) {
+    sp.addNumber(i);
+  }
+
+  if (expect_shortest != sp.shortestSpan()) {
+    print_fail_(expect_shortest, sp.shortestSpan());
+    return true;
+  }
+  if (expect_longest != sp.longestSpan()) {
+    print_fail_(expect_longest, sp.longestSpan());
+    return true;
+  }
+  return false;
+}
+
 int main(void) {
-  int fail_count = test_sample_main() + test_out_of_range() +
-                   test_throw_exception_shrtest() +
-                   test_throw_exception_longest() + test_large_diff() +
-                   test_copy_operator() + test_assignment_operator() +
-                   test_diff_zero() + test_add_numbers() +
-                   test_add_numbers_throw_exception() + test_n_is_zero();
+  int fail_count =
+      test_sample_main() + test_out_of_range() +
+      test_throw_exception_shrtest() + test_throw_exception_longest() +
+      test_large_diff() + test_copy_operator() + test_assignment_operator() +
+      test_diff_zero() + test_add_numbers() +
+      test_add_numbers_throw_exception() + test_n_is_zero() + test_n_is_10000();
   return fail_count != 0;
 }
