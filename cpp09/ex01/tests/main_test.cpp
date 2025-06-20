@@ -40,6 +40,8 @@ int main(void) {
                    exec_test_evaluate("9", 9) +
                    exec_test_evaluate("5 1 2 + 4 * + 3 -", 14) +
                    exec_test_evaluate("0 9 - 3 /", -3) +
+                   exec_test_evaluate("   1   1  +   ", 2) +
+                   exec_test_evaluate("1	1	+", 2) +
                    exec_test_evaluate("(1 + 1)", EXPECTED_EXCEPTION) +
                    exec_test_evaluate("1 0 /", EXPECTED_EXCEPTION) +
                    exec_test_evaluate("10 2 +", EXPECTED_EXCEPTION) +
