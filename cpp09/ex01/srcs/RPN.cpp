@@ -3,10 +3,6 @@
 #include <exception>
 #include <sstream>
 
-RPN::RPN(void) {}
-
-RPN::~RPN(void) {}
-
 int RPN::evaluate(const std::string &s) {
   std::istringstream iss(s);
   std::string token;
