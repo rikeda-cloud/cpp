@@ -57,16 +57,16 @@ int RPN::calc(int v1, int v2, Operation op) {
   switch (op) {
   case PLUS:
     return v1 + v2;
-    break;
   case MINUS:
     return v1 - v2;
-    break;
   case DIV:
+    if (v2 == 0) {
+      // Division by zero is not allowed
+      throw std::exception();
+    }
     return v1 / v2;
-    break;
   case MUL:
     return v1 * v2;
-    break;
   default:
     throw std::exception();
   }
