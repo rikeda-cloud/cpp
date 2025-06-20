@@ -45,6 +45,9 @@ void RPN::doOperation(std::stack<int> &stk, Operation op,
     stk.push(static_cast<int>(token[0] - '0'));
     break;
   default:
+    if (stk.size() < 2) {
+      throw std::exception();
+    }
     int first = stk.top();
     stk.pop();
     int second = stk.top();
