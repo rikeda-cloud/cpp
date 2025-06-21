@@ -10,7 +10,8 @@ OBJS_DIR		=	./objs
 INCLUDES_DIR	=	./inc
 TESTS_DIR		=	./tests
 
-SRCS			=	RPN.cpp
+SRCS			=	RPN.cpp \
+					safecalc.cpp
 
 MAIN_SRCS		=	main.cpp
 

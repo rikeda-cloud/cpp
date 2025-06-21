@@ -1,4 +1,5 @@
 #include "RPN.hpp"
+#include "safecalc.hpp"
 #include <cctype>
 #include <exception>
 #include <sstream>
@@ -55,17 +56,13 @@ void RPN::doOperation(std::stack<int> &stk, Operation op,
 int RPN::calc(int v1, int v2, Operation op) {
   switch (op) {
   case PLUS:
-    return v1 + v2;
+    return safe_add(v1, v2);
   case MINUS:
-    return v1 - v2;
+    return safe_diff(v1, v2);
   case DIV:
-    if (v2 == 0) {
-      // Division by zero is not allowed
-      throw std::exception();
-    }
-    return v1 / v2;
+    return safe_div(v1, v2);
   case MUL:
-    return v1 * v2;
+    return safe_mul(v1, v2);
   default:
     throw std::exception();
   }
