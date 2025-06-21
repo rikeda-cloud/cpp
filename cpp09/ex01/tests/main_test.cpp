@@ -48,8 +48,16 @@ int main(void) {
           "* 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 1 - 2 * 1 +",
           std::numeric_limits<int>::max()) +
       exec_test_evaluate(
+          "0 2 - 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 "
+          "* 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 *",
+          std::numeric_limits<int>::min()) +
+      exec_test_evaluate(
           "2 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 "
           "* 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 1 - 2 * 1 + 1 +",
+          EXPECTED_EXCEPTION) +
+      exec_test_evaluate(
+          "0 2 - 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 "
+          "* 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 1 -",
           EXPECTED_EXCEPTION) +
       exec_test_evaluate("(1 + 1)", EXPECTED_EXCEPTION) +
       exec_test_evaluate("1 0 /", EXPECTED_EXCEPTION) +
