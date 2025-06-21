@@ -44,9 +44,13 @@ int main(void) {
       exec_test_evaluate("   1   1  +   ", 2) +
       exec_test_evaluate("1	1	+", 2) +
       exec_test_evaluate(
-          "2 5 * 2 * 1 + 2 5 * * 4 + 2 5 * * 7 + 2 5 * * 4 + 2 5 * * 8 + 2 5 * "
-          "* 3 + 2 5 * * 6 + 2 5 * * 4 + 2 5 * * 8 + 0 -",
-          std::numeric_limits<int>::min()) +
+          "2 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 "
+          "* 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 1 - 2 * 1 +",
+          std::numeric_limits<int>::max()) +
+      exec_test_evaluate(
+          "2 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 "
+          "* 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 1 - 2 * 1 + 1 +",
+          EXPECTED_EXCEPTION) +
       exec_test_evaluate("(1 + 1)", EXPECTED_EXCEPTION) +
       exec_test_evaluate("1 0 /", EXPECTED_EXCEPTION) +
       exec_test_evaluate("10 2 +", EXPECTED_EXCEPTION) +
