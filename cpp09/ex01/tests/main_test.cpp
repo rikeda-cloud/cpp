@@ -1,6 +1,7 @@
 #include "RPN.hpp"
 #include <exception>
 #include <iostream>
+#include <limits>
 
 #define RED "\033[31m"
 #define GREEN "\033[32m"
@@ -33,28 +34,32 @@ bool exec_test_evaluate(const std::string &s, int expect_result) {
 }
 
 int main(void) {
-  int fail_count = exec_test_evaluate("8 9 * 9 - 9 - 9 - 4 - 1 +", 42) +
-                   exec_test_evaluate("7 7 * 7 -", 42) +
-                   exec_test_evaluate("1 2 * 2 / 2 * 2 4 - +", 0) +
-                   exec_test_evaluate("1 2 + 3 * 4 /", 2) +
-                   exec_test_evaluate("9", 9) +
-                   exec_test_evaluate("5 1 2 + 4 * + 3 -", 14) +
-                   exec_test_evaluate("0 9 - 3 /", -3) +
-                   exec_test_evaluate("   1   1  +   ", 2) +
-                   exec_test_evaluate("1	1	+", 2) +
-                   exec_test_evaluate("(1 + 1)", EXPECTED_EXCEPTION) +
-                   exec_test_evaluate("1 0 /", EXPECTED_EXCEPTION) +
-                   exec_test_evaluate("10 2 +", EXPECTED_EXCEPTION) +
-                   exec_test_evaluate("+", EXPECTED_EXCEPTION) +
-                   exec_test_evaluate("1 + 2", EXPECTED_EXCEPTION) +
-                   exec_test_evaluate("", EXPECTED_EXCEPTION) +
-                   exec_test_evaluate(" ", EXPECTED_EXCEPTION) +
-                   exec_test_evaluate("1 2 + -", EXPECTED_EXCEPTION) +
-                   exec_test_evaluate("1 2 + a", EXPECTED_EXCEPTION) +
-                   exec_test_evaluate("1.1 2 +", EXPECTED_EXCEPTION) +
-                   exec_test_evaluate("1 2 3 ++", EXPECTED_EXCEPTION) +
-                   exec_test_evaluate("1 2 3 +", EXPECTED_EXCEPTION) +
-                   exec_test_evaluate("1 -1 +", EXPECTED_EXCEPTION);
+  int fail_count =
+      exec_test_evaluate("8 9 * 9 - 9 - 9 - 4 - 1 +", 42) +
+      exec_test_evaluate("7 7 * 7 -", 42) +
+      exec_test_evaluate("1 2 * 2 / 2 * 2 4 - +", 0) +
+      exec_test_evaluate("1 2 + 3 * 4 /", 2) + exec_test_evaluate("9", 9) +
+      exec_test_evaluate("5 1 2 + 4 * + 3 -", 14) +
+      exec_test_evaluate("0 9 - 3 /", -3) +
+      exec_test_evaluate("   1   1  +   ", 2) +
+      exec_test_evaluate("1	1	+", 2) +
+      exec_test_evaluate(
+          "2 5 * 2 * 1 + 2 5 * * 4 + 2 5 * * 7 + 2 5 * * 4 + 2 5 * * 8 + 2 5 * "
+          "* 3 + 2 5 * * 6 + 2 5 * * 4 + 2 5 * * 8 + 0 -",
+          std::numeric_limits<int>::min()) +
+      exec_test_evaluate("(1 + 1)", EXPECTED_EXCEPTION) +
+      exec_test_evaluate("1 0 /", EXPECTED_EXCEPTION) +
+      exec_test_evaluate("10 2 +", EXPECTED_EXCEPTION) +
+      exec_test_evaluate("+", EXPECTED_EXCEPTION) +
+      exec_test_evaluate("1 + 2", EXPECTED_EXCEPTION) +
+      exec_test_evaluate("", EXPECTED_EXCEPTION) +
+      exec_test_evaluate(" ", EXPECTED_EXCEPTION) +
+      exec_test_evaluate("1 2 + -", EXPECTED_EXCEPTION) +
+      exec_test_evaluate("1 2 + a", EXPECTED_EXCEPTION) +
+      exec_test_evaluate("1.1 2 +", EXPECTED_EXCEPTION) +
+      exec_test_evaluate("1 2 3 ++", EXPECTED_EXCEPTION) +
+      exec_test_evaluate("1 2 3 +", EXPECTED_EXCEPTION) +
+      exec_test_evaluate("1 -1 +", EXPECTED_EXCEPTION);
 
   return fail_count != 0;
 }
