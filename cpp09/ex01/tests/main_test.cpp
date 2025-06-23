@@ -63,6 +63,11 @@ int test_underflow(void) {
       exec_test_evaluate( // INT_MIN * 2
           "0 2 - 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 "
           "* 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 *",
+          EXPECTED_EXCEPTION) +
+      exec_test_evaluate( // INT_MIN * -1
+          "0 1 - 0 2 - 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * "
+          "2 * 2 "
+          "* 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * *",
           EXPECTED_EXCEPTION);
   return fail_count;
 }
