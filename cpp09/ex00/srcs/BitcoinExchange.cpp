@@ -52,11 +52,9 @@ double BitcoinExchange::findRate(const std::string &date) const {
 
   it = db_.upper_bound(date);
   if (it == db_.begin()) {
-    // dateよりも前のデータが存在しない
-    std::cout << "Error: No data available for date " << date << std::endl;
-    return -1.0; // エラー値を返す
+    // dateよりも前のデータが存在しない場合はエラー値を返す
+    return -1.0;
   }
 
-  --it;
-  return it->second; // dateよりも前の最新のデータを返す
+  return (--it)->second; // dateよりも前の最新のデータを返す
 }
