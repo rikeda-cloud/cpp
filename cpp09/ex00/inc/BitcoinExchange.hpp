@@ -9,6 +9,8 @@ public:
   BitcoinExchange(const std::string &);
   ~BitcoinExchange(void);
 
+  double findRate(const std::string &) const;
+
 private:
   std::map<std::string, double> db_;
   std::string txt_file_;

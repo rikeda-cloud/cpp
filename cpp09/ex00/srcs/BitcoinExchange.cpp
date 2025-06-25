@@ -42,3 +42,21 @@ bool BitcoinExchange::parseDatabase(const std::string &db_file) {
   f.close();
   return true;
 }
+
+double BitcoinExchange::findRate(const std::string &date) const {
+  std::map<std::string, double>::const_iterator it = db_.find(date);
+
+  if (it != db_.end()) {
+    return it->second; // 日付が見つかった場合はその値を返す
+  }
+
+  it = db_.upper_bound(date);
+  if (it == db_.begin()) {
+    // dateよりも前のデータが存在しない
+    std::cout << "Error: No data available for date " << date << std::endl;
+    return -1.0; // エラー値を返す
+  }
+
+  --it;
+  return it->second; // dateよりも前の最新のデータを返す
+}
