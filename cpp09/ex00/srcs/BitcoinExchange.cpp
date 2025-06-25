@@ -58,3 +58,12 @@ double BitcoinExchange::findRate(const std::string &date) const {
 
   return (--it)->second; // dateよりも前の最新のデータを返す
 }
+
+double BitcoinExchange::calcBitcoin(const std::string &date,
+                                    double value) const {
+  double rate = findRate(date);
+  if (rate < 0) {
+    return -1.0; // エラー値を返す
+  }
+  return rate * value;
+}

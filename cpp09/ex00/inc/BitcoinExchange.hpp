@@ -9,13 +9,14 @@ public:
   BitcoinExchange(const std::string &);
   ~BitcoinExchange(void);
 
-  double findRate(const std::string &) const;
+  double calcBitcoin(const std::string &, double) const;
 
 private:
   std::map<std::string, double> db_;
   std::string txt_file_;
 
   bool parseDatabase(const std::string &);
+  double findRate(const std::string &) const;
 
   BitcoinExchange(void);
   BitcoinExchange(const BitcoinExchange &);
