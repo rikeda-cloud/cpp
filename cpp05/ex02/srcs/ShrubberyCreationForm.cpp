@@ -1,5 +1,6 @@
 #include "ShrubberyCreationForm.hpp"
 #include <fstream>
+#include <iostream>
 
 ShrubberyCreationForm::ShrubberyCreationForm(std::string target)
     : AForm("ShrubberyCreationForm", ShrubberyCreationForm::REQUIRED_GRADE_SIGN,
@@ -21,12 +22,6 @@ ShrubberyCreationForm::operator=(const ShrubberyCreationForm &form) {
 }
 
 void ShrubberyCreationForm::action(void) const {
-  std::ofstream s;
-  std::string file_name = std::string(target_) + std::string("_shrubbery");
-  s.open(file_name.c_str());
-  if (s.fail()) {
-    throw FileException();
-  }
   std::string ascii_tree = "     *      \n"
                            "    /.\\    \n"
                            "   /o..\\   \n"
@@ -35,15 +30,13 @@ void ShrubberyCreationForm::action(void) const {
                            "  /...o.\\  \n"
                            " /..o....\\ \n"
                            " ^^^[_]^^^ \n";
+  std::string file_name = std::string(target_) + std::string("_shrubbery");
+  std::ofstream s(file_name.c_str());
 
-  s << ascii_tree << std::endl;
-  if (s.is_open()) {
+  try {
+    s << ascii_tree << std::endl;
     s.close();
-    if (s.fail())
-      throw FileException();
+  } catch (const std::exception &e) {
+    std::cerr << e.what() << std::endl;
   }
-}
-
-const char *ShrubberyCreationForm::FileException::what(void) const throw() {
-  return "Error in file operation!";
 }

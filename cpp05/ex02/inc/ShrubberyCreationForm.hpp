@@ -8,11 +8,6 @@ public:
   static const size_t REQUIRED_GRADE_SIGN = 145;
   static const size_t REQUIRED_GRADE_EXEC = 137;
 
-  class FileException : public std::exception {
-  public:
-    const char *what() const throw();
-  };
-
   ShrubberyCreationForm(std::string);
   ~ShrubberyCreationForm(void);
   ShrubberyCreationForm(const ShrubberyCreationForm &);
