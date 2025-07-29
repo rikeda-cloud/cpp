@@ -1,7 +1,8 @@
 #include "AForm.hpp"
 #include "Bureaucrat.hpp"
 
-AForm::AForm(std::string name, size_t grade_to_sign, size_t grade_to_execute)
+AForm::AForm(const std::string &name, size_t grade_to_sign,
+             size_t grade_to_execute)
     : name_(name), is_signed_(false), grade_to_sign_(grade_to_sign),
       grade_to_execute_(grade_to_execute) {
   if (grade_to_sign < AForm::GRADE_HIGH_LIMIT ||

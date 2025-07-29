@@ -8,7 +8,7 @@ public:
   static const size_t REQUIRED_GRADE_SIGN = 145;
   static const size_t REQUIRED_GRADE_EXEC = 137;
 
-  ShrubberyCreationForm(std::string);
+  ShrubberyCreationForm(const std::string &);
   ~ShrubberyCreationForm(void);
   ShrubberyCreationForm(const ShrubberyCreationForm &);
   ShrubberyCreationForm &operator=(const ShrubberyCreationForm &);

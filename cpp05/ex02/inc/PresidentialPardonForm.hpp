@@ -8,7 +8,7 @@ public:
   static const size_t REQUIRED_GRADE_SIGN = 25;
   static const size_t REQUIRED_GRADE_EXEC = 5;
 
-  PresidentialPardonForm(std::string);
+  PresidentialPardonForm(const std::string &);
   PresidentialPardonForm(const PresidentialPardonForm &);
   ~PresidentialPardonForm(void);
   PresidentialPardonForm &operator=(const PresidentialPardonForm &);

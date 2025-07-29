@@ -2,7 +2,7 @@
 #include <fstream>
 #include <iostream>
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string target)
+ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target)
     : AForm("ShrubberyCreationForm", ShrubberyCreationForm::REQUIRED_GRADE_SIGN,
             ShrubberyCreationForm::REQUIRED_GRADE_EXEC),
       target_(target) {}
