@@ -1,4 +1,4 @@
-TARGET			=	span
+NAME			=	span
 
 CXX				=	c++
 CXXFLAGS		=	-Wall -Wextra -Werror
@@ -22,7 +22,7 @@ RM				=	rm -rf
 $(OBJS_DIR)	: % :
 	@mkdir -p $@
 
-$(TARGET)	: $(OBJS_DIR) $(OBJS)
+$(NAME)	: $(OBJS_DIR) $(OBJS)
 	$(CXX) $(CXXFLAGS) $(INCLUDE) $(OBJS) -o $@
 
 $(OBJS_DIR)/%.o	:	$(SRCS_DIR)/%.cpp
@@ -30,7 +30,7 @@ $(OBJS_DIR)/%.o	:	$(SRCS_DIR)/%.cpp
 
 .DEFAULT_GOAL	=	all
 .PHONY:	all
-all:	$(TARGET)
+all:	$(NAME)
 
 .PHONY:	clean
 clean:
@@ -38,7 +38,7 @@ clean:
 
 .PHONY:	fclean
 fclean:	clean
-	$(RM) $(TARGET)
+	$(RM) $(NAME)
 
 .PHONY:	re
 re:	fclean all
