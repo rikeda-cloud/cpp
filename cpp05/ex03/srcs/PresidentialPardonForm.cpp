@@ -1,7 +1,7 @@
 #include "PresidentialPardonForm.hpp"
 #include <iostream>
 
-PresidentialPardonForm::PresidentialPardonForm(std::string target)
+PresidentialPardonForm::PresidentialPardonForm(const std::string &target)
     : AForm("PresidentialPardonForm",
             PresidentialPardonForm::REQUIRED_GRADE_SIGN,
             PresidentialPardonForm::REQUIRED_GRADE_EXEC),

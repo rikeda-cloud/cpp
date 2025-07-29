@@ -24,7 +24,7 @@ public:
     const char *what() const throw();
   };
 
-  AForm(std::string, size_t, size_t);
+  AForm(const std::string &, size_t, size_t);
   AForm(const AForm &);
   virtual ~AForm(void);
   AForm &operator=(const AForm &);

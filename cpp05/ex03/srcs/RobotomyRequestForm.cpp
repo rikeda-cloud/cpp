@@ -4,7 +4,7 @@
 #include <ctime>
 #include <iostream>
 
-RobotomyRequestForm::RobotomyRequestForm(std::string target)
+RobotomyRequestForm::RobotomyRequestForm(const std::string &target)
     : AForm("RobotomyRequestForm", RobotomyRequestForm::REQUIRED_GRADE_SIGN,
             RobotomyRequestForm::REQUIRED_GRADE_EXEC),
       target_(target) {}
