@@ -11,21 +11,21 @@ public:
   ~Intern(void);
   Intern &operator=(const Intern &);
 
-  AForm *makeForm(const std::string, const std::string);
+  AForm *makeForm(const std::string &, const std::string &);
 
 private:
   class FormPair {
   public:
     const char *name;
-    AForm *(Intern::*makeFunc)(std::string &);
+    AForm *(Intern::*makeFunc)(const std::string &);
   };
 
   static const size_t NUM_OF_FORM_TYPES = 3;
   FormPair form_pairs_[NUM_OF_FORM_TYPES];
 
-  AForm *makeRobotomyRequestForm(std::string &);
-  AForm *makeShrubberyCreationForm(std::string &);
-  AForm *makePresidentialPardonForm(std::string &);
+  AForm *makeRobotomyRequestForm(const std::string &);
+  AForm *makeShrubberyCreationForm(const std::string &);
+  AForm *makePresidentialPardonForm(const std::string &);
 };
 
 #endif

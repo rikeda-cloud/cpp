@@ -32,7 +32,8 @@ Intern &Intern::operator=(const Intern &intern) {
   return *this;
 }
 
-AForm *Intern::makeForm(std::string form_name, std::string target) {
+AForm *Intern::makeForm(const std::string &form_name,
+                        const std::string &target) {
   for (size_t i = 0; i < NUM_OF_FORM_TYPES; i++) {
     if (form_pairs_[i].name == form_name) {
       std::cout << "Intern creates " << form_name << std::endl;
@@ -43,14 +44,14 @@ AForm *Intern::makeForm(std::string form_name, std::string target) {
   return NULL;
 }
 
-AForm *Intern::makeShrubberyCreationForm(std::string &target) {
+AForm *Intern::makeShrubberyCreationForm(const std::string &target) {
   return new ShrubberyCreationForm(target);
 }
 
-AForm *Intern::makeRobotomyRequestForm(std::string &target) {
+AForm *Intern::makeRobotomyRequestForm(const std::string &target) {
   return new RobotomyRequestForm(target);
 }
 
-AForm *Intern::makePresidentialPardonForm(std::string &target) {
+AForm *Intern::makePresidentialPardonForm(const std::string &target) {
   return new PresidentialPardonForm(target);
 }
