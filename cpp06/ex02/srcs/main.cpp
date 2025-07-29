@@ -10,5 +10,6 @@ int main(void) {
   identify(ref);
   identify(NULL);
 
+  delete ptr;
   return 0;
 }
