@@ -4,6 +4,7 @@
 #include "PresidentialPardonForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "ShrubberyCreationForm.hpp"
+#include <exception>
 #include <iostream>
 #include <sstream>
 #include <string>
@@ -94,10 +95,14 @@ void testMakeNotExistForm(void) {
 }
 
 int main(void) {
-  testMakeShrubberyCreationForm();
-  testMakeRobotomyRequestForm();
-  testMakePresidentialPardonForm();
-  testMakeNotExistForm();
+  try {
+    testMakeShrubberyCreationForm();
+    testMakeRobotomyRequestForm();
+    testMakePresidentialPardonForm();
+    testMakeNotExistForm();
+  } catch (std::exception &e) {
+    std::cerr << e.what() << std::endl;
+  }
 
   return 0;
 }
