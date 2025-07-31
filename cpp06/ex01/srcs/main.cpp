@@ -23,7 +23,7 @@ bool test_cmp_param(Data *d) {
   uintptr_t ptr = Serializer::serialize(d);
   Data *deserialized_d = Serializer::deserialize(ptr);
 
-  if (d->param == deserialized_d->param) {
+  if (d->param == deserialized_d->param && d->flag == deserialized_d->flag) {
     std::cout << GREEN << "[OK]" << RESET << std::endl;
     return false;
   } else {
@@ -33,14 +33,12 @@ bool test_cmp_param(Data *d) {
 }
 
 int main(void) {
-  Data *d1 = new Data(1, true);
-  Data *d2 = new Data(2, false);
+  Data d1(1, true);
+  Data d2(2, false);
   Data *null = NULL;
 
-  int fail_count = test_cmp_ptr(d1) + test_cmp_ptr(d2) + test_cmp_ptr(null) +
-                   test_cmp_param(d1) + test_cmp_param(d2);
+  int fail_count = test_cmp_ptr(&d1) + test_cmp_ptr(&d2) + test_cmp_ptr(null) +
+                   test_cmp_param(&d1) + test_cmp_param(&d2);
 
-  delete d1;
-  delete d2;
   return fail_count != 0;
 }
