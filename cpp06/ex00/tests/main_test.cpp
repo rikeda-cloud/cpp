@@ -1,4 +1,5 @@
 #include "test.hpp"
+#include <exception>
 #include <iostream>
 #include <limits>
 
@@ -266,11 +267,16 @@ int test_edge(void) {
 }
 
 int main(void) {
-  int total_fail_count = test_char() + test_int() + test_int_max() +
-                         test_int_min() + test_int_maxf() + test_int_minf() +
-                         test_float() + test_float_max() + test_float_min() +
-                         test_double() + test_double_max() + test_double_min() +
-                         test_nan_inf() + test_edge();
+  try {
+    int total_fail_count = test_char() + test_int() + test_int_max() +
+                           test_int_min() + test_int_maxf() + test_int_minf() +
+                           test_float() + test_float_max() + test_float_min() +
+                           test_double() + test_double_max() +
+                           test_double_min() + test_nan_inf() + test_edge();
 
-  return total_fail_count != 0;
+    return total_fail_count != 0;
+  } catch (const std::exception &e) {
+    std::cout << e.what() << std::endl;
+    return 1;
+  }
 }

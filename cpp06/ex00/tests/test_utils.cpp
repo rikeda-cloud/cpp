@@ -41,6 +41,8 @@ bool exec_test_convert(const std::string &param, const std::string &expect_char,
       _assert_string(param, expect_float, scalar->castToFloat(), "Float") +
       _assert_string(param, expect_double, scalar->castToDouble(), "Double");
 
+  delete scalar;
+
   if (!fail_count) {
     std::cout << GREEN << "[OK] " << param << RESET << std::endl;
   }
