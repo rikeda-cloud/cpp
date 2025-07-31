@@ -12,11 +12,6 @@ int main(void) {
     identify(ptr);
     identify(ref);
     delete ptr;
-
-    Base *nullp = NULL;
-    Base &nullr = *nullp;
-    identify(nullp);
-    identify(nullr);
   } catch (const std::exception &e) {
     std::cout << e.what() << std::endl;
   }
