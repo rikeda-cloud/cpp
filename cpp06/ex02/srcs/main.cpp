@@ -5,10 +5,13 @@
 int main(void) {
   Base *ptr = generate();
   Base &ref = *ptr;
+  Base *nullp = NULL;
+  Base &nullr = *nullp;
 
   identify(ptr);
   identify(ref);
-  identify(NULL);
+  identify(nullp);
+  identify(nullr);
 
   delete ptr;
   return 0;
