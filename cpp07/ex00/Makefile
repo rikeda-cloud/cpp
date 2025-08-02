@@ -11,7 +11,8 @@ SRCS_DIR		=	./srcs
 OBJS_DIR		=	./objs
 INCLUDES_DIR	=	./inc
 
-SRCS			=	main.cpp
+SRCS			=	Data.cpp \
+					main.cpp
 
 OBJS			=	$(patsubst %.o, $(OBJS_DIR)/%.o, $(SRCS:.cpp=.o))
 DEPS			=	$(OBJS:.o=.d)
