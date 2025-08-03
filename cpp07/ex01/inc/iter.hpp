@@ -3,9 +3,11 @@
 #include <cstddef>
 
 template <typename T> void iter(T *arr, std::size_t length, void (*f)(T &)) {
+  // INFO 配列がNULL、または、関数ポインタがNULLの場合何もしない
   if (!arr || !f) {
     return;
   }
+
   for (std::size_t i = 0; i < length; ++i) {
     f(arr[i]);
   }

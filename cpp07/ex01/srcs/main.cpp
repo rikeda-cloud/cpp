@@ -34,12 +34,14 @@ void testDouble() {
 }
 
 void testNull() {
-  double *ptr = NULL;
-  iter(ptr, 0, x10<double &>);
-
+  double *null_ptr = NULL;
+  void (*null_f)(double &) = NULL;
   double arr[] = {1.1, 2.2, 3.3, 4.4, 5.5};
-  void (*f)(double &) = NULL;
-  iter(arr, 5, f);
+
+  // 配列のアドレスを要求する引数にNULLを指定
+  iter(null_ptr, 5, x10<double &>);
+  // 関数ポインタを要求する引数にNULLを指定
+  iter(arr, 5, null_f);
 }
 
 int main(void) {
