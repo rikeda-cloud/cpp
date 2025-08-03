@@ -17,6 +17,6 @@ private:
   unsigned int size_;
 };
 
-#include "Array.hpp"
+#include "Array.tpp"
 
 #endif
