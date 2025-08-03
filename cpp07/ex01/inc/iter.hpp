@@ -1,8 +1,10 @@
 #ifndef CPP07_EX01_iter_H_
 #define CPP07_EX01_iter_H_
 #include <cstddef>
+#include <iostream>
 
-template <typename T> void iter(T *arr, std::size_t length, void (*f)(T &)) {
+template <typename T, typename Func>
+void iter(T *arr, std::size_t length, Func f) {
   // INFO 配列がNULL、または、関数ポインタがNULLの場合何もしない
   if (!arr || !f) {
     return;
@@ -13,6 +15,8 @@ template <typename T> void iter(T *arr, std::size_t length, void (*f)(T &)) {
   }
 }
 
-template <typename T> void x10(T val) { val *= 10; };
+template <typename T> void x10(T &val) { val *= 10; };
+
+template <typename T> void myprint(const T &val) { std::cout << val << " "; }
 
 #endif
