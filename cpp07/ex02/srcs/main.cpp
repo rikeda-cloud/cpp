@@ -1,5 +1,6 @@
 #include "Array.hpp"
 #include "Array.tpp"
+#include <exception>
 #include <iostream>
 #include <string>
 
@@ -154,13 +155,17 @@ void testSelfAssignment(void) {
 }
 
 int main(void) {
-  testDefaultConstructor();
-  testCustomConstructor();
-  testCopyConstructor();
-  testAssignmentOperator();
-  testAccessOperator();
-  testAccessOperatorEmptyArray();
-  testSelfAssignment();
+  try {
+    testDefaultConstructor();
+    testCustomConstructor();
+    testCopyConstructor();
+    testAssignmentOperator();
+    testAccessOperator();
+    testAccessOperatorEmptyArray();
+    testSelfAssignment();
+  } catch (const std::exception &e) {
+    std::cout << e.what() << std::endl;
+  }
 
   return 0;
 }
