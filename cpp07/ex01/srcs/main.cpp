@@ -38,6 +38,17 @@ void testDoubleArray() {
   std::cout << "[OK]" << std::endl;
 }
 
+void testNull() {
+  size_t length = 5;
+  int *null_arr = NULL;
+  void (*null_f)(int &) = NULL;
+  int arr[] = {1, 2, 3, 4, 5};
+
+  iter(null_arr, length, x10<int>);
+  iter(arr, length, null_f);
+  std::cout << "[OK]" << std::endl;
+}
+
 void testConstCharArray() {
   size_t length = 5;
   const char arr[] = {'a', 'b', 'c', 'd', 'e'};
@@ -68,6 +79,7 @@ void testConstStringArray() {
 int main(void) {
   testIntArray();
   testDoubleArray();
+  testNull();
   testConstCharArray();
   testConstStringArray();
 
