@@ -41,6 +41,7 @@ bool test_sample_main(void) {
 }
 
 bool test_out_of_range(void) {
+  // N回以上addNumberを実行した場合、例外を投げるか？
   const unsigned int N = 3;
   Span sp(N);
 
@@ -62,8 +63,8 @@ bool test_out_of_range(void) {
 }
 
 bool test_throw_exception_shrtest(void) {
+  // shortestspan実行時に格納されている数値が１つしかない場合、例外を投げるか？
   Span sp(5);
-
   sp.addNumber(1);
 
   try {
@@ -79,6 +80,7 @@ bool test_throw_exception_shrtest(void) {
 }
 
 bool test_throw_exception_longest(void) {
+  // longestspan実行時に格納されている数値が１つもない場合、例外を投げるか？
   Span sp(5);
 
   try {
@@ -94,6 +96,7 @@ bool test_throw_exception_longest(void) {
 }
 
 bool test_large_diff(void) {
+  // INT_MAXとINT_MINの差分を取るケース
   Span sp(5);
   const unsigned expect_diff = std::numeric_limits<unsigned int>::max();
 
@@ -113,6 +116,7 @@ bool test_large_diff(void) {
 }
 
 bool test_copy_operator(void) {
+  // コピーコンストラクタを使用し、内部のVectorが別々のものになっているか？
   Span sp1(3);
   sp1.addNumber(1);
   sp1.addNumber(2);
@@ -134,6 +138,7 @@ bool test_copy_operator(void) {
 }
 
 bool test_assignment_operator(void) {
+  // 代入演算子を使用し、内部のVectorが別々のものになっているか？
   Span sp1(3);
   sp1.addNumber(1);
   sp1.addNumber(2);
@@ -155,6 +160,7 @@ bool test_assignment_operator(void) {
 }
 
 bool test_diff_zero(void) {
+  // 最小・最大差分が0になるケース
   Span sp(2);
   const unsigned expect_shortest = 0;
   const unsigned expect_longest = 0;
@@ -176,6 +182,7 @@ bool test_diff_zero(void) {
 }
 
 bool test_add_numbers(void) {
+  // Vectorを使用し、イテレータを用いてSpanを埋める
   Span sp(5);
   int arr[] = {1, 2, 3, 4, 5};
   std::vector<int> vec;
@@ -196,6 +203,7 @@ bool test_add_numbers(void) {
 }
 
 bool test_add_numbers_throw_exception(void) {
+  // addNumbers中に容量オーバーによる例外を投げるか？
   Span sp(5);
   int arr[] = {1, 2, 3, 4, 5, 6};
   std::vector<int> vec;
@@ -214,6 +222,7 @@ bool test_add_numbers_throw_exception(void) {
 }
 
 bool test_n_is_zero(void) {
+  // Nが0の場合、１回でもaddNumberすると例外を投げる
   Span sp(0);
 
   try {
@@ -229,6 +238,7 @@ bool test_n_is_zero(void) {
 }
 
 bool test_n_is_10000(void) {
+  // 10000個の値を使用したテストケース
   const unsigned int n = 10000;
   const unsigned int expect_shortest = 1;
   const unsigned int expect_longest = n - 1;
