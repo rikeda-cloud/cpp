@@ -21,10 +21,10 @@ DEPS			=	$(OBJS:.o=.d)
 
 RM				=	rm -rf
 
-TARGET			=	btc
+NAME			=	btc
 MAIN_OBJS		=	$(patsubst %.cpp, $(OBJS_DIR)/%.o, $(SRCS) $(MAIN_SRCS))
 
-$(TARGET): $(OBJS_DIR) $(MAIN_OBJS)
+$(NAME): $(OBJS_DIR) $(MAIN_OBJS)
 	$(CXX) $(CXXFLAGS) $(INCLUDE) $(MAIN_OBJS) -o $@
 
 TEST_TARGET	=	RPN_test
@@ -47,13 +47,13 @@ $(OBJS_DIR)/%.o: tests/%.cpp
 
 .DEFAULT_GOAL	=	all
 .PHONY:	all clean fclean re test
-all:	$(TARGET)
+all:	$(NAME)
 
 clean:
 	$(RM) $(OBJS_DIR)
 
 fclean:	clean
-	$(RM) $(TARGET) $(TEST_TARGET)
+	$(RM) $(NAME) $(TEST_TARGET)
 
 re:	fclean all
 
