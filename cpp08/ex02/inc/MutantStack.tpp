@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stack>
 
 template<typename T, typename Container>
 MutantStack<T, Container>::MutantStack(void) {}
@@ -12,7 +13,7 @@ MutantStack<T, Container>::~MutantStack(void) {}
 template<typename T, typename Container>
 MutantStack<T, Container>&	MutantStack<T, Container>::operator=(const MutantStack<T, Container>& stack) {
 	if (this != &stack) {
-		*this = stack;
+		std::stack<T, Container>::operator=(stack);
 	}
 	return *this;
 }
