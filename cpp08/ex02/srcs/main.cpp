@@ -114,11 +114,60 @@ void test_one_content(void) {
   std::cout << "[OK]" << std::endl;
 }
 
+void test_copy_constructor(void) {
+	MutantStack<int> stk1;
+	stk1.push(1);
+	stk1.push(2);
+	stk1.push(3);
+
+	MutantStack<int> stk2(stk1);
+
+	if (stk1.size() != stk2.size() || !std::equal(stk1.begin(), stk1.end(), stk2.begin())) {
+		std::cout << "[ERROR] test_copy_constructor: Content/size mismatch" << std::endl;
+		return;
+	}
+
+	stk1.pop();
+	if (stk1.size() == stk2.size() || stk1.top() != 2 || stk2.top() != 3) {
+		std::cout << "[ERROR] test_copy_constructor: shallow copy" << std::endl;
+		return;
+	}
+
+	std::cout << "[OK]" << std::endl;
+}
+
+void test_assignment(void) {
+	MutantStack<std::string> stk1;
+	stk1.push("1");
+	stk1.push("2");
+
+	MutantStack<std::string> stk2;
+	stk2.push("X");
+	stk2.push("Y");
+	stk2.push("Z");
+
+	stk2 = stk1;
+
+	if (stk1.size() != stk2.size() || !std::equal(stk1.begin(), stk1.end(), stk2.begin())) {
+		std::cout << "[ERROR] test_assgnment: Content/size mismatch" << std::endl;
+		return;
+	}
+
+	stk1.pop();
+	if (stk1.size() == stk2.size() || stk1.top() != "1" || stk2.top() != "2") {
+		std::cout << "[ERROR] test_assgnment: shallow copy" << std::endl;
+		return;
+	}
+	std::cout << "[OK]" << std::endl;
+}
+
 int main(void) {
   sample_main();
   test_vector();
   test_list();
   test_empty_stack();
   test_one_content();
+  test_copy_constructor();
+  test_assignment();
   return 0;
 }
