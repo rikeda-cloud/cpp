@@ -2,33 +2,40 @@
 #define CPP08_EX02_MutantStack_H_
 
 #include <deque>
-#include <iterator>
 #include <stack>
+#include <iterator>
 
 template <typename T, typename Container = std::deque<T> >
 class MutantStack : public std::stack<T, Container> {
 public:
   MutantStack(void);
-  MutantStack(const MutantStack &stack);
+  MutantStack(const MutantStack &other);
   ~MutantStack(void);
-  MutantStack &operator=(const MutantStack &stack);
+  MutantStack &operator=(const MutantStack &other);
 
-  class iterator : public std::iterator<std::bidirectional_iterator_tag, T *> {
-  public:
-    iterator(T *ptr);
-    iterator(const iterator &);
-    ~iterator(void);
-    iterator &operator=(const iterator &);
+  typedef typename Container::iterator container_iterator;
 
-    T &operator*(void);
-    iterator &operator++(void);
-    iterator &operator--(void);
-    bool operator!=(const iterator &) const;
-
+  class iterator : public std::iterator<std::bidirectional_iterator_tag, T> {
   private:
-    T *ptr_;
+    container_iterator it_;
 
+  public:
     iterator(void);
+    iterator(container_iterator it);
+    iterator(const iterator &other);
+    ~iterator(void);
+    iterator &operator=(const iterator &other);
+
+    bool operator==(const iterator &other) const;
+    bool operator!=(const iterator &other) const;
+
+    T &operator*(void) const;
+    T *operator->(void) const;
+
+    iterator &operator++(void);
+    iterator operator++(int);
+    iterator &operator--(void);
+    iterator operator--(int);
   };
 
   iterator begin(void);
