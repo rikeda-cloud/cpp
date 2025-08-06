@@ -102,22 +102,15 @@ void test_empty_stack(void) {
 void test_one_content(void) {
   MutantStack<float> one_content;
   one_content.push(123.456f);
+  MutantStack<float>::iterator it = one_content.begin();
 
-  unsigned cnt = 0;
-  for (MutantStack<float>::iterator it = one_content.begin();
-       it != one_content.end(); it++) {
-    if (cnt > 0) {
-      std::cout << "[ERROR] test_one_content: Iterator is not working properly."
-                << std::endl;
-      return;
-    }
-    cnt++;
-  }
-  if (cnt != 1) {
+  ++it;
+  if (it != one_content.end()) {
     std::cout << "[ERROR] test_one_content: Iterator is not working properly."
-              << std::endl;
+      << std::endl;
     return;
   }
+
   std::cout << "[OK]" << std::endl;
 }
 
