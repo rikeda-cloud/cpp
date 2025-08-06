@@ -4,7 +4,6 @@
 #include <list>
 #include <stack>
 #include <vector>
-#include <list>
 
 void sample_main() {
   std::cout << "~~~ 課題PDFにあるサンプルのmain関数 ~~~" << std::endl;
@@ -87,9 +86,46 @@ void test_list(void) {
   std::cout << "[OK]" << std::endl;
 }
 
+void test_empty_stack(void) {
+  MutantStack<int> empty_stack;
+
+  for (MutantStack<int>::iterator it = empty_stack.begin();
+       it != empty_stack.end(); it++) {
+    std::cout << "[ERROR] test_empty_stack: Iterator is not working properly."
+              << std::endl;
+    return;
+  }
+
+  std::cout << "[OK]" << std::endl;
+}
+
+void test_one_content(void) {
+  MutantStack<float> one_content;
+  one_content.push(123.456f);
+
+  unsigned cnt = 0;
+  for (MutantStack<float>::iterator it = one_content.begin();
+       it != one_content.end(); it++) {
+    if (cnt > 0) {
+      std::cout << "[ERROR] test_one_content: Iterator is not working properly."
+                << std::endl;
+      return;
+    }
+    cnt++;
+  }
+  if (cnt != 1) {
+    std::cout << "[ERROR] test_one_content: Iterator is not working properly."
+              << std::endl;
+    return;
+  }
+  std::cout << "[OK]" << std::endl;
+}
+
 int main(void) {
   sample_main();
   test_vector();
   test_list();
+  test_empty_stack();
+  test_one_content();
   return 0;
 }
