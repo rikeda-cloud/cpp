@@ -5,6 +5,11 @@
 #include <stack>
 #include <vector>
 
+struct Data {
+	std::string str;
+	int v;
+};
+
 void sample_main() {
   std::cout << "~~~ 課題PDFにあるサンプルのmain関数 ~~~" << std::endl;
 
@@ -161,6 +166,34 @@ void test_assignment(void) {
 	std::cout << "[OK]" << std::endl;
 }
 
+void test_arrow_operator(void) {
+	MutantStack<Data> stk;
+
+	Data d1 = {"Hello", 42};
+	Data d2 = {"World", 100};
+
+	stk.push(d1);
+	stk.push(d2);
+
+	MutantStack<Data>::iterator it = stk.begin();
+
+	if (it->str != d1.str || it->v != d1.v) {
+		std::cout << "[ERROR] test_arrow_operator: unexpect value" << std::endl;
+		return;
+	}
+	it++;
+	if (it->str != d2.str || it->v != d2.v) {
+		std::cout << "[ERROR] test_arrow_operator: unexpect value" << std::endl;
+		return;
+	}
+	--it;
+	if (it->str != d1.str || it->v != d1.v) {
+		std::cout << "[ERROR] test_arrow_operator: unexpect value" << std::endl;
+		return;
+	}
+	std::cout << "[OK]" << std::endl;
+}
+
 int main(void) {
   sample_main();
   test_vector();
@@ -169,5 +202,6 @@ int main(void) {
   test_one_content();
   test_copy_constructor();
   test_assignment();
+  test_arrow_operator();
   return 0;
 }
