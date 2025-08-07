@@ -6,8 +6,8 @@
 #include <vector>
 
 struct Data {
-	std::string str;
-	int v;
+  std::string str;
+  int v;
 };
 
 void sample_main() {
@@ -38,6 +38,7 @@ void sample_main() {
 }
 
 void test_vector(void) {
+  // std::vectorをstackの内部コンテナで使用
   MutantStack<double, std::vector<double> > actual;
   actual.push(5.0);
   actual.push(17.0);
@@ -65,6 +66,7 @@ void test_vector(void) {
 }
 
 void test_list(void) {
+  // std::listをstackの内部コンテナで使用
   MutantStack<std::string, std::list<std::string> > actual;
   actual.push("5.0");
   actual.push("17.0");
@@ -92,6 +94,7 @@ void test_list(void) {
 }
 
 void test_empty_stack(void) {
+  // 空のstackをイテレーションするケース
   MutantStack<int> empty_stack;
 
   for (MutantStack<int>::iterator it = empty_stack.begin();
@@ -105,6 +108,7 @@ void test_empty_stack(void) {
 }
 
 void test_one_content(void) {
+  // 要素数1のstackをイテレーションするケース
   MutantStack<float> one_content;
   one_content.push(123.456f);
   MutantStack<float>::iterator it = one_content.begin();
@@ -112,7 +116,7 @@ void test_one_content(void) {
   ++it;
   if (it != one_content.end()) {
     std::cout << "[ERROR] test_one_content: Iterator is not working properly."
-      << std::endl;
+              << std::endl;
     return;
   }
 
@@ -120,78 +124,84 @@ void test_one_content(void) {
 }
 
 void test_copy_constructor(void) {
-	MutantStack<int> stk1;
-	stk1.push(1);
-	stk1.push(2);
-	stk1.push(3);
+  // コピーコンストラクタが機能するか？ディープコピーか？
+  MutantStack<int> stk1;
+  stk1.push(1);
+  stk1.push(2);
+  stk1.push(3);
 
-	MutantStack<int> stk2(stk1);
+  MutantStack<int> stk2(stk1);
 
-	if (stk1.size() != stk2.size() || !std::equal(stk1.begin(), stk1.end(), stk2.begin())) {
-		std::cout << "[ERROR] test_copy_constructor: Content/size mismatch" << std::endl;
-		return;
-	}
+  if (stk1.size() != stk2.size() ||
+      !std::equal(stk1.begin(), stk1.end(), stk2.begin())) {
+    std::cout << "[ERROR] test_copy_constructor: Content/size mismatch"
+              << std::endl;
+    return;
+  }
 
-	stk1.pop();
-	if (stk1.size() == stk2.size() || stk1.top() != 2 || stk2.top() != 3) {
-		std::cout << "[ERROR] test_copy_constructor: shallow copy" << std::endl;
-		return;
-	}
+  stk1.pop();
+  if (stk1.size() == stk2.size() || stk1.top() != 2 || stk2.top() != 3) {
+    std::cout << "[ERROR] test_copy_constructor: shallow copy" << std::endl;
+    return;
+  }
 
-	std::cout << "[OK]" << std::endl;
+  std::cout << "[OK]" << std::endl;
 }
 
 void test_assignment(void) {
-	MutantStack<std::string> stk1;
-	stk1.push("1");
-	stk1.push("2");
+  // 代入演算子が機能するか？ディープコピーか？
+  MutantStack<std::string> stk1;
+  stk1.push("1");
+  stk1.push("2");
 
-	MutantStack<std::string> stk2;
-	stk2.push("X");
-	stk2.push("Y");
-	stk2.push("Z");
+  MutantStack<std::string> stk2;
+  stk2.push("X");
+  stk2.push("Y");
+  stk2.push("Z");
 
-	stk2 = stk1;
+  stk2 = stk1;
 
-	if (stk1.size() != stk2.size() || !std::equal(stk1.begin(), stk1.end(), stk2.begin())) {
-		std::cout << "[ERROR] test_assgnment: Content/size mismatch" << std::endl;
-		return;
-	}
+  if (stk1.size() != stk2.size() ||
+      !std::equal(stk1.begin(), stk1.end(), stk2.begin())) {
+    std::cout << "[ERROR] test_assgnment: Content/size mismatch" << std::endl;
+    return;
+  }
 
-	stk1.pop();
-	if (stk1.size() == stk2.size() || stk1.top() != "1" || stk2.top() != "2") {
-		std::cout << "[ERROR] test_assgnment: shallow copy" << std::endl;
-		return;
-	}
-	std::cout << "[OK]" << std::endl;
+  stk1.pop();
+  if (stk1.size() == stk2.size() || stk1.top() != "1" || stk2.top() != "2") {
+    std::cout << "[ERROR] test_assgnment: shallow copy" << std::endl;
+    return;
+  }
+  std::cout << "[OK]" << std::endl;
 }
 
 void test_arrow_operator(void) {
-	MutantStack<Data> stk;
+  // アロー演算子でパラメータにアクセスできるか？
+  MutantStack<Data> stk;
 
-	Data d1 = {"Hello", 42};
-	Data d2 = {"World", 100};
+  Data d1 = {"Hello", 42};
+  Data d2 = {"World", 100};
 
-	stk.push(d1);
-	stk.push(d2);
+  stk.push(d1);
+  stk.push(d2);
 
-	MutantStack<Data>::iterator it = stk.begin();
+  MutantStack<Data>::iterator it = stk.begin();
 
-	if (it->str != d1.str || it->v != d1.v) {
-		std::cout << "[ERROR] test_arrow_operator: unexpect value" << std::endl;
-		return;
-	}
-	it++;
-	if (it->str != d2.str || it->v != d2.v) {
-		std::cout << "[ERROR] test_arrow_operator: unexpect value" << std::endl;
-		return;
-	}
-	--it;
-	if (it->str != d1.str || it->v != d1.v) {
-		std::cout << "[ERROR] test_arrow_operator: unexpect value" << std::endl;
-		return;
-	}
-	std::cout << "[OK]" << std::endl;
+  if (it->str != d1.str || it->v != d1.v) {
+    std::cout << "[ERROR] test_arrow_operator: unexpect value" << std::endl;
+    return;
+  }
+  it++;
+  if (it->str != d2.str || it->v != d2.v) {
+    std::cout << "[ERROR] test_arrow_operator: unexpect value" << std::endl;
+    return;
+  }
+  --it;
+  if (it->str != d1.str || it->v != d1.v) {
+    std::cout << "[ERROR] test_arrow_operator: unexpect value" << std::endl;
+    return;
+  }
+  std::cout << "[OK]" << std::endl;
 }
 
 int main(void) {
