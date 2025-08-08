@@ -1,11 +1,20 @@
 #include "parser.hpp"
 #include <cstdlib>
+#include <fstream>
 #include <sstream>
 #include <stdexcept>
 
 void parseCsv(const std::string &file, DataBase &db) {
-  (void)file;
-  (void)db;
+  std::ifstream s(file.c_str());
+  std::string line;
+  std::string key;
+  double value;
+
+  while (std::getline(s, line)) {
+    parseLine(line, ",", key, value);
+    db.insert(key, value);
+  }
+  s.close();
 }
 
 void parseLine(const std::string &line, const std::string &sep,
