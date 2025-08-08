@@ -57,7 +57,7 @@ int test_return_first_find_pos(void) {
   std::vector<int>::const_iterator actual_it = easyfind(actual, target_number);
   std::vector<int>::const_iterator expect_it = expect.begin();
 
-  for (; actual_it != actual.end(); ++actual_it, ++expect_it) {
+  for (; expect_it != expect.end(); ++actual_it, ++expect_it) {
     if (*expect_it != *actual_it) {
       std::cout << "[ERROR] test_return_first_find_pos: expect " << *expect_it
                 << ", actual " << *actual_it << std::endl;
@@ -105,10 +105,10 @@ int test_unwriteable(void) {
   expect.push_back(20);
   expect.push_back(30);
   const std::vector<int> actual(expect);
-  std::vector<int>::const_iterator expect_it = easyfind(expect, 10);
-  std::vector<int>::const_iterator actual_it = actual.begin();
+  std::vector<int>::const_iterator expect_it = expect.begin();
+  std::vector<int>::const_iterator actual_it = easyfind(actual, target_number);
 
-  for (; actual_it != actual.end(); actual_it++, expect_it++) {
+  for (; expect_it != expect.end(); actual_it++, expect_it++) {
     if (*actual_it != *expect_it) {
       std::cout << "[ERROR] test_unwriteable: expect " << *expect_it
                 << ", actual " << *actual_it << std::endl;
