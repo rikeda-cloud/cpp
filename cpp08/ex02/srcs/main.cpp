@@ -37,6 +37,33 @@ void sample_main() {
   std::cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << std::endl;
 }
 
+void sample_main_std_list() {
+  std::cout << "~~~ サンプルのmain関数をstd::listで置き換え ~~~" << std::endl;
+
+  std::list<int> mstack;
+  mstack.push_back(5);
+  mstack.push_back(17);
+  std::cout << mstack.back() << std::endl;
+  mstack.pop_back();
+  std::cout << mstack.size() << std::endl;
+  mstack.push_back(3);
+  mstack.push_back(5);
+  mstack.push_back(737);
+  //[...]
+  mstack.push_back(0);
+  std::list<int>::iterator it = mstack.begin();
+  std::list<int>::iterator ite = mstack.end();
+  ++it;
+  --it;
+  while (it != ite) {
+    std::cout << *it << std::endl;
+    ++it;
+  }
+  std::stack<int, std::list<int> > s(mstack);
+
+  std::cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << std::endl;
+}
+
 void test_vector(void) {
   // std::vectorをstackの内部コンテナで使用
   MutantStack<double, std::vector<double> > actual;
@@ -206,6 +233,7 @@ void test_arrow_operator(void) {
 
 int main(void) {
   sample_main();
+  sample_main_std_list();
   test_vector();
   test_list();
   test_empty_stack();
