@@ -1,3 +1,4 @@
+#include "easyfind.hpp"
 #include "test.hpp"
 #include <deque>
 #include <iostream>
@@ -39,6 +40,28 @@ int test_deque(void) {
 
   return test_container(deque, "Deque", 1, true) +
          test_container(deque, "Deque", 2, false);
+}
+
+int test_return_first_find_pos(void) {
+  int target_number = 42;
+  const int actual_arr[] = {1, target_number, 2, target_number, 3};
+  const int expect_arr[] = {target_number, 2, target_number, 3};
+  std::vector<int> actual(actual_arr,
+                          actual_arr + sizeof(actual_arr) / sizeof(int));
+  std::vector<int> expect(expect_arr,
+                          expect_arr + sizeof(expect_arr) / sizeof(int));
+  std::vector<int>::const_iterator actual_it = easyfind(actual, target_number);
+  std::vector<int>::const_iterator expect_it = expect.begin();
+
+  for (; actual_it != actual.end(); ++actual_it, ++expect_it) {
+    if (*expect_it != *actual_it) {
+      std::cout << "[ERROR] test_return_first_find_pos: expect " << *expect_it
+                << ", actual " << *actual_it << std::endl;
+      return 1;
+    }
+  }
+  std::cout << "[OK]" << std::endl;
+  return 0;
 }
 
 int main(void) {
