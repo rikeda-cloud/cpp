@@ -26,7 +26,7 @@ typename T::iterator easyfind(T &container, int val) {
 }
 
 template <typename T>
-bool test_container(const T &container, const std::string &container_type,
+bool test_easyfind(const T &container, const std::string &container_type,
                     int p, bool expect_find) {
   bool actual_find = easyfind(container, p) != container.end();
 

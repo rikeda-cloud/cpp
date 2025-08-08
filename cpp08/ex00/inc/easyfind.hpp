@@ -10,8 +10,8 @@ typename T::const_iterator easyfind(const T &container, int val);
 template <typename T> typename T::iterator easyfind(T &container, int val);
 
 template <typename T>
-bool test_container(const T &container, const std::string &container_type,
-                    int p, bool expect_find);
+bool test_easyfind(const T &container, const std::string &container_type, int p,
+                   bool expect_find);
 
 #include "easyfind.tpp"
 

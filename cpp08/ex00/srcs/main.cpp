@@ -11,8 +11,8 @@ int test_vector(void) {
   vector.push_back(1);
   vector.push_back(3);
 
-  return test_container(vector, "Vector", 1, true) +
-         test_container(vector, "Vector", 2, false);
+  return test_easyfind(vector, "Vector", 1, true) +
+         test_easyfind(vector, "Vector", 2, false);
 }
 
 int test_set(void) {
@@ -21,8 +21,8 @@ int test_set(void) {
   set.insert(1);
   set.insert(3);
 
-  return test_container(set, "Set", 1, true) +
-         test_container(set, "Set", 2, false);
+  return test_easyfind(set, "Set", 1, true) +
+         test_easyfind(set, "Set", 2, false);
 }
 
 int test_list(void) {
@@ -31,8 +31,8 @@ int test_list(void) {
   list.push_back(1);
   list.push_back(3);
 
-  return test_container(list, "List", 1, true) +
-         test_container(list, "List", 2, false);
+  return test_easyfind(list, "List", 1, true) +
+         test_easyfind(list, "List", 2, false);
 }
 
 int test_deque(void) {
@@ -41,8 +41,8 @@ int test_deque(void) {
   deque.push_back(1);
   deque.push_back(3);
 
-  return test_container(deque, "Deque", 1, true) +
-         test_container(deque, "Deque", 2, false);
+  return test_easyfind(deque, "Deque", 1, true) +
+         test_easyfind(deque, "Deque", 2, false);
 }
 
 int test_return_first_find_pos(void) {
