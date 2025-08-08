@@ -26,7 +26,7 @@ NAME			=	RPN
 MAIN_OBJS		=	$(patsubst %.cpp, $(OBJS_DIR)/%.o, $(SRCS) $(MAIN_SRCS))
 
 $(NAME): $(OBJS_DIR) $(MAIN_OBJS)
-	$(CXX) $(CXXFLAGS) $(INCLUDE) $(MAIN_OBJS) -o $@
+	$(CXX) $(MAIN_OBJS) -o $@
 
 TEST_TARGET	=	RPN_test
 TEST_OBJS	=	$(patsubst %.cpp, $(OBJS_DIR)/%.o, $(SRCS) $(TEST_SRCS))
@@ -35,7 +35,7 @@ test: $(OBJS_DIR) $(TEST_TARGET)
 	./$(TEST_TARGET)
 
 $(TEST_TARGET): $(TEST_OBJS)
-	$(CXX) $(CXXFLAGS) $(INCLUDE) $(TEST_OBJS) -o $@
+	$(CXX) $(TEST_OBJS) -o $@
 
 $(OBJS_DIR):
 	@mkdir -p $(OBJS_DIR)
