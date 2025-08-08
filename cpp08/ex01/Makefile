@@ -19,11 +19,11 @@ DEPS			=	$(OBJS:.o=.d)
 
 RM				=	rm -rf
 
-$(OBJS_DIR)	: % :
+$(OBJS_DIR)	:
 	@mkdir -p $@
 
 $(NAME)	: $(OBJS_DIR) $(OBJS)
-	$(CXX) $(CXXFLAGS) $(INCLUDE) $(OBJS) -o $@
+	$(CXX) $(OBJS) -o $@
 
 $(OBJS_DIR)/%.o	:	$(SRCS_DIR)/%.cpp
 	$(CXX) $(CXXFLAGS) $(INCLUDE) $(PRE_OPT) -o $@ -c $<
