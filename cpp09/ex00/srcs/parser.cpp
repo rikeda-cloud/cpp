@@ -3,7 +3,10 @@
 #include <sstream>
 #include <stdexcept>
 
-void parseCsv(const std::string &file, DataBase &db) {}
+void parseCsv(const std::string &file, DataBase &db) {
+  (void)file;
+  (void)db;
+}
 
 void parseLine(const std::string &line, const std::string &sep,
                std::string &key, double &value) {
@@ -15,7 +18,7 @@ void parseLine(const std::string &line, const std::string &sep,
   std::string date = line.substr(0, comma_pos);
   std::string value_str = line.substr(comma_pos + 1);
 
-  if (!validateDate(date) || !valiadteValue(value_str)) {
+  if (!validateBtcDate(date) || !valiadteValue(value_str)) {
     throw std::runtime_error("Invalid format.");
   }
 
@@ -23,41 +26,37 @@ void parseLine(const std::string &line, const std::string &sep,
   value = std::strtod(value_str.c_str(), NULL);
 }
 
-bool validateDate(const std::string &date) {
-  size_t first_div_c_pos = date.find('-');
-  if (first_div_c_pos == std::string::npos) {
+bool validateBtcDate(const std::string &date) {
+  if (date.size() != std::string("xxxx-xx-xx").size() || date[4] != '-' ||
+      date[7] != '-') {
     return false;
   }
 
-  size_t second_div_c_pos = date.find('-', first_div_c_pos + 1);
-  if (second_div_c_pos == std::string::npos) {
-    return false;
-  }
-
-  std::string year_str = date.substr(0, first_div_c_pos);
-  size_t month_size = second_div_c_pos - (first_div_c_pos + 1);
-  std::string month_str = date.substr(first_div_c_pos + 1, month_size);
-  std::string day_str = date.substr(second_div_c_pos + 1);
+  std::string year_str = date.substr(0, 4);
+  std::string month_str = date.substr(5, 2);
+  std::string day_str = date.substr(8, 2);
 
   char *end;
   int year = std::strtol(year_str.c_str(), &end, 10);
-  if (*end != '\0') {
+  // https://ja.wikipedia.org/wiki/%E3%83%93%E3%83%83%E3%83%88%E3%82%B3%E3%82%A4%E3%83%B3
+  if (*end != '\0' || year < 2009) {
     return false;
   }
-  int month = std::strtol(year_str.c_str(), &end, 10);
+  int month = std::strtol(month_str.c_str(), &end, 10);
   if (*end != '\0' || month < 1 || 12 < month) {
     return false;
   }
-  int day = std::strtol(year_str.c_str(), &end, 10);
+  int day = std::strtol(day_str.c_str(), &end, 10);
   if (*end != '\0' || day < 1 || 31 < day) {
     return false;
   }
 
+  // TODO 閏年や月ごとの最終日のバリデーションを追加
   return true;
 }
 
 bool valiadteValue(const std::string &value) {
   char *end;
-  double parsed_value = std::strtod(value.c_str(), &end);
+  std::strtod(value.c_str(), &end);
   return *end == '\0';
 }

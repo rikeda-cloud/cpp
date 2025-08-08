@@ -15,9 +15,9 @@ void parseCsv(const std::string &, DataBase &);
  * WARN パース失敗時、std::exceptionをthrow
  */
 void parseLine(const std::string &line, const std::string &sep,
-               std::string &date, double &value);
+               std::string &key, double &value);
 
-bool validateDate(const std::string &);
+bool validateBtcDate(const std::string &);
 bool valiadteValue(const std::string &);
 
 #endif

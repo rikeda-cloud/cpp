@@ -10,12 +10,14 @@ OBJS_DIR		=	./objs
 INCLUDES_DIR	=	./inc
 TESTS_DIR		=	./tests
 
-SRCS			=	DataBase.cpp
+SRCS			=	DataBase.cpp \
+					parser.cpp
 
 MAIN_SRCS		=	main.cpp
 
 TEST_SRCS		=	main_test.cpp \
-					test_data_base.cpp
+					test_data_base.cpp \
+					test_parser.cpp
 
 OBJS			=	$(patsubst %.o, $(OBJS_DIR)/%.o, $(SRCS:.cpp=.o))
 DEPS			=	$(OBJS:.o=.d)
