@@ -64,8 +64,37 @@ int test_return_first_find_pos(void) {
   return 0;
 }
 
+int test_writeable(void) {
+  int target_number = 42;
+  int n = 10;
+  const int actual_arr[] = {1, target_number, 3, 4, 5};
+  const int expect_arr[] = {1, target_number * n, 3 * n, 4 * n, 5 * n};
+  std::vector<int> actual(actual_arr,
+                          actual_arr + sizeof(actual_arr) / sizeof(int));
+  std::vector<int> expect(expect_arr,
+                          expect_arr + sizeof(expect_arr) / sizeof(int));
+
+  for (std::vector<int>::iterator it = easyfind(actual, target_number);
+       it != actual.end(); ++it) {
+    *it *= n;
+  }
+
+  std::vector<int>::const_iterator actual_it = actual.begin();
+  std::vector<int>::const_iterator expect_it = expect.begin();
+  for (; expect_it != expect.end(); expect_it++, actual_it++) {
+    if (*expect_it != *actual_it) {
+      std::cout << "[ERROR] test_return_first_find_pos: expect " << *expect_it
+                << ", actual " << *actual_it << std::endl;
+      return 1;
+    }
+  }
+  std::cout << "[OK]" << std::endl;
+  return 0;
+}
+
 int main(void) {
 
-  int fail_count = test_vector() + test_set() + test_list() + test_deque();
+  int fail_count = test_vector() + test_set() + test_list() + test_deque() +
+                   test_return_first_find_pos() + test_writeable();
   return fail_count != 0;
 }
