@@ -83,7 +83,7 @@ int test_writeable(void) {
   std::vector<int>::const_iterator expect_it = expect.begin();
   for (; expect_it != expect.end(); expect_it++, actual_it++) {
     if (*expect_it != *actual_it) {
-      std::cout << "[ERROR] test_return_first_find_pos: expect " << *expect_it
+      std::cout << "[ERROR] test_writeable: expect " << *expect_it
                 << ", actual " << *actual_it << std::endl;
       return 1;
     }
@@ -92,9 +92,44 @@ int test_writeable(void) {
   return 0;
 }
 
+int test_unwriteable(void) {
+  int target_number = 10;
+  std::vector<int> expect;
+  expect.push_back(target_number);
+  expect.push_back(20);
+  expect.push_back(30);
+  const std::vector<int> actual(expect);
+  std::vector<int>::const_iterator expect_it = easyfind(expect, 10);
+  std::vector<int>::const_iterator actual_it = actual.begin();
+
+  for (; actual_it != actual.end(); actual_it++, expect_it++) {
+    if (*actual_it != *expect_it) {
+      std::cout << "[ERROR] test_unwriteable: expect " << *expect_it
+                << ", actual " << *actual_it << std::endl;
+      return 1;
+    }
+  }
+  std::cout << "[OK]" << std::endl;
+  return 0;
+}
+
+int test_empty_container(void) {
+  std::list<int> lst;
+  std::list<int>::const_iterator it = easyfind(lst, 123);
+
+  if (it != lst.end()) {
+    std::cout << "[ERROR] test_empty_container: it no point end()."
+              << std::endl;
+    return 1;
+  }
+  std::cout << "[OK]" << std::endl;
+  return 0;
+}
+
 int main(void) {
 
   int fail_count = test_vector() + test_set() + test_list() + test_deque() +
-                   test_return_first_find_pos() + test_writeable();
+                   test_return_first_find_pos() + test_writeable() +
+                   test_empty_container();
   return fail_count != 0;
 }
