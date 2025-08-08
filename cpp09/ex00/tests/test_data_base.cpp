@@ -36,7 +36,23 @@ static bool _test_empty_db(void) {
   return false;
 }
 
+static bool _test_insert_multiple_key(void) {
+  DataBase db;
+  db.insert("2000-01-01", 1);
+  db.insert("2000-01-01", 10);
+  db.insert("2000-01-01", 100);
+
+  if (db.select("2000-01-01") != 100) {
+    std::cout << "[ERROR] _test_insert_multiple_key: not overwritten"
+              << std::endl;
+    return true;
+  }
+  std::cout << "[OK]" << std::endl;
+  return false;
+}
+
 int test_data_base(void) {
-  int fail_count = _test_simple_db() + _test_empty_db();
+  int fail_count =
+      _test_simple_db() + _test_empty_db() + _test_insert_multiple_key();
   return fail_count;
 }
