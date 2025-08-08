@@ -10,7 +10,12 @@ void parseCsv(const std::string &file, DataBase &db) {
   std::string key;
   double value;
 
+  bool read_first_line = false;
   while (std::getline(s, line)) {
+    if (!read_first_line) { // 最初の行(Header)は読み飛ばす
+      read_first_line = true;
+      continue;
+    }
     parseLine(line, ",", key, value);
     db.insert(key, value);
   }
