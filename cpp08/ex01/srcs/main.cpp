@@ -182,13 +182,39 @@ bool test_diff_zero(void) {
 }
 
 bool test_add_numbers(void) {
-  // Vectorを使用し、イテレータを用いてSpanを埋める
+  // イテレータを用いてSpanを埋める
   Span sp(5);
   int arr[] = {1, 2, 3, 4, 5};
   std::vector<int> vec;
   vec.insert(vec.begin(), arr, arr + 5);
+  std::vector<int>::iterator begin = vec.begin();
+  std::vector<int>::iterator end = vec.end();
 
-  sp.addNumbers(vec.begin(), vec.end());
+  sp.addNumbers(begin, end);
+
+  try {
+    sp.addNumber(6);
+    std::cout << RED << "No exception occurred." << RESET << std::endl;
+  } catch (std::length_error &e) {
+    print_ok_();
+    return false;
+  } catch (std::exception &e) {
+    std::cout << RED << "Unexpected exceptions occured." << RESET << std::endl;
+  }
+  return true;
+}
+
+bool test_add_numbers_const_iterator(void) {
+  // constイテレータを用いてSpanを埋める
+  Span sp(5);
+  int arr[] = {1, 2, 3, 4, 5};
+  std::vector<int> vec;
+  vec.insert(vec.begin(), arr, arr + 5);
+  std::vector<int>::const_iterator begin = vec.begin();
+  std::vector<int>::const_iterator end = vec.end();
+
+  // INFO const_iteratorを指定してaddNumbersを呼び出している
+  sp.addNumbers(begin, end);
 
   try {
     sp.addNumber(6);
@@ -265,6 +291,7 @@ int main(void) {
       test_throw_exception_shrtest() + test_throw_exception_longest() +
       test_large_diff() + test_copy_operator() + test_assignment_operator() +
       test_diff_zero() + test_add_numbers() +
-      test_add_numbers_throw_exception() + test_n_is_zero() + test_n_is_10000();
+      test_add_numbers_const_iterator() + test_add_numbers_throw_exception() +
+      test_n_is_zero() + test_n_is_10000();
   return fail_count != 0;
 }
