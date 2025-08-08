@@ -7,6 +7,7 @@
 #include <vector>
 
 int test_vector(void) {
+  // vectorに対してeasyfindを実行できるか
   std::vector<int> vector;
   vector.push_back(1);
   vector.push_back(3);
@@ -16,6 +17,7 @@ int test_vector(void) {
 }
 
 int test_set(void) {
+  // setに対してeasyfindを実行できるか
   std::set<int> set;
   set.insert(1);
   set.insert(3);
@@ -25,6 +27,7 @@ int test_set(void) {
 }
 
 int test_list(void) {
+  // listに対してeasyfindを実行できるか
   std::list<int> list;
   list.push_back(1);
   list.push_back(3);
@@ -34,6 +37,7 @@ int test_list(void) {
 }
 
 int test_deque(void) {
+  // dequeに対してeasyfindを実行できるか
   std::deque<int> deque;
   deque.push_back(1);
   deque.push_back(3);
@@ -43,6 +47,7 @@ int test_deque(void) {
 }
 
 int test_return_first_find_pos(void) {
+  // findしたい値が複数コンテナ内に存在する場合、最初に見つかった場所を返すか
   int target_number = 42;
   const int actual_arr[] = {1, target_number, 2, target_number, 3};
   const int expect_arr[] = {target_number, 2, target_number, 3};
@@ -65,6 +70,7 @@ int test_return_first_find_pos(void) {
 }
 
 int test_writeable(void) {
+  // easyfindの返り値のiterator経由で値を書き換えられるか
   int target_number = 42;
   int n = 10;
   const int actual_arr[] = {1, target_number, 3, 4, 5};
@@ -93,6 +99,7 @@ int test_writeable(void) {
 }
 
 int test_unwriteable(void) {
+  // 引数をconstで受け取る場合のeasyfindが機能するか
   int target_number = 10;
   std::vector<int> expect;
   expect.push_back(target_number);
@@ -114,6 +121,7 @@ int test_unwriteable(void) {
 }
 
 int test_empty_container(void) {
+  // 空のコンテナに対してeasyfindした時に正常にendを返すか
   std::list<int> lst;
   std::list<int>::const_iterator it = easyfind(lst, 123);
 
@@ -130,6 +138,6 @@ int main(void) {
 
   int fail_count = test_vector() + test_set() + test_list() + test_deque() +
                    test_return_first_find_pos() + test_writeable() +
-                   test_empty_container();
+                   test_unwriteable() + test_empty_container();
   return fail_count != 0;
 }
