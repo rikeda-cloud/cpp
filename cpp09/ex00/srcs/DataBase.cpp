@@ -1,5 +1,7 @@
 #include "DataBase.hpp"
 
+const double DataBase::NOT_FOUND = -1.0;
+
 DataBase::DataBase(void) : db_() {}
 
 DataBase::~DataBase(void) {}

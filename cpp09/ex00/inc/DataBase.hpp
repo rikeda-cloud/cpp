@@ -6,7 +6,7 @@
 
 class DataBase {
 public:
-  const double NOT_FOUND = -1.0;
+  static const double NOT_FOUND;
 
   DataBase(void);
   ~DataBase(void);
