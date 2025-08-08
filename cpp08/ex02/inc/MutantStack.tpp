@@ -26,6 +26,16 @@ typename MutantStack<T, Container>::iterator MutantStack<T, Container>::end(void
 }
 
 template<typename T, typename Container>
+typename MutantStack<T, Container>::const_iterator MutantStack<T, Container>::begin(void) const {
+	return const_iterator(this->c.begin());
+}
+
+template<typename T, typename Container>
+typename MutantStack<T, Container>::const_iterator MutantStack<T, Container>::end(void) const {
+	return const_iterator(this->c.end());
+}
+
+template<typename T, typename Container>
 MutantStack<T, Container>::iterator::iterator(void) : it_() {}
 
 template<typename T, typename Container>
@@ -87,6 +97,72 @@ typename MutantStack<T, Container>::iterator &MutantStack<T, Container>::iterato
 template<typename T, typename Container>
 typename MutantStack<T, Container>::iterator MutantStack<T, Container>::iterator::operator--(int) {
 	iterator tmp = *this;
+	--this->it_;
+	return tmp;
+}
+
+template<typename T, typename Container>
+MutantStack<T, Container>::const_iterator::const_iterator(void) : it_() {}
+
+template<typename T, typename Container>
+MutantStack<T, Container>::const_iterator::const_iterator(container_const_iterator it) : it_(it) {}
+
+template<typename T, typename Container>
+MutantStack<T, Container>::const_iterator::const_iterator(const const_iterator &it) : it_(it.it_) {}
+
+template<typename T, typename Container>
+MutantStack<T, Container>::const_iterator::~const_iterator(void) {}
+
+template<typename T, typename Container>
+typename MutantStack<T, Container>::const_iterator &MutantStack<T, Container>::const_iterator::operator=(const const_iterator &it) {
+	if (this != &it) {
+		this->it_ = it.it_;
+	}
+	return *this;
+}
+
+template<typename T, typename Container>
+bool MutantStack<T, Container>::const_iterator::operator==(const const_iterator &it) const {
+	return this->it_ == it.it_;
+}
+
+template<typename T, typename Container>
+bool MutantStack<T, Container>::const_iterator::operator!=(const const_iterator &it) const {
+	return this->it_ != it.it_;
+}
+
+template<typename T, typename Container>
+const T &MutantStack<T, Container>::const_iterator::operator*(void) const {
+	return *this->it_;
+}
+
+template<typename T, typename Container>
+const T *MutantStack<T, Container>::const_iterator::operator->(void) const {
+	return &(*this->it_);
+}
+
+template<typename T, typename Container>
+typename MutantStack<T, Container>::const_iterator &MutantStack<T, Container>::const_iterator::operator++(void) {
+	++this->it_;
+	return *this;
+}
+
+template<typename T, typename Container>
+typename MutantStack<T, Container>::const_iterator MutantStack<T, Container>::const_iterator::operator++(int) {
+	const_iterator tmp = *this;
+	++this->it_;
+	return tmp;
+}
+
+template<typename T, typename Container>
+typename MutantStack<T, Container>::const_iterator &MutantStack<T, Container>::const_iterator::operator--(void) {
+	--this->it_;
+	return *this;
+}
+
+template<typename T, typename Container>
+typename MutantStack<T, Container>::const_iterator MutantStack<T, Container>::const_iterator::operator--(int) {
+	const_iterator tmp = *this;
 	--this->it_;
 	return tmp;
 }

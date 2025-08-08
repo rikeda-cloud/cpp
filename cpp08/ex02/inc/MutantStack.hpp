@@ -15,10 +15,11 @@ public:
 
   // 毎回書くと長いのでtypedef
   typedef typename Container::iterator container_iterator;
+  typedef typename Container::const_iterator container_const_iterator;
 
   // INFO bidirectional_iterator(双方向イテレータ) Interface的な役割
   // INFO [Iterator] https://cpprefjp.github.io/reference/iterator.html
-  // INFO [Iterator Tag] https://cpprefjp.github.io/reference/iterator/iterator_tag.html
+  // INFO [Tag] https://cpprefjp.github.io/reference/iterator/iterator_tag.html
   class iterator : public std::iterator<std::bidirectional_iterator_tag, T> {
   private:
     container_iterator it_;
@@ -42,8 +43,34 @@ public:
     iterator operator--(int);
   };
 
+  class const_iterator
+      : public std::iterator<std::bidirectional_iterator_tag, T> {
+  private:
+    container_const_iterator it_;
+
+  public:
+    const_iterator(void);
+    const_iterator(container_const_iterator it);
+    const_iterator(const const_iterator &other);
+    ~const_iterator(void);
+    const_iterator &operator=(const const_iterator &other);
+
+    bool operator==(const const_iterator &other) const;
+    bool operator!=(const const_iterator &other) const;
+
+    const T &operator*(void) const;
+    const T *operator->(void) const;
+
+    const_iterator &operator++(void);
+    const_iterator operator++(int);
+    const_iterator &operator--(void);
+    const_iterator operator--(int);
+  };
+
   iterator begin(void);
   iterator end(void);
+  const_iterator begin(void) const;
+  const_iterator end(void) const;
 };
 
 #include "MutantStack.tpp"
