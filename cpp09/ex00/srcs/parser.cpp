@@ -57,20 +57,39 @@ bool validateBtcDate(const std::string &date) {
     return false;
   }
   int month = std::strtol(month_str.c_str(), &end, 10);
-  if (*end != '\0' || month < 1 || 12 < month) {
+  if (*end != '\0') {
     return false;
   }
   int day = std::strtol(day_str.c_str(), &end, 10);
-  if (*end != '\0' || day < 1 || 31 < day) {
+  if (*end != '\0') {
     return false;
   }
-
-  // TODO 閏年や月ごとの最終日のバリデーションを追加
-  return true;
+  return isDate(year, month, day);
 }
 
 bool valiadteValue(const std::string &value) {
   char *end;
+
+  if (value.size() == 0) {
+    return false;
+  }
   std::strtod(value.c_str(), &end);
   return *end == '\0';
+}
+
+bool isDate(int year, int month, int day) {
+  const int LAST_DAYS[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
+  if (!(1 <= month && month <= 12)) {
+    return false;
+  }
+
+  //閏年判定
+  bool is_leap_year = year % 4 == 0 && (year % 100 != 0 || year % 400 == 0);
+  int last_day = LAST_DAYS[month - 1];
+
+  if (month == 2 && is_leap_year) {
+    last_day = 29;
+  }
+  return 1 <= day && day <= last_day;
 }
