@@ -27,6 +27,13 @@ bool _exec_is_date(int y, int m, int d, bool success_validate) {
   return error_occurred;
 }
 
+bool _exec_parse_line(const std::string &line, const std::string &sep,
+                      bool success_parse) {
+  std::string key;
+  double value;
+  return parseLine(line, sep, key, value) != success_parse;
+}
+
 int _test_validate_btc_date(void) {
   return _exec_validate_date("2009-01-01", true) +
          _exec_validate_date("2012-02-29", true) +
@@ -65,8 +72,12 @@ int test_is_date(void) {
          _exec_is_date(2000, 13, 1, false) + _exec_is_date(2001, 0, 1, false);
 }
 
+int test_parse_line(void) {
+  return _exec_parse_line("2020-01-01,123456", ",", true);
+}
+
 int test_parser(void) {
-  int fail_count =
-      _test_validate_btc_date() + test_validate_value() + test_is_date();
+  int fail_count = _test_validate_btc_date() + test_validate_value() +
+                   test_is_date() + test_parse_line();
   return fail_count;
 }
