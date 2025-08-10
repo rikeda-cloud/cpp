@@ -40,7 +40,7 @@ bool parseLine(const std::string &line, const std::string &sep,
   }
 
   std::string date = line.substr(0, comma_pos);
-  std::string value_str = line.substr(comma_pos + 1);
+  std::string value_str = line.substr(comma_pos + sep.size());
 
   if (!validateBtcDate(date)) {
     std::cout << "Error: bad date => " << date << std::endl;
