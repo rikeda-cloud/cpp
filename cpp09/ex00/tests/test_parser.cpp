@@ -73,7 +73,17 @@ int _test_is_date(void) {
 }
 
 int _test_parse_line(void) {
-  return _exec_parse_line("2020-01-01,123456", ",", true);
+  return _exec_parse_line("2020-01-01,123456", ",", true) +
+         _exec_parse_line("2020-01-01 | 1.000000001", " | ", true) +
+         _exec_parse_line("2020-01-01 | -123456", " | ", false) +
+         _exec_parse_line("2020-01-01 || 1", " | ", false) +
+         _exec_parse_line("2020-01-01 | 1 1", " | ", false) +
+         _exec_parse_line("2020-01-01 ! 1 1", ",", false) +
+         _exec_parse_line("2020-01-01,", ",", false) +
+         _exec_parse_line("2020-01-01,1234", "", false) +
+         _exec_parse_line(",12345", ",", false) +
+         _exec_parse_line("   ,    ", ",", false) +
+         _exec_parse_line("", ",", false);
 }
 
 int test_parser(void) {
