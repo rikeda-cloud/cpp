@@ -35,6 +35,7 @@ void BitcoinExchange::exchange(const std::string &file, const DataBase &db) {
     double rate = db.select(key);
     if (rate == DataBase::NOT_FOUND) {
       std::cout << "Error: date is not found in db." << std::endl;
+      continue;
     }
     std::cout << key << " => " << value << " = " << rate * value << std::endl;
   }
