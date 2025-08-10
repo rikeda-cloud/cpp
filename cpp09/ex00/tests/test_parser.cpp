@@ -57,13 +57,13 @@ int _test_validate_btc_date(void) {
          _exec_validate_date("", false);
 }
 
-int test_validate_value(void) {
+int _test_validate_value(void) {
   return _exec_validate_value("123", true) + _exec_validate_value(".1", true) +
          _exec_validate_value("1.", true) + _exec_validate_value("1.1", true) +
          _exec_validate_value("", false) + _exec_validate_value("1a", false);
 }
 
-int test_is_date(void) {
+int _test_is_date(void) {
   return _exec_is_date(0, 1, 1, true) + _exec_is_date(2000, 2, 29, true) +
          _exec_is_date(9999, 12, 31, true) + _exec_is_date(2001, 2, 28, true) +
          _exec_is_date(2004, 2, 29, true) + _exec_is_date(2000, 2, 29, true) +
@@ -72,12 +72,12 @@ int test_is_date(void) {
          _exec_is_date(2000, 13, 1, false) + _exec_is_date(2001, 0, 1, false);
 }
 
-int test_parse_line(void) {
+int _test_parse_line(void) {
   return _exec_parse_line("2020-01-01,123456", ",", true);
 }
 
 int test_parser(void) {
-  int fail_count = _test_validate_btc_date() + test_validate_value() +
-                   test_is_date() + test_parse_line();
+  int fail_count = _test_validate_btc_date() + _test_validate_value() +
+                   _test_is_date() + _test_parse_line();
   return fail_count;
 }
