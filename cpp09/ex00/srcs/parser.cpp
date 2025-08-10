@@ -4,14 +4,14 @@
 
 bool parseLine(const std::string &line, const std::string &sep,
                std::string &key, double &value) {
-  size_t comma_pos = line.find(sep);
-  if (comma_pos == std::string::npos) {
+  size_t sep_pos = line.find(sep);
+  if (sep_pos == std::string::npos) {
     std::cout << "Error: bad input => " << line << std::endl;
     return false;
   }
 
-  std::string date = line.substr(0, comma_pos);
-  std::string value_str = line.substr(comma_pos + sep.size());
+  std::string date = line.substr(0, sep_pos);
+  std::string value_str = line.substr(sep_pos + sep.size());
 
   if (!validateBtcDate(date)) {
     std::cout << "Error: bad date => " << date << std::endl;
