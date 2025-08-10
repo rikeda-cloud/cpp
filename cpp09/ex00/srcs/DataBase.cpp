@@ -36,7 +36,7 @@ void DataBase::parseCsv(const std::string &file, DataBase &db) {
   std::string key;
   double value;
 
-  if (!s.is_open()) {
+  if (!s) {
     throw std::runtime_error("Error: could not open file.");
   }
 
@@ -54,4 +54,7 @@ void DataBase::parseCsv(const std::string &file, DataBase &db) {
     db.insert(key, value);
   }
   s.close();
+  if (!read_first_line) {
+    throw std::runtime_error("Error: empty file.");
+  }
 }

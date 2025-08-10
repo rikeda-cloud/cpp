@@ -10,7 +10,7 @@ void BitcoinExchange::exchange(const std::string &file, const DataBase &db) {
   std::string key;
   double value;
 
-  if (!s.is_open()) {
+  if (!s) {
     throw std::runtime_error("Error: could not open file.");
   }
 
@@ -40,4 +40,7 @@ void BitcoinExchange::exchange(const std::string &file, const DataBase &db) {
     std::cout << key << " => " << value << " = " << rate * value << std::endl;
   }
   s.close();
+  if (!read_first_line) {
+    throw std::runtime_error("Error: empty file.");
+  }
 }
