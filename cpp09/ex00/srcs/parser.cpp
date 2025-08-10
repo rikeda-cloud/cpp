@@ -1,6 +1,7 @@
 #include "parser.hpp"
 #include <cstdlib>
 #include <fstream>
+#include <iostream>
 #include <sstream>
 #include <stdexcept>
 
@@ -20,28 +21,43 @@ void parseCsv(const std::string &file, DataBase &db) {
       read_first_line = true;
       continue;
     }
-    parseLine(line, ",", key, value);
+    // INFO csvファイルに1行でもエラーが有るなら例外を投げ、終了
+    if (!parseLine(line, ",", key, value)) {
+      s.close();
+      throw std::runtime_error("Error: invalid csv.");
+    }
     db.insert(key, value);
   }
   s.close();
 }
 
-void parseLine(const std::string &line, const std::string &sep,
+bool parseLine(const std::string &line, const std::string &sep,
                std::string &key, double &value) {
   size_t comma_pos = line.find(sep);
   if (comma_pos == std::string::npos) {
-    throw std::runtime_error("Invalid format.");
+    std::cout << "Error: bad input => " << line << std::endl;
+    return false;
   }
 
   std::string date = line.substr(0, comma_pos);
   std::string value_str = line.substr(comma_pos + 1);
 
-  if (!validateBtcDate(date) || !valiadteValue(value_str)) {
-    throw std::runtime_error("Invalid format.");
+  if (!validateBtcDate(date)) {
+    std::cout << "Error: bad date => " << date << std::endl;
+    return false;
   }
-
+  if (!valiadteValue(value_str)) {
+    std::cout << "Error: bad value => " << value_str << std::endl;
+    return false;
+  }
   key = date;
   value = std::strtod(value_str.c_str(), NULL);
+
+  if (value < 0) {
+    std::cout << "Error: not a positive number." << std::endl;
+    return false;
+  }
+  return true;
 }
 
 bool validateBtcDate(const std::string &date) {
