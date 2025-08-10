@@ -14,7 +14,7 @@ int RPN::evaluate(const std::string &s) {
     doOperation(stk, op, token);
   }
   if (stk.size() != 1) {
-    throw std::exception();
+    throw std::runtime_error("[ERROR] RPN.evaluate: RPN syntax");
   }
   return stk.top();
 }
@@ -31,7 +31,8 @@ RPN::Operation RPN::detectOperation(const std::string &token) {
   } else if (token.size() == 1 && std::isdigit(token[0])) {
     return NUMBER;
   } else {
-    throw std::exception();
+    throw std::runtime_error(
+        "[ERROR] RPN.detectOperation: detect unexpect token");
   }
 }
 
@@ -43,7 +44,7 @@ void RPN::doOperation(std::stack<int> &stk, Operation op,
     break;
   default:
     if (stk.size() < 2) {
-      throw std::exception();
+      throw std::runtime_error("[ERROR] RPN.doOperation: RPN syntax");
     }
     int first = stk.top();
     stk.pop();
@@ -64,6 +65,6 @@ int RPN::calc(int v1, int v2, Operation op) {
   case MUL:
     return safe_mul(v1, v2);
   default:
-    throw std::exception();
+    throw std::runtime_error("[ERROR] RPN.calc: unexpect Operation");
   }
 }
