@@ -10,6 +10,10 @@ void parseCsv(const std::string &file, DataBase &db) {
   std::string key;
   double value;
 
+  if (!s.is_open()) {
+    throw std::runtime_error("Error: could not open file.");
+  }
+
   bool read_first_line = false;
   while (std::getline(s, line)) {
     if (!read_first_line) { // 最初の行(Header)は読み飛ばす
