@@ -11,6 +11,7 @@ INCLUDES_DIR	=	./inc
 TESTS_DIR		=	./tests
 
 SRCS			=	DataBase.cpp \
+					BitcoinExchange.cpp \
 					parser.cpp
 
 MAIN_SRCS		=	main.cpp

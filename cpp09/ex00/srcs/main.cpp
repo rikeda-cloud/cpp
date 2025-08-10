@@ -1,7 +1,10 @@
+#include "BitcoinExchange.hpp"
 #include "DataBase.hpp"
 #include "parser.hpp"
 #include <exception>
 #include <iostream>
+
+const std::string DB_FILE = "data.csv";
 
 int main(int argc, char **argv) {
   if (argc != 2) {
@@ -11,7 +14,8 @@ int main(int argc, char **argv) {
 
   DataBase db;
   try {
-    parseCsv(argv[1], db);
+    parseCsv(DB_FILE, db);
+    BitcoinExchange::exchange(argv[1], db);
   } catch (const std::exception &e) {
     std::cout << e.what() << std::endl;
     return 1;
