@@ -1,35 +1,6 @@
 #include "parser.hpp"
 #include <cstdlib>
-#include <fstream>
 #include <iostream>
-#include <sstream>
-#include <stdexcept>
-
-void parseCsv(const std::string &file, DataBase &db) {
-  std::ifstream s(file.c_str());
-  std::string line;
-  std::string key;
-  double value;
-
-  if (!s.is_open()) {
-    throw std::runtime_error("Error: could not open file.");
-  }
-
-  bool read_first_line = false;
-  while (std::getline(s, line)) {
-    if (!read_first_line) { // 最初の行(Header)は読み飛ばす
-      read_first_line = true;
-      continue;
-    }
-    // INFO csvファイルに1行でもエラーが有るなら例外を投げ、終了
-    if (!parseLine(line, ",", key, value)) {
-      s.close();
-      throw std::runtime_error("Error: invalid csv.");
-    }
-    db.insert(key, value);
-  }
-  s.close();
-}
 
 bool parseLine(const std::string &line, const std::string &sep,
                std::string &key, double &value) {

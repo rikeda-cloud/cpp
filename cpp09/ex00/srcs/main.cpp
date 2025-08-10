@@ -1,6 +1,5 @@
 #include "BitcoinExchange.hpp"
 #include "DataBase.hpp"
-#include "parser.hpp"
 #include <exception>
 #include <iostream>
 
@@ -14,7 +13,7 @@ int main(int argc, char **argv) {
 
   DataBase db;
   try {
-    parseCsv(DB_FILE, db);
+    DataBase::parseCsv(DB_FILE, db);
     BitcoinExchange::exchange(argv[1], db);
   } catch (const std::exception &e) {
     std::cout << e.what() << std::endl;
