@@ -10,7 +10,7 @@ OBJS_DIR		=	./objs
 INCLUDES_DIR	=	./inc
 TESTS_DIR		=	./tests
 
-SRCS			=	MergeInsert.cpp
+SRCS			=	PmergeMe.cpp
 
 MAIN_SRCS		=	main.cpp
 
