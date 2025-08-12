@@ -14,7 +14,9 @@ SRCS			=	PmergeMe.cpp
 
 MAIN_SRCS		=	main.cpp
 
-TEST_SRCS		=	main_test.cpp
+TEST_SRCS		=	main_test.cpp \
+					test_jacobsthal.cpp
+
 
 OBJS			=	$(patsubst %.o, $(OBJS_DIR)/%.o, $(SRCS:.cpp=.o))
 DEPS			=	$(OBJS:.o=.d)
@@ -27,7 +29,7 @@ MAIN_OBJS		=	$(patsubst %.cpp, $(OBJS_DIR)/%.o, $(SRCS) $(MAIN_SRCS))
 $(NAME): $(OBJS_DIR) $(MAIN_OBJS)
 	$(CXX) $(MAIN_OBJS) -o $@
 
-TEST_TARGET	=	RPN_test
+TEST_TARGET	=	PmergeMe_test
 TEST_OBJS	=	$(patsubst %.cpp, $(OBJS_DIR)/%.o, $(SRCS) $(TEST_SRCS))
 
 test: $(OBJS_DIR) $(TEST_TARGET)
