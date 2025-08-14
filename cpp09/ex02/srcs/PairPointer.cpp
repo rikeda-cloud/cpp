@@ -1,4 +1,5 @@
 #include "PairPointer.hpp"
+#include <cstddef>
 
 PairPointer::PairPointer(unsigned val, PairPointer *small_pair,
                          PairPointer *large_pair)
@@ -47,4 +48,23 @@ bool PairPointer::operator==(const PairPointer &pair) const {
 
 bool PairPointer::operator!=(const PairPointer &pair) const {
   return this->val_ != pair.val_;
+}
+
+std::vector<PairPointer>
+PairPointer::vecToPairVec(const std::vector<unsigned> &vec) {
+  std::vector<PairPointer> pair_vec;
+  for (std::vector<unsigned>::const_iterator it = vec.begin(); it != vec.end();
+       ++it) {
+    pair_vec.push_back(PairPointer(*it, NULL, NULL));
+  }
+  return pair_vec;
+}
+
+std::vector<unsigned>
+PairPointer::pairVecToVec(const std::vector<PairPointer> &pair_vec) {
+  std::vector<unsigned> vec;
+  for (std::size_t i = 0; i < pair_vec.size(); i++) {
+    vec.push_back(pair_vec[i].getVal());
+  }
+  return vec;
 }

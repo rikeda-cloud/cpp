@@ -33,9 +33,11 @@ static void _sort(std::vector<PairPointer> &pairs) {
 
 std::vector<unsigned> PmergeMe::sort(const std::vector<unsigned> &src) {
   // std::vector<unsigned> -> std::vector<PairPointer>
+  std::vector<PairPointer> pairs = PairPointer::vecToPairVec(src);
 
   // std::vector<PairPointer>を引数に取る再帰関数でソート
+  _sort(pairs);
 
   // std::vector<PairPointer> -> std::vector<unsigned>
-  return src;
+  return PairPointer::pairVecToVec(pairs);
 }
