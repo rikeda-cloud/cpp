@@ -29,8 +29,10 @@ int main(int argc, char **argv) {
   }
 
   print_vector(vec);
-  std::vector<unsigned> sorted_vec = PmergeMe::sort(vec);
+  std::size_t cmp_count = 0;
+  std::vector<unsigned> sorted_vec = PmergeMe::sort(vec, cmp_count);
   print_vector(sorted_vec);
+  std::cout << "cmp_count = " << cmp_count << std::endl;
 
   return 0;
 }

@@ -69,8 +69,8 @@ static void _sort(std::vector<PairPointer> &pairs, std::size_t &cmp_count) {
   pairs = sorted_pairs;
 }
 
-std::vector<unsigned> PmergeMe::sort(const std::vector<unsigned> &src) {
-  std::size_t cmp_count = 0;
+std::vector<unsigned> PmergeMe::sort(const std::vector<unsigned> &src,
+                                     std::size_t &cmp_count) {
   std::vector<PairPointer> pairs = PairPointer::vecToPairVec(src);
   _sort(pairs, cmp_count);
   return PairPointer::pairVecToVec(pairs);
