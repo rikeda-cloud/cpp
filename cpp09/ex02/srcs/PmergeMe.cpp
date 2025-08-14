@@ -3,11 +3,13 @@
 #include "utils.hpp"
 #include <cstddef>
 
-static std::vector<PairPointer> _create_pairs(std::vector<PairPointer> &pairs) {
+static std::vector<PairPointer> _create_pairs(std::vector<PairPointer> &pairs,
+                                              std::size_t &cmp_count) {
   std::vector<PairPointer> new_pairs;
   for (std::size_t i = 1; i < pairs.size(); i += 2) {
     PairPointer *small = NULL;
     PairPointer *large = NULL;
+    cmp_count++;
     if (pairs[i - 1] < pairs[i]) { // INFO 大小比較しながらペアを作成
       small = &pairs[i - 1];
       large = &pairs[i];
@@ -20,45 +22,54 @@ static std::vector<PairPointer> _create_pairs(std::vector<PairPointer> &pairs) {
   return new_pairs;
 }
 
-static void _sort(std::vector<PairPointer> &pairs) {
+static void _sort(std::vector<PairPointer> &pairs, std::size_t &cmp_count) {
   if (pairs.size() <= 1) {
     return;
   }
-  std::vector<PairPointer> new_pairs = _create_pairs(pairs);
-  _sort(new_pairs); // INFO 再帰的にソート
+  std::vector<PairPointer> new_pairs = _create_pairs(pairs, cmp_count);
+  _sort(new_pairs, cmp_count); // INFO 再帰的にソート
 
   std::vector<PairPointer> sorted_pairs;
   sorted_pairs.push_back(new_pairs[0].getSmallPair());
-  sorted_pairs.push_back(new_pairs[0].getLargePair());
+
+  // INFO 大きい方の要素を全て挿入
+  for (std::size_t i = 0; i < new_pairs.size(); ++i) {
+    sorted_pairs.push_back(new_pairs[i].getLargePair());
+  }
 
   if (new_pairs.size() == 1) { // INFO ペアが1つしかない場合はそのまま返す
     pairs = sorted_pairs;
     return;
   }
 
-  // INFO 大きい方の要素を全て挿入
-  for (std::size_t i = 1; i < new_pairs.size(); ++i) {
-    sorted_pairs.push_back(new_pairs[i].getLargePair());
-  }
-
   std::size_t base_idx = 1;
-  std::size_t n = 1;
-  for (; base_idx < pairs.size();) {
-    for (std::size_t i = jacobsthal(n++) * 2; i > 0; --i) {
-      // std::size_t idx = findInsertIdx(sorted_pairs, , pairs[i - 1 +
-      // base_idx]); sorted_pairs.insert(idx, pairs[i - 1 + base_idx]);
+  std::size_t right_idx = 2;
+  for (std::size_t i = 1; sorted_pairs.size() < new_pairs.size() * 2; i++) {
+    std::size_t j = jacobsthal(i) * 2;
+    if (j >= new_pairs.size() * 2 + base_idx) {
+      j = new_pairs.size() * 2 - base_idx;
     }
+    for (; j > 0; --j) {
+      PairPointer target = new_pairs[base_idx + j - 1].getSmallPair();
+      std::size_t idx =
+          findInsertIdx(sorted_pairs, target, right_idx, cmp_count);
+      sorted_pairs.insert(sorted_pairs.begin() + idx, target);
+      right_idx += 2;
+    }
+    base_idx += j;
   }
 
   if (pairs.size() % 2 == 1) { // INFO 奇数の場合の残りの要素を挿入
-    // std::size_t idx = findInsertIdx(sorted_pairs, pairs.back());
-    // sorted_pairs.insert(idx, pairs.back());
+    std::size_t idx = findInsertIdx(sorted_pairs, pairs.back(),
+                                    sorted_pairs.size(), cmp_count);
+    sorted_pairs.insert(sorted_pairs.begin() + idx, pairs.back());
   }
   pairs = sorted_pairs;
 }
 
 std::vector<unsigned> PmergeMe::sort(const std::vector<unsigned> &src) {
+  std::size_t cmp_count = 0;
   std::vector<PairPointer> pairs = PairPointer::vecToPairVec(src);
-  _sort(pairs);
+  _sort(pairs, cmp_count);
   return PairPointer::pairVecToVec(pairs);
 }
