@@ -1,18 +1,36 @@
 #include "PmergeMe.hpp"
+#include <iostream>
+#include <sstream>
 
-int main(void) {
+void print_vector(const std::vector<unsigned> &vec) {
+  for (std::vector<unsigned>::const_iterator it = vec.begin(); it != vec.end();
+       ++it) {
+    std::cout << *it << " ";
+  }
+  std::cout << std::endl;
+}
+
+int main(int argc, char **argv) {
+  if (argc < 2) {
+    std::cerr << "argc < 2" << std::endl;
+    return 1;
+  }
+
   std::vector<unsigned> vec;
-  vec.push_back(9);
-  vec.push_back(8);
-  vec.push_back(7);
-  vec.push_back(6);
-  vec.push_back(5);
-  vec.push_back(4);
-  vec.push_back(3);
-  vec.push_back(2);
-  vec.push_back(1);
+  for (int i = 1; i < argc; ++i) {
+    std::istringstream iss(argv[i]);
+    unsigned num;
+    if (iss >> num) {
+      vec.push_back(num);
+    } else {
+      std::cerr << "Invalid arg: " << argv[i] << std::endl;
+      return 1;
+    }
+  }
 
-  PmergeMe::sort(vec);
+  print_vector(vec);
+  std::vector<unsigned> sorted_vec = PmergeMe::sort(vec);
+  print_vector(sorted_vec);
 
   return 0;
 }
