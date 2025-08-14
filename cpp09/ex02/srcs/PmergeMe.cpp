@@ -3,11 +3,7 @@
 #include "utils.hpp"
 #include <cstddef>
 
-static void _sort(std::vector<PairPointer> &pairs) {
-  if (pairs.size() <= 1) {
-    return;
-  }
-
+static std::vector<PairPointer> _create_pairs(std::vector<PairPointer> &pairs) {
   std::vector<PairPointer> new_pairs;
   for (std::size_t i = 1; i < pairs.size(); i += 2) {
     PairPointer *small = NULL;
@@ -21,6 +17,14 @@ static void _sort(std::vector<PairPointer> &pairs) {
     }
     new_pairs.push_back(PairPointer(large->getVal(), small, large));
   }
+  return new_pairs;
+}
+
+static void _sort(std::vector<PairPointer> &pairs) {
+  if (pairs.size() <= 1) {
+    return;
+  }
+  std::vector<PairPointer> new_pairs = _create_pairs(pairs);
   _sort(new_pairs); // INFO 再帰的にソート
 
   std::vector<PairPointer> sorted_pairs;
