@@ -1,9 +1,9 @@
-#include "PmergeMe.hpp"
 #include "test.hpp"
+#include "utils.hpp"
 #include <iostream>
 
 bool _exec_jacobsthal(unsigned n, unsigned expect) {
-  unsigned result = PmergeMe::jacobsthal(n);
+  unsigned result = jacobsthal(n);
   bool fail = result != expect;
 
   if (fail) {

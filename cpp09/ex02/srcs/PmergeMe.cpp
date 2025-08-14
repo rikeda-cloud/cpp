@@ -1,12 +1,7 @@
 #include "PmergeMe.hpp"
 #include "PairPointer.hpp"
+#include "utils.hpp"
 #include <cstddef>
-
-unsigned PmergeMe::jacobsthal(unsigned n) {
-  if (n <= 1)
-    return n;
-  return jacobsthal(n - 1) + 2 * jacobsthal(n - 2);
-}
 
 static void _sort(std::vector<PairPointer> &pairs) {
   if (pairs.size() <= 1) {
@@ -45,7 +40,7 @@ static void _sort(std::vector<PairPointer> &pairs) {
   std::size_t base_idx = 1;
   std::size_t n = 1;
   for (; base_idx < pairs.size();) {
-    for (std::size_t i = PmergeMe::jacobsthal(n++) * 2; i > 0; --i) {
+    for (std::size_t i = jacobsthal(n++) * 2; i > 0; --i) {
       // std::size_t idx = findInsertIdx(sorted_pairs, , pairs[i - 1 +
       // base_idx]); sorted_pairs.insert(idx, pairs[i - 1 + base_idx]);
     }

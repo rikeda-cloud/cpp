@@ -5,7 +5,6 @@
 
 class PmergeMe {
 public:
-  static unsigned jacobsthal(unsigned);
   static std::vector<unsigned> sort(const std::vector<unsigned> &);
 
 private:

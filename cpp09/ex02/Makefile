@@ -11,7 +11,8 @@ INCLUDES_DIR	=	./inc
 TESTS_DIR		=	./tests
 
 SRCS			=	PmergeMe.cpp \
-					PairPointer.cpp
+					PairPointer.cpp \
+					utils.cpp
 
 MAIN_SRCS		=	main.cpp
 
