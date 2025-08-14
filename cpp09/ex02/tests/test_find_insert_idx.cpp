@@ -21,7 +21,7 @@ bool _exec_find_insert_idx(unsigned target, std::size_t right,
   std::vector<PairPointer> pairs = _create_pairs();
   PairPointer target_pair = PairPointer(target, NULL, NULL);
 
-  std::size_t cnt;
+  std::size_t cnt = 0;
   std::size_t result = findInsertIdx(pairs, target_pair, right, cnt);
 
   if (result != expect_idx) {
