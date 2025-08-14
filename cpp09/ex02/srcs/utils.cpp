@@ -7,9 +7,13 @@ unsigned jacobsthal(unsigned n) {
 }
 
 std::size_t findInsertIdx(const std::vector<PairPointer> &sorted_pairs,
-                          const PairPointer &target_pair, std::size_t left_idx,
-                          std::size_t right_idx) {
+                          const PairPointer &target_pair, std::size_t right_idx,
+                          std::size_t &cmp_count) {
+  cmp_count = 0;
+
+  std::size_t left_idx = 0;
   while (left_idx <= right_idx) {
+    cmp_count++;
     std::size_t middle_idx = (left_idx + right_idx) / 2;
     PairPointer middle_pair = sorted_pairs[middle_idx];
 

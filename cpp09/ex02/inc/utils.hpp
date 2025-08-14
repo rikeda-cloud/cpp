@@ -7,6 +7,6 @@
 unsigned jacobsthal(unsigned);
 
 std::size_t findInsertIdx(const std::vector<PairPointer> &, const PairPointer &,
-                          std::size_t, std::size_t);
+                          std::size_t, std::size_t &);
 
 #endif
