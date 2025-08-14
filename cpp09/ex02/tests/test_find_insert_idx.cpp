@@ -3,20 +3,7 @@
 #include "utils.hpp"
 #include <iostream>
 
-bool _exec_find_insert_idx(const std::vector<PairPointer> &pairs,
-                           const PairPointer &target_pair, std::size_t left,
-                           std::size_t right, std::size_t expect) {
-  std::size_t result = findInsertIdx(pairs, target_pair, left, right);
-  bool fail = result != expect;
-
-  if (fail) {
-    std::cout << "[ERROR] test_jacobsthal: expect = " << expect
-              << " actual = " << result << std::endl;
-  }
-  return fail;
-}
-
-int test_find_insert_idx(void) {
+std::vector<PairPointer> _create_pairs(void) {
   std::vector<unsigned> vec;
   vec.push_back(1);
   vec.push_back(3);
@@ -26,11 +13,35 @@ int test_find_insert_idx(void) {
   vec.push_back(11);
   vec.push_back(15);
   vec.push_back(100);
-  std::vector<PairPointer> pairs = PairPointer::vecToPairVec(vec);
-  std::size_t size = pairs.size();
+  return PairPointer::vecToPairVec(vec);
+}
 
-  int fail_count =
-      _exec_find_insert_idx(pairs, PairPointer(2, NULL, NULL), 0, size, 1);
+bool _exec_find_insert_idx(unsigned target, std::size_t right,
+                           std::size_t expect_idx, std::size_t expect_cnt) {
+  std::vector<PairPointer> pairs = _create_pairs();
+  PairPointer target_pair = PairPointer(target, NULL, NULL);
+
+  std::size_t cnt;
+  std::size_t result = findInsertIdx(pairs, target_pair, right, cnt);
+
+  if (result != expect_idx) {
+    std::cout << "[ERROR] test_find_insert_idx: expect = " << expect_idx
+              << " actual = " << result << std::endl;
+    return true;
+  }
+  if (cnt != expect_cnt) {
+    std::cout << "[ERROR] test_find_insert_idx: expect = " << expect_cnt
+              << " actual = " << cnt << std::endl;
+    return true;
+  }
+  return false;
+}
+
+int test_find_insert_idx(void) {
+  std::size_t size = _create_pairs().size();
+
+  int fail_count = _exec_find_insert_idx(2, size, 1, 3) +
+                   _exec_find_insert_idx(4, size, 2, 3);
 
   if (fail_count == 0) {
     std::cout << "[OK]" << std::endl;
