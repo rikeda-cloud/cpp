@@ -11,8 +11,8 @@ public:
   PairPointer &operator=(const PairPointer &);
 
   unsigned getVal(void) const;
-  PairPointer *getSmallPair(void) const;
-  PairPointer *getLargePair(void) const;
+  PairPointer getSmallPair(void) const;
+  PairPointer getLargePair(void) const;
 
   bool operator>(const PairPointer &) const;
   bool operator<(const PairPointer &) const;

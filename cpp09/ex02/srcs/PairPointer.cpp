@@ -22,9 +22,9 @@ PairPointer &PairPointer::operator=(const PairPointer &pair) {
 
 unsigned PairPointer::getVal(void) const { return this->val_; }
 
-PairPointer *PairPointer::getSmallPair(void) const { return this->small_pair_; }
+PairPointer PairPointer::getSmallPair(void) const { return *small_pair_; }
 
-PairPointer *PairPointer::getLargePair(void) const { return this->large_pair_; }
+PairPointer PairPointer::getLargePair(void) const { return *large_pair_; }
 
 bool PairPointer::operator>(const PairPointer &pair) const {
   return this->val_ > pair.val_;
