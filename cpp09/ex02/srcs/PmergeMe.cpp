@@ -32,12 +32,22 @@ static void _sort(std::vector<PairPointer> &pairs) {
   sorted_pairs.push_back(new_pairs[0].getSmallPair());
   sorted_pairs.push_back(new_pairs[0].getLargePair());
 
-  for (std::size_t i = 1;; i++) {
-    std::size_t j = PmergeMe::jacobsthal(i);
-    while (j) {
-      j--;
-      // std::size_t idx = findInsertIdx(sorted_pairs, new_pairs[j]);
-      // sorted_pairs.insert(idx, new_pairs[i]);
+  if (new_pairs.size() == 1) { // INFO ペアが1つしかない場合はそのまま返す
+    pairs = sorted_pairs;
+    return;
+  }
+
+  // INFO 大きい方の要素を全て挿入
+  for (std::size_t i = 1; i < new_pairs.size(); ++i) {
+    sorted_pairs.push_back(new_pairs[i].getLargePair());
+  }
+
+  std::size_t base_idx = 1;
+  std::size_t n = 1;
+  for (; base_idx < pairs.size();) {
+    for (std::size_t i = PmergeMe::jacobsthal(n++) * 2; i > 0; --i) {
+      // std::size_t idx = findInsertIdx(sorted_pairs, , pairs[i - 1 +
+      // base_idx]); sorted_pairs.insert(idx, pairs[i - 1 + base_idx]);
     }
   }
 
