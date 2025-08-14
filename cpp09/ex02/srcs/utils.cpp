@@ -16,14 +16,18 @@ std::size_t findInsertIdx(const std::vector<PairPointer> &sorted_pairs,
     PairPointer middle_pair = sorted_pairs[middle_idx];
 
     if (target_pair < middle_pair) {
+      if (middle_idx == 0) {
+        return 0;
+      }
       right_idx = middle_idx - 1;
-      continue;
-    }
-    if (target_pair > middle_pair) {
+    } else if (target_pair > middle_pair) {
+      if (middle_idx >= sorted_pairs.size()) {
+        return sorted_pairs.size();
+      }
       left_idx = middle_idx + 1;
-      continue;
+    } else {
+      return middle_idx;
     }
-    return middle_idx;
   }
   return left_idx;
 }
