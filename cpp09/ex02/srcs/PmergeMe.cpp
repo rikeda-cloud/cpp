@@ -2,6 +2,7 @@
 #include "PairPointer.hpp"
 #include "utils.hpp"
 #include <cstddef>
+#include <iostream>
 
 static std::vector<PairPointer> _create_pairs(std::vector<PairPointer> &pairs,
                                               std::size_t &cmp_count) {
@@ -37,26 +38,27 @@ static void _sort(std::vector<PairPointer> &pairs, std::size_t &cmp_count) {
     sorted_pairs.push_back(new_pairs[i].getLargePair());
   }
 
-  if (new_pairs.size() == 1) { // INFO ペアが1つしかない場合はそのまま返す
+  if (pairs.size() == 2) { // INFO ペアが1つしかない場合はそのまま返す
     pairs = sorted_pairs;
     return;
   }
 
-  std::size_t base_idx = 1;
   std::size_t right_idx = 2;
-  for (std::size_t i = 1; sorted_pairs.size() < new_pairs.size() * 2; i++) {
-    std::size_t j = jacobsthal(i) * 2;
-    if (j >= new_pairs.size() * 2 + base_idx) {
-      j = new_pairs.size() * 2 - base_idx;
+  std::size_t loop_finish_size = new_pairs.size() * 2;
+  new_pairs.erase(new_pairs.begin());
+  for (std::size_t i = 1; sorted_pairs.size() < loop_finish_size; ++i) {
+    std::size_t idx = jacobsthal(i) * 2;
+    if (idx > new_pairs.size()) {
+      idx = new_pairs.size();
     }
-    for (; j > 0; --j) {
-      PairPointer target = new_pairs[base_idx + j - 1].getSmallPair();
-      std::size_t idx =
-          findInsertIdx(sorted_pairs, target, right_idx, cmp_count);
-      sorted_pairs.insert(sorted_pairs.begin() + idx, target);
+    for (; idx > 0; --idx) {
+      PairPointer target_pair = new_pairs[idx - 1].getSmallPair();
+      std::size_t insert_idx =
+          findInsertIdx(sorted_pairs, target_pair, right_idx, cmp_count);
+      sorted_pairs.insert(sorted_pairs.begin() + insert_idx, target_pair);
+      new_pairs.erase(new_pairs.begin() + idx - 1);
       right_idx += 2;
     }
-    base_idx += j;
   }
 
   if (pairs.size() % 2 == 1) { // INFO 奇数の場合の残りの要素を挿入
