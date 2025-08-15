@@ -51,18 +51,18 @@ static void _sort(std::vector<PairPointer> &pairs) {
     }
     for (; idx > 0; --idx) {
       PairPointer target_pair = new_pairs[idx - 1].getSmallPair();
-      std::size_t insert_idx =
-          findInsertIdx(sorted_pairs, target_pair, right_idx);
-      sorted_pairs.insert(sorted_pairs.begin() + insert_idx, target_pair);
+      std::vector<PairPointer>::iterator insert_pos = std::lower_bound(
+          sorted_pairs.begin(), sorted_pairs.end(), target_pair);
+      sorted_pairs.insert(insert_pos, target_pair);
       new_pairs.erase(new_pairs.begin() + idx - 1);
       right_idx += 2;
     }
   }
 
   if (pairs.size() % 2 == 1) { // INFO 奇数の場合の残りの要素を挿入
-    std::size_t idx =
-        findInsertIdx(sorted_pairs, pairs.back(), sorted_pairs.size());
-    sorted_pairs.insert(sorted_pairs.begin() + idx, pairs.back());
+    std::vector<PairPointer>::iterator insert_pos = std::lower_bound(
+        sorted_pairs.begin(), sorted_pairs.end(), pairs.back());
+    sorted_pairs.insert(insert_pos, pairs.back());
   }
   pairs = sorted_pairs;
 }

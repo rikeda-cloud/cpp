@@ -1,3 +1,4 @@
+#include "PairPointer.hpp"
 #include "PmergeMe.hpp"
 #include <iostream>
 #include <sstream>
@@ -29,10 +30,10 @@ int main(int argc, char **argv) {
   }
 
   print_vector(vec);
-  std::size_t cmp_count = 0;
-  std::vector<unsigned> sorted_vec = PmergeMe::sort(vec, cmp_count);
+  PairPointer::resetCmpCount();
+  std::vector<unsigned> sorted_vec = PmergeMe::sort(vec);
+  std::cout << "cmp_count = " << PairPointer::getCmpCount() << std::endl;
   print_vector(sorted_vec);
-  std::cout << "cmp_count = " << cmp_count << std::endl;
 
   return 0;
 }
