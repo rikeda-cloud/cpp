@@ -17,8 +17,7 @@ SRCS			=	PmergeMe.cpp \
 MAIN_SRCS		=	main.cpp
 
 TEST_SRCS		=	main_test.cpp \
-					test_jacobsthal.cpp \
-					test_find_insert_idx.cpp
+					test_jacobsthal.cpp
 
 
 OBJS			=	$(patsubst %.o, $(OBJS_DIR)/%.o, $(SRCS:.cpp=.o))
