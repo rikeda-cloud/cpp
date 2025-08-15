@@ -77,8 +77,5 @@ PairPointer::pairVecToVec(const std::vector<PairPointer> &pair_vec) {
   return vec;
 }
 
-std::size_t PairPointer::getCmpCount(void) const {
-  return PairPointer::cmp_count_;
-}
-
+std::size_t PairPointer::getCmpCount(void) { return PairPointer::cmp_count_; }
 void PairPointer::resetCmpCount(void) { PairPointer::cmp_count_ = 0; }

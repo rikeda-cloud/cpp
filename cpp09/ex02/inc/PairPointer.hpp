@@ -24,8 +24,8 @@ public:
   static std::vector<PairPointer> vecToPairVec(const std::vector<unsigned> &);
   static std::vector<unsigned> pairVecToVec(const std::vector<PairPointer> &);
 
-  std::size_t getCmpCount(void) const;
-  void resetCmpCount(void);
+  static std::size_t getCmpCount(void);
+  static void resetCmpCount(void);
 
 private:
   unsigned val_;
