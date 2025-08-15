@@ -2,14 +2,7 @@
 #include "PmergeMe.hpp"
 #include "utils.hpp"
 #include <iostream>
-
-void print_vector(const std::vector<unsigned> &vec) {
-  for (std::vector<unsigned>::const_iterator it = vec.begin(); it != vec.end();
-       ++it) {
-    std::cout << *it << " ";
-  }
-  std::cout << std::endl;
-}
+#include <sys/time.h>
 
 int main(int argc, const char **argv) {
   if (argc < 2) {
@@ -22,11 +15,17 @@ int main(int argc, const char **argv) {
     return 1;
   }
 
-  print_vector(vec);
+  timeval start, end;
+
+  printContainer(vec, "Before:  ");
   PairPointer::resetCmpCount();
+  gettimeofday(&start, NULL);
   std::vector<unsigned> sorted_vec = PmergeMe::sort(vec);
-  std::cout << "cmp_count = " << PairPointer::getCmpCount() << std::endl;
-  print_vector(sorted_vec);
+  gettimeofday(&end, NULL);
+  printContainer(sorted_vec, "After:   ");
+  printTimeInfo(sorted_vec.size(), "vector", start, end);
+
+  // std::cout << "cmp_count = " << PairPointer::getCmpCount() << std::endl;
 
   return 0;
 }
