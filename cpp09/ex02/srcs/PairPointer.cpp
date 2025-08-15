@@ -77,5 +77,24 @@ PairPointer::pairVecToVec(const std::vector<PairPointer> &pair_vec) {
   return vec;
 }
 
+std::deque<PairPointer>
+PairPointer::dequeToPairDeque(const std::deque<unsigned> &deq) {
+  std::deque<PairPointer> pair_deq;
+  for (std::deque<unsigned>::const_iterator it = deq.begin(); it != deq.end();
+       ++it) {
+    pair_deq.push_back(PairPointer(*it, NULL, NULL));
+  }
+  return pair_deq;
+}
+
+std::deque<unsigned>
+PairPointer::pairDequeToDeque(const std::deque<PairPointer> &pair_deq) {
+  std::deque<unsigned> deq;
+  for (std::size_t i = 0; i < pair_deq.size(); i++) {
+    deq.push_back(pair_deq[i].getVal());
+  }
+  return deq;
+}
+
 std::size_t PairPointer::getCmpCount(void) { return PairPointer::cmp_count_; }
 void PairPointer::resetCmpCount(void) { PairPointer::cmp_count_ = 0; }
