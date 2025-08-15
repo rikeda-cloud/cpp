@@ -5,5 +5,6 @@
 #include <cstddef>
 
 unsigned jacobsthal(unsigned);
+std::vector<unsigned> argvToUintVec(int argc, const char **argv);
 
 #endif
