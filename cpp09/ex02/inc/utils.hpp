@@ -11,7 +11,7 @@ unsigned jacobsthal(unsigned);
 std::vector<unsigned> argvToUintVec(int argc, const char **argv);
 
 template <typename T>
-void printContainer(const T &container, const std::string message) {
+void printContainer(const std::string message, const T &container) {
   std::cout << message;
   for (typename T::const_iterator it = container.begin(); it != container.end();
        ++it) {

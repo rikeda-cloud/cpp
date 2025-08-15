@@ -17,12 +17,12 @@ int main(int argc, const char **argv) {
 
   timeval start, end;
 
-  printContainer(vec, "Before:  ");
+  printContainer("Before:  ", vec);
   PairPointer::resetCmpCount();
   gettimeofday(&start, NULL);
   std::vector<unsigned> sorted_vec = PmergeMe::sort(vec);
   gettimeofday(&end, NULL);
-  printContainer(sorted_vec, "After:   ");
+  printContainer("After:   ", sorted_vec);
   printTimeInfo(sorted_vec.size(), "vector", start, end);
 
   // std::cout << "cmp_count = " << PairPointer::getCmpCount() << std::endl;
