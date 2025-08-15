@@ -58,17 +58,17 @@ static void _sort(std::vector<PairPointer> &pairs) {
     }
     std::size_t right_idx = base_idx + idx;
     for (std::size_t j = idx; j > 0; --j) {
+      PairPointer target_pair = larger_pairs[j - 1];
+      std::vector<PairPointer>::iterator insert_pos;
       if (pairs.size() % 2 == 1 && j == idx && j == larger_pairs.size()) {
-        PairPointer target_pair = larger_pairs[j - 1];
-        std::vector<PairPointer>::iterator insert_pos =
+        insert_pos =
             std::lower_bound(main_chain.begin(), main_chain.end(), target_pair);
-        main_chain.insert(insert_pos, target_pair);
       } else {
-        PairPointer target_pair = larger_pairs[j - 1].getSmallPair();
-        std::vector<PairPointer>::iterator insert_pos = std::lower_bound(
+        target_pair = target_pair.getSmallPair();
+        insert_pos = std::lower_bound(
             main_chain.begin(), main_chain.begin() + right_idx, target_pair);
-        main_chain.insert(insert_pos, target_pair);
       }
+      main_chain.insert(insert_pos, target_pair);
       larger_pairs.erase(larger_pairs.begin() + j - 1);
     }
     base_idx += idx * 2;
@@ -136,17 +136,17 @@ static void _sort(std::deque<PairPointer> &pairs) {
     }
     std::size_t right_idx = base_idx + idx;
     for (std::size_t j = idx; j > 0; --j) {
+      PairPointer target_pair = larger_pairs[j - 1];
+      std::deque<PairPointer>::iterator insert_pos;
       if (pairs.size() % 2 == 1 && j == idx && j == larger_pairs.size()) {
-        PairPointer target_pair = larger_pairs[j - 1];
-        std::deque<PairPointer>::iterator insert_pos =
+        insert_pos =
             std::lower_bound(main_chain.begin(), main_chain.end(), target_pair);
-        main_chain.insert(insert_pos, target_pair);
       } else {
-        PairPointer target_pair = larger_pairs[j - 1].getSmallPair();
-        std::deque<PairPointer>::iterator insert_pos = std::lower_bound(
+        target_pair = target_pair.getSmallPair();
+        insert_pos = std::lower_bound(
             main_chain.begin(), main_chain.begin() + right_idx, target_pair);
-        main_chain.insert(insert_pos, target_pair);
       }
+      main_chain.insert(insert_pos, target_pair);
       larger_pairs.erase(larger_pairs.begin() + j - 1);
     }
     base_idx += idx * 2;
