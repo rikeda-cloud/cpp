@@ -4,7 +4,8 @@
 #include <cstddef>
 #include <iostream>
 
-static std::vector<PairPointer> _create_pairs(std::vector<PairPointer> &pairs) {
+static std::vector<PairPointer>
+_create_larger_pairs(std::vector<PairPointer> &pairs) {
   std::vector<PairPointer> new_pairs;
   for (std::size_t i = 1; i < pairs.size(); i += 2) {
     PairPointer *small = NULL;
@@ -25,47 +26,47 @@ static void _sort(std::vector<PairPointer> &pairs) {
   if (pairs.size() <= 1) {
     return;
   }
-  std::vector<PairPointer> new_pairs = _create_pairs(pairs);
-  _sort(new_pairs); // INFO 再帰的にソート
+  std::vector<PairPointer> larger_pairs = _create_larger_pairs(pairs);
+  _sort(larger_pairs); // INFO 再帰的にソート
 
-  std::vector<PairPointer> sorted_pairs;
-  sorted_pairs.push_back(new_pairs[0].getSmallPair());
-
+  std::vector<PairPointer> main_chain;
+  // INFO 最小の要素をMainChainに追加
+  main_chain.push_back(larger_pairs[0].getSmallPair());
   // INFO 大きい方の要素を全て挿入
-  for (std::size_t i = 0; i < new_pairs.size(); ++i) {
-    sorted_pairs.push_back(new_pairs[i].getLargePair());
+  for (std::size_t i = 0; i < larger_pairs.size(); ++i) {
+    main_chain.push_back(larger_pairs[i].getLargePair());
   }
 
-  if (pairs.size() == 2) { // INFO ペアが1つしかない場合はそのまま返す
-    pairs = sorted_pairs;
+  if (pairs.size() == 2) { // INFO 要素が1ペア分しかない場合はそのまま返す
+    pairs = main_chain;
     return;
   }
 
   std::size_t base_idx = 1;
-  std::size_t loop_finish_size = new_pairs.size() * 2;
-  new_pairs.erase(new_pairs.begin());
-  for (std::size_t i = 1; sorted_pairs.size() < loop_finish_size; ++i) {
+  std::size_t loop_finish_size = larger_pairs.size() * 2;
+  larger_pairs.erase(larger_pairs.begin());
+  for (std::size_t i = 1; main_chain.size() < loop_finish_size; ++i) {
     std::size_t idx = jacobsthal(i) * 2;
-    if (idx > new_pairs.size()) {
-      idx = new_pairs.size();
+    if (idx > larger_pairs.size()) {
+      idx = larger_pairs.size();
     }
     std::size_t right_idx = base_idx + idx;
     for (std::size_t j = idx; j > 0; --j) {
-      PairPointer target_pair = new_pairs[j - 1].getSmallPair();
+      PairPointer target_pair = larger_pairs[j - 1].getSmallPair();
       std::vector<PairPointer>::iterator insert_pos = std::lower_bound(
-          sorted_pairs.begin(), sorted_pairs.begin() + right_idx, target_pair);
-      sorted_pairs.insert(insert_pos, target_pair);
-      new_pairs.erase(new_pairs.begin() + j - 1);
+          main_chain.begin(), main_chain.begin() + right_idx, target_pair);
+      main_chain.insert(insert_pos, target_pair);
+      larger_pairs.erase(larger_pairs.begin() + j - 1);
     }
     base_idx += idx * 2;
   }
 
   if (pairs.size() % 2 == 1) { // INFO 奇数の場合の残りの要素を挿入
-    std::vector<PairPointer>::iterator insert_pos = std::lower_bound(
-        sorted_pairs.begin(), sorted_pairs.end(), pairs.back());
-    sorted_pairs.insert(insert_pos, pairs.back());
+    std::vector<PairPointer>::iterator insert_pos =
+        std::lower_bound(main_chain.begin(), main_chain.end(), pairs.back());
+    main_chain.insert(insert_pos, pairs.back());
   }
-  pairs = sorted_pairs;
+  pairs = main_chain;
 }
 
 std::vector<unsigned> PmergeMe::sort(const std::vector<unsigned> &src) {
