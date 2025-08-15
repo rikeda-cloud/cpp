@@ -41,7 +41,7 @@ static void _sort(std::vector<PairPointer> &pairs) {
     return;
   }
 
-  std::size_t right_idx = 1;
+  std::size_t base_idx = 1;
   std::size_t loop_finish_size = new_pairs.size() * 2;
   new_pairs.erase(new_pairs.begin());
   for (std::size_t i = 1; sorted_pairs.size() < loop_finish_size; ++i) {
@@ -49,17 +49,15 @@ static void _sort(std::vector<PairPointer> &pairs) {
     if (idx > new_pairs.size()) {
       idx = new_pairs.size();
     }
-    std::size_t add_idx = idx;
-    std::size_t tmp = idx * 2;
-    for (; idx > 0; --idx) {
-      PairPointer target_pair = new_pairs[idx - 1].getSmallPair();
+    std::size_t right_idx = base_idx + idx;
+    for (std::size_t j = idx; j > 0; --j) {
+      PairPointer target_pair = new_pairs[j - 1].getSmallPair();
       std::vector<PairPointer>::iterator insert_pos = std::lower_bound(
-          sorted_pairs.begin(), sorted_pairs.begin() + right_idx + add_idx,
-          target_pair);
+          sorted_pairs.begin(), sorted_pairs.begin() + right_idx, target_pair);
       sorted_pairs.insert(insert_pos, target_pair);
-      new_pairs.erase(new_pairs.begin() + idx - 1);
+      new_pairs.erase(new_pairs.begin() + j - 1);
     }
-    right_idx += tmp;
+    base_idx += idx * 2;
   }
 
   if (pairs.size() % 2 == 1) { // INFO 奇数の場合の残りの要素を挿入
