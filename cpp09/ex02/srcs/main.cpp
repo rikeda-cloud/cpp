@@ -14,6 +14,7 @@ int main(int argc, const char **argv) {
     std::cerr << "[ERROR] Invalid input" << std::endl;
     return 1;
   }
+  std::deque<unsigned> deq(vec.begin(), vec.end());
 
   timeval start, end;
 
@@ -24,6 +25,11 @@ int main(int argc, const char **argv) {
   gettimeofday(&end, NULL);
   printContainer("After:   ", sorted_vec);
   printTimeInfo(sorted_vec.size(), "vector", start, end);
+
+  gettimeofday(&start, NULL);
+  std::deque<unsigned> sorted_deq = PmergeMe::sort(deq);
+  gettimeofday(&end, NULL);
+  printTimeInfo(sorted_vec.size(), "deque ", start, end);
 
   std::cout << "cmp_count = " << PairPointer::getCmpCount() << std::endl;
 
