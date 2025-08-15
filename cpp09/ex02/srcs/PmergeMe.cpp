@@ -4,13 +4,11 @@
 #include <cstddef>
 #include <iostream>
 
-static std::vector<PairPointer> _create_pairs(std::vector<PairPointer> &pairs,
-                                              std::size_t &cmp_count) {
+static std::vector<PairPointer> _create_pairs(std::vector<PairPointer> &pairs) {
   std::vector<PairPointer> new_pairs;
   for (std::size_t i = 1; i < pairs.size(); i += 2) {
     PairPointer *small = NULL;
     PairPointer *large = NULL;
-    cmp_count++;
     if (pairs[i - 1] < pairs[i]) { // INFO 大小比較しながらペアを作成
       small = &pairs[i - 1];
       large = &pairs[i];
@@ -23,12 +21,12 @@ static std::vector<PairPointer> _create_pairs(std::vector<PairPointer> &pairs,
   return new_pairs;
 }
 
-static void _sort(std::vector<PairPointer> &pairs, std::size_t &cmp_count) {
+static void _sort(std::vector<PairPointer> &pairs) {
   if (pairs.size() <= 1) {
     return;
   }
-  std::vector<PairPointer> new_pairs = _create_pairs(pairs, cmp_count);
-  _sort(new_pairs, cmp_count); // INFO 再帰的にソート
+  std::vector<PairPointer> new_pairs = _create_pairs(pairs);
+  _sort(new_pairs); // INFO 再帰的にソート
 
   std::vector<PairPointer> sorted_pairs;
   sorted_pairs.push_back(new_pairs[0].getSmallPair());
@@ -54,7 +52,7 @@ static void _sort(std::vector<PairPointer> &pairs, std::size_t &cmp_count) {
     for (; idx > 0; --idx) {
       PairPointer target_pair = new_pairs[idx - 1].getSmallPair();
       std::size_t insert_idx =
-          findInsertIdx(sorted_pairs, target_pair, right_idx, cmp_count);
+          findInsertIdx(sorted_pairs, target_pair, right_idx);
       sorted_pairs.insert(sorted_pairs.begin() + insert_idx, target_pair);
       new_pairs.erase(new_pairs.begin() + idx - 1);
       right_idx += 2;
@@ -62,16 +60,15 @@ static void _sort(std::vector<PairPointer> &pairs, std::size_t &cmp_count) {
   }
 
   if (pairs.size() % 2 == 1) { // INFO 奇数の場合の残りの要素を挿入
-    std::size_t idx = findInsertIdx(sorted_pairs, pairs.back(),
-                                    sorted_pairs.size(), cmp_count);
+    std::size_t idx =
+        findInsertIdx(sorted_pairs, pairs.back(), sorted_pairs.size());
     sorted_pairs.insert(sorted_pairs.begin() + idx, pairs.back());
   }
   pairs = sorted_pairs;
 }
 
-std::vector<unsigned> PmergeMe::sort(const std::vector<unsigned> &src,
-                                     std::size_t &cmp_count) {
+std::vector<unsigned> PmergeMe::sort(const std::vector<unsigned> &src) {
   std::vector<PairPointer> pairs = PairPointer::vecToPairVec(src);
-  _sort(pairs, cmp_count);
+  _sort(pairs);
   return PairPointer::pairVecToVec(pairs);
 }
