@@ -76,42 +76,63 @@ int test_sort_vector() {
 
   // empty
   {
-    int arr[] = {};
-    std::vector<unsigned> vec(arr, arr + sizeof(arr) / sizeof(arr[0]));
+    std::vector<unsigned> vec;
     if (_exec_test_sort_vector(vec))
       fail_count++;
   }
 
   // one
   {
-    int arr[] = {1};
-    std::vector<unsigned> vec(arr, arr + sizeof(arr) / sizeof(arr[0]));
+    std::vector<unsigned> vec;
+    vec.push_back(1);
     if (_exec_test_sort_vector(vec))
       fail_count++;
   }
 
   // two
   {
-    int arr[] = {2, 1};
-    std::vector<unsigned> vec(arr, arr + sizeof(arr) / sizeof(arr[0]));
+    std::vector<unsigned> vec;
+    vec.push_back(2);
+    vec.push_back(1);
     if (_exec_test_sort_vector(vec))
       fail_count++;
   }
 
   // three
   {
-    int arr[] = {2, 1, 3};
+    std::vector<unsigned> vec;
+    vec.push_back(2);
+    vec.push_back(1);
+    vec.push_back(3);
+    if (_exec_test_sort_vector(vec))
+      fail_count++;
+  }
+
+  // same number
+  {
+    int arr[] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 8, 1, 1, 1, 1, 1};
     std::vector<unsigned> vec(arr, arr + sizeof(arr) / sizeof(arr[0]));
     if (_exec_test_sort_vector(vec))
       fail_count++;
   }
 
+  std::srand(std::time(0));
+
   // Large random
   {
     std::vector<unsigned> vec;
-    std::srand(std::time(0));
     for (int i = 0; i < 3000; ++i) {
       vec.push_back(std::rand() % 1000);
+    }
+    if (_exec_test_sort_vector(vec))
+      fail_count++;
+  }
+
+  // Large random odd
+  {
+    std::vector<unsigned> vec;
+    for (int i = 0; i < 12345; ++i) {
+      vec.push_back(std::rand() % 100000);
     }
     if (_exec_test_sort_vector(vec))
       fail_count++;
