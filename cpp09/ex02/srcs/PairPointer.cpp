@@ -1,6 +1,8 @@
 #include "PairPointer.hpp"
 #include <cstddef>
 
+std::size_t PairPointer::cmp_count_ = 0;
+
 PairPointer::PairPointer(unsigned val, PairPointer *small_pair,
                          PairPointer *large_pair)
     : val_(val), small_pair_(small_pair), large_pair_(large_pair) {}
@@ -27,26 +29,32 @@ PairPointer PairPointer::getSmallPair(void) const { return *small_pair_; }
 PairPointer PairPointer::getLargePair(void) const { return *large_pair_; }
 
 bool PairPointer::operator>(const PairPointer &pair) const {
+  PairPointer::cmp_count_++;
   return this->val_ > pair.val_;
 }
 
 bool PairPointer::operator<(const PairPointer &pair) const {
+  PairPointer::cmp_count_++;
   return this->val_ < pair.val_;
 }
 
 bool PairPointer::operator>=(const PairPointer &pair) const {
+  PairPointer::cmp_count_++;
   return this->val_ >= pair.val_;
 }
 
 bool PairPointer::operator<=(const PairPointer &pair) const {
+  PairPointer::cmp_count_++;
   return this->val_ <= pair.val_;
 }
 
 bool PairPointer::operator==(const PairPointer &pair) const {
+  PairPointer::cmp_count_++;
   return this->val_ == pair.val_;
 }
 
 bool PairPointer::operator!=(const PairPointer &pair) const {
+  PairPointer::cmp_count_++;
   return this->val_ != pair.val_;
 }
 
@@ -68,3 +76,9 @@ PairPointer::pairVecToVec(const std::vector<PairPointer> &pair_vec) {
   }
   return vec;
 }
+
+std::size_t PairPointer::getCmpCount(void) const {
+  return PairPointer::cmp_count_;
+}
+
+void PairPointer::resetCmpCount(void) { PairPointer::cmp_count_ = 0; }
