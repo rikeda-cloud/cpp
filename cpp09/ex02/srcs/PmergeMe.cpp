@@ -41,7 +41,7 @@ static void _sort(std::vector<PairPointer> &pairs) {
     return;
   }
 
-  std::size_t right_idx = 1;
+  std::size_t right_idx = 2;
   std::size_t loop_finish_size = new_pairs.size() * 2;
   new_pairs.erase(new_pairs.begin());
   for (std::size_t i = 1; sorted_pairs.size() < loop_finish_size; ++i) {

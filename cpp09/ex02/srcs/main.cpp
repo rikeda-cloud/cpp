@@ -25,7 +25,7 @@ int main(int argc, const char **argv) {
   printContainer("After:   ", sorted_vec);
   printTimeInfo(sorted_vec.size(), "vector", start, end);
 
-  // std::cout << "cmp_count = " << PairPointer::getCmpCount() << std::endl;
+  std::cout << "cmp_count = " << PairPointer::getCmpCount() << std::endl;
 
   return 0;
 }
