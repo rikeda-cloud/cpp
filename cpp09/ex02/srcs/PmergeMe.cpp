@@ -40,11 +40,6 @@ static void _sort(std::vector<PairPointer> &pairs) {
     main_chain.push_back(larger_pairs[i].getLargePair());
   }
 
-  if (pairs.size() == 2) { // INFO 要素が1ペア分しかない場合はそのまま返す
-    pairs = main_chain;
-    return;
-  }
-
   std::size_t loop_finish_size = larger_pairs.size() * 2;
   if (pairs.size() % 2 == 1) {
     larger_pairs.push_back(pairs.back());
@@ -116,11 +111,6 @@ static void _sort(std::deque<PairPointer> &pairs) {
   // INFO 大きい方の要素を全て挿入
   for (std::size_t i = 0; i < larger_pairs.size(); ++i) {
     main_chain.push_back(larger_pairs[i].getLargePair());
-  }
-
-  if (pairs.size() == 2) { // INFO 要素が1ペア分しかない場合はそのまま返す
-    pairs = main_chain;
-    return;
   }
 
   std::size_t loop_finish_size = larger_pairs.size() * 2;
