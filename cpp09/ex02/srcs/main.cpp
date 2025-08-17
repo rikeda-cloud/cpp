@@ -1,8 +1,8 @@
 #include "PairPointer.hpp"
 #include "PmergeMe.hpp"
 #include "utils.hpp"
+#include <ctime>
 #include <iostream>
-#include <sys/time.h>
 
 int main(int argc, const char **argv) {
   if (argc < 2) {
@@ -16,21 +16,23 @@ int main(int argc, const char **argv) {
   }
   std::deque<unsigned> deq(vec.begin(), vec.end());
 
-  timeval start, end;
+  clock_t start, end;
 
   printContainer("Before:  ", vec);
   PairPointer::resetCmpCount();
-  gettimeofday(&start, NULL);
+  start = clock();
   std::vector<unsigned> sorted_vec = PmergeMe::sort(vec);
-  gettimeofday(&end, NULL);
+  end = clock();
   printContainer("After:   ", sorted_vec);
   printTimeInfo(sorted_vec.size(), "vector", start, end);
-  std::cout << "cmp_count = " << PairPointer::getCmpCount() << std::endl;
+  // std::cout << "cmp_count = " << PairPointer::getCmpCount() << std::endl;
 
-  gettimeofday(&start, NULL);
+  PairPointer::resetCmpCount();
+  start = clock();
   std::deque<unsigned> sorted_deq = PmergeMe::sort(deq);
-  gettimeofday(&end, NULL);
+  end = clock();
   printTimeInfo(sorted_vec.size(), "deque ", start, end);
+  // std::cout << "cmp_count = " << PairPointer::getCmpCount() << std::endl;
 
   return 0;
 }

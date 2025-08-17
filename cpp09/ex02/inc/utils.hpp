@@ -3,8 +3,8 @@
 
 #include "PairPointer.hpp"
 #include <cstddef>
+#include <ctime>
 #include <iostream>
-#include <string>
 
 unsigned jacobsthal(unsigned);
 std::vector<unsigned> argvToUintVec(int argc, const char **argv);
@@ -21,6 +21,6 @@ void printContainer(const std::string message, const T &container) {
   std::cout << std::endl;
 }
 
-void printTimeInfo(std::size_t, const std::string &, timeval, timeval);
+void printTimeInfo(std::size_t, const std::string &, clock_t, clock_t);
 
 #endif
