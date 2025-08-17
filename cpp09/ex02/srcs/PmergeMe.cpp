@@ -31,6 +31,8 @@ static void _sort(std::vector<PairPointer> &pairs) {
   _sort(larger_pairs); // INFO 再帰的にソート
 
   std::vector<PairPointer> main_chain;
+  main_chain.reserve(pairs.size());
+
   // INFO 最小の要素をMainChainに追加
   main_chain.push_back(larger_pairs[0].getSmallPair());
   // INFO 大きい方の要素を全て挿入
