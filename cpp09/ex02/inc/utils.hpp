@@ -5,7 +5,6 @@
 #include <cstddef>
 #include <iostream>
 #include <string>
-#include <sys/time.h>
 
 unsigned jacobsthal(unsigned);
 std::vector<unsigned> argvToUintVec(int argc, const char **argv);
