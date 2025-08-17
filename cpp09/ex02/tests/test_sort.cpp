@@ -23,6 +23,7 @@ bool _exec_test_sort_vector(const std::vector<unsigned> &vec,
     std::cout << "[ERROR] test_sort_vector: expect_cmp_count = "
               << expect_cmp_count << " actual_cmp_count = " << actual_cmp_count
               << std::endl;
+    printContainer("Input:   ", vec);
     return true;
   }
   std::cout << "[OK]" << std::endl;
@@ -49,6 +50,7 @@ bool _exec_test_sort_deque(const std::deque<unsigned> &deq,
     std::cout << "[ERROR] test_sort_deque: expect_cmp_count = "
               << expect_cmp_count << " actual_cmp_count = " << actual_cmp_count
               << std::endl;
+    printContainer("Input:   ", deq);
     return true;
   }
   std::cout << "[OK]" << std::endl;
