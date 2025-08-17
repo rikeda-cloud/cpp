@@ -36,69 +36,47 @@ bool exec_test_evaluate(const std::string &s, int expect_result) {
 int test_overflow(void) {
   int fail_count =
       exec_test_evaluate( // INT_MAX
-          "2 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 "
-          "* 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 1 - 2 * 1 +",
+          "8 8 * 8 * 8 * 8 * 8 * 8 * 8 * 8 * 8 * 1 - 2 * 1 +",
           std::numeric_limits<int>::max()) +
-      exec_test_evaluate( // (INT_MAX / -1) = (INT_MIN + 1)
-          "2 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 "
-          "* 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 1 - 2 * 1 + 0 1 - "
-          "/",
-          std::numeric_limits<int>::min() + 1) +
       exec_test_evaluate( // INT_MAX + 1
-          "2 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 "
-          "* 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 1 - 2 * 1 + 1 +",
-          EXPECTED_EXCEPTION) +
-      exec_test_evaluate( // INT_MAX * INT_MAX
-          "2 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 "
-          "* 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 1 - 2 * 1 + "
-          "2 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 "
-          "* 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 1 - 2 * 1 + *",
+          "8 8 * 8 * 8 * 8 * 8 * 8 * 8 * 8 * 8 * 1 - 2 * 1 + 1 +",
           EXPECTED_EXCEPTION) +
       exec_test_evaluate( // INT_MAX - -1
-          "2 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 "
-          "* 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 1 - 2 * 1 + 0 1 - "
-          "-",
+          "8 8 * 8 * 8 * 8 * 8 * 8 * 8 * 8 * 8 * 1 - 2 * 1 + 0 1 - -",
           EXPECTED_EXCEPTION) +
-      exec_test_evaluate( // 2^32
-          "2 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 "
-          "* 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 *",
-          EXPECTED_EXCEPTION);
+      exec_test_evaluate( // INT_MAX * INT_MAX
+          "8 8 * 8 * 8 * 8 * 8 * 8 * 8 * 8 * 8 * 1 - 2 * 1 +"
+          "8 8 * 8 * 8 * 8 * 8 * 8 * 8 * 8 * 8 * 1 - 2 * 1 + *",
+          EXPECTED_EXCEPTION) +
+      exec_test_evaluate( // (INT_MAX / -1) = (INT_MIN + 1)
+          "8 8 * 8 * 8 * 8 * 8 * 8 * 8 * 8 * 8 * 1 - 2 * 1 + 0 1 - /",
+          std::numeric_limits<int>::min() + 1);
   return fail_count;
 }
 
 int test_underflow(void) {
-  int fail_count =
-      exec_test_evaluate( // INT_MIN
-          "0 2 - 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 "
-          "* 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 *",
-          std::numeric_limits<int>::min()) +
-      exec_test_evaluate( // INT_MIN - 1
-          "0 2 - 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 "
-          "* 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 1 -",
-          EXPECTED_EXCEPTION) +
-      exec_test_evaluate( // INT_MIN * 2
-          "0 2 - 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 "
-          "* 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 *",
-          EXPECTED_EXCEPTION) +
-      exec_test_evaluate( // INT_MIN / -1
-          "0 2 - 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 "
-          "* 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 0 1 - /",
-          EXPECTED_EXCEPTION) +
-      exec_test_evaluate( // INT_MIN * -1
-          "0 1 - 0 2 - 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * "
-          "2 * 2 "
-          "* 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * *",
-          EXPECTED_EXCEPTION) +
-      exec_test_evaluate( // INT_MIN + -1
-          "0 2 - 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 "
-          "* 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 0 1 - +",
-          EXPECTED_EXCEPTION) +
-      exec_test_evaluate( // INT_MIN * INT_MIN
-          "0 2 - 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 "
-          "* 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * "
-          "0 2 - 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 "
-          "* 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * *",
-          EXPECTED_EXCEPTION);
+  int fail_count = exec_test_evaluate( // INT_MIN
+                       "0 8 - 8 * 8 * 8 * 8 * 8 * 8 * 8 * 8 * 8 * 2 *",
+                       std::numeric_limits<int>::min()) +
+                   exec_test_evaluate( // INT_MIN - 1
+                       "0 8 - 8 * 8 * 8 * 8 * 8 * 8 * 8 * 8 * 8 * 2 * 1 -",
+                       EXPECTED_EXCEPTION) +
+                   exec_test_evaluate( // INT_MIN * 2
+                       "0 8 - 8 * 8 * 8 * 8 * 8 * 8 * 8 * 8 * 8 * 2 * 2 *",
+                       EXPECTED_EXCEPTION) +
+                   exec_test_evaluate( // INT_MIN / -1
+                       "0 8 - 8 * 8 * 8 * 8 * 8 * 8 * 8 * 8 * 8 * 2 * 0 1 - /",
+                       EXPECTED_EXCEPTION) +
+                   exec_test_evaluate( // INT_MIN * -1
+                       "0 8 - 8 * 8 * 8 * 8 * 8 * 8 * 8 * 8 * 8 * 2 * 0 1 - *",
+                       EXPECTED_EXCEPTION) +
+                   exec_test_evaluate( // INT_MIN + -1
+                       "0 8 - 8 * 8 * 8 * 8 * 8 * 8 * 8 * 8 * 8 * 2 * 0 1 - +",
+                       EXPECTED_EXCEPTION) +
+                   exec_test_evaluate( // INT_MIN * INT_MIN
+                       "0 8 - 8 * 8 * 8 * 8 * 8 * 8 * 8 * 8 * 8 * 2 *"
+                       "0 8 - 8 * 8 * 8 * 8 * 8 * 8 * 8 * 8 * 8 * 2 * *",
+                       EXPECTED_EXCEPTION);
   return fail_count;
 }
 
