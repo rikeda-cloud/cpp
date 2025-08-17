@@ -4,19 +4,29 @@
 #include <cstddef>
 #include <iostream>
 
-// vector sort
 static std::vector<PairPointer>
 _create_larger_pairs(std::vector<PairPointer> &pairs) {
   std::vector<PairPointer> new_pairs;
   for (std::size_t i = 1; i < pairs.size(); i += 2) {
-    PairPointer *small = NULL;
-    PairPointer *large = NULL;
-    if (pairs[i - 1] < pairs[i]) { // INFO 大小比較しながらペアを作成
-      small = &pairs[i - 1];
-      large = &pairs[i];
-    } else {
-      small = &pairs[i];
-      large = &pairs[i - 1];
+    PairPointer *small = &pairs[i - 1];
+    PairPointer *large = &pairs[i];
+    if (*large < *small) { // INFO 大小比較
+      std::swap(small, large);
+    }
+    new_pairs.push_back(PairPointer(large->getVal(), small, large));
+  }
+  return new_pairs;
+}
+
+static std::deque<PairPointer>
+_create_larger_pairs(std::deque<PairPointer> &pairs) {
+  std::deque<PairPointer> new_pairs;
+
+  for (std::size_t i = 1; i < pairs.size(); i += 2) {
+    PairPointer *small = &pairs[i - 1];
+    PairPointer *large = &pairs[i];
+    if (*large < *small) { // INFO 大小比較
+      std::swap(small, large);
     }
     new_pairs.push_back(PairPointer(large->getVal(), small, large));
   }
@@ -73,31 +83,6 @@ static void _sort(std::vector<PairPointer> &pairs) {
   pairs = main_chain;
 }
 
-std::vector<unsigned> PmergeMe::sort(const std::vector<unsigned> &src) {
-  std::vector<PairPointer> pairs = PairPointer::vecToPairVec(src);
-  _sort(pairs);
-  return PairPointer::pairVecToVec(pairs);
-}
-
-// deque sort
-static std::deque<PairPointer>
-_create_larger_pairs(std::deque<PairPointer> &pairs) {
-  std::deque<PairPointer> new_pairs;
-  for (std::size_t i = 1; i < pairs.size(); i += 2) {
-    PairPointer *small = NULL;
-    PairPointer *large = NULL;
-    if (pairs[i - 1] < pairs[i]) { // INFO 大小比較しながらペアを作成
-      small = &pairs[i - 1];
-      large = &pairs[i];
-    } else {
-      small = &pairs[i];
-      large = &pairs[i - 1];
-    }
-    new_pairs.push_back(PairPointer(large->getVal(), small, large));
-  }
-  return new_pairs;
-}
-
 static void _sort(std::deque<PairPointer> &pairs) {
   if (pairs.size() <= 1) {
     return;
@@ -144,6 +129,12 @@ static void _sort(std::deque<PairPointer> &pairs) {
     base_idx += idx * 2;
   }
   pairs = main_chain;
+}
+
+std::vector<unsigned> PmergeMe::sort(const std::vector<unsigned> &src) {
+  std::vector<PairPointer> pairs = PairPointer::vecToPairVec(src);
+  _sort(pairs);
+  return PairPointer::pairVecToVec(pairs);
 }
 
 std::deque<unsigned> PmergeMe::sort(const std::deque<unsigned> &src) {
