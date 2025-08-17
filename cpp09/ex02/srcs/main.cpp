@@ -31,7 +31,7 @@ int main(int argc, const char **argv) {
   start = clock();
   std::deque<unsigned> sorted_deq = PmergeMe::sort(deq);
   end = clock();
-  printTimeInfo(sorted_vec.size(), "deque ", start, end);
+  printTimeInfo(sorted_deq.size(), "deque ", start, end);
   // std::cout << "cmp_count = " << PairPointer::getCmpCount() << std::endl;
 
   return 0;
