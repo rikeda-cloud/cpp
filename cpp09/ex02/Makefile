@@ -18,8 +18,8 @@ MAIN_SRCS		=	main.cpp
 
 TEST_SRCS		=	main_test.cpp \
 					test_jacobsthal.cpp \
-					test_sort_vector.cpp \
-					test_sort_deque.cpp
+					SortTestCase.cpp \
+					test_sort.cpp
 
 
 OBJS			=	$(patsubst %.o, $(OBJS_DIR)/%.o, $(SRCS:.cpp=.o))
