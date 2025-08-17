@@ -33,52 +33,78 @@ _create_larger_pairs(std::deque<PairPointer> &pairs) {
   return new_pairs;
 }
 
+static void
+_prep_main_chain_and_pend(const std::vector<PairPointer> &pairs,
+                          const std::vector<PairPointer> &sorted_pairs,
+                          std::vector<PairPointer> &main_chain,
+                          std::vector<PairPointer> &pend) {
+  main_chain.reserve(pairs.size());
+  pend.reserve(pairs.size() / 2 + 1);
+
+  main_chain.push_back(sorted_pairs[0].getSmallPair());
+  for (std::size_t i = 0; i < sorted_pairs.size(); ++i) {
+    main_chain.push_back(sorted_pairs[i].getLargePair());
+    pend.push_back(sorted_pairs[i].getSmallPair());
+  }
+  // ペアの数が奇数の場合、余り要素をpendに追加
+  if (pairs.size() % 2 == 1) {
+    pend.push_back(pairs.back());
+  }
+}
+
+static void
+_prep_main_chain_and_pend(const std::deque<PairPointer> &pairs,
+                          const std::deque<PairPointer> &sorted_pairs,
+                          std::deque<PairPointer> &main_chain,
+                          std::deque<PairPointer> &pend) {
+  main_chain.push_back(sorted_pairs[0].getSmallPair());
+  for (std::size_t i = 0; i < sorted_pairs.size(); ++i) {
+    main_chain.push_back(sorted_pairs[i].getLargePair());
+    pend.push_back(sorted_pairs[i].getSmallPair());
+  }
+  // ペアの数が奇数の場合、余り要素をpendに追加
+  if (pairs.size() % 2 == 1) {
+    pend.push_back(pairs.back());
+  }
+}
+
 static void _sort(std::vector<PairPointer> &pairs) {
   if (pairs.size() <= 1) {
     return;
   }
+  // INFO Step1: ペアリングと再帰ソート
   std::vector<PairPointer> larger_pairs = _create_larger_pairs(pairs);
-  _sort(larger_pairs); // INFO 再帰的にソート
+  _sort(larger_pairs);
 
-  std::vector<PairPointer> main_chain;
-  main_chain.reserve(pairs.size());
+  // INFO Step2: メインチェーンと挿入待ちリストの構築
+  std::vector<PairPointer> main_chain, pend;
+  _prep_main_chain_and_pend(pairs, larger_pairs, main_chain, pend);
 
-  // INFO 最小の要素をMainChainに追加
-  main_chain.push_back(larger_pairs[0].getSmallPair());
-  // INFO 大きい方の要素を全て挿入
-  for (std::size_t i = 0; i < larger_pairs.size(); ++i) {
-    main_chain.push_back(larger_pairs[i].getLargePair());
-  }
+  std::size_t main_chain_idx = 1;
+  std::size_t pend_idx = 1;
 
-  std::size_t loop_finish_size = larger_pairs.size() * 2;
-  if (pairs.size() % 2 == 1) {
-    larger_pairs.push_back(pairs.back());
-    loop_finish_size++;
-  }
-
-  std::size_t base_idx = 1;
-  larger_pairs.erase(larger_pairs.begin());
-  for (std::size_t i = 1; main_chain.size() < loop_finish_size; ++i) {
-    std::size_t idx = jacobsthal(i) * 2;
-    if (idx > larger_pairs.size()) {
-      idx = larger_pairs.size();
+  // INFO Step3: pend要素をメインチェーンに挿入
+  for (std::size_t i = 1; main_chain.size() < pairs.size(); ++i) {
+    std::size_t jacobsthal_num = jacobsthal(i) * 2;
+    std::size_t group_end_idx = pend_idx + jacobsthal_num;
+    std::size_t right_idx = main_chain_idx + jacobsthal_num;
+    if (group_end_idx > pend.size()) {
+      group_end_idx = pend.size();
+      right_idx = main_chain.size();
     }
-    std::size_t right_idx = base_idx + idx;
-    for (std::size_t j = idx; j > 0; --j) {
-      PairPointer target_pair = larger_pairs[j - 1];
-      std::vector<PairPointer>::iterator insert_pos;
-      if (pairs.size() % 2 == 1 && j == idx && j == larger_pairs.size()) {
-        insert_pos =
-            std::lower_bound(main_chain.begin(), main_chain.end(), target_pair);
-      } else {
-        target_pair = target_pair.getSmallPair();
-        insert_pos = std::lower_bound(
-            main_chain.begin(), main_chain.begin() + right_idx, target_pair);
+
+    for (std::size_t j = group_end_idx; j > pend_idx; --j) {
+      std::vector<PairPointer>::iterator end = main_chain.begin() + right_idx;
+      // INFO 余り要素の挿入位置探索はmain_chain全体
+      if (pairs.size() % 2 == 1 && j == pend.size()) {
+        end = main_chain.end();
       }
-      main_chain.insert(insert_pos, target_pair);
-      larger_pairs.erase(larger_pairs.begin() + j - 1);
+      std::vector<PairPointer>::iterator insert_pos =
+          std::lower_bound(main_chain.begin(), end, pend[j - 1]);
+      main_chain.insert(insert_pos, pend[j - 1]);
     }
-    base_idx += idx * 2;
+    pend_idx += jacobsthal_num;
+    main_chain_idx += jacobsthal_num * 2;
   }
   pairs = main_chain;
 }
@@ -87,46 +113,39 @@ static void _sort(std::deque<PairPointer> &pairs) {
   if (pairs.size() <= 1) {
     return;
   }
+  // INFO Step1: ペアリングと再帰ソート
   std::deque<PairPointer> larger_pairs = _create_larger_pairs(pairs);
-  _sort(larger_pairs); // INFO 再帰的にソート
+  _sort(larger_pairs);
 
-  std::deque<PairPointer> main_chain;
-  // INFO 最小の要素をMainChainに追加
-  main_chain.push_back(larger_pairs[0].getSmallPair());
-  // INFO 大きい方の要素を全て挿入
-  for (std::size_t i = 0; i < larger_pairs.size(); ++i) {
-    main_chain.push_back(larger_pairs[i].getLargePair());
-  }
+  // INFO Step2: メインチェーンと挿入待ちリストの構築
+  std::deque<PairPointer> main_chain, pend;
+  _prep_main_chain_and_pend(pairs, larger_pairs, main_chain, pend);
 
-  std::size_t loop_finish_size = larger_pairs.size() * 2;
-  if (pairs.size() % 2 == 1) {
-    larger_pairs.push_back(pairs.back());
-    loop_finish_size++;
-  }
+  std::size_t main_chain_idx = 1;
+  std::size_t pend_idx = 1;
 
-  std::size_t base_idx = 1;
-  larger_pairs.erase(larger_pairs.begin());
-  for (std::size_t i = 1; main_chain.size() < loop_finish_size; ++i) {
-    std::size_t idx = jacobsthal(i) * 2;
-    if (idx > larger_pairs.size()) {
-      idx = larger_pairs.size();
+  // INFO Step3: pend要素をメインチェーンに挿入
+  for (std::size_t i = 1; main_chain.size() < pairs.size(); ++i) {
+    std::size_t jacobsthal_num = jacobsthal(i) * 2;
+    std::size_t group_end_idx = pend_idx + jacobsthal_num;
+    std::size_t right_idx = main_chain_idx + jacobsthal_num;
+    if (group_end_idx > pend.size()) {
+      group_end_idx = pend.size();
+      right_idx = main_chain.size();
     }
-    std::size_t right_idx = base_idx + idx;
-    for (std::size_t j = idx; j > 0; --j) {
-      PairPointer target_pair = larger_pairs[j - 1];
-      std::deque<PairPointer>::iterator insert_pos;
-      if (pairs.size() % 2 == 1 && j == idx && j == larger_pairs.size()) {
-        insert_pos =
-            std::lower_bound(main_chain.begin(), main_chain.end(), target_pair);
-      } else {
-        target_pair = target_pair.getSmallPair();
-        insert_pos = std::lower_bound(
-            main_chain.begin(), main_chain.begin() + right_idx, target_pair);
+
+    for (std::size_t j = group_end_idx; j > pend_idx; --j) {
+      std::deque<PairPointer>::iterator end = main_chain.begin() + right_idx;
+      // INFO 余り要素の挿入位置探索はmain_chain全体
+      if (pairs.size() % 2 == 1 && j == pend.size()) {
+        end = main_chain.end();
       }
-      main_chain.insert(insert_pos, target_pair);
-      larger_pairs.erase(larger_pairs.begin() + j - 1);
+      std::deque<PairPointer>::iterator insert_pos =
+          std::lower_bound(main_chain.begin(), end, pend[j - 1]);
+      main_chain.insert(insert_pos, pend[j - 1]);
     }
-    base_idx += idx * 2;
+    pend_idx += jacobsthal_num;
+    main_chain_idx += jacobsthal_num * 2;
   }
   pairs = main_chain;
 }
