@@ -71,16 +71,18 @@ bool validateValue(const std::string &value) {
 bool isDate(int year, int month, int day) {
   const int LAST_DAYS[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
+  // 月の範囲チェック
   if (!(1 <= month && month <= 12)) {
     return false;
   }
 
   //閏年判定
   bool is_leap_year = year % 4 == 0 && (year % 100 != 0 || year % 400 == 0);
-  int last_day = LAST_DAYS[month - 1];
 
+  int last_day = LAST_DAYS[month - 1];
   if (month == 2 && is_leap_year) {
     last_day = 29;
   }
+
   return 1 <= day && day <= last_day;
 }

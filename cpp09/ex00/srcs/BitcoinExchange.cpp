@@ -39,6 +39,9 @@ void BitcoinExchange::exchange(const std::string &file, const DataBase &db) {
     }
     std::cout << key << " => " << value << " = " << rate * value << std::endl;
   }
+  if (s.eof() == false && s.fail()) {
+    throw std::runtime_error("Error: could not read file.");
+  }
   s.close();
   if (!read_first_line) {
     throw std::runtime_error("Error: empty file.");
