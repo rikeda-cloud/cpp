@@ -1,6 +1,6 @@
 #include "test.hpp"
 
 int main(void) {
-  int fail_count = test_data_base() + test_utils();
-  return fail_count;
+  return test_data_base() + test_validate_btc_date() + test_validate_value() +
+         test_is_date() + test_parse_line();
 }
