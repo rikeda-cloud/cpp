@@ -61,7 +61,10 @@ void Span::prepareCalcSpan(void) {
 }
 
 unsigned int Span::calcDiff(int v1, int v2) const {
-  long long lv1 = static_cast<long long>(v1);
-  long long lv2 = static_cast<long long>(v2);
-  return (lv1 > lv2) ? lv1 - lv2 : lv2 - lv1;
+  long long lv1 = v1;
+  long long lv2 = v2;
+  if (v1 < v2) {
+    return lv2 - lv1;
+  }
+  return lv1 - lv2;
 }
