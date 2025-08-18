@@ -7,13 +7,17 @@
 class RPN {
 public:
   enum Operation { PLUS, MINUS, DIV, MUL, NUMBER };
-
   static int evaluate(const std::string &);
 
 private:
   static Operation detectOperation(const std::string &);
   static void doOperation(std::stack<int> &, Operation, const std::string &);
   static int calc(int, int, Operation);
+
+  static int safe_add(int, int);
+  static int safe_diff(int, int);
+  static int safe_mul(int, int);
+  static int safe_div(int, int);
 
   RPN(void);
   ~RPN(void);
