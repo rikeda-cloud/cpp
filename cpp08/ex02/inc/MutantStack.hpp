@@ -13,64 +13,13 @@ public:
   ~MutantStack(void);
   MutantStack &operator=(const MutantStack &);
 
-  // 毎回書くと長いのでtypedef
-  typedef typename Container::iterator container_iterator;
-  typedef typename Container::const_iterator container_const_iterator;
-
-  // INFO bidirectional_iterator(双方向イテレータ) Interface的な役割
-  // INFO [Iterator] https://cpprefjp.github.io/reference/iterator.html
-  // INFO [Tag] https://cpprefjp.github.io/reference/iterator/iterator_tag.html
-  class iterator : public std::iterator<std::bidirectional_iterator_tag, T> {
-  private:
-    container_iterator it_;
-
-  public:
-    iterator(void);
-    iterator(container_iterator it);
-    iterator(const iterator &other);
-    ~iterator(void);
-    iterator &operator=(const iterator &other);
-
-    bool operator==(const iterator &other) const;
-    bool operator!=(const iterator &other) const;
-
-    T &operator*(void) const;
-    T *operator->(void) const;
-
-    iterator &operator++(void);
-    iterator operator++(int);
-    iterator &operator--(void);
-    iterator operator--(int);
-  };
-
-  class const_iterator
-      : public std::iterator<std::bidirectional_iterator_tag, T> {
-  private:
-    container_const_iterator it_;
-
-  public:
-    const_iterator(void);
-    const_iterator(container_const_iterator it);
-    const_iterator(const const_iterator &other);
-    ~const_iterator(void);
-    const_iterator &operator=(const const_iterator &other);
-
-    bool operator==(const const_iterator &other) const;
-    bool operator!=(const const_iterator &other) const;
-
-    const T &operator*(void) const;
-    const T *operator->(void) const;
-
-    const_iterator &operator++(void);
-    const_iterator operator++(int);
-    const_iterator &operator--(void);
-    const_iterator operator--(int);
-  };
+  typedef typename Container::iterator iterator;
+  typedef typename Container::reverse_iterator reverse_iterator;
 
   iterator begin(void);
+  reverse_iterator rbegin(void);
   iterator end(void);
-  const_iterator begin(void) const;
-  const_iterator end(void) const;
+  reverse_iterator rend(void);
 };
 
 #include "MutantStack.tpp"

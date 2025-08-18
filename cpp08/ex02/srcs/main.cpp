@@ -233,54 +233,31 @@ void test_arrow_operator(void) {
   std::cout << "[OK]" << std::endl;
 }
 
-void test_const_iterator(void) {
-  MutantStack<int, std::list<int> > stk;
-  stk.push(3);
-  stk.push(2);
-  stk.push(1);
-  const MutantStack<int, std::list<int> > const_stk(stk);
+void test_rbegin_rend(void) {
+  // rbegin()とrend()が機能するか？
+  MutantStack<double, std::vector<double> > actual;
+  actual.push(5.0);
+  actual.push(17.0);
+  actual.pop();
+  actual.push(3.0);
+  actual.push(5.0);
+  actual.push(737.0);
+  actual.push(0.0);
 
-  std::list<int> expect;
-  expect.push_back(3);
-  expect.push_back(2);
-  expect.push_back(1);
+  std::vector<double> expect;
+  expect.push_back(5.0);
+  expect.push_back(17.0);
+  expect.pop_back();
+  expect.push_back(3.0);
+  expect.push_back(5.0);
+  expect.push_back(737.0);
+  expect.push_back(0.0);
 
-  MutantStack<int, std::list<int> >::const_iterator actual_it =
-      const_stk.begin();
-  std::list<int>::const_iterator expect_it = expect.begin();
-  for (; expect_it != expect.end(); ++actual_it, ++expect_it) {
-    if (*expect_it != *actual_it) {
-      std::cout << "[ERROR] test_const_iterator: expect " << *expect_it
-                << ", actual " << *actual_it << std::endl;
-    }
-  }
-  std::cout << "[OK]" << std::endl;
-}
-
-void test_const_iterator_arrow(void) {
-  MutantStack<Data> stk;
-
-  const Data d1 = {"Hello", 42};
-  const Data d2 = {"World", 100};
-
-  stk.push(d1);
-  stk.push(d2);
-  const MutantStack<Data> const_stk(stk);
-
-  MutantStack<Data>::const_iterator it = const_stk.begin();
-  if (it->str != d1.str || it->v != d1.v) {
-    std::cout << "[ERROR] test_const_iterator: unexpect value" << std::endl;
-  }
-  it++;
-  if (it->str != d2.str || it->v != d2.v) {
-    std::cout << "[ERROR] test_const_iterator: unexpect value" << std::endl;
+  if (!std::equal(actual.rbegin(), actual.rend(), expect.rbegin())) {
+    std::cout << "[ERROR] test_vector: content mismatch" << std::endl;
     return;
   }
-  --it;
-  if (it->str != d1.str || it->v != d1.v) {
-    std::cout << "[ERROR] test_const_iterator: unexpect value" << std::endl;
-    return;
-  }
+
   std::cout << "[OK]" << std::endl;
 }
 
@@ -294,7 +271,6 @@ int main(void) {
   test_copy_constructor();
   test_assignment();
   test_arrow_operator();
-  test_const_iterator();
-  test_const_iterator_arrow();
+  test_rbegin_rend();
   return 0;
 }
