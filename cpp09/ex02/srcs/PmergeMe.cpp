@@ -4,9 +4,9 @@
 #include <cstddef>
 #include <iostream>
 
-static std::vector<PairPointer>
-_create_larger_pairs(std::vector<PairPointer> &pairs) {
+static std::vector<PairPointer> _pair_up(std::vector<PairPointer> &pairs) {
   std::vector<PairPointer> new_pairs;
+
   for (std::size_t i = 1; i < pairs.size(); i += 2) {
     PairPointer *small = &pairs[i - 1];
     PairPointer *large = &pairs[i];
@@ -18,8 +18,7 @@ _create_larger_pairs(std::vector<PairPointer> &pairs) {
   return new_pairs;
 }
 
-static std::deque<PairPointer>
-_create_larger_pairs(std::deque<PairPointer> &pairs) {
+static std::deque<PairPointer> _pair_up(std::deque<PairPointer> &pairs) {
   std::deque<PairPointer> new_pairs;
 
   for (std::size_t i = 1; i < pairs.size(); i += 2) {
@@ -73,7 +72,7 @@ static void _sort(std::vector<PairPointer> &pairs) {
     return;
   }
   // INFO Step1: ペアリングと再帰ソート
-  std::vector<PairPointer> larger_pairs = _create_larger_pairs(pairs);
+  std::vector<PairPointer> larger_pairs = _pair_up(pairs);
   _sort(larger_pairs);
 
   // INFO Step2: メインチェーンと挿入待ちリストの構築
@@ -114,7 +113,7 @@ static void _sort(std::deque<PairPointer> &pairs) {
     return;
   }
   // INFO Step1: ペアリングと再帰ソート
-  std::deque<PairPointer> larger_pairs = _create_larger_pairs(pairs);
+  std::deque<PairPointer> larger_pairs = _pair_up(pairs);
   _sort(larger_pairs);
 
   // INFO Step2: メインチェーンと挿入待ちリストの構築
