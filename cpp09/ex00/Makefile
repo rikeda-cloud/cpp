@@ -12,13 +12,13 @@ TESTS_DIR		=	./tests
 
 SRCS			=	DataBase.cpp \
 					BitcoinExchange.cpp \
-					parser.cpp
+					utils.cpp
 
 MAIN_SRCS		=	main.cpp
 
 TEST_SRCS		=	main_test.cpp \
 					test_data_base.cpp \
-					test_parser.cpp
+					test_utils.cpp
 
 OBJS			=	$(patsubst %.o, $(OBJS_DIR)/%.o, $(SRCS:.cpp=.o))
 DEPS			=	$(OBJS:.o=.d)

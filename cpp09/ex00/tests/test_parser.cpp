@@ -1,4 +1,4 @@
-#include "parser.hpp"
+#include "utils.hpp"
 #include <iostream>
 
 bool _exec_validate_date(const std::string &date, bool success_validate) {
@@ -84,10 +84,4 @@ int _test_parse_line(void) {
          _exec_parse_line(",12345", ",", false) +
          _exec_parse_line("   ,    ", ",", false) +
          _exec_parse_line("", ",", false);
-}
-
-int test_parser(void) {
-  int fail_count = _test_validate_btc_date() + _test_validate_value() +
-                   _test_is_date() + _test_parse_line();
-  return fail_count;
 }
