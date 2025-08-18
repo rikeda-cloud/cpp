@@ -67,6 +67,68 @@ _prep_main_chain_and_pend(const std::deque<PairPointer> &pairs,
   }
 }
 
+static void
+_insert_pend_elements_to_main_chain(std::size_t pairs_size,
+                                    std::vector<PairPointer> &main_chain,
+                                    const std::vector<PairPointer> &pend) {
+  std::size_t main_chain_idx = 1;
+  std::size_t pend_idx = 1;
+
+  for (std::size_t i = 1; main_chain.size() < pairs_size; ++i) {
+    std::size_t jacobsthal_num = jacobsthal(i) * 2;
+    std::size_t group_end_idx = pend_idx + jacobsthal_num;
+    std::size_t right_idx = main_chain_idx + jacobsthal_num;
+    if (group_end_idx > pend.size()) {
+      group_end_idx = pend.size();
+      right_idx = main_chain.size();
+    }
+
+    for (std::size_t j = group_end_idx; j > pend_idx; --j) {
+      std::vector<PairPointer>::iterator end = main_chain.begin() + right_idx;
+      // INFO 余り要素の挿入位置探索はmain_chain全体
+      if (pairs_size % 2 == 1 && j == pend.size()) {
+        end = main_chain.end();
+      }
+      std::vector<PairPointer>::iterator insert_pos =
+          std::lower_bound(main_chain.begin(), end, pend[j - 1]);
+      main_chain.insert(insert_pos, pend[j - 1]);
+    }
+    pend_idx += jacobsthal_num;
+    main_chain_idx += jacobsthal_num * 2;
+  }
+}
+
+static void
+_insert_pend_elements_to_main_chain(std::size_t pairs_size,
+                                    std::deque<PairPointer> &main_chain,
+                                    const std::deque<PairPointer> &pend) {
+  std::size_t main_chain_idx = 1;
+  std::size_t pend_idx = 1;
+
+  for (std::size_t i = 1; main_chain.size() < pairs_size; ++i) {
+    std::size_t jacobsthal_num = jacobsthal(i) * 2;
+    std::size_t group_end_idx = pend_idx + jacobsthal_num;
+    std::size_t right_idx = main_chain_idx + jacobsthal_num;
+    if (group_end_idx > pend.size()) {
+      group_end_idx = pend.size();
+      right_idx = main_chain.size();
+    }
+
+    for (std::size_t j = group_end_idx; j > pend_idx; --j) {
+      std::deque<PairPointer>::iterator end = main_chain.begin() + right_idx;
+      // INFO 余り要素の挿入位置探索はmain_chain全体
+      if (pairs_size % 2 == 1 && j == pend.size()) {
+        end = main_chain.end();
+      }
+      std::deque<PairPointer>::iterator insert_pos =
+          std::lower_bound(main_chain.begin(), end, pend[j - 1]);
+      main_chain.insert(insert_pos, pend[j - 1]);
+    }
+    pend_idx += jacobsthal_num;
+    main_chain_idx += jacobsthal_num * 2;
+  }
+}
+
 static void _sort(std::vector<PairPointer> &pairs) {
   if (pairs.size() <= 1) {
     return;
@@ -79,32 +141,8 @@ static void _sort(std::vector<PairPointer> &pairs) {
   std::vector<PairPointer> main_chain, pend;
   _prep_main_chain_and_pend(pairs, larger_pairs, main_chain, pend);
 
-  std::size_t main_chain_idx = 1;
-  std::size_t pend_idx = 1;
-
   // INFO Step3: pend要素をメインチェーンに挿入
-  for (std::size_t i = 1; main_chain.size() < pairs.size(); ++i) {
-    std::size_t jacobsthal_num = jacobsthal(i) * 2;
-    std::size_t group_end_idx = pend_idx + jacobsthal_num;
-    std::size_t right_idx = main_chain_idx + jacobsthal_num;
-    if (group_end_idx > pend.size()) {
-      group_end_idx = pend.size();
-      right_idx = main_chain.size();
-    }
-
-    for (std::size_t j = group_end_idx; j > pend_idx; --j) {
-      std::vector<PairPointer>::iterator end = main_chain.begin() + right_idx;
-      // INFO 余り要素の挿入位置探索はmain_chain全体
-      if (pairs.size() % 2 == 1 && j == pend.size()) {
-        end = main_chain.end();
-      }
-      std::vector<PairPointer>::iterator insert_pos =
-          std::lower_bound(main_chain.begin(), end, pend[j - 1]);
-      main_chain.insert(insert_pos, pend[j - 1]);
-    }
-    pend_idx += jacobsthal_num;
-    main_chain_idx += jacobsthal_num * 2;
-  }
+  _insert_pend_elements_to_main_chain(pairs.size(), main_chain, pend);
   pairs = main_chain;
 }
 
@@ -120,32 +158,8 @@ static void _sort(std::deque<PairPointer> &pairs) {
   std::deque<PairPointer> main_chain, pend;
   _prep_main_chain_and_pend(pairs, larger_pairs, main_chain, pend);
 
-  std::size_t main_chain_idx = 1;
-  std::size_t pend_idx = 1;
-
   // INFO Step3: pend要素をメインチェーンに挿入
-  for (std::size_t i = 1; main_chain.size() < pairs.size(); ++i) {
-    std::size_t jacobsthal_num = jacobsthal(i) * 2;
-    std::size_t group_end_idx = pend_idx + jacobsthal_num;
-    std::size_t right_idx = main_chain_idx + jacobsthal_num;
-    if (group_end_idx > pend.size()) {
-      group_end_idx = pend.size();
-      right_idx = main_chain.size();
-    }
-
-    for (std::size_t j = group_end_idx; j > pend_idx; --j) {
-      std::deque<PairPointer>::iterator end = main_chain.begin() + right_idx;
-      // INFO 余り要素の挿入位置探索はmain_chain全体
-      if (pairs.size() % 2 == 1 && j == pend.size()) {
-        end = main_chain.end();
-      }
-      std::deque<PairPointer>::iterator insert_pos =
-          std::lower_bound(main_chain.begin(), end, pend[j - 1]);
-      main_chain.insert(insert_pos, pend[j - 1]);
-    }
-    pend_idx += jacobsthal_num;
-    main_chain_idx += jacobsthal_num * 2;
-  }
+  _insert_pend_elements_to_main_chain(pairs.size(), main_chain, pend);
   pairs = main_chain;
 }
 
