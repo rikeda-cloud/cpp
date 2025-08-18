@@ -5,8 +5,7 @@ static bool _exec_validate_btc_date(const std::string &date,
                                     bool success_validate) {
   bool error_occurred = validateBtcDate(date) != success_validate;
   if (error_occurred) {
-    std::cout << "[ERROR] _test_validate_btc_date: date = " << date
-              << std::endl;
+    std::cout << "[KO] test_validate_btc_date: date = " << date << std::endl;
   }
   return error_occurred;
 }

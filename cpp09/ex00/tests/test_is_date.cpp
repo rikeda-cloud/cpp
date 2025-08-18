@@ -4,8 +4,8 @@
 static bool _exec_is_date(int y, int m, int d, bool success_validate) {
   bool error_occurred = isDate(y, m, d) != success_validate;
   if (error_occurred) {
-    std::cout << "[ERROR] _test_is_date: y = " << y << " m = " << m
-              << " d = " << d << std::endl;
+    std::cout << "[KO] test_is_date: y = " << y << " m = " << m << " d = " << d
+              << std::endl;
   }
   return error_occurred;
 }
