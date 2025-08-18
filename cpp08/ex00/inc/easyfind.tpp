@@ -3,26 +3,16 @@
 
 #include <string>
 #include <iostream>
+#include <algorithm>
 
 template <typename T>
 typename T::const_iterator easyfind(const T &container, int val) {
-  for (typename T::const_iterator it = container.begin(); it != container.end();
-       ++it) {
-    if (*it == val) {
-      return it;
-    }
-  }
-  return container.end();
+	return std::find(container.begin(), container.end(), val);
 }
 
 template <typename T>
 typename T::iterator easyfind(T &container, int val) {
-	for (typename T::iterator it = container.begin(); it != container.end(); ++it) {
-		if (*it == val) {
-			return it;
-		}
-	}
-	return container.end();
+	return std::find(container.begin(), container.end(), val);
 }
 
 template <typename T>
