@@ -14,10 +14,10 @@ int test_is_date(void) {
   int fail_count =
       _exec_is_date(0, 1, 1, true) + _exec_is_date(2000, 2, 29, true) +
       _exec_is_date(9999, 12, 31, true) + _exec_is_date(2001, 2, 28, true) +
-      _exec_is_date(2004, 2, 29, true) + _exec_is_date(2000, 2, 29, true) +
-      _exec_is_date(2100, 2, 29, false) + _exec_is_date(2000, 4, 31, false) +
-      _exec_is_date(2000, 1, 0, false) + _exec_is_date(2000, 12, 32, false) +
-      _exec_is_date(2000, 13, 1, false) + _exec_is_date(2001, 0, 1, false);
+      _exec_is_date(2004, 2, 29, true) + _exec_is_date(2100, 2, 29, false) +
+      _exec_is_date(2000, 4, 31, false) + _exec_is_date(2000, 1, 0, false) +
+      _exec_is_date(2000, 12, 32, false) + _exec_is_date(2000, 13, 1, false) +
+      _exec_is_date(2001, 0, 1, false);
 
   if (!fail_count) {
     std::cout << "[OK]" << std::endl;
