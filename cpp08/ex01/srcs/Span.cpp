@@ -3,7 +3,9 @@
 #include <limits>
 #include <stdexcept>
 
-Span::Span(unsigned int n) : n_(n), sorted_(false) {}
+Span::Span(unsigned int n) : n_(n), vec_(), sorted_(false) {
+  this->vec_.reserve(n);
+}
 
 Span::~Span(void) {}
 
