@@ -1,34 +1,30 @@
 #include "utils.hpp"
 #include <cstdlib>
 #include <iostream>
+#include <stdexcept>
 
-bool parseLine(const std::string &line, const std::string &sep,
+void parseLine(const std::string &line, const std::string &sep,
                std::string &key, double &value) {
   size_t sep_pos = line.find(sep);
   if (sep_pos == std::string::npos) {
-    std::cout << "Error: bad input => " << line << std::endl;
-    return false;
+    throw std::runtime_error("Error: bad input => " + line);
   }
 
   std::string date = line.substr(0, sep_pos);
   std::string value_str = line.substr(sep_pos + sep.size());
 
   if (!validateBtcDate(date)) {
-    std::cout << "Error: bad date => " << date << std::endl;
-    return false;
+    throw std::runtime_error("Error: bad date => " + date);
   }
   if (!validateValue(value_str)) {
-    std::cout << "Error: bad value => " << value_str << std::endl;
-    return false;
+    throw std::runtime_error("Error: bad value => " + value_str);
   }
   key = date;
   value = std::strtod(value_str.c_str(), NULL);
 
   if (value < 0) {
-    std::cout << "Error: not a positive number." << std::endl;
-    return false;
+    throw std::runtime_error("Error: not a positive number.");
   }
-  return true;
 }
 
 bool validateBtcDate(const std::string &date) {

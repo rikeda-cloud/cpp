@@ -21,9 +21,14 @@ void BitcoinExchange::exchange(const std::string &file, const DataBase &db) {
       continue;
     }
 
-    if (!parseLine(line, " | ", key, value)) {
+    // INFO Lineのパースが失敗したらエラーを表示し、次の行を処理
+    try {
+      parseLine(line, " | ", key, value);
+    } catch (const std::exception &e) {
+      std::cout << e.what() << std::endl;
       continue;
     }
+
     if (value < 0.0) {
       std::cout << "Error: not a positive number." << std::endl;
       continue;
