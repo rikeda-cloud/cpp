@@ -1,0 +1,109 @@
+#include "RPN.hpp"
+#include <exception>
+#include <iostream>
+#include <limits>
+
+#define RED "\033[31m"
+#define GREEN "\033[32m"
+#define RESET "\033[0m"
+#define EXPECTED_EXCEPTION -99999
+
+bool exec_test_evaluate(const std::string &s, int expect_result) {
+  try {
+    int actual_result = RPN::evaluate(s);
+    if (expect_result == EXPECTED_EXCEPTION) {
+      std::cout << RED << "[FAIL] not raised exception" << RESET << std::endl;
+      return true;
+    }
+    if (expect_result != actual_result) {
+      std::cout << RED << "[FAIL] "
+                << "  Expected: \"" << expect_result << "\"" << std::endl
+                << "  Actual  : \"" << actual_result << "\"" << RESET
+                << std::endl;
+      return true;
+    }
+  } catch (const std::exception &e) {
+    if (expect_result != EXPECTED_EXCEPTION) {
+      std::cout << RED << "[FAIL] raised exception: " << e.what() << RESET
+                << std::endl;
+      return true;
+    }
+  }
+  std::cout << GREEN << "[OK]" << RESET << std::endl;
+  return false;
+}
+
+int test_overflow(void) {
+  int fail_count =
+      exec_test_evaluate( // INT_MAX
+          "8 8 * 8 * 8 * 8 * 8 * 8 * 8 * 8 * 8 * 1 - 2 * 1 +",
+          std::numeric_limits<int>::max()) +
+      exec_test_evaluate( // INT_MAX + 1
+          "8 8 * 8 * 8 * 8 * 8 * 8 * 8 * 8 * 8 * 1 - 2 * 1 + 1 +",
+          EXPECTED_EXCEPTION) +
+      exec_test_evaluate( // INT_MAX - -1
+          "8 8 * 8 * 8 * 8 * 8 * 8 * 8 * 8 * 8 * 1 - 2 * 1 + 0 1 - -",
+          EXPECTED_EXCEPTION) +
+      exec_test_evaluate( // INT_MAX * INT_MAX
+          "8 8 * 8 * 8 * 8 * 8 * 8 * 8 * 8 * 8 * 1 - 2 * 1 +"
+          "8 8 * 8 * 8 * 8 * 8 * 8 * 8 * 8 * 8 * 1 - 2 * 1 + *",
+          EXPECTED_EXCEPTION) +
+      exec_test_evaluate( // (INT_MAX / -1) = (INT_MIN + 1)
+          "8 8 * 8 * 8 * 8 * 8 * 8 * 8 * 8 * 8 * 1 - 2 * 1 + 0 1 - /",
+          std::numeric_limits<int>::min() + 1);
+  return fail_count;
+}
+
+int test_underflow(void) {
+  int fail_count = exec_test_evaluate( // INT_MIN
+                       "0 8 - 8 * 8 * 8 * 8 * 8 * 8 * 8 * 8 * 8 * 2 *",
+                       std::numeric_limits<int>::min()) +
+                   exec_test_evaluate( // INT_MIN - 1
+                       "0 8 - 8 * 8 * 8 * 8 * 8 * 8 * 8 * 8 * 8 * 2 * 1 -",
+                       EXPECTED_EXCEPTION) +
+                   exec_test_evaluate( // INT_MIN * 2
+                       "0 8 - 8 * 8 * 8 * 8 * 8 * 8 * 8 * 8 * 8 * 2 * 2 *",
+                       EXPECTED_EXCEPTION) +
+                   exec_test_evaluate( // INT_MIN / -1
+                       "0 8 - 8 * 8 * 8 * 8 * 8 * 8 * 8 * 8 * 8 * 2 * 0 1 - /",
+                       EXPECTED_EXCEPTION) +
+                   exec_test_evaluate( // INT_MIN * -1
+                       "0 8 - 8 * 8 * 8 * 8 * 8 * 8 * 8 * 8 * 8 * 2 * 0 1 - *",
+                       EXPECTED_EXCEPTION) +
+                   exec_test_evaluate( // INT_MIN + -1
+                       "0 8 - 8 * 8 * 8 * 8 * 8 * 8 * 8 * 8 * 8 * 2 * 0 1 - +",
+                       EXPECTED_EXCEPTION) +
+                   exec_test_evaluate( // INT_MIN * INT_MIN
+                       "0 8 - 8 * 8 * 8 * 8 * 8 * 8 * 8 * 8 * 8 * 2 *"
+                       "0 8 - 8 * 8 * 8 * 8 * 8 * 8 * 8 * 8 * 8 * 2 * *",
+                       EXPECTED_EXCEPTION);
+  return fail_count;
+}
+
+int main(void) {
+  int fail_count = exec_test_evaluate("8 9 * 9 - 9 - 9 - 4 - 1 +", 42) +
+                   exec_test_evaluate("7 7 * 7 -", 42) +
+                   exec_test_evaluate("1 2 * 2 / 2 * 2 4 - +", 0) +
+                   exec_test_evaluate("1 2 + 3 * 4 /", 2) +
+                   exec_test_evaluate("9", 9) +
+                   exec_test_evaluate("5 1 2 + 4 * + 3 -", 14) +
+                   exec_test_evaluate("0 9 - 3 /", -3) +
+                   exec_test_evaluate("   1   1  +   ", 2) +
+                   exec_test_evaluate("1	1	+", 2) +
+                   exec_test_evaluate("(1 + 1)", EXPECTED_EXCEPTION) +
+                   exec_test_evaluate("1 0 /", EXPECTED_EXCEPTION) +
+                   exec_test_evaluate("10 2 +", EXPECTED_EXCEPTION) +
+                   exec_test_evaluate("+", EXPECTED_EXCEPTION) +
+                   exec_test_evaluate("1 + 2", EXPECTED_EXCEPTION) +
+                   exec_test_evaluate("", EXPECTED_EXCEPTION) +
+                   exec_test_evaluate(" ", EXPECTED_EXCEPTION) +
+                   exec_test_evaluate("1 2 + -", EXPECTED_EXCEPTION) +
+                   exec_test_evaluate("1 2 + a", EXPECTED_EXCEPTION) +
+                   exec_test_evaluate("1.1 2 +", EXPECTED_EXCEPTION) +
+                   exec_test_evaluate("1 2 3 ++", EXPECTED_EXCEPTION) +
+                   exec_test_evaluate("1 2 3 +", EXPECTED_EXCEPTION) +
+                   exec_test_evaluate("1 -1 +", EXPECTED_EXCEPTION) +
+                   test_overflow() + test_underflow();
+
+  return fail_count != 0;
+}
