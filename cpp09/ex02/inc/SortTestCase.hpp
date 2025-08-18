@@ -19,6 +19,8 @@ public:
 private:
   std::vector<unsigned> input_;
   std::size_t expect_cmp_count_;
+
+  SortTestCase(void);
 };
 
 #endif
