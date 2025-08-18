@@ -18,6 +18,7 @@ std::vector<unsigned> argvToUintVec(int argc, const char **argv) {
     if (*end == '\0' && num <= std::numeric_limits<unsigned int>::max()) {
       vec.push_back(num);
     } else {
+      // INFO コマンドライン引数が不正な値なら空のVectorを返す
       return std::vector<unsigned>();
     }
   }
