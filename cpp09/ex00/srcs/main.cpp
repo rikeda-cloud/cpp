@@ -3,7 +3,7 @@
 #include <exception>
 #include <iostream>
 
-const std::string DB_FILE = "data.csv";
+const std::string DB_FILE = "csv/data.csv";
 
 int main(int argc, char **argv) {
   if (argc != 2) {

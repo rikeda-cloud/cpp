@@ -21,7 +21,9 @@ TEST_SRCS		=	main_test.cpp \
 					test_validate_btc_date.cpp \
 					test_validate_value.cpp \
 					test_is_date.cpp \
-					test_parse_line.cpp
+					test_parse_line.cpp \
+					test_parse_csv.cpp
+
 
 OBJS			=	$(patsubst %.o, $(OBJS_DIR)/%.o, $(SRCS:.cpp=.o))
 DEPS			=	$(OBJS:.o=.d)
