@@ -1,7 +1,6 @@
 #ifndef CPP08_EX00_easyfind_H_
 #define CPP08_EX00_easyfind_H_
 
-#include <algorithm>
 #include <string>
 
 template <typename T>
