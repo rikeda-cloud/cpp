@@ -9,11 +9,12 @@ public:
   enum Operation { PLUS, MINUS, DIV, MUL, NUMBER };
 
   static int evaluate(const std::string &);
+
+private:
   static Operation detectOperation(const std::string &);
   static void doOperation(std::stack<int> &, Operation, const std::string &);
   static int calc(int, int, Operation);
 
-private:
   RPN(void);
   ~RPN(void);
   RPN(const RPN &);
