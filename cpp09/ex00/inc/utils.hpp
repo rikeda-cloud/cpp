@@ -11,7 +11,7 @@ bool parseLine(const std::string &line, const std::string &sep,
                std::string &key, double &value);
 
 bool validateBtcDate(const std::string &);
-bool valiadteValue(const std::string &);
-bool isDate(int, int, int);
+bool validateValue(const std::string &);
+bool isDate(int year, int month, int day);
 
 #endif

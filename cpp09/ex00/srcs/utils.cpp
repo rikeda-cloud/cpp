@@ -17,7 +17,7 @@ bool parseLine(const std::string &line, const std::string &sep,
     std::cout << "Error: bad date => " << date << std::endl;
     return false;
   }
-  if (!valiadteValue(value_str)) {
+  if (!validateValue(value_str)) {
     std::cout << "Error: bad value => " << value_str << std::endl;
     return false;
   }
@@ -58,7 +58,7 @@ bool validateBtcDate(const std::string &date) {
   return isDate(year, month, day);
 }
 
-bool valiadteValue(const std::string &value) {
+bool validateValue(const std::string &value) {
   char *end;
 
   if (value.size() == 0) {
