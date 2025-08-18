@@ -35,6 +35,7 @@ int test_exchange(void) {
       _exec_exchange(db, input_dir + "invalid_value.txt", false) +
       _exec_exchange(db, input_dir + "invalid_separator.txt", false) +
       _exec_exchange(db, input_dir + "greater_than_1000.txt", false) +
+      _exec_exchange(db, input_dir + "2009-01-01.txt", false) +
       _exec_exchange(db, input_dir + "", true) +
       _exec_exchange(db, input_dir + "empty.txt", true);
 
