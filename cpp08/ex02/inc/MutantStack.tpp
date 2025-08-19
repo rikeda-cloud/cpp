@@ -1,3 +1,6 @@
+#ifndef CPP08_EX02_MutantStack_T_
+#define CPP08_EX02_MutantStack_T_
+
 template<typename T, typename Container>
 MutantStack<T, Container>::MutantStack(void) : std::stack<T, Container>() {}
 
@@ -34,3 +37,5 @@ template<typename T, typename Container>
 typename Container::reverse_iterator MutantStack<T, Container>::rend(void) {
 	return this->c.rend();
 }
+
+#endif
