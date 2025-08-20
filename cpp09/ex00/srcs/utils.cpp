@@ -28,8 +28,11 @@ void parseLine(const std::string &line, const std::string &sep,
 }
 
 bool validateBtcDate(const std::string &date) {
-  if (date.size() != std::string("xxxx-xx-xx").size() || date[4] != '-' ||
-      date[7] != '-') {
+  if (date.size() != std::string("xxxx-xx-xx").size() ||
+      !std::isdigit(date[0]) || !std::isdigit(date[1]) ||
+      !std::isdigit(date[2]) || !std::isdigit(date[3]) || date[4] != '-' ||
+      !std::isdigit(date[5]) || !std::isdigit(date[6]) || date[7] != '-' ||
+      !std::isdigit(date[8]) || !std::isdigit(date[9])) {
     return false;
   }
 
