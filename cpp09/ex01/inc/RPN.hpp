@@ -1,9 +1,9 @@
 #ifndef CPP09_EX01_RPN_H_
 #define CPP09_EX01_RPN_H_
 
+#include <list>
 #include <stack>
 #include <string>
-#include <list>
 
 class RPN {
 public:
@@ -17,7 +17,7 @@ private:
   static int calc(int, int, Operation);
 
   static int safe_add(int, int);
-  static int safe_diff(int, int);
+  static int safe_sub(int, int);
   static int safe_mul(int, int);
   static int safe_div(int, int);
 

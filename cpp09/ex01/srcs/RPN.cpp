@@ -58,7 +58,7 @@ int RPN::calc(int v1, int v2, Operation op) {
   case PLUS:
     return safe_add(v1, v2);
   case MINUS:
-    return safe_diff(v1, v2);
+    return safe_sub(v1, v2);
   case DIV:
     return safe_div(v1, v2);
   case MUL:
@@ -78,12 +78,12 @@ int RPN::safe_add(int v1, int v2) {
   return v1 + v2;
 }
 
-int RPN::safe_diff(int v1, int v2) {
+int RPN::safe_sub(int v1, int v2) {
   if (v2 < 0 && v1 > std::numeric_limits<int>::max() + v2) {
-    throw std::runtime_error("[ERROR] safe_diff: Overflow");
+    throw std::runtime_error("[ERROR] safe_sub: Overflow");
   }
   if (v2 > 0 && v1 < std::numeric_limits<int>::min() + v2) {
-    throw std::runtime_error("[ERROR] safe_diff: Underflow");
+    throw std::runtime_error("[ERROR] safe_sub: Underflow");
   }
   return v1 - v2;
 }
