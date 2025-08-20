@@ -29,10 +29,6 @@ void BitcoinExchange::exchange(const std::string &file, const DataBase &db) {
       continue;
     }
 
-    if (value < 0.0) {
-      std::cout << "Error: not a positive number." << std::endl;
-      continue;
-    }
     if (value > 1000.0) {
       std::cout << "Error: too large a number." << std::endl;
       continue;
