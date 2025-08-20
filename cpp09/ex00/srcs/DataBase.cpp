@@ -47,11 +47,7 @@ void DataBase::parseCsv(const std::string &file, DataBase &db) {
       continue;
     }
     // INFO csvファイルに1行でもエラーが有るなら例外を投げ、終了
-    try {
-      parseLine(line, ",", key, value);
-    } catch (const std::exception &e) {
-      throw std::runtime_error(e.what());
-    }
+    parseLine(line, ",", key, value);
     db.insert(key, value);
   }
   if (s.eof() == false && s.fail()) {
