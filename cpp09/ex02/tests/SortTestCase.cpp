@@ -123,5 +123,12 @@ std::vector<SortTestCase> SortTestCase::createTestCase(void) {
   }
   test_cases.push_back(SortTestCase(random_odd_case, IGNORE_CMP));
 
+  // INFO
+  // 挿入する値が次に挿入する要素のペア(大)よりも大きい場合、次に挿入する要素は探索範囲を狭くできる
+  unsigned max_effi[] = {1, 2, 5, 6, 3, 4};
+  std::vector<unsigned> maximum_efficiency_case(
+      max_effi, max_effi + sizeof(max_effi) / sizeof(max_effi[0]));
+  test_cases.push_back(SortTestCase(maximum_efficiency_case, 9));
+
   return test_cases;
 }
