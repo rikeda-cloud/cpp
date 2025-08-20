@@ -68,24 +68,24 @@ std::vector<SortTestCase> SortTestCase::createTestCase(void) {
   std::vector<unsigned> case10(a10, a10 + sizeof(a10) / sizeof(a10[0]));
   test_cases.push_back(SortTestCase(case10, 22));
 
-  unsigned a12[] = {12, 1, 6, 2, 7, 3, 5, 4, 8, 9, 10, 11};
+  unsigned a12[] = {12, 1, 8, 2, 10, 3, 7, 4, 11, 5, 9, 6};
   std::vector<unsigned> case12(a12, a12 + sizeof(a12) / sizeof(a12[0]));
   test_cases.push_back(SortTestCase(case12, 30));
 
-  unsigned a13[] = {13, 1, 6, 2, 7, 3, 5, 4, 8, 9, 10, 11, 12};
+  unsigned a13[] = {12, 1, 8, 2, 10, 3, 7, 4, 11, 5, 9, 6, 0};
   std::vector<unsigned> case13(a13, a13 + sizeof(a13) / sizeof(a13[0]));
   test_cases.push_back(SortTestCase(case13, 34));
 
-  unsigned a15[] = {15, 1, 6, 2, 7, 3, 5, 4, 8, 9, 10, 11, 12, 13, 14};
+  unsigned a15[] = {15, 1, 9, 2, 12, 3, 8, 4, 14, 5, 11, 6, 13, 7, 10};
   std::vector<unsigned> case15(a15, a15 + sizeof(a15) / sizeof(a15[0]));
   test_cases.push_back(SortTestCase(case15, 42));
 
-  unsigned a17[] = {17, 1, 6, 2, 7, 3, 5, 4, 8, 9, 10, 11, 12, 13, 14, 15, 16};
+  unsigned a17[] = {16, 1, 10, 2, 13, 3, 9, 4, 15, 5, 12, 6, 14, 7, 11, 8, 0};
   std::vector<unsigned> case17(a17, a17 + sizeof(a17) / sizeof(a17[0]));
   test_cases.push_back(SortTestCase(case17, 50));
 
-  unsigned a19[] = {19, 1,  6,  2,  7,  3,  5,  4,  8, 9,
-                    10, 11, 12, 13, 14, 15, 16, 17, 18};
+  unsigned a19[] = {19, 1, 11, 2, 15, 3, 10, 4, 18, 5,
+                    13, 6, 17, 7, 12, 8, 16, 9, 14};
   std::vector<unsigned> case19(a19, a19 + sizeof(a19) / sizeof(a19[0]));
   test_cases.push_back(SortTestCase(case19, 58));
 
@@ -129,6 +129,13 @@ std::vector<SortTestCase> SortTestCase::createTestCase(void) {
   std::vector<unsigned> maximum_efficiency_case(
       max_effi, max_effi + sizeof(max_effi) / sizeof(max_effi[0]));
   test_cases.push_back(SortTestCase(maximum_efficiency_case, 9));
+
+  // INFO 連続した数だと大幅に挿入範囲を効率化できる
+  unsigned max_effi2[] = {1,  2,  3,  4,  5,  6,  7,  8,  9,  10, 11,
+                          12, 13, 14, 15, 16, 17, 18, 19, 20, 21};
+  std::vector<unsigned> maximum_efficiency_case2(
+      max_effi2, max_effi2 + sizeof(max_effi2) / sizeof(max_effi2[0]));
+  test_cases.push_back(SortTestCase(maximum_efficiency_case2, 56));
 
   return test_cases;
 }

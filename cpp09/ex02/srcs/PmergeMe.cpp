@@ -83,8 +83,10 @@ _insert_pend_elements_to_main_chain(std::size_t pairs_size,
       right_idx = main_chain.size();
     }
 
+    std::size_t insert_end_pos_count = 0;
     for (std::size_t j = group_end_idx; j > pend_idx; --j) {
-      std::vector<PairPointer>::iterator end = main_chain.begin() + right_idx;
+      std::vector<PairPointer>::iterator end =
+          main_chain.begin() + right_idx - insert_end_pos_count;
       // INFO 余り要素の挿入位置探索はmain_chain全体
       if (pairs_size % 2 == 1 && j == pend.size()) {
         end = main_chain.end();
@@ -92,6 +94,8 @@ _insert_pend_elements_to_main_chain(std::size_t pairs_size,
       std::vector<PairPointer>::iterator insert_pos =
           std::lower_bound(main_chain.begin(), end, pend[j - 1]);
       main_chain.insert(insert_pos, pend[j - 1]);
+      // INFO 二分探索範囲の右終端よりも右側に挿入されたら探索範囲を狭める
+      insert_end_pos_count += (end - 1) < insert_pos;
     }
     pend_idx += jacobsthal_num;
     main_chain_idx += jacobsthal_num * 2;
