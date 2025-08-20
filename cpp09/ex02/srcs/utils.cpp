@@ -14,6 +14,9 @@ std::vector<unsigned> argvToUintVec(int argc, const char **argv) {
 
   char *end;
   for (int i = 1; i < argc; ++i) {
+    if (std::string(argv[i]).size() == 0) {
+      return std::vector<unsigned>();
+    }
     unsigned long num = std::strtoul(argv[i], &end, 10);
     if (*end == '\0' && num <= std::numeric_limits<unsigned int>::max()) {
       vec.push_back(num);
