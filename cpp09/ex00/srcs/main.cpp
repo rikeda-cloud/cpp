@@ -7,7 +7,8 @@ const std::string DB_FILE = "csv/data.csv";
 
 int main(int argc, char **argv) {
   if (argc != 2) {
-    std::cout << "Specify inputfile as a command line argument." << std::endl;
+    std::cout << "Error: Specify inputfile as a command line argument."
+              << std::endl;
     return 1;
   }
 
