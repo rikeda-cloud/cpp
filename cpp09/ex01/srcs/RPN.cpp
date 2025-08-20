@@ -56,41 +56,41 @@ void RPN::doOperation(std::stack<int, std::list<int> > &stk, Operation op,
 int RPN::calc(int v1, int v2, Operation op) {
   switch (op) {
   case PLUS:
-    return safe_add(v1, v2);
+    return safeAdd(v1, v2);
   case MINUS:
-    return safe_sub(v1, v2);
+    return safeSub(v1, v2);
   case DIV:
-    return safe_div(v1, v2);
+    return safeDiv(v1, v2);
   case MUL:
-    return safe_mul(v1, v2);
+    return safeMul(v1, v2);
   default:
     throw std::runtime_error("[ERROR] RPN.calc: unexpect Operation");
   }
 }
 
-int RPN::safe_add(int v1, int v2) {
+int RPN::safeAdd(int v1, int v2) {
   if (v2 > 0 && v1 > std::numeric_limits<int>::max() - v2) {
-    throw std::runtime_error("[ERROR] safe_add: Overflow");
+    throw std::runtime_error("[ERROR] safeAdd: Overflow");
   }
   if (v2 < 0 && v1 < std::numeric_limits<int>::min() - v2) {
-    throw std::runtime_error("[ERROR] safe_add: Underflow");
+    throw std::runtime_error("[ERROR] safeAdd: Underflow");
   }
   return v1 + v2;
 }
 
-int RPN::safe_sub(int v1, int v2) {
+int RPN::safeSub(int v1, int v2) {
   if (v2 < 0 && v1 > std::numeric_limits<int>::max() + v2) {
-    throw std::runtime_error("[ERROR] safe_sub: Overflow");
+    throw std::runtime_error("[ERROR] safeSub: Overflow");
   }
   if (v2 > 0 && v1 < std::numeric_limits<int>::min() + v2) {
-    throw std::runtime_error("[ERROR] safe_sub: Underflow");
+    throw std::runtime_error("[ERROR] safeSub: Underflow");
   }
   return v1 - v2;
 }
 
-int RPN::safe_div(int v1, int v2) {
+int RPN::safeDiv(int v1, int v2) {
   if (v2 == 0) {
-    throw std::runtime_error("[ERROR] safe_div: 0 div");
+    throw std::runtime_error("[ERROR] safeDiv: 0 div");
   }
 
   long long llv1 = v1;
@@ -98,24 +98,24 @@ int RPN::safe_div(int v1, int v2) {
   long long result = llv1 / llv2;
 
   if (result > std::numeric_limits<int>::max()) {
-    throw std::runtime_error("[ERROR] safe_div: Overflow");
+    throw std::runtime_error("[ERROR] safeDiv: Overflow");
   }
   if (result < std::numeric_limits<int>::min()) {
-    throw std::runtime_error("[ERROR] safe_div: Underflow");
+    throw std::runtime_error("[ERROR] safeDiv: Underflow");
   }
   return v1 / v2;
 }
 
-int RPN::safe_mul(int v1, int v2) {
+int RPN::safeMul(int v1, int v2) {
   long long llv1 = v1;
   long long llv2 = v2;
   long long result = llv1 * llv2;
 
   if (result > std::numeric_limits<int>::max()) {
-    throw std::runtime_error("[ERROR] safe_mul: Overflow");
+    throw std::runtime_error("[ERROR] safeMul: Overflow");
   }
   if (result < std::numeric_limits<int>::min()) {
-    throw std::runtime_error("[ERROR] safe_mul: Underflow");
+    throw std::runtime_error("[ERROR] safeMul: Underflow");
   }
   return v1 * v2;
 }

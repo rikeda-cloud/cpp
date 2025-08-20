@@ -16,10 +16,10 @@ private:
                           const std::string &);
   static int calc(int, int, Operation);
 
-  static int safe_add(int, int);
-  static int safe_sub(int, int);
-  static int safe_mul(int, int);
-  static int safe_div(int, int);
+  static int safeAdd(int, int);
+  static int safeSub(int, int);
+  static int safeMul(int, int);
+  static int safeDiv(int, int);
 
   RPN(void);
   ~RPN(void);
