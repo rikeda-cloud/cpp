@@ -6,7 +6,7 @@
 int RPN::evaluate(const std::string &s) {
   std::istringstream iss(s);
   std::string token;
-  std::stack<int, std::list<int> > stk;
+  std::stack<int> stk;
 
   while (iss >> token) {
     Operation op = detectOperation(token);
@@ -35,7 +35,7 @@ RPN::Operation RPN::detectOperation(const std::string &token) {
   }
 }
 
-void RPN::doOperation(std::stack<int, std::list<int> > &stk, Operation op,
+void RPN::doOperation(std::stack<int> &stk, Operation op,
                       const std::string &token) {
   switch (op) {
   case NUMBER:
