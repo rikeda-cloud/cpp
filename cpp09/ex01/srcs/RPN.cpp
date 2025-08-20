@@ -99,15 +99,27 @@ int RPN::safeDiv(int v1, int v2) {
 }
 
 int RPN::safeMul(int v1, int v2) {
-  long long llv1 = v1;
-  long long llv2 = v2;
-  long long result = llv1 * llv2;
-
-  if (result > std::numeric_limits<int>::max()) {
-    throw std::runtime_error("[ERROR] safeMul: Overflow");
-  }
-  if (result < std::numeric_limits<int>::min()) {
-    throw std::runtime_error("[ERROR] safeMul: Underflow");
+  // INFO https://www.jpcert.or.jp/sc-rules/c-int32-c.html
+  if (v1 > 0) {
+    if (v2 > 0) {
+      if (v1 > (std::numeric_limits<int>::max() / v2)) {
+        throw std::runtime_error("[ERROR] safeMul: Overflow");
+      }
+    } else {
+      if (v2 < (std::numeric_limits<int>::min() / v1)) {
+        throw std::runtime_error("[ERROR] safeMul: Underflow");
+      }
+    }
+  } else {
+    if (v2 > 0) {
+      if (v1 < (std::numeric_limits<int>::min() / v2)) {
+        throw std::runtime_error("[ERROR] safeMul: Underflow");
+      }
+    } else {
+      if ((v1 != 0) && (v2 < (std::numeric_limits<int>::max() / v1))) {
+        throw std::runtime_error("[ERROR] safeMul: Overflow");
+      }
+    }
   }
   return v1 * v2;
 }
