@@ -28,6 +28,8 @@ int test_validate_btc_date(void) {
                    _exec_validate_btc_date("2010-12-32", false) +
                    _exec_validate_btc_date("0001-01-01", false) +
                    _exec_validate_btc_date("2010-02-31", false) +
+                   _exec_validate_btc_date("2020- 1-01", false) +
+                   _exec_validate_btc_date("2020-01- 1", false) +
                    _exec_validate_btc_date("", false);
 
   if (!fail_count) {
