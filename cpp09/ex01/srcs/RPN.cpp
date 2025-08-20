@@ -92,16 +92,8 @@ int RPN::safeDiv(int v1, int v2) {
   if (v2 == 0) {
     throw std::runtime_error("[ERROR] safeDiv: 0 div");
   }
-
-  long long llv1 = v1;
-  long long llv2 = v2;
-  long long result = llv1 / llv2;
-
-  if (result > std::numeric_limits<int>::max()) {
-    throw std::runtime_error("[ERROR] safeDiv: Overflow");
-  }
-  if (result < std::numeric_limits<int>::min()) {
-    throw std::runtime_error("[ERROR] safeDiv: Underflow");
+  if (v1 == std::numeric_limits<int>::min() && v2 == -1) {
+    throw std::runtime_error("[ERROR] safeDiv: Floating point exception");
   }
   return v1 / v2;
 }
