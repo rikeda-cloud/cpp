@@ -1,5 +1,5 @@
-#ifndef CPP09_EX02_TestCase_H_
-#define CPP09_EX02_TestCase_H_
+#ifndef CPP09_EX02_SortTestCase_H_
+#define CPP09_EX02_SortTestCase_H_
 
 #include <vector>
 
