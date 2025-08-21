@@ -14,9 +14,10 @@ void printContainer(const std::string message, const T &container) {
   std::cout << message;
   for (typename T::const_iterator it = container.begin(); it != container.end();
        ++it) {
-    std::cout << *it;
-    if (it + 1 != container.end())
+    if (it != container.begin()) {
       std::cout << " ";
+    }
+    std::cout << *it;
   }
   std::cout << std::endl;
 }
