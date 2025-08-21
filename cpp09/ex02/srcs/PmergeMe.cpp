@@ -6,6 +6,7 @@
 
 static std::vector<PairPointer> _pair_up(std::vector<PairPointer> &pairs) {
   std::vector<PairPointer> new_pairs;
+  new_pairs.reserve(pairs.size() / 2);
 
   for (std::size_t i = 1; i < pairs.size(); i += 2) {
     PairPointer *small = &pairs[i - 1];
