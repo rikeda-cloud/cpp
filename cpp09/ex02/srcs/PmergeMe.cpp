@@ -74,10 +74,10 @@ _insert_pend_elements_to_main_chain(std::size_t pairs_size,
   std::size_t main_chain_idx = 1;
   std::size_t pend_idx = 1;
 
-  for (std::size_t i = 1; main_chain.size() < pairs_size; ++i) {
-    std::size_t jacobsthal_num = jacobsthal(i) * 2;
-    std::size_t group_end_idx = pend_idx + jacobsthal_num;
-    std::size_t right_idx = main_chain_idx + jacobsthal_num;
+  for (std::size_t k = 3; main_chain.size() < pairs_size; ++k) {
+    std::size_t group_size = jacobsthal(k) - jacobsthal(k - 1);
+    std::size_t group_end_idx = pend_idx + group_size;
+    std::size_t right_idx = main_chain_idx + group_size;
     if (group_end_idx > pend.size()) {
       group_end_idx = pend.size();
       right_idx = main_chain.size();
@@ -97,8 +97,8 @@ _insert_pend_elements_to_main_chain(std::size_t pairs_size,
       // INFO 二分探索範囲の右終端よりも右側に挿入されたら探索範囲を狭める
       insert_end_pos_count += (end - 1) < insert_pos;
     }
-    pend_idx += jacobsthal_num;
-    main_chain_idx += jacobsthal_num * 2;
+    pend_idx += group_size;
+    main_chain_idx += group_size * 2;
   }
 }
 
@@ -109,10 +109,10 @@ _insert_pend_elements_to_main_chain(std::size_t pairs_size,
   std::size_t main_chain_idx = 1;
   std::size_t pend_idx = 1;
 
-  for (std::size_t i = 1; main_chain.size() < pairs_size; ++i) {
-    std::size_t jacobsthal_num = jacobsthal(i) * 2;
-    std::size_t group_end_idx = pend_idx + jacobsthal_num;
-    std::size_t right_idx = main_chain_idx + jacobsthal_num;
+  for (std::size_t k = 3; main_chain.size() < pairs_size; ++k) {
+    std::size_t group_size = jacobsthal(k) - jacobsthal(k - 1);
+    std::size_t group_end_idx = pend_idx + group_size;
+    std::size_t right_idx = main_chain_idx + group_size;
     if (group_end_idx > pend.size()) {
       group_end_idx = pend.size();
       right_idx = main_chain.size();
@@ -132,8 +132,8 @@ _insert_pend_elements_to_main_chain(std::size_t pairs_size,
       // INFO 二分探索範囲の右終端よりも右側に挿入されたら探索範囲を狭める
       insert_end_pos_count += (end - 1) < insert_pos;
     }
-    pend_idx += jacobsthal_num;
-    main_chain_idx += jacobsthal_num * 2;
+    pend_idx += group_size;
+    main_chain_idx += group_size * 2;
   }
 }
 
