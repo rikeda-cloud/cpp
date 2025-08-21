@@ -12,7 +12,7 @@ public:
 
 private:
   static Operation detectOperation(const std::string &);
-  static void doOperation(std::stack<int> &, Operation,
+  static void doOperation(std::stack<int, std::list<int> > &, Operation,
                           const std::string &);
   static int calc(int, int, Operation);
 
