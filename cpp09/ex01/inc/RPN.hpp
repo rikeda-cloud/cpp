@@ -7,10 +7,10 @@
 
 class RPN {
 public:
-  enum Operation { PLUS, MINUS, DIV, MUL, NUMBER };
   static int evaluate(const std::string &);
 
 private:
+  enum Operation { PLUS, MINUS, DIV, MUL, NUMBER };
   static Operation detectOperation(const std::string &);
   static void doOperation(std::stack<int, std::list<int> > &, Operation,
                           const std::string &);
