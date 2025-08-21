@@ -43,7 +43,8 @@ bool validateBtcDate(const std::string &date) {
   char *end;
   int year = std::strtol(year_str.c_str(), &end, 10);
   // https://ja.wikipedia.org/wiki/%E3%83%93%E3%83%83%E3%83%88%E3%82%B3%E3%82%A4%E3%83%B3
-  if (*end != '\0' || year < 2009) {
+  const int btc_start_year = 2009;
+  if (*end != '\0' || year < btc_start_year) {
     return false;
   }
   int month = std::strtol(month_str.c_str(), &end, 10);
