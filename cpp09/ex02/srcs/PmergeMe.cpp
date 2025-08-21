@@ -72,39 +72,39 @@ static void
 _insert_pend_elements_to_main_chain(std::size_t pairs_size,
                                     std::vector<PairPointer> &main_chain,
                                     const std::vector<PairPointer> &pend) {
-  std::size_t main_chain_idx = 0;
+  std::size_t search_limit_base_idx = 0;
   std::size_t pend_idx = 0;
 
   // INFO 最小要素のペアをmain_chain先頭に挿入
-  main_chain.insert(main_chain.begin(), pend[0]);
-  main_chain_idx++;
+  main_chain.insert(main_chain.begin(), pend[pend_idx]);
+  search_limit_base_idx++;
   pend_idx++;
 
   for (std::size_t k = 3; main_chain.size() < pairs_size; ++k) {
     std::size_t group_size = jacobsthal(k) - jacobsthal(k - 1);
     std::size_t group_end_idx = pend_idx + group_size;
-    std::size_t right_idx = main_chain_idx + group_size;
+    std::size_t search_limit_idx = search_limit_base_idx + group_size;
     if (group_end_idx > pend.size()) {
       group_end_idx = pend.size();
-      right_idx = main_chain.size();
+      search_limit_idx = main_chain.size();
     }
 
-    std::size_t insert_end_pos_count = 0;
+    std::size_t search_limit_adjust = 0;
     for (std::size_t j = group_end_idx; j > pend_idx; --j) {
-      std::vector<PairPointer>::iterator end =
-          main_chain.begin() + right_idx - insert_end_pos_count;
+      std::vector<PairPointer>::iterator search_limit_it =
+          main_chain.begin() + search_limit_idx - search_limit_adjust;
       // INFO 余り要素の挿入位置探索はmain_chain全体
       if (pairs_size % 2 == 1 && j == pend.size()) {
-        end = main_chain.end();
+        search_limit_it = main_chain.end();
       }
       std::vector<PairPointer>::iterator insert_pos =
-          std::lower_bound(main_chain.begin(), end, pend[j - 1]);
+          std::lower_bound(main_chain.begin(), search_limit_it, pend[j - 1]);
       main_chain.insert(insert_pos, pend[j - 1]);
       // INFO 二分探索範囲の右終端よりも右側に挿入されたら探索範囲を狭める
-      insert_end_pos_count += (end - 1) < insert_pos;
+      search_limit_adjust += (search_limit_it - 1) < insert_pos;
     }
     pend_idx += group_size;
-    main_chain_idx += group_size * 2;
+    search_limit_base_idx += group_size * 2;
   }
 }
 
@@ -112,39 +112,39 @@ static void
 _insert_pend_elements_to_main_chain(std::size_t pairs_size,
                                     std::deque<PairPointer> &main_chain,
                                     const std::deque<PairPointer> &pend) {
-  std::size_t main_chain_idx = 0;
+  std::size_t search_limit_base_idx = 0;
   std::size_t pend_idx = 0;
 
   // INFO 最小要素のペアをmain_chain先頭に挿入
   main_chain.insert(main_chain.begin(), pend[pend_idx]);
-  main_chain_idx++;
+  search_limit_base_idx++;
   pend_idx++;
 
   for (std::size_t k = 3; main_chain.size() < pairs_size; ++k) {
     std::size_t group_size = jacobsthal(k) - jacobsthal(k - 1);
     std::size_t group_end_idx = pend_idx + group_size;
-    std::size_t right_idx = main_chain_idx + group_size;
+    std::size_t search_limit_idx = search_limit_base_idx + group_size;
     if (group_end_idx > pend.size()) {
       group_end_idx = pend.size();
-      right_idx = main_chain.size();
+      search_limit_idx = main_chain.size();
     }
 
-    std::size_t insert_end_pos_count = 0;
+    std::size_t search_limit_adjust = 0;
     for (std::size_t j = group_end_idx; j > pend_idx; --j) {
-      std::deque<PairPointer>::iterator end =
-          main_chain.begin() + right_idx - insert_end_pos_count;
+      std::deque<PairPointer>::iterator search_limit_it =
+          main_chain.begin() + search_limit_idx - search_limit_adjust;
       // INFO 余り要素の挿入位置探索はmain_chain全体
       if (pairs_size % 2 == 1 && j == pend.size()) {
-        end = main_chain.end();
+        search_limit_it = main_chain.end();
       }
       std::deque<PairPointer>::iterator insert_pos =
-          std::lower_bound(main_chain.begin(), end, pend[j - 1]);
+          std::lower_bound(main_chain.begin(), search_limit_it, pend[j - 1]);
       main_chain.insert(insert_pos, pend[j - 1]);
       // INFO 二分探索範囲の右終端よりも右側に挿入されたら探索範囲を狭める
-      insert_end_pos_count += (end - 1) < insert_pos;
+      search_limit_adjust += (search_limit_it - 1) < insert_pos;
     }
     pend_idx += group_size;
-    main_chain_idx += group_size * 2;
+    search_limit_base_idx += group_size * 2;
   }
 }
 
