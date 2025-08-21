@@ -41,10 +41,10 @@ _prep_main_chain_and_pend(const std::vector<PairPointer> &pairs,
   main_chain.reserve(pairs.size());
   pend.reserve(pairs.size() / 2 + 1);
 
-  main_chain.push_back(sorted_pairs[0].getSmallPair());
-  for (std::size_t i = 0; i < sorted_pairs.size(); ++i) {
-    main_chain.push_back(sorted_pairs[i].getLargePair());
-    pend.push_back(sorted_pairs[i].getSmallPair());
+  for (std::vector<PairPointer>::const_iterator it = sorted_pairs.begin();
+       it != sorted_pairs.end(); ++it) {
+    main_chain.push_back(it->getLargePair());
+    pend.push_back(it->getSmallPair());
   }
   // ペアの数が奇数の場合、余り要素をpendに追加
   if (pairs.size() % 2 == 1) {
@@ -57,10 +57,10 @@ _prep_main_chain_and_pend(const std::deque<PairPointer> &pairs,
                           const std::deque<PairPointer> &sorted_pairs,
                           std::deque<PairPointer> &main_chain,
                           std::deque<PairPointer> &pend) {
-  main_chain.push_back(sorted_pairs[0].getSmallPair());
-  for (std::size_t i = 0; i < sorted_pairs.size(); ++i) {
-    main_chain.push_back(sorted_pairs[i].getLargePair());
-    pend.push_back(sorted_pairs[i].getSmallPair());
+  for (std::deque<PairPointer>::const_iterator it = sorted_pairs.begin();
+       it != sorted_pairs.end(); ++it) {
+    main_chain.push_back(it->getLargePair());
+    pend.push_back(it->getSmallPair());
   }
   // ペアの数が奇数の場合、余り要素をpendに追加
   if (pairs.size() % 2 == 1) {
@@ -72,8 +72,13 @@ static void
 _insert_pend_elements_to_main_chain(std::size_t pairs_size,
                                     std::vector<PairPointer> &main_chain,
                                     const std::vector<PairPointer> &pend) {
-  std::size_t main_chain_idx = 1;
-  std::size_t pend_idx = 1;
+  std::size_t main_chain_idx = 0;
+  std::size_t pend_idx = 0;
+
+  // INFO 最小要素のペアをmain_chain先頭に挿入
+  main_chain.insert(main_chain.begin(), pend[0]);
+  main_chain_idx++;
+  pend_idx++;
 
   for (std::size_t k = 3; main_chain.size() < pairs_size; ++k) {
     std::size_t group_size = jacobsthal(k) - jacobsthal(k - 1);
@@ -107,8 +112,13 @@ static void
 _insert_pend_elements_to_main_chain(std::size_t pairs_size,
                                     std::deque<PairPointer> &main_chain,
                                     const std::deque<PairPointer> &pend) {
-  std::size_t main_chain_idx = 1;
-  std::size_t pend_idx = 1;
+  std::size_t main_chain_idx = 0;
+  std::size_t pend_idx = 0;
+
+  // INFO 最小要素のペアをmain_chain先頭に挿入
+  main_chain.insert(main_chain.begin(), pend[pend_idx]);
+  main_chain_idx++;
+  pend_idx++;
 
   for (std::size_t k = 3; main_chain.size() < pairs_size; ++k) {
     std::size_t group_size = jacobsthal(k) - jacobsthal(k - 1);
