@@ -99,9 +99,9 @@ _insert_pend_elements_to_main_chain(std::size_t pairs_size,
       }
       std::vector<PairPointer>::iterator insert_pos =
           std::lower_bound(main_chain.begin(), search_limit_it, pend[j - 1]);
-      main_chain.insert(insert_pos, pend[j - 1]);
       // INFO 二分探索範囲の右終端よりも右側に挿入されたら探索範囲を狭める
-      search_limit_adjust += (search_limit_it - 1) < insert_pos;
+      search_limit_adjust += (search_limit_it == insert_pos);
+      main_chain.insert(insert_pos, pend[j - 1]);
     }
     pend_idx += group_size;
     search_limit_base_idx += group_size * 2;
@@ -139,9 +139,9 @@ _insert_pend_elements_to_main_chain(std::size_t pairs_size,
       }
       std::deque<PairPointer>::iterator insert_pos =
           std::lower_bound(main_chain.begin(), search_limit_it, pend[j - 1]);
-      main_chain.insert(insert_pos, pend[j - 1]);
       // INFO 二分探索範囲の右終端よりも右側に挿入されたら探索範囲を狭める
-      search_limit_adjust += (search_limit_it - 1) < insert_pos;
+      search_limit_adjust += (search_limit_it == insert_pos);
+      main_chain.insert(insert_pos, pend[j - 1]);
     }
     pend_idx += group_size;
     search_limit_base_idx += group_size * 2;
