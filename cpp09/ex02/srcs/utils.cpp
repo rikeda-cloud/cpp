@@ -4,6 +4,7 @@
 #include <limits>
 
 unsigned jacobsthal(unsigned n) {
+  // INFO `return (std::pow(2, n) - std::pow(-1, n)) / 3;` と同じ
   if (n <= 1)
     return n;
   return jacobsthal(n - 1) + 2 * jacobsthal(n - 2);
